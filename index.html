@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latino Las Vegas — Tu Guía en Español</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ─── RESET & VARS ─── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --red: #E8272A; --red-dark: #C01E21; --red-light: #FF3538;
+  --gold: #F5B014; --gold-dark: #C48C0A;
+  --dark: #0C0C0F; --dark2: #111115; --dark3: #17171D; --dark4: #1E1E26;
+  --card-bg: #14141A;
+  --text: #F0EDE8; --text-2: #C8C4BE; --text-muted: #8A8680;
+  --border: rgba(255,255,255,0.07); --border-2: rgba(255,255,255,0.12);
+  --glow-red: rgba(232,39,42,0.3); --glow-gold: rgba(245,176,20,0.25);
+  --radius: 12px; --radius-sm: 8px; --radius-lg: 16px;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--dark); color: var(--text); font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: var(--dark4); border-radius: 3px; }
+
+/* ─── PAGE SYSTEM ─── */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ─── NAV ─── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 70px;
+  background: rgba(12,12,15,0.9); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border); transition: background 0.3s;
+}
+.nav.scrolled { background: rgba(12,12,15,0.98); }
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px;
+  color: var(--text); display: flex; align-items: center; gap: 10px; cursor: pointer;
+}
+.nav-badge {
+  width: 36px; height: 36px; background: var(--red); border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; color: white; font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 1px; box-shadow: 0 0 20px var(--glow-red); flex-shrink: 0;
+}
+.nav-logo .red { color: var(--red); }
+.nav-links { display: flex; gap: 0; list-style: none; }
+.nav-links a {
+  color: var(--text-muted); font-size: 13px; font-weight: 600; letter-spacing: 0.8px;
+  text-transform: uppercase; padding: 8px 16px; border-radius: 6px;
+  transition: all 0.2s; cursor: pointer; display: block;
+}
+.nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
+.nav-links a.active { color: var(--red); background: rgba(232,39,42,0.08); }
+.nav-actions { display: flex; gap: 10px; align-items: center; }
+
+/* ─── BUTTONS ─── */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 20px; border-radius: var(--radius-sm);
+  font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border: none;
+  transition: all 0.2s; white-space: nowrap;
+}
+.btn-ghost { background: transparent; border: 1px solid var(--border-2); color: var(--text-muted); }
+.btn-ghost:hover { border-color: rgba(255,255,255,0.25); color: var(--text); }
+.btn-primary { background: var(--red); color: white; box-shadow: 0 0 20px var(--glow-red); }
+.btn-primary:hover { background: var(--red-light); box-shadow: 0 0 28px var(--glow-red); }
+.btn-gold { background: var(--gold); color: #0C0C0F; box-shadow: 0 0 20px var(--glow-gold); }
+.btn-gold:hover { background: #FFB820; }
+.btn-lg { padding: 13px 28px; font-size: 15px; }
+
+/* ─── LAYOUT UTILS ─── */
+.container { max-width: 1240px; margin: 0 auto; padding: 0 48px; }
+.section { padding: 80px 0; }
+.section-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
+.section-title { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 2px; line-height: 0.95; color: var(--text); margin-bottom: 6px; }
+.section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 36px; }
+.view-all { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--border-2); padding-bottom: 2px; transition: all 0.2s; white-space: nowrap; cursor: pointer; }
+.view-all:hover { color: var(--text); border-color: var(--text-muted); }
+.divider { height: 1px; background: var(--border); }
+
+/* ─── CARD ─── */
+.card {
+  background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border);
+  overflow: hidden; display: block; transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1); cursor: pointer;
+}
+.card:hover { border-color: rgba(255,255,255,0.14); transform: translateY(-4px); box-shadow: 0 24px 48px rgba(0,0,0,0.5); }
+.card-img { aspect-ratio: 16/10; position: relative; overflow: hidden; background: var(--dark4); }
+.card-img-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 48px; transition: transform 0.4s ease; }
+.card:hover .card-img-inner { transform: scale(1.06); }
+.card-badge { position: absolute; top: 12px; left: 12px; background: var(--gold); color: #0C0C0F; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; }
+.card-badge-red { background: var(--red); color: white; box-shadow: 0 0 12px var(--glow-red); }
+.card-fav { position: absolute; top: 12px; right: 12px; width: 32px; height: 32px; background: rgba(0,0,0,0.6); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; border: none; transition: background 0.2s; }
+.card-fav:hover { background: rgba(232,39,42,0.7); }
+.card-body { padding: 16px 18px 18px; }
+.card-cat { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+.card-name { font-family: 'Barlow Condensed', sans-serif; font-size: 21px; font-weight: 700; color: var(--text); letter-spacing: 0.3px; margin-bottom: 5px; line-height: 1.2; }
+.card-desc { font-size: 13px; color: var(--text-muted); font-style: italic; line-height: 1.5; margin-bottom: 14px; }
+.card-footer { display: flex; align-items: center; justify-content: space-between; }
+.card-stars { color: var(--gold); font-size: 12px; letter-spacing: 1px; }
+.card-price { font-size: 12px; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; }
+
+/* ─── FOOTER ─── */
+.footer { background: var(--dark2); border-top: 1px solid var(--border); padding: 56px 0 28px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.footer-brand p { font-size: 14px; color: var(--text-muted); line-height: 1.75; max-width: 280px; margin-top: 16px; }
+.footer-col h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 18px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a { font-size: 14px; color: var(--text-muted); transition: color 0.2s; cursor: pointer; }
+.footer-col ul li a:hover { color: var(--text); }
+.footer-bottom { padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--text-muted); }
+.footer-socials { display: flex; gap: 10px; }
+.social-btn { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 15px; transition: all 0.2s; cursor: pointer; }
+.social-btn:hover { background: rgba(255,255,255,0.09); border-color: var(--border-2); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%,100% { opacity:1; box-shadow:0 0 8px var(--red); } 50% { opacity:0.4; box-shadow:0 0 2px var(--red); } }
+@keyframes iconFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+@keyframes twinkle { 0%,100% { opacity:0.8; transform:scale(1); } 50% { opacity:0.2; transform:scale(0.6); } }
+.fade-up { animation: fadeUp 0.6s ease both; }
+.fade-up-1 { animation: fadeUp 0.6s 0.1s ease both; }
+.fade-up-2 { animation: fadeUp 0.6s 0.2s ease both; }
+.fade-up-3 { animation: fadeUp 0.6s 0.3s ease both; }
+.fade-up-4 { animation: fadeUp 0.6s 0.4s ease both; }
+.fade-up-5 { animation: fadeUp 0.6s 0.5s ease both; }
+
+/* ══════════════════════════════
+   HOME PAGE
+══════════════════════════════ */
+.hero {
+  position: relative; min-height: 100vh; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; padding: 140px 48px 120px; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(232,39,42,0.2) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 15% 60%, rgba(245,176,20,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 85% 30%, rgba(20,60,200,0.06) 0%, transparent 50%),
+    linear-gradient(180deg, #0C0C0F 0%, #0F0F14 60%, #0A0A10 100%);
+}
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(232,39,42,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(232,39,42,0.025) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 85% 80% at 50% 50%, black 0%, transparent 75%);
+}
+.hero-dots { position: absolute; inset: 0; pointer-events: none; }
+.hero-dots span { position: absolute; border-radius: 50%; filter: blur(1px); animation: twinkle var(--d,3s) var(--delay,0s) infinite; }
+.hero-content { position: relative; z-index: 2; max-width: 820px; }
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(232,39,42,0.1); border: 1px solid rgba(232,39,42,0.25); border-radius: 100px;
+  padding: 7px 18px; font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--red); margin-bottom: 32px;
+}
+.hero-dot { width: 7px; height: 7px; background: var(--red); border-radius: 50%; box-shadow: 0 0 8px var(--red); animation: pulse 2s ease infinite; }
+.hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(80px, 13vw, 148px); line-height: 0.88; letter-spacing: 4px; margin-bottom: 10px; }
+.hero h1 .outline { color: transparent; -webkit-text-stroke: 2px var(--red); filter: drop-shadow(0 0 24px rgba(232,39,42,0.6)); }
+.hero-subtitle { font-size: 18px; color: var(--text-2); margin-bottom: 52px; font-weight: 400; line-height: 1.6; }
+.hero-subtitle strong { color: var(--gold); font-weight: 600; }
+.search-wrap { max-width: 700px; margin: 0 auto 20px; }
+.search-box {
+  display: flex; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.11);
+  border-radius: var(--radius); overflow: hidden; backdrop-filter: blur(12px); transition: border-color 0.3s;
+}
+.search-box:focus-within { border-color: rgba(232,39,42,0.45); box-shadow: 0 0 0 3px rgba(232,39,42,0.1); }
+.search-input { flex: 1; background: none; border: none; outline: none; padding: 17px 22px; color: var(--text); font-family: 'Barlow', sans-serif; font-size: 15px; }
+.search-input::placeholder { color: var(--text-muted); }
+.search-divider { width: 1px; background: var(--border); margin: 10px 0; }
+.search-select { background: transparent; border: none; outline: none; color: var(--text-muted); padding: 17px 18px; font-family: 'Barlow', sans-serif; font-size: 14px; cursor: pointer; min-width: 160px; }
+.search-select option { background: var(--dark3); }
+.search-btn { background: var(--red); border: none; padding: 17px 30px; color: white; font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+.search-btn:hover { background: var(--red-light); }
+.quick-tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.quick-tag { padding: 7px 16px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 100px; font-size: 13px; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
+.quick-tag:hover { background: rgba(255,255,255,0.09); color: var(--text); border-color: var(--border-2); }
+.hero-stats { position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%); display: flex; gap: 56px; z-index: 2; }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--gold); letter-spacing: 1px; line-height: 1; }
+.stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); margin-top: 4px; }
+.cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.cat-card { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 3/4; cursor: pointer; display: flex; flex-direction: column; transition: transform 0.3s cubic-bezier(0.25,0.8,0.25,1); }
+.cat-card:hover { transform: translateY(-5px); }
+.cat-bg { position: absolute; inset: 0; transition: transform 0.4s ease; }
+.cat-card:hover .cat-bg { transform: scale(1.04); }
+.bg-hoteles { background: linear-gradient(145deg, #1a0f35 0%, #32186a 40%, #1a0a30 100%); }
+.bg-restaurantes { background: linear-gradient(145deg, #2d0a0a 0%, #7a1a1a 40%, #2a0707 100%); }
+.bg-shows { background: linear-gradient(145deg, #0a1828 0%, #1a3f6a 40%, #080f20 100%); }
+.bg-nocturna { background: linear-gradient(145deg, #100f22 0%, #2a186a 40%, #100818 100%); }
+.cat-icon-big { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -58%); font-size: 64px; filter: drop-shadow(0 0 20px rgba(255,255,255,0.2)); transition: all 0.3s; }
+.cat-card:hover .cat-icon-big { transform: translate(-50%, -64%); filter: drop-shadow(0 0 30px rgba(255,255,255,0.35)); }
+.cat-pill { position: absolute; top: 16px; right: 16px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.12); border-radius: 100px; padding: 4px 12px; font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 0.5px; backdrop-filter: blur(4px); }
+.cat-info { position: absolute; bottom: 0; left: 0; right: 0; padding: 28px 22px 22px; background: linear-gradient(transparent, rgba(0,0,0,0.92) 60%); }
+.cat-name { font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 2px; color: white; display: block; margin-bottom: 5px; }
+.cat-desc-sm { font-size: 12px; color: rgba(255,255,255,0.5); font-style: italic; }
+.cat-arrow { display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--red); transition: transform 0.2s; }
+.cat-card:hover .cat-arrow { transform: translateX(4px); }
+.listings-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.listings-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.featured-belt { background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 72px 0; }
+.featured-inner { display: grid; grid-template-columns: 1fr 1.7fr; gap: 72px; align-items: center; }
+.feat-text .section-title { font-size: 56px; margin-bottom: 16px; }
+.feat-text p { color: var(--text-muted); font-size: 16px; line-height: 1.75; margin-bottom: 28px; max-width: 380px; }
+.feat-cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.feat-card-small { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 20px; transition: all 0.25s; cursor: pointer; }
+.feat-card-small:hover { border-color: rgba(232,39,42,0.3); background: rgba(232,39,42,0.04); transform: translateY(-2px); }
+.feat-card-icon { font-size: 30px; margin-bottom: 12px; }
+.feat-card-name { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.feat-card-sub { font-size: 12px; color: var(--text-muted); font-style: italic; }
+.nl-section { padding: 80px 0; text-align: center; position: relative; overflow: hidden; }
+.nl-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(232,39,42,0.07) 0%, transparent 70%); }
+.nl-inner { max-width: 540px; margin: 0 auto; position: relative; }
+.nl-title { font-family: 'Bebas Neue', sans-serif; font-size: 56px; letter-spacing: 2px; margin-bottom: 12px; }
+.nl-sub { color: var(--text-muted); margin-bottom: 32px; font-size: 16px; line-height: 1.7; }
+.nl-form { display: flex; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); background: var(--card-bg); transition: border-color 0.3s; }
+.nl-form:focus-within { border-color: rgba(232,39,42,0.4); box-shadow: 0 0 0 3px rgba(232,39,42,0.08); }
+.nl-input { flex: 1; background: none; border: none; outline: none; padding: 14px 20px; color: var(--text); font-family: 'Barlow', sans-serif; font-size: 15px; }
+.nl-input::placeholder { color: var(--text-muted); }
+.nl-btn { background: var(--red); border: none; padding: 14px 24px; color: white; font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+.nl-btn:hover { background: var(--red-light); }
+.nl-note { margin-top: 12px; font-size: 12px; color: var(--text-muted); }
+
+/* ══════════════════════════════
+   EXPLORE PAGE
+══════════════════════════════ */
+.page-hero { padding: 140px 0 60px; background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(232,39,42,0.12) 0%, transparent 60%), linear-gradient(180deg, #0C0C0F 0%, #0F0F12 100%); border-bottom: 1px solid var(--border); }
+.page-hero-inner { text-align: center; }
+.page-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 80px; letter-spacing: 4px; line-height: 0.9; margin-bottom: 16px; }
+.page-hero h1 span { color: var(--red); }
+.page-hero p { font-size: 17px; color: var(--text-muted); margin-bottom: 40px; }
+.explore-search-box { display: flex; max-width: 740px; margin: 0 auto; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.11); border-radius: var(--radius); overflow: hidden; backdrop-filter: blur(12px); transition: border-color 0.3s; }
+.explore-search-box:focus-within { border-color: rgba(232,39,42,0.45); }
+.es-input { flex: 1; background: none; border: none; outline: none; padding: 15px 20px; color: var(--text); font-family: 'Barlow', sans-serif; font-size: 15px; }
+.es-input::placeholder { color: var(--text-muted); }
+.es-btn { background: var(--red); border: none; padding: 15px 26px; color: white; font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
+.es-btn:hover { background: var(--red-light); }
+.filter-bar { background: var(--dark2); border-bottom: 1px solid var(--border); position: sticky; top: 70px; z-index: 100; }
+.filter-bar-inner { display: flex; align-items: center; overflow-x: auto; padding: 0 48px; }
+.filter-tab { padding: 16px 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; color: var(--text-muted); cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; font-family: 'Barlow', sans-serif; }
+.filter-tab:hover { color: var(--text); }
+.filter-tab.active { color: var(--red); border-bottom-color: var(--red); }
+.results-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+.results-count { font-size: 14px; color: var(--text-muted); }
+.results-count strong { color: var(--text); }
+.sort-select { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-muted); padding: 8px 14px; font-family: 'Barlow', sans-serif; font-size: 13px; outline: none; cursor: pointer; }
+.sort-select option { background: var(--dark3); }
+.explore-layout { padding: 48px 0 80px; }
+.explore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.empty-state { grid-column: 1/-1; text-align: center; padding: 80px 20px; }
+.empty-icon { font-size: 56px; margin-bottom: 16px; opacity: 0.4; }
+.empty-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 8px; }
+.empty-sub { font-size: 14px; color: var(--text-muted); }
+.price-filters, .stars-filter { display: flex; gap: 8px; flex-wrap: wrap; }
+.price-btn, .stars-btn { padding: 6px 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: all 0.2s; font-family: 'Barlow', sans-serif; }
+.price-btn:hover, .stars-btn:hover { border-color: var(--border-2); color: var(--text); }
+.price-btn.active { background: rgba(232,39,42,0.1); border-color: rgba(232,39,42,0.4); color: var(--red); }
+.stars-btn { color: var(--gold); }
+.stars-btn.active { background: rgba(245,176,20,0.1); border-color: rgba(245,176,20,0.4); }
+.filters-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.filter-label { font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); }
+.active-filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+.active-tag { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; background: rgba(232,39,42,0.1); border: 1px solid rgba(232,39,42,0.3); border-radius: 100px; font-size: 12px; color: var(--red); font-weight: 600; }
+.active-tag button { background: none; border: none; color: var(--red); cursor: pointer; font-size: 14px; line-height: 1; padding: 0; }
+.clear-all { font-size: 12px; color: var(--text-muted); cursor: pointer; background: none; border: none; text-decoration: underline; font-family: 'Barlow', sans-serif; }
+.clear-all:hover { color: var(--text); }
+
+/* ══════════════════════════════
+   LISTING DETAIL PAGE
+══════════════════════════════ */
+.listing-hero { padding: 120px 0 0; background: linear-gradient(180deg, #0C0C0F 0%, #0F0F14 100%); }
+.breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); margin-bottom: 28px; }
+.breadcrumb span { color: var(--border-2); }
+.breadcrumb a { color: var(--text-muted); transition: color 0.2s; cursor: pointer; }
+.breadcrumb a:hover { color: var(--text); }
+.listing-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; padding-bottom: 40px; }
+.listing-header-left { flex: 1; }
+.listing-cat-tag { display: inline-flex; align-items: center; background: rgba(232,39,42,0.1); border: 1px solid rgba(232,39,42,0.25); border-radius: 100px; padding: 5px 14px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+.listing-main-title { font-family: 'Bebas Neue', sans-serif; font-size: 72px; letter-spacing: 3px; line-height: 0.92; margin-bottom: 16px; }
+.listing-tagline { font-size: 18px; color: var(--text-2); font-style: italic; margin-bottom: 24px; }
+.listing-meta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.meta-stars { font-size: 18px; color: var(--gold); letter-spacing: 2px; }
+.meta-rating { font-size: 22px; font-weight: 700; color: var(--text); font-family: 'Barlow Condensed', sans-serif; }
+.meta-reviews { font-size: 13px; color: var(--text-muted); }
+.meta-sep { width: 1px; height: 20px; background: var(--border-2); }
+.meta-price { font-size: 20px; font-weight: 700; color: var(--text); font-family: 'Barlow Condensed', sans-serif; letter-spacing: 1px; }
+.meta-badge { background: var(--gold); color: #0C0C0F; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; }
+.listing-actions { display: flex; flex-direction: column; gap: 10px; min-width: 220px; }
+.listing-visual { background: var(--dark3); border-radius: var(--radius-lg) var(--radius-lg) 0 0; border-top: 1px solid var(--border); border-left: 1px solid var(--border); border-right: 1px solid var(--border); overflow: hidden; }
+.listing-icon-display { height: 380px; display: flex; align-items: center; justify-content: center; font-size: 120px; position: relative; overflow: hidden; }
+.listing-icon-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(232,39,42,0.1) 0%, transparent 70%); }
+.listing-icon-glow { position: relative; z-index: 1; filter: drop-shadow(0 0 40px rgba(255,255,255,0.15)); animation: iconFloat 4s ease-in-out infinite; }
+.listing-body { padding: 64px 0 80px; }
+.listing-layout { display: grid; grid-template-columns: 1fr 340px; gap: 48px; align-items: start; }
+.listing-main section { margin-bottom: 48px; }
+.section-subtitle { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+.about-text { font-size: 16px; color: var(--text-2); line-height: 1.8; }
+.highlights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.highlight-item { display: flex; align-items: center; gap: 10px; background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; font-size: 14px; color: var(--text-2); }
+.highlight-dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 6px var(--red); }
+.listing-sidebar { position: sticky; top: 90px; display: flex; flex-direction: column; gap: 16px; }
+.info-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.info-card-header { padding: 16px 20px; border-bottom: 1px solid var(--border); font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
+.info-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 20px; border-bottom: 1px solid var(--border); font-size: 14px; }
+.info-item:last-child { border-bottom: none; }
+.info-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.info-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; margin-bottom: 3px; }
+.info-value { color: var(--text-2); }
+.open-badge { display: inline-block; padding: 2px 8px; background: rgba(40,200,80,0.12); border: 1px solid rgba(40,200,80,0.3); border-radius: 4px; font-size: 11px; font-weight: 700; color: #3DD68C; letter-spacing: 0.5px; }
+.related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.review-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 12px; }
+.review-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.reviewer-name { font-weight: 700; font-size: 15px; color: var(--text); }
+.reviewer-date { font-size: 12px; color: var(--text-muted); }
+.review-stars { color: var(--gold); font-size: 13px; letter-spacing: 1px; margin-bottom: 8px; }
+.review-text { font-size: 14px; color: var(--text-2); line-height: 1.6; font-style: italic; }
+
+/* ══════════════════════════════
+   ABOUT PAGE
+══════════════════════════════ */
+.about-hero { padding: 140px 0 80px; text-align: center; position: relative; overflow: hidden; background: linear-gradient(180deg, #0C0C0F 0%, #0F0F14 100%); }
+.about-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 80%, rgba(232,39,42,0.12) 0%, transparent 60%); }
+.about-hero-inner { position: relative; }
+.about-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 96px; letter-spacing: 4px; line-height: 0.9; margin-bottom: 20px; }
+.about-hero h1 span { color: var(--red); }
+.about-hero p { font-size: 19px; color: var(--text-2); max-width: 600px; margin: 0 auto 36px; line-height: 1.7; }
+.mission-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+.mission-text .section-title { font-size: 60px; margin-bottom: 20px; }
+.mission-text p { color: var(--text-2); font-size: 16px; line-height: 1.8; margin-bottom: 20px; }
+.mission-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.mission-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 22px; text-align: center; transition: all 0.25s; }
+.mission-card:hover { border-color: rgba(232,39,42,0.25); transform: translateY(-3px); }
+.mission-icon { font-size: 36px; margin-bottom: 12px; }
+.mission-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--gold); letter-spacing: 1px; line-height: 1; margin-bottom: 4px; }
+.mission-label { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); }
+.team-section { padding: 80px 0; background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.team-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; text-align: center; transition: all 0.25s; }
+.team-card:hover { border-color: var(--border-2); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+.team-avatar { height: 180px; background: var(--dark3); display: flex; align-items: center; justify-content: center; font-size: 72px; position: relative; overflow: hidden; }
+.team-avatar::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(232,39,42,0.08) 0%, transparent 70%); }
+.team-body { padding: 24px 20px; }
+.team-name { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.team-role { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
+.team-bio { font-size: 13px; color: var(--text-muted); line-height: 1.6; font-style: italic; }
+.values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.value-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; transition: all 0.25s; }
+.value-card:hover { border-color: rgba(232,39,42,0.25); }
+.value-icon { font-size: 36px; margin-bottom: 16px; }
+.value-title { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+.value-text { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+.contact-section { padding: 80px 0; background: var(--dark2); border-top: 1px solid var(--border); }
+.contact-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 72px; align-items: start; }
+.contact-info .section-title { font-size: 52px; margin-bottom: 16px; }
+.contact-info > p { color: var(--text-2); font-size: 16px; line-height: 1.75; margin-bottom: 36px; }
+.contact-items { display: flex; flex-direction: column; gap: 16px; }
+.contact-item { display: flex; align-items: flex-start; gap: 16px; padding: 16px 18px; background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); transition: border-color 0.2s; }
+.contact-item:hover { border-color: var(--border-2); }
+.ci-icon { font-size: 22px; flex-shrink: 0; }
+.ci-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); font-weight: 700; margin-bottom: 3px; }
+.ci-value { font-size: 15px; color: var(--text-2); }
+.contact-form-wrap { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px; }
+.form-title { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700; color: var(--text); margin-bottom: 28px; letter-spacing: 0.5px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { margin-bottom: 16px; }
+.form-label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+.form-input, .form-select, .form-textarea { width: 100%; background: var(--dark3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; color: var(--text); font-family: 'Barlow', sans-serif; font-size: 15px; outline: none; transition: border-color 0.2s; }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: rgba(232,39,42,0.4); box-shadow: 0 0 0 3px rgba(232,39,42,0.08); }
+.form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); }
+.form-select { cursor: pointer; }
+.form-select option { background: var(--dark3); }
+.form-textarea { min-height: 120px; resize: vertical; line-height: 1.6; }
+.form-submit { width: 100%; padding: 14px; background: var(--red); color: white; border: none; border-radius: var(--radius-sm); font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; box-shadow: 0 0 20px var(--glow-red); }
+.form-submit:hover { background: var(--red-light); }
+.form-success { display: none; text-align: center; padding: 20px; background: rgba(40,200,80,0.08); border: 1px solid rgba(40,200,80,0.2); border-radius: var(--radius-sm); margin-top: 12px; color: #3DD68C; font-weight: 600; }
+.faq-section { padding: 80px 0; }
+.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; transition: border-color 0.2s; }
+.faq-item:hover { border-color: var(--border-2); }
+.faq-q { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+.faq-a { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav class="nav" id="mainNav">
+  <div class="nav-logo" onclick="navigate('home')">
+    <div class="nav-badge">LLV</div>
+    Latino<span class="red">LV</span>
+  </div>
+  <ul class="nav-links">
+    <li><a id="nav-home" onclick="navigate('home')">Inicio</a></li>
+    <li><a id="nav-explore" onclick="navigate('explore')">Explorar</a></li>
+    <li><a id="nav-about" onclick="navigate('about')">Nosotros</a></li>
+    <li><a id="nav-contact" onclick="navigate('about','contact')">Contacto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn btn-ghost">Iniciar sesión</button>
+    <button class="btn btn-primary">Registrarse</button>
+  </div>
+</nav>
+
+<!-- ══════════════════ HOME ══════════════════ -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-dots" id="heroDots"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow fade-up"><span class="hero-dot"></span> Tu guía en español · Las Vegas, NV</div>
+      <h1 class="fade-up-1">EXPLORA<br><span class="outline">LAS VEGAS</span></h1>
+      <p class="hero-subtitle fade-up-2">Hoteles, casinos, restaurantes y experiencias — <strong>en tu idioma</strong></p>
+      <div class="search-wrap fade-up-3">
+        <div class="search-box">
+          <input type="text" class="search-input" id="heroSearch" placeholder="¿Qué estás buscando? (hotel, restaurante, show…)" />
+          <div class="search-divider"></div>
+          <select class="search-select" id="heroCategory">
+            <option value="">Todas las categorías</option>
+            <option value="hoteles">Hoteles & Casinos</option>
+            <option value="restaurantes">Restaurantes</option>
+            <option value="shows">Shows & Eventos</option>
+            <option value="nocturna">Vida Nocturna</option>
+          </select>
+          <button class="search-btn" onclick="doHeroSearch()">Buscar</button>
+        </div>
+      </div>
+      <div class="quick-tags fade-up-4">
+        <span class="quick-tag" onclick="navigate('explore','hoteles')">🏨 Hoteles en el Strip</span>
+        <span class="quick-tag" onclick="navigate('explore','restaurantes')">🌮 Comida Latina</span>
+        <span class="quick-tag" onclick="navigate('explore','hoteles')">🎰 Casinos</span>
+        <span class="quick-tag" onclick="navigate('explore','shows')">🎭 Shows</span>
+        <span class="quick-tag" onclick="navigate('explore','nocturna')">🍹 Vida Nocturna</span>
+      </div>
+    </div>
+    <div class="hero-stats fade-up-5">
+      <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Lugares</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-label">Categorías</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">En Español</div></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div><div class="section-eyebrow">Explora por categoría</div><div class="section-title">Encuentra Tu Experiencia</div></div>
+        <span class="view-all" onclick="navigate('explore')">Ver todo →</span>
+      </div>
+      <div class="cat-grid">
+        <div class="cat-card" onclick="navigate('explore','hoteles')">
+          <div class="cat-bg bg-hoteles"></div><div class="cat-icon-big">🏨</div>
+          <div class="cat-pill">12 lugares</div>
+          <div class="cat-info"><span class="cat-name">Hoteles & Casinos</span><span class="cat-desc-sm">Lujo, ubicación y entretenimiento</span><span class="cat-arrow">Explorar →</span></div>
+        </div>
+        <div class="cat-card" onclick="navigate('explore','restaurantes')">
+          <div class="cat-bg bg-restaurantes"></div><div class="cat-icon-big">🍽️</div>
+          <div class="cat-pill">24 lugares</div>
+          <div class="cat-info"><span class="cat-name">Restaurantes</span><span class="cat-desc-sm">Desde tacos hasta alta cocina</span><span class="cat-arrow">Explorar →</span></div>
+        </div>
+        <div class="cat-card" onclick="navigate('explore','shows')">
+          <div class="cat-bg bg-shows"></div><div class="cat-icon-big">🎭</div>
+          <div class="cat-pill">8 eventos</div>
+          <div class="cat-info"><span class="cat-name">Shows & Eventos</span><span class="cat-desc-sm">Espectáculos únicos e inolvidables</span><span class="cat-arrow">Explorar →</span></div>
+        </div>
+        <div class="cat-card" onclick="navigate('explore','nocturna')">
+          <div class="cat-bg bg-nocturna"></div><div class="cat-icon-big">🍹</div>
+          <div class="cat-pill">10 lugares</div>
+          <div class="cat-info"><span class="cat-name">Vida Nocturna</span><span class="cat-desc-sm">Clubes y cócteles hasta tarde</span><span class="cat-arrow">Explorar →</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div><div class="section-eyebrow">Alojamiento destacado</div><div class="section-title">Hoteles & Casinos</div></div>
+        <span class="view-all" onclick="navigate('explore','hoteles')">Ver todos →</span>
+      </div>
+      <div class="listings-4" id="homeHotels"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div><div class="section-eyebrow">Sabores imperdibles</div><div class="section-title">Restaurantes</div></div>
+        <span class="view-all" onclick="navigate('explore','restaurantes')">Ver todos →</span>
+      </div>
+      <div class="listings-4" id="homeRestaurants"></div>
+    </div>
+  </section>
+
+  <div class="featured-belt">
+    <div class="container">
+      <div class="featured-inner">
+        <div class="feat-text">
+          <div class="section-eyebrow">¿Por qué Latino Las Vegas?</div>
+          <div class="section-title">Hecho Para La Comunidad</div>
+          <p>Todo el contenido está curado en español, pensado para visitantes y residentes latinos que quieren vivir Las Vegas al máximo — sin barreras.</p>
+          <button class="btn btn-primary btn-lg" onclick="navigate('explore')">Explorar ahora →</button>
+        </div>
+        <div class="feat-cards-grid">
+          <div class="feat-card-small"><div class="feat-card-icon">🇲🇽</div><div class="feat-card-name">100% en Español</div><div class="feat-card-sub">Toda la guía en tu idioma</div></div>
+          <div class="feat-card-small"><div class="feat-card-icon">⭐</div><div class="feat-card-name">Reseñas Reales</div><div class="feat-card-sub">Opiniones de la comunidad</div></div>
+          <div class="feat-card-small"><div class="feat-card-icon">📍</div><div class="feat-card-name">Mapa Interactivo</div><div class="feat-card-sub">Encuentra lugares cercanos</div></div>
+          <div class="feat-card-small"><div class="feat-card-icon">🔔</div><div class="feat-card-name">Alertas de Eventos</div><div class="feat-card-sub">No te pierdas nada</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div><div class="section-eyebrow">Entretenimiento & Noche</div><div class="section-title">Shows & Vida Nocturna</div></div>
+        <span class="view-all" onclick="navigate('explore','shows')">Ver todos →</span>
+      </div>
+      <div class="listings-3" id="homeShows"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+  <section class="nl-section">
+    <div class="nl-inner">
+      <div class="section-eyebrow">Newsletter</div>
+      <div class="nl-title">Mantente Al Día</div>
+      <p class="nl-sub">Los mejores eventos, lugares y planes en Las Vegas — directo a tu correo.</p>
+      <div class="nl-form">
+        <input type="email" class="nl-input" placeholder="tucorreo@email.com" />
+        <button class="nl-btn">Suscribirse</button>
+      </div>
+      <p class="nl-note">Sin spam. Solo recomendaciones útiles.</p>
+    </div>
+  </section>
+  <div id="footer-home"></div>
+</div>
+
+<!-- ══════════════════ EXPLORE ══════════════════ -->
+<div id="page-explore" class="page">
+  <div class="page-hero">
+    <div class="container page-hero-inner">
+      <div class="section-eyebrow">Directorio completo</div>
+      <h1>EXPLORA <span>LAS VEGAS</span></h1>
+      <p>Hoteles, restaurantes, shows y vida nocturna — todo en español</p>
+      <div class="explore-search-box">
+        <input type="text" class="es-input" id="exploreSearchInput" placeholder="Buscar hoteles, restaurantes, shows…" oninput="applyFilters()" onkeypress="if(event.key==='Enter')applyFilters()" />
+        <button class="es-btn" onclick="applyFilters()">🔍 Buscar</button>
+      </div>
+    </div>
+  </div>
+  <div class="filter-bar">
+    <div class="filter-bar-inner">
+      <button class="filter-tab active" data-cat="" onclick="setCat(this,'')">Todos</button>
+      <button class="filter-tab" data-cat="hoteles" onclick="setCat(this,'hoteles')">🏨 Hoteles & Casinos</button>
+      <button class="filter-tab" data-cat="restaurantes" onclick="setCat(this,'restaurantes')">🍽️ Restaurantes</button>
+      <button class="filter-tab" data-cat="shows" onclick="setCat(this,'shows')">🎭 Shows & Eventos</button>
+      <button class="filter-tab" data-cat="nocturna" onclick="setCat(this,'nocturna')">🍹 Vida Nocturna</button>
+    </div>
+  </div>
+  <div class="explore-layout">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)">
+        <div class="filters-row">
+          <span class="filter-label">Precio:</span>
+          <div class="price-filters">
+            <button class="price-btn" data-price="$" onclick="togglePrice(this,'$')">$</button>
+            <button class="price-btn" data-price="$$" onclick="togglePrice(this,'$$')">$$</button>
+            <button class="price-btn" data-price="$$$" onclick="togglePrice(this,'$$$')">$$$</button>
+            <button class="price-btn" data-price="$$$$" onclick="togglePrice(this,'$$$$')">$$$$</button>
+          </div>
+          <span class="filter-label" style="margin-left:8px">Estrellas:</span>
+          <div class="stars-filter">
+            <button class="stars-btn" data-stars="5" onclick="toggleStars(this,5)">★★★★★</button>
+            <button class="stars-btn" data-stars="4" onclick="toggleStars(this,4)">★★★★</button>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span class="filter-label">Ordenar:</span>
+          <select class="sort-select" id="sortSelect" onchange="applyFilters()">
+            <option value="default">Destacados</option>
+            <option value="name">Nombre A–Z</option>
+            <option value="stars">Mejor valorados</option>
+            <option value="price-low">Precio: menor</option>
+            <option value="price-high">Precio: mayor</option>
+          </select>
+        </div>
+      </div>
+      <div class="active-filters" id="activeFilters" style="display:none"></div>
+      <div class="results-bar">
+        <div class="results-count" id="resultsCount"><strong>16</strong> lugares encontrados</div>
+      </div>
+      <div class="explore-grid" id="exploreGrid"></div>
+    </div>
+  </div>
+  <div id="footer-explore"></div>
+</div>
+
+<!-- ══════════════════ LISTING DETAIL ══════════════════ -->
+<div id="page-listing" class="page">
+  <div class="listing-hero">
+    <div class="container">
+      <div class="breadcrumb fade-up">
+        <a onclick="navigate('home')">Inicio</a><span>›</span>
+        <a onclick="navigate('explore')">Explorar</a><span>›</span>
+        <span id="breadCat">—</span><span>›</span>
+        <span id="breadName">—</span>
+      </div>
+      <div class="listing-header fade-up-1">
+        <div class="listing-header-left">
+          <div class="listing-cat-tag" id="listingCatTag">—</div>
+          <div class="listing-main-title" id="listingTitle">—</div>
+          <div class="listing-tagline" id="listingTagline"></div>
+          <div class="listing-meta">
+            <div class="meta-stars" id="metaStars">★★★★★</div>
+            <div class="meta-rating" id="metaRating">5.0</div>
+            <div class="meta-reviews">reseñas</div>
+            <div class="meta-sep"></div>
+            <div class="meta-price" id="metaPrice">$$$</div>
+            <div class="meta-badge" id="metaBadge" style="display:none"></div>
+          </div>
+        </div>
+        <div class="listing-actions">
+          <button class="btn btn-primary btn-lg" id="listingPhoneBtn">📞 Llamar</button>
+          <button class="btn btn-ghost btn-lg" onclick="navigate('explore')">← Volver</button>
+        </div>
+      </div>
+    </div>
+    <div class="container" style="padding-bottom:0">
+      <div class="listing-visual">
+        <div class="listing-icon-display">
+          <div class="listing-icon-bg"></div>
+          <div class="listing-icon-glow" id="listingIcon">🏛️</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="listing-body">
+    <div class="container">
+      <div class="listing-layout">
+        <div class="listing-main">
+          <section>
+            <div class="section-subtitle">📖 Acerca de este lugar</div>
+            <div class="about-text" id="aboutText"></div>
+          </section>
+          <section>
+            <div class="section-subtitle">✨ Destacados</div>
+            <div class="highlights-grid" id="highlightsGrid"></div>
+          </section>
+          <section id="happyHourSection" style="display:none">
+            <div class="section-subtitle">🍹 Happy Hour</div>
+            <div style="background:var(--card-bg);border:1px solid rgba(245,176,20,0.2);border-radius:var(--radius);padding:24px">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+                <span style="background:rgba(245,176,20,0.15);border:1px solid rgba(245,176,20,0.3);border-radius:6px;padding:4px 12px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold)">Happy Hour</span>
+                <span style="font-size:14px;color:var(--text-muted)" id="happyHourDays"></span>
+              </div>
+              <div style="font-size:15px;color:var(--text-2);line-height:1.8;white-space:pre-line" id="happyHourDetails"></div>
+            </div>
+          </section>
+          <section>
+            <div class="section-subtitle">💬 Reseñas</div>
+            <div id="reviewsContainer"></div>
+          </section>
+        </div>
+        <div class="listing-sidebar">
+          <div class="info-card">
+            <div class="info-card-header">Información</div>
+            <div class="info-item"><span class="info-icon">📍</span><div><div class="info-label">Dirección</div><div class="info-value" id="infoAddress">—</div></div></div>
+            <div class="info-item"><span class="info-icon">📞</span><div><div class="info-label">Teléfono</div><div class="info-value" id="infoPhone">—</div></div></div>
+            <div class="info-item"><span class="info-icon">🕐</span><div><div class="info-label">Horario</div><div class="info-value" id="infoHours">—</div><div style="margin-top:6px"><span class="open-badge">ABIERTO</span></div></div></div>
+            <div class="info-item" id="infoCuisineRow" style="display:none"><span class="info-icon">🍴</span><div><div class="info-label">Cocina</div><div class="info-value" id="infoCuisine">—</div></div></div>
+            <div class="info-item" id="infoRegionRow" style="display:none"><span class="info-icon">📌</span><div><div class="info-label">Zona</div><div class="info-value" id="infoRegion">—</div></div></div>
+            <div class="info-item" id="infoSocialRow" style="display:none"><span class="info-icon">📱</span><div><div class="info-label">Redes Sociales</div><div id="infoSocial" style="display:flex;gap:10px;margin-top:6px;flex-wrap:wrap"></div></div></div>
+          </div>
+          <div class="info-card">
+            <div class="info-card-header">Calificación</div>
+            <div style="padding:20px;text-align:center">
+              <div style="font-family:'Bebas Neue',sans-serif;font-size:64px;color:var(--gold);line-height:1" id="bigRating">5.0</div>
+              <div style="font-size:20px;color:var(--gold);margin-bottom:6px" id="bigStars">★★★★★</div>
+              <div style="font-size:13px;color:var(--text-muted)">Basado en reseñas de la comunidad</div>
+            </div>
+          </div>
+          <button class="btn btn-ghost" style="justify-content:center" onclick="navigate('explore')">← Ver más lugares</button>
+        </div>
+      </div>
+      <div style="margin-top:48px;padding-top:48px;border-top:1px solid var(--border)">
+        <div class="section-header">
+          <div><div class="section-eyebrow">También te puede gustar</div><div class="section-title">Lugares Similares</div></div>
+          <span class="view-all" onclick="navigate('explore')">Ver todos →</span>
+        </div>
+        <div class="related-grid" id="relatedGrid"></div>
+      </div>
+    </div>
+  </div>
+  <div id="footer-listing"></div>
+</div>
+
+<!-- ══════════════════ ABOUT ══════════════════ -->
+<div id="page-about" class="page">
+  <div class="about-hero">
+    <div class="container about-hero-inner">
+      <div class="section-eyebrow">Conoce la comunidad</div>
+      <h1>SOMOS<br><span>LATINOS LV</span></h1>
+      <p>La primera guía en español dedicada a conectar a la comunidad latina con lo mejor que Las Vegas tiene para ofrecer.</p>
+      <div style="display:flex;gap:12px;justify-content:center">
+        <button class="btn btn-primary btn-lg" onclick="scrollToContact()">Contáctanos</button>
+        <button class="btn btn-ghost btn-lg" onclick="navigate('explore')">Explorar guía →</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="mission-layout">
+        <div class="mission-text">
+          <div class="section-eyebrow">Nuestra misión</div>
+          <div class="section-title">Por La Comunidad,<br>Para La Comunidad</div>
+          <p>Latino Las Vegas nació de una necesidad real: los visitantes y residentes latinos en Las Vegas merecen una guía completa, confiable y en su idioma.</p>
+          <p>Somos más que un directorio. Somos un puente entre la comunidad latina y las mejores experiencias que esta ciudad icónica tiene para ofrecer.</p>
+          <button class="btn btn-gold btn-lg" style="margin-top:8px" onclick="navigate('explore')">Explorar la guía →</button>
+        </div>
+        <div class="mission-visual">
+          <div class="mission-card"><div class="mission-icon">📍</div><div class="mission-num">50+</div><div class="mission-label">Lugares</div></div>
+          <div class="mission-card"><div class="mission-icon">⭐</div><div class="mission-num">4.8</div><div class="mission-label">Calificación</div></div>
+          <div class="mission-card"><div class="mission-icon">🇲🇽</div><div class="mission-num">100%</div><div class="mission-label">En español</div></div>
+          <div class="mission-card"><div class="mission-icon">👥</div><div class="mission-num">5k+</div><div class="mission-label">Usuarios</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+  <div class="team-section">
+    <div class="container">
+      <div class="section-header"><div><div class="section-eyebrow">Las personas detrás del proyecto</div><div class="section-title">Nuestro Equipo</div></div></div>
+      <div class="team-grid">
+        <div class="team-card"><div class="team-avatar">👨‍💻</div><div class="team-body"><div class="team-name">Alejandro Torres</div><div class="team-role">Fundador & Director</div><div class="team-bio">Mexicano residente en Las Vegas desde 2010. Creó Latino LV para ayudar a su comunidad a navegar la ciudad sin barreras.</div></div></div>
+        <div class="team-card"><div class="team-avatar">👩‍🎨</div><div class="team-body"><div class="team-name">Valentina Cruz</div><div class="team-role">Editora de contenido</div><div class="team-bio">Periodista colombiana con 8 años de experiencia en medios latinos. Apasionada por la gastronomía y la cultura.</div></div></div>
+        <div class="team-card"><div class="team-avatar">👨‍🍳</div><div class="team-body"><div class="team-name">Roberto Méndez</div><div class="team-role">Curador gastronómico</div><div class="team-bio">Chef y crítico culinario. Ha probado más de 200 restaurantes en Las Vegas para traerte las mejores recomendaciones.</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <section class="section">
+    <div class="container">
+      <div class="section-header"><div><div class="section-eyebrow">En qué creemos</div><div class="section-title">Nuestros Valores</div></div></div>
+      <div class="values-grid">
+        <div class="value-card"><div class="value-icon">🤝</div><div class="value-title">Comunidad Primero</div><div class="value-text">Todo lo que hacemos está pensado para servir a la comunidad latina de Las Vegas y sus visitantes.</div></div>
+        <div class="value-card"><div class="value-icon">✅</div><div class="value-title">Contenido Verificado</div><div class="value-text">Visitamos personalmente cada lugar antes de incluirlo. No publicamos reseñas sin verificar la información.</div></div>
+        <div class="value-card"><div class="value-icon">🗣️</div><div class="value-title">Siempre en Español</div><div class="value-text">El español es nuestra lengua de trabajo. Todo está escrito por hablantes nativos, nunca con traducciones automáticas.</div></div>
+        <div class="value-card"><div class="value-icon">🔍</div><div class="value-title">Transparencia Total</div><div class="value-text">Nunca aceptamos pagos por reseñas positivas. Nuestra independencia editorial es nuestra promesa.</div></div>
+        <div class="value-card"><div class="value-icon">🌎</div><div class="value-title">Diversidad Latina</div><div class="value-text">Mexicanos, cubanos, colombianos, venezolanos y más. Nuestra guía refleja esa riqueza cultural.</div></div>
+        <div class="value-card"><div class="value-icon">📱</div><div class="value-title">Siempre Actualizado</div><div class="value-text">Verificamos la información constantemente para que siempre tengas los datos más frescos de Las Vegas.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="contact-section" id="contactSection">
+    <div class="container">
+      <div class="contact-layout">
+        <div class="contact-info">
+          <div class="section-eyebrow">¿Preguntas?</div>
+          <div class="section-title">Contáctanos</div>
+          <p>¿Quieres agregar tu negocio, reportar información incorrecta, o simplemente saludar? Estamos aquí.</p>
+          <div class="contact-items">
+            <div class="contact-item"><div class="ci-icon">📧</div><div><div class="ci-label">Email</div><div class="ci-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="8ae2e5e6ebcae6ebfee3e4e5e6ebf9fcefedebf9a4e9e5e7">[email&#160;protected]</a></div></div></div>
+            <div class="contact-item"><div class="ci-icon">📱</div><div><div class="ci-label">WhatsApp</div><div class="ci-value">(702) 555-1234</div></div></div>
+            <div class="contact-item"><div class="ci-icon">📍</div><div><div class="ci-label">Ubicación</div><div class="ci-value">Las Vegas, Nevada, USA</div></div></div>
+            <div class="contact-item"><div class="ci-icon">🕐</div><div><div class="ci-label">Horario</div><div class="ci-value">Lun–Vie · 9am–6pm PST</div></div></div>
+          </div>
+        </div>
+        <div class="contact-form-wrap">
+          <div class="form-title">Envíanos un mensaje</div>
+          <form onsubmit="handleContactSubmit(event)">
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Nombre</label><input type="text" class="form-input" placeholder="Tu nombre" required /></div>
+              <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="tu@email.com" required /></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Asunto</label>
+              <select class="form-select">
+                <option>Selecciona un asunto…</option>
+                <option>Agregar mi negocio</option>
+                <option>Información incorrecta</option>
+                <option>Colaboración o patrocinio</option>
+                <option>Sugerencia de lugar</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="form-group"><label class="form-label">Mensaje</label><textarea class="form-textarea" placeholder="Cuéntanos en qué podemos ayudarte…" required></textarea></div>
+            <button type="submit" class="form-submit" id="contactSubmitBtn">Enviar mensaje →</button>
+            <div class="form-success" id="formSuccess">✅ ¡Mensaje enviado! Te responderemos en menos de 24 horas.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="faq-section">
+    <div class="container">
+      <div class="section-header"><div><div class="section-eyebrow">Preguntas frecuentes</div><div class="section-title">FAQ</div></div></div>
+      <div class="faq-grid">
+        <div class="faq-item"><div class="faq-q">¿Cómo agrego mi negocio a la guía?</div><div class="faq-a">Usa el formulario de contacto y cuéntanos sobre tu lugar. Nuestro equipo lo revisará y se pondrá en contacto contigo.</div></div>
+        <div class="faq-item"><div class="faq-q">¿La guía es gratuita?</div><div class="faq-a">Sí, completamente gratuita para usuarios. Nuestro modelo se basa en membresías premium para negocios.</div></div>
+        <div class="faq-item"><div class="faq-q">¿Con qué frecuencia actualizan la info?</div><div class="faq-a">Revisamos cada lugar al menos una vez al mes y respondemos reportes de errores en menos de 48 horas.</div></div>
+        <div class="faq-item"><div class="faq-q">¿Solo incluyen lugares en el Strip?</div><div class="faq-a">No. Cubrimos toda el área de Las Vegas: Strip, Summerlin, Henderson, North Las Vegas y más.</div></div>
+        <div class="faq-item"><div class="faq-q">¿Puedo dejar reseñas?</div><div class="faq-a">¡Sí! Crea una cuenta gratuita y podrás dejar reseñas, guardar favoritos y recibir recomendaciones.</div></div>
+        <div class="faq-item"><div class="faq-q">¿Aceptan publicidad patrocinada?</div><div class="faq-a">Ofrecemos listados destacados, siempre claramente marcados. Nunca cobramos por reseñas positivas.</div></div>
+      </div>
+    </div>
+  </section>
+  <div id="footer-about"></div>
+</div>
+
+
+
+<!-- ══════════════════ ADMIN LOGIN ══════════════════ -->
+<div id="page-admin-login" class="page">
+  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(232,39,42,0.08) 0%,transparent 70%)">
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);padding:48px;width:100%;max-width:420px;text-align:center">
+      <div style="width:56px;height:56px;background:var(--red);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:22px;color:white;margin:0 auto 20px;box-shadow:0 0 24px var(--glow-red)">LLV</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:36px;letter-spacing:2px;margin-bottom:8px">ADMIN PANEL</div>
+      <div style="font-size:14px;color:var(--text-muted);margin-bottom:32px">Ingresa tu contraseña para continuar</div>
+      <form onsubmit="handleAdminLogin(event)">
+        <div style="margin-bottom:16px;text-align:left">
+          <label style="display:block;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">Contraseña</label>
+          <input type="password" id="adminPasswordInput" style="width:100%;background:var(--dark3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;color:var(--text);font-family:'Barlow',sans-serif;font-size:15px;outline:none;transition:border-color 0.2s" placeholder="••••••••••••" required
+            onfocus="this.style.borderColor='rgba(232,39,42,0.4)'" onblur="this.style.borderColor='var(--border)'" />
+        </div>
+        <div id="adminLoginError" style="display:none;background:rgba(232,39,42,0.1);border:1px solid rgba(232,39,42,0.3);border-radius:6px;padding:10px;font-size:13px;color:var(--red);margin-bottom:16px">❌ Contraseña incorrecta. Intenta de nuevo.</div>
+        <button type="submit" style="width:100%;padding:13px;background:var(--red);color:white;border:none;border-radius:var(--radius-sm);font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background 0.2s;box-shadow:0 0 20px var(--glow-red)"
+          onmouseover="this.style.background='var(--red-light)'" onmouseout="this.style.background='var(--red)'">Entrar →</button>
+      </form>
+      <div style="margin-top:20px"><a onclick="navigate('home')" style="font-size:13px;color:var(--text-muted);cursor:pointer;transition:color 0.2s" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">← Volver al sitio</a></div>
+    </div>
+  </div>
+  <div id="footer-admin-login"></div>
+</div>
+
+<!-- ══════════════════ ADMIN PANEL ══════════════════ -->
+<div id="page-admin" class="page">
+
+  <!-- Admin Header -->
+  <div style="padding:100px 0 40px;background:linear-gradient(180deg,#0C0C0F 0%,#0F0F14 100%);border-bottom:1px solid var(--border)">
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div>
+          <div class="section-eyebrow">Panel de administración</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:56px;letter-spacing:3px;line-height:1">ADMIN <span style="color:var(--red)">PANEL</span></div>
+          <div style="font-size:14px;color:var(--text-muted);margin-top:4px">Gestiona todos los listados de Latino Las Vegas</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button class="btn btn-primary" onclick="openAddModal()">+ Agregar lugar</button>
+          <button class="btn btn-ghost" onclick="adminLogout()">Cerrar sesión</button>
+        </div>
+      </div>
+
+      <!-- Stats row -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px">
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px">
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">Total Lugares</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--gold);letter-spacing:1px" id="adminListingCount">0</div>
+        </div>
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px">
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">Hoteles</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--text);letter-spacing:1px" id="adminHotelCount">0</div>
+        </div>
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px">
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">Restaurantes</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--text);letter-spacing:1px" id="adminRestCount">0</div>
+        </div>
+        <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:20px">
+          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">Shows & Noche</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:40px;color:var(--text);letter-spacing:1px" id="adminShowCount">0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table section -->
+  <div style="padding:48px 0 80px">
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:24px">
+        <div style="position:relative;flex:1;max-width:360px">
+          <input type="text" placeholder="Buscar listings…" oninput="adminSearch(this.value)"
+            style="width:100%;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 16px 10px 40px;color:var(--text);font-family:'Barlow',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s"
+            onfocus="this.style.borderColor='rgba(232,39,42,0.4)'" onblur="this.style.borderColor='var(--border)'" />
+          <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;opacity:0.5">🔍</span>
+        </div>
+        <button onclick="resetToDefaults()" style="background:none;border:1px solid var(--border);border-radius:var(--radius-sm);padding:9px 16px;color:var(--text-muted);font-family:'Barlow',sans-serif;font-size:13px;cursor:pointer;transition:all 0.2s"
+          onmouseover="this.style.borderColor='var(--border-2)';this.style.color='var(--text)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">🔄 Restaurar defaults</button>
+      </div>
+
+      <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden">
+        <table style="width:100%;border-collapse:collapse">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border)">
+              <th style="padding:14px 16px;text-align:left;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);width:48px">Icon</th>
+              <th style="padding:14px 16px;text-align:left;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted)">Nombre</th>
+              <th style="padding:14px 16px;text-align:left;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted)">Categoría</th>
+              <th style="padding:14px 16px;text-align:left;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted)">Estrellas</th>
+              <th style="padding:14px 16px;text-align:left;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted)">Precio</th>
+              <th style="padding:14px 16px;text-align:left;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted)">Badge</th>
+              <th style="padding:14px 16px;text-align:left;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted)">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="adminTableBody">
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-admin"></div>
+</div>
+
+<!-- ══════════════════ ADD/EDIT MODAL ══════════════════ -->
+<div id="adminModal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);align-items:flex-start;justify-content:center;padding:80px 20px 40px;overflow-y:auto">
+  <div style="background:var(--dark2);border:1px solid var(--border-2);border-radius:var(--radius-lg);width:100%;max-width:680px;padding:36px;position:relative">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:28px">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px" id="modalTitle">Agregar Lugar</div>
+      <button onclick="closeModal()" style="background:rgba(255,255,255,0.06);border:1px solid var(--border);border-radius:8px;width:36px;height:36px;color:var(--text-muted);cursor:pointer;font-size:18px;transition:all 0.2s;display:flex;align-items:center;justify-content:center"
+        onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='rgba(255,255,255,0.06)'">×</button>
+    </div>
+    <form id="listingForm" onsubmit="handleListingSubmit(event)">
+      <!-- Row 1 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+        <div>
+          <label class="form-label">Nombre del lugar *</label>
+          <input type="text" id="fName" class="form-input" placeholder="Ej: The Venetian Las Vegas" required />
+        </div>
+        <div>
+          <label class="form-label">Ícono (emoji) *</label>
+          <input type="text" id="fIcon" class="form-input" placeholder="🏨" maxlength="4" />
+        </div>
+      </div>
+      <!-- Row 2 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+        <div>
+          <label class="form-label">Categoría *</label>
+          <select id="fCat" class="form-select" required onchange="autoCatLabel(this.value)">
+            <option value="">Selecciona…</option>
+            <option value="hoteles">Hoteles & Casinos</option>
+            <option value="restaurantes">Restaurantes</option>
+            <option value="shows">Shows & Eventos</option>
+            <option value="nocturna">Vida Nocturna</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Etiqueta de categoría *</label>
+          <input type="text" id="fCatLabel" class="form-input" placeholder="Ej: Hotel & Casino" required />
+        </div>
+      </div>
+      <!-- Row 3 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px">
+        <div>
+          <label class="form-label">Estrellas *</label>
+          <select id="fStars" class="form-select" required>
+            <option value="5">★★★★★ (5)</option>
+            <option value="4">★★★★☆ (4)</option>
+            <option value="3">★★★☆☆ (3)</option>
+            <option value="2">★★☆☆☆ (2)</option>
+            <option value="1">★☆☆☆☆ (1)</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Precio *</label>
+          <select id="fPrice" class="form-select" required>
+            <option value="$">$ (Económico)</option>
+            <option value="$$">$$ (Moderado)</option>
+            <option value="$$$">$$$ (Caro)</option>
+            <option value="$$$$">$$$$ (Muy caro)</option>
+          </select>
+        </div>
+        <div>
+          <label class="form-label">Badge (opcional)</label>
+          <input type="text" id="fBadge" class="form-input" placeholder="Ej: Destacado" />
+        </div>
+      </div>
+      <!-- Description -->
+      <div style="margin-bottom:14px">
+        <label class="form-label">Descripción corta *</label>
+        <input type="text" id="fDesc" class="form-input" placeholder="Una frase que describe el lugar" required />
+      </div>
+      <!-- About -->
+      <div style="margin-bottom:14px">
+        <label class="form-label">Descripción completa</label>
+        <textarea id="fAbout" class="form-textarea" style="min-height:90px" placeholder="Descripción detallada del lugar…"></textarea>
+      </div>
+      <!-- Contact -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+        <div>
+          <label class="form-label">Dirección</label>
+          <input type="text" id="fAddress" class="form-input" placeholder="3355 S Las Vegas Blvd" />
+        </div>
+        <div>
+          <label class="form-label">Teléfono</label>
+          <input type="text" id="fPhone" class="form-input" placeholder="(702) 000-0000" />
+        </div>
+      </div>
+      <div style="margin-bottom:20px">
+        <label class="form-label">Horario</label>
+        <input type="text" id="fHours" class="form-input" placeholder="Lun–Dom 11am–10pm" />
+      </div>
+      <!-- Cuisine & Region -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+        <div>
+          <label class="form-label">Tipo de cocina</label>
+          <input type="text" id="fCuisine" class="form-input" placeholder="Ej: Steakhouse, Mariscos, Mexicana" />
+        </div>
+        <div>
+          <label class="form-label">Zona / Región</label>
+          <input type="text" id="fRegion" class="form-input" placeholder="Ej: The Strip, East LV, Henderson" />
+        </div>
+      </div>
+      <!-- Social links -->
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px">
+        <div>
+          <label class="form-label">Instagram (URL)</label>
+          <input type="url" id="fInstagram" class="form-input" placeholder="https://instagram.com/…" />
+        </div>
+        <div>
+          <label class="form-label">Facebook (URL)</label>
+          <input type="url" id="fFacebook" class="form-input" placeholder="https://facebook.com/…" />
+        </div>
+        <div>
+          <label class="form-label">Sitio web (URL)</label>
+          <input type="url" id="fWebsite" class="form-input" placeholder="https://…" />
+        </div>
+      </div>
+      <!-- Happy Hour -->
+      <div style="background:rgba(245,176,20,0.05);border:1px solid rgba(245,176,20,0.15);border-radius:var(--radius);padding:20px;margin-bottom:20px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px">🍹 Happy Hour (opcional)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+          <div>
+            <label class="form-label">Días</label>
+            <input type="text" id="fHappyHourDays" class="form-input" placeholder="Ej: Lunes a Jueves" />
+          </div>
+          <div>
+            <label class="form-label">Horario happy hour</label>
+            <input type="text" id="fHappyHourTime" class="form-input" placeholder="Ej: 3pm – 7pm" />
+          </div>
+        </div>
+        <div>
+          <label class="form-label">Detalles de las ofertas</label>
+          <textarea id="fHappyHourDetails" class="form-textarea" style="min-height:80px" placeholder="Ej: $5 cervezas de barril&#10;$8 cocteles de la casa&#10;Debe consumirse en la barra"></textarea>
+        </div>
+      </div>
+      <!-- Highlights -->
+      <div style="margin-bottom:24px">
+        <label class="form-label">Destacados (hasta 4)</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <input type="text" id="highlight1" class="form-input" placeholder="Destacado 1" />
+          <input type="text" id="highlight2" class="form-input" placeholder="Destacado 2" />
+          <input type="text" id="highlight3" class="form-input" placeholder="Destacado 3" />
+          <input type="text" id="highlight4" class="form-input" placeholder="Destacado 4" />
+        </div>
+      </div>
+      <div style="display:flex;gap:12px">
+        <button type="submit" class="btn btn-primary btn-lg" style="flex:1">Guardar lugar ✓</button>
+        <button type="button" class="btn btn-ghost btn-lg" onclick="closeModal()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════════════ DELETE CONFIRM MODAL ══════════════════ -->
+<div id="deleteModal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--dark2);border:1px solid rgba(232,39,42,0.3);border-radius:var(--radius-lg);width:100%;max-width:420px;padding:36px;text-align:center">
+    <div style="font-size:48px;margin-bottom:16px">🗑️</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;margin-bottom:8px">¿Eliminar lugar?</div>
+    <div style="font-size:15px;color:var(--text-2);margin-bottom:8px">Estás a punto de eliminar:</div>
+    <div style="font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:700;color:var(--red);margin-bottom:24px" id="deleteListingName"></div>
+    <div style="font-size:13px;color:var(--text-muted);margin-bottom:28px">Esta acción no se puede deshacer.</div>
+    <div style="display:flex;gap:12px">
+      <button class="btn btn-ghost btn-lg" style="flex:1" onclick="closeDeleteModal()">Cancelar</button>
+      <button style="flex:1;padding:13px 28px;background:var(--red);color:white;border:none;border-radius:var(--radius-sm);font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background 0.2s"
+        onmouseover="this.style.background='var(--red-light)'" onmouseout="this.style.background='var(--red)'"
+        onclick="executeDeletion()">Sí, eliminar</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════ TOAST ══════════════════ -->
+<div id="adminToast" style="position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark3);border:1px solid var(--border-2);border-radius:var(--radius);padding:14px 24px;font-size:15px;font-weight:600;color:var(--text);z-index:600;opacity:0;transition:all 0.3s;box-shadow:0 8px 32px rgba(0,0,0,0.5);white-space:nowrap"></div>
+
+<!-- Admin CSS -->
+<style>
+#adminTableBody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+#adminTableBody tr:last-child { border-bottom: none; }
+#adminTableBody tr:hover { background: rgba(255,255,255,0.03); }
+#adminTableBody td { padding: 14px 16px; vertical-align: middle; }
+.admin-cat-tag { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.cat-hoteles { background: rgba(50,24,106,0.4); color: #a78bfa; border: 1px solid rgba(167,139,250,0.2); }
+.cat-restaurantes { background: rgba(122,26,26,0.4); color: #f87171; border: 1px solid rgba(248,113,113,0.2); }
+.cat-shows { background: rgba(26,63,106,0.4); color: #60a5fa; border: 1px solid rgba(96,165,250,0.2); }
+.cat-nocturna { background: rgba(42,24,106,0.4); color: #c084fc; border: 1px solid rgba(192,132,252,0.2); }
+.admin-badge-tag { display: inline-block; padding: 2px 8px; background: rgba(245,176,20,0.15); border: 1px solid rgba(245,176,20,0.3); border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); }
+.admin-btn-edit { padding: 6px 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 6px; color: var(--text-muted); font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: 'Barlow', sans-serif; }
+.admin-btn-edit:hover { background: rgba(255,255,255,0.1); color: var(--text); border-color: var(--border-2); }
+.admin-btn-delete { padding: 6px 12px; background: rgba(232,39,42,0.08); border: 1px solid rgba(232,39,42,0.2); border-radius: 6px; color: var(--red); font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: 'Barlow', sans-serif; }
+.admin-btn-delete:hover { background: rgba(232,39,42,0.15); border-color: rgba(232,39,42,0.4); }
+</style>
+
+<script>
+// ─── SUPABASE CONFIG ───
+const SUPABASE_URL = 'https://xednuynwcnjzkrkfyqsa.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhlZG51eW53Y25qemtya2Z5cXNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA0NDIwMzAsImV4cCI6MjA1NjAxODAzMH0.8o91HYfgGF0LP7y3JO2YOoRAg_KcDQNxrIjF4InhlZG';
+
+const sb = {
+  async query(table, opts={}) {
+    let url = `${SUPABASE_URL}/rest/v1/${table}?`;
+    if (opts.select) url += `select=${opts.select}&`;
+    if (opts.eq) Object.entries(opts.eq).forEach(([k,v]) => url += `${k}=eq.${encodeURIComponent(v)}&`);
+    if (opts.order) url += `order=${opts.order}&`;
+    url += 'limit=500';
+    const r = await fetch(url, { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }});
+    return r.json();
+  },
+  async insert(table, data) {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+      method: 'POST',
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', Prefer: 'return=representation' },
+      body: JSON.stringify(data)
+    });
+    return r.json();
+  },
+  async update(table, id, data) {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`, {
+      method: 'PATCH',
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', Prefer: 'return=representation' },
+      body: JSON.stringify(data)
+    });
+    return r.json();
+  },
+  async delete(table, id) {
+    await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`, {
+      method: 'DELETE',
+      headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}` }
+    });
+  }
+};
+
+// Map DB row (snake_case) to app object (camelCase)
+function dbToListing(r) {
+  return {
+    id: r.id, slug: r.slug, name: r.name, cat: r.cat,
+    catLabel: r.cat_label, icon: r.icon||'📍', stars: r.stars||5,
+    price: r.price||'$$', badge: r.badge||null,
+    desc: r.description||'', about: r.about||'',
+    address: r.address||'', phone: r.phone||'', hours: r.hours||'',
+    cuisine: r.cuisine||'', region: r.region||'',
+    instagram: r.instagram||'', facebook: r.facebook||'', website: r.website||'',
+    happyHourDays: r.happy_hour_days||'', happyHourDetails: r.happy_hour_details||'',
+    highlights: r.highlights||[]
+  };
+}
+
+function listingToDB(l) {
+  return {
+    slug: l.slug, name: l.name, cat: l.cat, cat_label: l.catLabel,
+    icon: l.icon, stars: l.stars, price: l.price, badge: l.badge||null,
+    description: l.desc, about: l.about, address: l.address, phone: l.phone, hours: l.hours,
+    cuisine: l.cuisine||null, region: l.region||null,
+    instagram: l.instagram||null, facebook: l.facebook||null, website: l.website||null,
+    happy_hour_days: l.happyHourDays||null, happy_hour_details: l.happyHourDetails||null,
+    highlights: l.highlights||[]
+  };
+}
+
+// ─── DATA LAYER (Supabase) ───
+let _listingsCache = null;
+
+const DATA = {
+  async getAll() {
+    if (_listingsCache) return _listingsCache;
+    const rows = await sb.query('listings', { select: '*', order: 'id.asc' });
+    _listingsCache = (rows||[]).map(dbToListing);
+    return _listingsCache;
+  },
+  invalidate() { _listingsCache = null; },
+  async add(listing) {
+    const slug = listing.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'') + '-' + Date.now();
+    listing.slug = slug;
+    const db = listingToDB(listing);
+    const result = await sb.insert('listings', db);
+    this.invalidate();
+    return result;
+  },
+  async update(id, updates) {
+    const db = listingToDB(updates);
+    await sb.update('listings', id, db);
+    this.invalidate();
+  },
+  async delete(id) {
+    await sb.delete('listings', id);
+    this.invalidate();
+  }
+};
+
+// ─── FALLBACK DEFAULT LISTINGS (only used if DB empty) ───
+const DEFAULT_LISTINGS = [
+  { id:1, slug:'venetian', name:'The Venetian Las Vegas', cat:'hoteles', catLabel:'Hotel & Casino', icon:'🏛️', stars:5, price:'$$$', badge:'Top Rated', desc:'La grandeza de Venecia, reinventada en Las Vegas. Suites de lujo, canales y entretenimiento sin igual.', address:'3355 S Las Vegas Blvd', phone:'(702) 414-1000', hours:'Abierto 24 horas', highlights:['Suites de 720 sq ft','Casino de clase mundial','Más de 30 restaurantes','Spa The Canyon Ranch'], about:'The Venetian es uno de los hoteles más icónicos de Las Vegas Strip. Inspirado en la arquitectura veneciana, ofrece suites de lujo, un casino de clase mundial y una experiencia gastronómica sin igual con más de 30 restaurantes.' },
+  { id:2, slug:'mandalay-bay', name:'Mandalay Bay', cat:'hoteles', catLabel:'Hotel & Casino', icon:'🌴', stars:5, price:'$$$', badge:null, desc:'Lujo tropical en el Strip, con playa privada, entretenimiento y vistas icónicas de Las Vegas.', address:'3950 S Las Vegas Blvd', phone:'(702) 632-7777', hours:'Abierto 24 horas', highlights:['Playa privada de arena','Aqua Pool con olas','House of Blues','Michelob Ultra Arena'], about:'Mandalay Bay ofrece una experiencia única con su famosa playa de arena y piscina con olas artificiales. Es el destino perfecto para quienes buscan lujo tropical combinado con la emoción de Las Vegas.' },
+  { id:3, slug:'mgm-grand', name:'MGM Grand', cat:'hoteles', catLabel:'Hotel & Casino', icon:'🦁', stars:5, price:'$$$', badge:null, desc:'La autoridad del entretenimiento en Las Vegas. Shows, casino y gastronomía de primer nivel.', address:'3799 S Las Vegas Blvd', phone:'(702) 891-1111', hours:'Abierto 24 horas', highlights:['Grand Garden Arena','Spa & Health Club','Pool complex de 6.5 acres','Joel Robuchon restaurant'], about:'MGM Grand es uno de los hoteles más grandes del mundo, con un casino enorme, múltiples piscinas, spa de lujo y algunos de los mejores restaurantes de Las Vegas incluyendo el legendario Joel Robuchon.' },
+  { id:4, slug:'south-point', name:'South Point Hotel & Spa', cat:'hoteles', catLabel:'Hotel & Casino', icon:'🎰', stars:4, price:'$$', badge:null, desc:'Entretenimiento completo con espíritu local y precios accesibles.', address:'9777 Las Vegas Blvd S', phone:'(702) 796-7111', hours:'Abierto 24 horas', highlights:['Bowling center 64 pistas','Arena equestre','Spa completo','Cine 16 pantallas'], about:'South Point es el favorito de los locales. Con precios accesibles y una oferta completa de entretenimiento, es perfecto para quienes buscan la auténtica experiencia de Las Vegas.' },
+  { id:5, slug:'primal-steakhouse', name:'Primal Steakhouse', cat:'restaurantes', catLabel:'Steakhouse', icon:'🥩', stars:5, price:'$$$$', badge:'Destacado', cuisine:'Steakhouse', region:'East Las Vegas', instagram:'https://instagram.com/primalsteakhouselv', facebook:'https://facebook.com/primalsteakhouselv', website:'https://primalsteakhouse.com', happyHourDays:'Lunes a Jueves · Toda la noche', happyHourDetails:'• $8 tragos de la casa\n• $10 cocteles de la casa\n• $5 cervezas de barril (16 oz)\n\nDebe consumirse en la barra', desc:'Donde el fuego, el sabor y el espectáculo se unen. Los mejores cortes de carne en un ambiente vibrante.', address:'3568 S Maryland Pkwy, Las Vegas, NV 89169', phone:'(702) 262-4900', hours:'Dom–Jue 5pm–10pm, Vie–Sáb 5pm–11pm', highlights:['Cortes USDA Prime','Ambiente espectacular','Selección de vinos','Chef de renombre'], about:'Primal Steakhouse & Supper Club es un steakhouse único en Las Vegas que combina cortes premium, espectáculo y una atmósfera elegante con inspiración medieval y contemporánea. Ubicado a minutos del Strip, ofrece carnes de alta calidad, presentaciones impactantes y una experiencia gastronómica envolvente. Ideal para cenas especiales, celebraciones o una noche diferente en la ciudad.' },
+  { id:6, slug:'havana-grill', name:'Havana Grill', cat:'restaurantes', catLabel:'Cocina Cubana', icon:'🇨🇺', stars:5, price:'$$', badge:null, desc:'Un pedacito de Cuba en cada plato. Ropa vieja, tostones y mojitos auténticos.', address:'3900 W Flamingo Rd', phone:'(702) 364-0990', hours:'Lun–Dom 11am–10pm', highlights:['Ropa vieja auténtica','Mojitos artesanales','Música en vivo fines de semana','Ambiente familiar'], about:'Havana Grill trae la auténtica cocina cubana al corazón de Las Vegas. Con recetas familiares tradicionales y una atmósfera cálida, es el lugar perfecto para una experiencia latina genuina.' },
+  { id:7, slug:'el-ausente', name:'El Ausente', cat:'restaurantes', catLabel:'Mariscos', icon:'🌊', stars:4, price:'$$', badge:null, desc:'Mariscos sinaloenses, micheladas y puro ambiente. El favorito de la comunidad mexicana.', address:'5765 W Spring Mountain Rd', phone:'(702) 220-6644', hours:'Lun–Dom 10am–11pm', highlights:['Ceviche de camarón','Micheladas especiales','Caldo de mariscos','Ambiente familiar'], about:'El Ausente es el corazón de la comunidad sinaloense en Las Vegas. Sus mariscos frescos, micheladas y ambiente familiar lo hacen el destino favorito para la comunidad mexicana.' },
+  { id:8, slug:'agave-bar', name:'Agave Bar & Grill', cat:'restaurantes', catLabel:'Bar & Cocina', icon:'🌵', stars:4, price:'$$', badge:null, desc:'Sabores costeros y cocteles junto a la piscina. Cocina mexicana fresca con ambiente vibrante.', address:'3400 S Jones Blvd', phone:'(702) 259-7777', hours:'Lun–Dom 12pm–12am', highlights:['Terraza junto a la piscina','Margaritas artesanales','Tacos de autor','Happy hour diario'], about:'Agave Bar & Grill es el lugar perfecto para disfrutar de cocina mexicana fresca en un ambiente relajado. Con terraza exterior y las mejores margaritas de la ciudad.' },
+  { id:9, slug:'brasa-roja', name:'Brasa Roja', cat:'restaurantes', catLabel:'Cocina Colombiana', icon:'🍗', stars:5, price:'$$', badge:null, desc:'Pollo a la brasa colombiano, lleno de sabor y tradición.', address:'3101 N Rancho Dr', phone:'(702) 638-0101', hours:'Lun–Dom 11am–10pm', highlights:['Pollo a la brasa auténtico','Arepas caseras','Ají y salsas especiales','Porciones generosas'], about:'Brasa Roja lleva la tradición del pollo asado colombiano a Las Vegas. Con recetas originales y porciones generosas, este restaurante familiar se ha convertido en un favorito.' },
+  { id:10, slug:'cirque-mystere', name:'Cirque du Soleil — Mystère', cat:'shows', catLabel:'Circo & Espectáculo', icon:'🎭', stars:5, price:'$$$', badge:'Must See', desc:'El show más icónico de Las Vegas. Acrobacia, música y magia visual que te dejará sin aliento.', address:'Treasure Island, 3300 Las Vegas Blvd S', phone:'(702) 894-7722', hours:'Mar–Sáb 7pm y 9:30pm', highlights:['Acrobacias de élite','Producción visual épica','Más de 25 años en escena','Apto para toda la familia'], about:'Mystère es el show más longevo de Las Vegas, y uno de los mejores del mundo. Con acrobacias increíbles, música original y un despliegue visual extraordinario.' },
+  { id:11, slug:'absinthe', name:'ABSINTHE', cat:'shows', catLabel:'Varieté Adulto', icon:'🎪', stars:5, price:'$$$', badge:null, desc:'Varieté adulto con circo, comedia y un anfitrión imposible de olvidar. El show más atrevido de Vegas.', address:'Caesars Palace, 3570 Las Vegas Blvd S', phone:'(800) 745-3000', hours:'Mié–Dom 8pm y 10pm', highlights:['Show para mayores de 18','Acrobacias impresionantes','Comedia irreverente','Teatro circular íntimo'], about:'ABSINTHE es el show más atrevido y divertido de Las Vegas. En un teatro circular íntimo, disfrutarás de acrobacias de clase mundial combinadas con comedia adulta.' },
+  { id:12, slug:'blue-man-group', name:'Blue Man Group', cat:'shows', catLabel:'Entretenimiento', icon:'🥁', stars:4, price:'$$', badge:null, desc:'Música, comedia y arte visual en un show único para toda la familia.', address:'Luxor Hotel, 3900 Las Vegas Blvd S', phone:'(702) 262-4400', hours:'Lun–Dom 7pm', highlights:['Show familiar','Música percusiva original','Efectos visuales únicos','Interacción con el público'], about:'Blue Man Group es un espectáculo diferente a todo lo que has visto. Tres hombres azules crean música, arte y comedia en una presentación energética y colorida.' },
+  { id:13, slug:'omnia', name:'OMNIA Nightclub', cat:'nocturna', catLabel:'Club Nocturno', icon:'💫', stars:5, price:'$$$', badge:'Top Club', desc:'El club más exclusivo de Las Vegas. DJs internacionales, producción espectacular y vista al Strip.', address:'Caesars Palace, 3570 Las Vegas Blvd S', phone:'(702) 785-6200', hours:'Vie–Dom 10:30pm–4am', highlights:['DJs de clase mundial','Chandelier interactivo','Terrace con vista al Strip','VIP tables'], about:'OMNIA en Caesars Palace es considerado uno de los mejores nightclubs del mundo. Con su enorme chandelier kinético, producción de luces y los mejores DJs internacionales.' },
+  { id:14, slug:'drais', name:"Drai's Beachclub & Nightclub", cat:'nocturna', catLabel:'Club & Beach', icon:'🏖️', stars:5, price:'$$$', badge:null, desc:'Club de día y noche en la azotea del The Cromwell. Piscina, DJs y vistas al Strip.', address:'The Cromwell, 3595 Las Vegas Blvd S', phone:'(702) 777-3800', hours:'Vier–Dom día y noche', highlights:['Rooftop con piscina','Vistas panorámicas al Strip','Hip-hop y R&B','Afterhours hasta las 6am'], about:"Drai's combina lo mejor del día y la noche en una experiencia única en azotea. Beach club de día, uno de los mejores clubs de hip-hop de Vegas por la noche." },
+  { id:15, slug:'jose-cuervo', name:'Jose Cuervo Tequilería', cat:'nocturna', catLabel:'Bar & Cantina', icon:'🍹', stars:4, price:'$$', badge:null, desc:'La mejor cantina latina del Strip. Tequila, mezcal y música en vivo hasta tarde.', address:'3200 Las Vegas Blvd S', phone:'(702) 693-8300', hours:'Lun–Dom 6pm–2am', highlights:['250+ tequilas y mezcales','Música en vivo','Margaritas artesanales','Ambiente latino'], about:'La Jose Cuervo Tequilería es el corazón latino del Strip. Con más de 250 tequilas y mezcales, música en vivo y un ambiente festivo.' },
+  { id:16, slug:'chapos', name:"Chapó's Bar & Lounge", cat:'nocturna', catLabel:'Lounge Latino', icon:'🎺', stars:4, price:'$$', badge:null, desc:'El lounge latino más popular de Las Vegas. Banda en vivo, cumbias, norteñas y ambiente familiar.', address:'4850 W Flamingo Rd', phone:'(702) 876-2100', hours:'Mié–Dom 8pm–3am', highlights:['Bandas en vivo','Cumbias y norteñas','Sin cover miércoles','Cocina mexicana'], about:"Chapó's es el punto de encuentro de la comunidad latina en Las Vegas. Con bandas en vivo tocando cumbias, norteñas y banda, y un ambiente familiar y festivo." },
+];
+
+// ─── FOOTER HTML ───
+const FOOTER_HTML = `
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" onclick="navigate('home')" style="cursor:pointer"><div class="nav-badge">LLV</div>Latino<span class="red">LV</span></div>
+        <p>Tu guía en español para descubrir lo mejor de Las Vegas — hoteles, restaurantes, shows y vida nocturna.</p>
+      </div>
+      <div class="footer-col"><h4>Explorar</h4><ul>
+        <li><a onclick="navigate('explore','hoteles')">Hoteles & Casinos</a></li>
+        <li><a onclick="navigate('explore','restaurantes')">Restaurantes</a></li>
+        <li><a onclick="navigate('explore','shows')">Shows & Eventos</a></li>
+        <li><a onclick="navigate('explore','nocturna')">Vida Nocturna</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Sitio</h4><ul>
+        <li><a onclick="navigate('about')">Nosotros</a></li>
+        <li><a onclick="navigate('about','contact')">Contacto</a></li>
+        <li><a onclick="navigate('admin')">Admin</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Legal</h4><ul>
+        <li><a>Privacidad</a></li>
+        <li><a>Términos de uso</a></li>
+        <li><a>Cookies</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Latino Las Vegas · Guía en español de Las Vegas</span>
+      <div class="footer-socials">
+        <div class="social-btn">📘</div>
+        <div class="social-btn">📸</div>
+        <div class="social-btn">🎵</div>
+        <div class="social-btn">▶️</div>
+      </div>
+    </div>
+  </div>
+</footer>`;
+
+['home','explore','listing','about','admin'].forEach(id => {
+  const el = document.getElementById('footer-' + id);
+  if (el) el.innerHTML = FOOTER_HTML;
+});
+
+// ─── NAVIGATION ───
+let currentPage = 'home';
+let currentSlug = null;
+
+function navigate(page, param) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const navEl = document.getElementById('nav-' + (['listing','admin'].includes(page) ? 'explore' : page));
+  if (navEl) navEl.classList.add('active');
+
+  if (page === 'listing') {
+    currentSlug = param;
+    loadListingDetail(param);
+    document.getElementById('page-listing').classList.add('active');
+  } else if (page === 'explore') {
+    document.getElementById('page-explore').classList.add('active');
+    if (param) {
+      activeCat = param;
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === param));
+    }
+    applyFilters();
+  } else if (page === 'about') {
+    document.getElementById('page-about').classList.add('active');
+    if (param === 'contact') setTimeout(scrollToContact, 100);
+  } else if (page === 'admin') {
+    if (!isAdminLoggedIn()) { showAdminLogin(); return; }
+    document.getElementById('page-admin').classList.add('active');
+    renderAdminListings();
+  } else {
+    document.getElementById('page-home').classList.add('active');
+    renderHome();
+  }
+  currentPage = page;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── RENDER CARD ───
+function renderCard(l) {
+  const stars = '★'.repeat(l.stars) + '☆'.repeat(5 - l.stars);
+  return `
+  <div class="card" onclick="navigate('listing','${l.slug}')">
+    <div class="card-img">
+      <div class="card-img-inner">${l.icon}</div>
+      ${l.badge ? `<div class="card-badge ${['Top Rated','Must See','Top Club'].includes(l.badge) ? 'card-badge-red' : ''}">${l.badge}</div>` : ''}
+      <button class="card-fav" onclick="event.stopPropagation()">♡</button>
+    </div>
+    <div class="card-body">
+      <div class="card-cat">${l.catLabel}${l.cuisine ? ' · ' + l.cuisine : ''}</div>
+      <div class="card-name">${l.name}</div>
+      <div class="card-desc">${l.desc}</div>
+      <div class="card-footer">
+        <span class="card-stars">${stars}</span>
+        <span class="card-price">${l.price}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ─── HOME ───
+async function renderHome() {
+  const listings = await DATA.getAll();
+  const hotels = listings.filter(l => l.cat === 'hoteles');
+  const restaurants = listings.filter(l => l.cat === 'restaurantes').slice(0, 4);
+  const shows = listings.filter(l => l.cat === 'shows' || l.cat === 'nocturna').slice(0, 3);
+  document.getElementById('homeHotels').innerHTML = hotels.map(renderCard).join('') || '<p style="color:var(--text-muted)">No hay hoteles aún.</p>';
+  document.getElementById('homeRestaurants').innerHTML = restaurants.map(renderCard).join('') || '<p style="color:var(--text-muted)">No hay restaurantes aún.</p>';
+  document.getElementById('homeShows').innerHTML = shows.map(renderCard).join('') || '<p style="color:var(--text-muted)">No hay shows aún.</p>';
+}
+
+function doHeroSearch() {
+  const q = document.getElementById('heroSearch').value;
+  const cat = document.getElementById('heroCategory').value;
+  activeCat = cat;
+  navigate('explore');
+  if (q) document.getElementById('exploreSearchInput').value = q;
+  applyFilters();
+}
+
+// ─── EXPLORE ───
+let activeCat = '', activePrices = new Set(), activeStars = new Set();
+
+function setCat(btn, cat) {
+  activeCat = cat;
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function togglePrice(btn, price) {
+  activePrices.has(price) ? activePrices.delete(price) : activePrices.add(price);
+  btn.classList.toggle('active');
+  applyFilters();
+}
+function toggleStars(btn, stars) {
+  activeStars.has(stars) ? activeStars.delete(stars) : activeStars.add(stars);
+  btn.classList.toggle('active');
+  applyFilters();
+}
+async function applyFilters() {
+  const q = (document.getElementById('exploreSearchInput')?.value || '').toLowerCase().trim();
+  const sort = document.getElementById('sortSelect')?.value || 'default';
+  let results = await DATA.getAll();
+  results = [...results];
+  if (activeCat) results = results.filter(l => l.cat === activeCat);
+  if (activePrices.size) results = results.filter(l => activePrices.has(l.price));
+  if (activeStars.size) results = results.filter(l => activeStars.has(l.stars));
+  if (q) results = results.filter(l => l.name.toLowerCase().includes(q) || l.desc.toLowerCase().includes(q) || l.catLabel.toLowerCase().includes(q) || (l.about||'').toLowerCase().includes(q));
+  const pm = {'$':1,'$$':2,'$$$':3,'$$$$':4};
+  if (sort === 'name') results.sort((a,b) => a.name.localeCompare(b.name));
+  else if (sort === 'stars') results.sort((a,b) => b.stars - a.stars);
+  else if (sort === 'price-low') results.sort((a,b) => pm[a.price] - pm[b.price]);
+  else if (sort === 'price-high') results.sort((a,b) => pm[b.price] - pm[a.price]);
+  const rc = document.getElementById('resultsCount');
+  if (rc) rc.innerHTML = `<strong>${results.length}</strong> lugar${results.length!==1?'es':''} encontrado${results.length!==1?'s':''}`;
+  const tags = [];
+  if (activeCat) { const lbl={hoteles:'🏨 Hoteles',restaurantes:'🍽️ Restaurantes',shows:'🎭 Shows',nocturna:'🍹 Vida Nocturna'}; tags.push({label:lbl[activeCat],clear:()=>{activeCat='';document.querySelectorAll('.filter-tab').forEach(t=>t.classList.toggle('active',t.dataset.cat===''));applyFilters();}}); }
+  if (q) tags.push({label:`"${q}"`,clear:()=>{document.getElementById('exploreSearchInput').value='';applyFilters();}});
+  activePrices.forEach(p => tags.push({label:p,clear:()=>{activePrices.delete(p);document.querySelector(`[data-price="${p}"]`).classList.remove('active');applyFilters();}}));
+  activeStars.forEach(s => tags.push({label:'★'.repeat(s),clear:()=>{activeStars.delete(s);document.querySelector(`[data-stars="${s}"]`).classList.remove('active');applyFilters();}}));
+  const af = document.getElementById('activeFilters');
+  if (af) {
+    if (tags.length) { af.style.display='flex'; af.innerHTML=tags.map((t,i)=>`<span class="active-tag">${t.label} <button onclick="_ft[${i}].clear()">×</button></span>`).join('')+`<button class="clear-all" onclick="clearAllFilters()">Limpiar todo</button>`; window._ft=tags; }
+    else af.style.display='none';
+  }
+  const grid = document.getElementById('exploreGrid');
+  if (!grid) return;
+  grid.innerHTML = results.length===0 ? `<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-title">Sin Resultados</div><div class="empty-sub">Intenta con otros filtros</div></div>` : results.map(renderCard).join('');
+}
+function clearAllFilters() {
+  activeCat=''; activePrices.clear(); activeStars.clear();
+  const si=document.getElementById('exploreSearchInput'); if(si) si.value='';
+  document.querySelectorAll('.filter-tab').forEach(t=>t.classList.toggle('active',t.dataset.cat===''));
+  document.querySelectorAll('.price-btn,.stars-btn').forEach(b=>b.classList.remove('active'));
+  applyFilters();
+}
+
+// ─── LISTING DETAIL ───
+const REVIEWS = [
+  {name:'María G.',stars:5,date:'Enero 2025',text:'¡Increíble experiencia! Todo en español, el personal fue muy amable y las instalaciones son de primera.'},
+  {name:'Carlos M.',stars:5,date:'Diciembre 2024',text:'Uno de los mejores lugares que he visitado en Las Vegas. La atención es excepcional.'},
+  {name:'Sofía R.',stars:4,date:'Noviembre 2024',text:'Muy buen lugar, lo recomiendo ampliamente. La ubicación es perfecta y el ambiente es fantástico.'},
+];
+async function loadListingDetail(slug) {
+  const listings = await DATA.getAll();
+  const l = listings.find(x => x.slug === slug);
+  if (!l) return;
+  document.getElementById('breadCat').textContent = l.catLabel;
+  document.getElementById('breadName').textContent = l.name;
+  document.getElementById('listingCatTag').textContent = l.catLabel;
+  document.getElementById('listingTitle').textContent = l.name;
+  document.getElementById('listingTagline').textContent = l.desc;
+  document.getElementById('metaStars').textContent = '★'.repeat(l.stars)+'☆'.repeat(5-l.stars);
+  document.getElementById('metaRating').textContent = l.stars+'.0';
+  document.getElementById('metaPrice').textContent = l.price;
+  document.getElementById('listingIcon').textContent = l.icon;
+  document.getElementById('aboutText').textContent = l.about||l.desc;
+  document.getElementById('infoAddress').textContent = l.address||'—';
+  document.getElementById('infoPhone').textContent = l.phone||'—';
+  document.getElementById('infoHours').textContent = l.hours||'—';
+  document.getElementById('bigStars').textContent = '★'.repeat(l.stars)+'☆'.repeat(5-l.stars);
+  document.getElementById('bigRating').textContent = l.stars+'.0';
+  const mb=document.getElementById('metaBadge');
+  if(l.badge){mb.textContent=l.badge;mb.style.display='inline-block';}else{mb.style.display='none';}
+  document.getElementById('listingPhoneBtn').textContent=`📞 ${l.phone||'Llamar'}`;
+  const highlights = l.highlights||[];
+  document.getElementById('highlightsGrid').innerHTML = highlights.length ? highlights.map(h=>`<div class="highlight-item"><div class="highlight-dot"></div><span>${h}</span></div>`).join('') : '<p style="color:var(--text-muted);font-size:14px">No hay destacados aún.</p>';
+  document.getElementById('reviewsContainer').innerHTML = REVIEWS.map(r=>`<div class="review-card"><div class="review-header"><div><div class="reviewer-name">${r.name}</div><div class="reviewer-date">${r.date}</div></div><div>⭐ ${r.stars}.0</div></div><div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div><div class="review-text">"${r.text}"</div></div>`).join('');
+  // Cuisine
+  const cuisineRow = document.getElementById('infoCuisineRow');
+  if (l.cuisine) { document.getElementById('infoCuisine').textContent = l.cuisine; cuisineRow.style.display = ''; }
+  else cuisineRow.style.display = 'none';
+  // Region
+  const regionRow = document.getElementById('infoRegionRow');
+  if (l.region) { document.getElementById('infoRegion').textContent = l.region; regionRow.style.display = ''; }
+  else regionRow.style.display = 'none';
+  // Social
+  const socialRow = document.getElementById('infoSocialRow');
+  const socialEl = document.getElementById('infoSocial');
+  if (l.instagram || l.facebook || l.website) {
+    socialRow.style.display = '';
+    socialEl.innerHTML = [
+      l.instagram ? `<a href="${l.instagram}" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:6px;font-size:12px;font-weight:700;color:var(--text-muted);transition:all 0.2s" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">📸 Instagram</a>` : '',
+      l.facebook ? `<a href="${l.facebook}" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:6px;font-size:12px;font-weight:700;color:var(--text-muted);transition:all 0.2s" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">👍 Facebook</a>` : '',
+      l.website ? `<a href="${l.website}" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:6px;font-size:12px;font-weight:700;color:var(--text-muted);transition:all 0.2s" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text-muted)'">🌐 Sitio web</a>` : '',
+    ].join('');
+  } else socialRow.style.display = 'none';
+  // Happy Hour
+  const hhSection = document.getElementById('happyHourSection');
+  if (l.happyHourDays || l.happyHourDetails) {
+    hhSection.style.display = '';
+    document.getElementById('happyHourDays').textContent = l.happyHourDays || '';
+    document.getElementById('happyHourDetails').textContent = l.happyHourDetails || '';
+  } else hhSection.style.display = 'none';
+  const related=DATA.listings.filter(x=>x.cat===l.cat&&x.slug!==l.slug).slice(0,2);
+  document.getElementById('relatedGrid').innerHTML=related.map(renderCard).join('');
+}
+
+// ─── ABOUT ───
+function scrollToContact() { document.getElementById('contactSection')?.scrollIntoView({behavior:'smooth'}); }
+function handleContactSubmit(e) {
+  e.preventDefault();
+  const btn=document.getElementById('contactSubmitBtn');
+  btn.textContent='Enviando…'; btn.disabled=true;
+  setTimeout(()=>{
+    document.getElementById('formSuccess').style.display='block';
+    btn.textContent='✅ Enviado'; btn.style.background='rgba(40,200,80,0.15)';
+    btn.style.color='#3DD68C'; btn.style.boxShadow='none';
+  },1200);
+}
+
+// ─── ADMIN AUTH ───
+const ADMIN_PASS_KEY = 'llv_admin_auth';
+const ADMIN_PASSWORD = 'latinolv2025'; // Change this to your desired password
+
+function isAdminLoggedIn() {
+  return sessionStorage.getItem(ADMIN_PASS_KEY) === 'true';
+}
+
+function showAdminLogin() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-admin-login').classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function handleAdminLogin(e) {
+  e.preventDefault();
+  const pass = document.getElementById('adminPasswordInput').value;
+  if (pass === ADMIN_PASSWORD) {
+    sessionStorage.setItem(ADMIN_PASS_KEY, 'true');
+    document.getElementById('adminLoginError').style.display = 'none';
+    navigate('admin');
+  } else {
+    document.getElementById('adminLoginError').style.display = 'block';
+    document.getElementById('adminPasswordInput').value = '';
+  }
+}
+
+function adminLogout() {
+  sessionStorage.removeItem(ADMIN_PASS_KEY);
+  navigate('home');
+}
+
+// ─── ADMIN PANEL ───
+let adminEditId = null;
+
+async function renderAdminListings() {
+  const listings = await DATA.getAll();
+  const tbody = document.getElementById('adminTableBody');
+  if (!tbody) return;
+  tbody.innerHTML = listings.map(l => `
+    <tr>
+      <td><span style="font-size:24px">${l.icon}</span></td>
+      <td>
+        <div style="font-weight:700;color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:17px">${l.name}</div>
+        <div style="font-size:12px;color:var(--text-muted);margin-top:2px">${l.address||'Sin dirección'}</div>
+      </td>
+      <td><span class="admin-cat-tag cat-${l.cat}">${l.catLabel}</span></td>
+      <td style="color:var(--gold);letter-spacing:1px">${'★'.repeat(l.stars)}</td>
+      <td style="font-weight:700;color:var(--text-muted)">${l.price}</td>
+      <td>${l.badge ? `<span class="admin-badge-tag">${l.badge}</span>` : '<span style="color:var(--text-muted);font-size:12px">—</span>'}</td>
+      <td>
+        <div style="display:flex;gap:8px">
+          <button class="admin-btn-edit" onclick="openEditModal(${l.id})">✏️ Editar</button>
+          <button class="admin-btn-delete" onclick="confirmDelete(${l.id},'${l.name.replace(/'/g,"\\'")}')">🗑️ Borrar</button>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+  document.getElementById('adminListingCount').textContent = listings.length;
+}
+
+function openAddModal() {
+  adminEditId = null;
+  document.getElementById('modalTitle').textContent = 'Agregar Nuevo Lugar';
+  document.getElementById('listingForm').reset();
+  document.getElementById('highlight1').value='';
+  document.getElementById('highlight2').value='';
+  document.getElementById('highlight3').value='';
+  document.getElementById('highlight4').value='';
+  document.getElementById('fCuisine').value='';
+  document.getElementById('fRegion').value='';
+  document.getElementById('fInstagram').value='';
+  document.getElementById('fFacebook').value='';
+  document.getElementById('fWebsite').value='';
+  document.getElementById('fHappyHourDays').value='';
+  document.getElementById('fHappyHourTime').value='';
+  document.getElementById('fHappyHourDetails').value='';
+  document.getElementById('adminModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function openEditModal(id) {
+  const l = DATA.listings.find(x => x.id === id);
+  if (!l) return;
+  adminEditId = id;
+  document.getElementById('modalTitle').textContent = 'Editar Lugar';
+  document.getElementById('fName').value = l.name;
+  document.getElementById('fCat').value = l.cat;
+  document.getElementById('fCatLabel').value = l.catLabel;
+  document.getElementById('fIcon').value = l.icon;
+  document.getElementById('fStars').value = l.stars;
+  document.getElementById('fPrice').value = l.price;
+  document.getElementById('fBadge').value = l.badge||'';
+  document.getElementById('fDesc').value = l.desc;
+  document.getElementById('fAbout').value = l.about||'';
+  document.getElementById('fAddress').value = l.address||'';
+  document.getElementById('fPhone').value = l.phone||'';
+  document.getElementById('fHours').value = l.hours||'';
+  document.getElementById('fCuisine').value = l.cuisine||'';
+  document.getElementById('fRegion').value = l.region||'';
+  document.getElementById('fInstagram').value = l.instagram||'';
+  document.getElementById('fFacebook').value = l.facebook||'';
+  document.getElementById('fWebsite').value = l.website||'';
+  // Split happyHourDays back out from combined string
+  const hhParts = (l.happyHourDays||'').split(' · ');
+  document.getElementById('fHappyHourDays').value = hhParts[0]||'';
+  document.getElementById('fHappyHourTime').value = hhParts[1]||'';
+  document.getElementById('fHappyHourDetails').value = l.happyHourDetails||'';
+  const h = l.highlights||[];
+  document.getElementById('highlight1').value = h[0]||'';
+  document.getElementById('highlight2').value = h[1]||'';
+  document.getElementById('highlight3').value = h[2]||'';
+  document.getElementById('highlight4').value = h[3]||'';
+  document.getElementById('adminModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('adminModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+async function handleListingSubmit(e) {
+  e.preventDefault();
+  const btn = e.submitter || document.querySelector('#listingForm button[type=submit]');
+  const origText = btn.textContent;
+  btn.textContent = 'Guardando…'; btn.disabled = true;
+  const highlights = [
+    document.getElementById('highlight1').value,
+    document.getElementById('highlight2').value,
+    document.getElementById('highlight3').value,
+    document.getElementById('highlight4').value,
+  ].filter(h => h.trim());
+
+  const listing = {
+    name: document.getElementById('fName').value,
+    cat: document.getElementById('fCat').value,
+    catLabel: document.getElementById('fCatLabel').value,
+    icon: document.getElementById('fIcon').value || '📍',
+    stars: parseInt(document.getElementById('fStars').value),
+    price: document.getElementById('fPrice').value,
+    badge: document.getElementById('fBadge').value || null,
+    desc: document.getElementById('fDesc').value,
+    about: document.getElementById('fAbout').value,
+    address: document.getElementById('fAddress').value,
+    phone: document.getElementById('fPhone').value,
+    hours: document.getElementById('fHours').value,
+    cuisine: document.getElementById('fCuisine').value,
+    region: document.getElementById('fRegion').value,
+    instagram: document.getElementById('fInstagram').value,
+    facebook: document.getElementById('fFacebook').value,
+    website: document.getElementById('fWebsite').value,
+    happyHourDays: document.getElementById('fHappyHourDays').value + (document.getElementById('fHappyHourTime').value ? ' · ' + document.getElementById('fHappyHourTime').value : ''),
+    happyHourDetails: document.getElementById('fHappyHourDetails').value,
+    highlights,
+  };
+
+  if (adminEditId) {
+    await DATA.update(adminEditId, listing);
+    showAdminToast('✅ Lugar actualizado correctamente');
+  } else {
+    await DATA.add(listing);
+    showAdminToast('✅ Nuevo lugar agregado correctamente');
+  }
+
+  btn.textContent = origText; btn.disabled = false;
+  closeModal();
+  await renderAdminListings();
+}
+
+function confirmDelete(id, name) {
+  document.getElementById('deleteListingName').textContent = name;
+  document.getElementById('deleteModal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  window._pendingDeleteId = id;
+}
+
+function closeDeleteModal() {
+  document.getElementById('deleteModal').style.display = 'none';
+  document.body.style.overflow = '';
+  window._pendingDeleteId = null;
+}
+
+async function executeDeletion() {
+  if (window._pendingDeleteId) {
+    await DATA.delete(window._pendingDeleteId);
+    showAdminToast('🗑️ Lugar eliminado');
+    closeDeleteModal();
+    await renderAdminListings();
+  }
+}
+
+function showAdminToast(msg) {
+  const t = document.getElementById('adminToast');
+  t.textContent = msg;
+  t.style.opacity = '1';
+  t.style.transform = 'translateY(0)';
+  setTimeout(() => { t.style.opacity='0'; t.style.transform='translateY(20px)'; }, 3000);
+}
+
+function adminSearch(q) {
+  const rows = document.querySelectorAll('#adminTableBody tr');
+  q = q.toLowerCase();
+  rows.forEach(row => {
+    const text = row.textContent.toLowerCase();
+    row.style.display = text.includes(q) ? '' : 'none';
+  });
+}
+
+function resetToDefaults() {
+  showAdminToast('ℹ️ Los datos viven en Supabase — edítalos desde el panel');
+}
+
+// ─── NAV SCROLL ───
+window.addEventListener('scroll', () => {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ─── HERO DOTS ───
+const dotsEl = document.getElementById('heroDots');
+[{x:'15%',y:'25%',s:4,c:'rgba(232,39,42,0.8)',d:'2.5s',dl:'0s'},
+ {x:'80%',y:'20%',s:3,c:'rgba(245,176,20,0.7)',d:'3.5s',dl:'0.5s'},
+ {x:'90%',y:'55%',s:5,c:'rgba(232,39,42,0.6)',d:'2s',dl:'1s'},
+ {x:'8%',y:'65%',s:3,c:'rgba(245,176,20,0.8)',d:'4s',dl:'0.3s'},
+ {x:'70%',y:'80%',s:4,c:'rgba(100,150,255,0.5)',d:'3s',dl:'0.8s'},
+ {x:'25%',y:'85%',s:2,c:'rgba(232,39,42,0.5)',d:'2.8s',dl:'1.2s'}
+].forEach(d => {
+  const s = document.createElement('span');
+  s.style.cssText = `left:${d.x};top:${d.y};width:${d.s}px;height:${d.s}px;background:${d.c};--d:${d.d};--delay:${d.dl};`;
+  dotsEl.appendChild(s);
+});
+
+// ─── INIT ───
+(async () => {
+  await renderHome();
+  await applyFilters();
+  document.getElementById('nav-home').classList.add('active');
+})();
+</script>
+<script>
+// Auto cat label helper
+function autoCatLabel(cat) {
+  const labels = { hoteles:'Hotel & Casino', restaurantes:'Restaurante', shows:'Show & Evento', nocturna:'Bar & Club' };
+  const el = document.getElementById('fCatLabel');
+  if (el && !el.value) el.value = labels[cat]||'';
+}
+
+// Update admin stats counts when panel opens
+const _origRenderAdminListings = renderAdminListings;
+renderAdminListings = async function() {
+  await _origRenderAdminListings();
+  const all = await DATA.getAll();
+  const hc = document.getElementById('adminHotelCount');
+  const rc = document.getElementById('adminRestCount');
+  const sc = document.getElementById('adminShowCount');
+  if (hc) hc.textContent = all.filter(l=>l.cat==='hoteles').length;
+  if (rc) rc.textContent = all.filter(l=>l.cat==='restaurantes').length;
+  if (sc) sc.textContent = all.filter(l=>l.cat==='shows'||l.cat==='nocturna').length;
+};
+
+// Close modal on backdrop click
+document.getElementById('adminModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+document.getElementById('deleteModal').addEventListener('click', function(e) {
+  if (e.target === this) closeDeleteModal();
+});
+
+// Footer for admin login page
+document.getElementById('footer-admin-login').innerHTML = FOOTER_HTML;
+</script>
+</body></html>
