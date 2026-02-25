@@ -563,9 +563,9 @@ img { display: block; max-width: 100%; }
   <div class="filter-bar">
     <div class="filter-bar-inner">
       <button class="filter-tab active" data-cat="" onclick="setCat(this,'')">Todos</button>
-      <button class="filter-tab" data-cat="hoteles" onclick="setCat(this,'hoteles')">🏨 Hoteles & Casinos</button>
-      <button class="filter-tab" data-cat="restaurantes" onclick="setCat(this,'restaurantes')">🍽️ Restaurantes</button>
-      <button class="filter-tab" data-cat="shows" onclick="setCat(this,'shows')">🎭 Shows & Eventos</button>
+      <button class="filter-tab" data-cat="hoteles" onclick="setCat(this,'hoteles')">Hoteles & Casinos</button>
+      <button class="filter-tab" data-cat="restaurantes" onclick="setCat(this,'restaurantes')">Restaurantes</button>
+      <button class="filter-tab" data-cat="shows" onclick="setCat(this,'shows')">Shows & Eventos</button>
       <button class="filter-tab" data-cat="nocturna" onclick="setCat(this,'nocturna')">🍹 Vida Nocturna</button>
     </div>
   </div>
@@ -893,13 +893,13 @@ img { display: block; max-width: 100%; }
   <div style="padding:48px 0 80px">
     <div class="container">
       <!-- Filter buttons -->
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
-        <button class="admin-filter-btn active" data-filter="all" onclick="setAdminFilter('all',this)" style="--fc:#a0a0a0;--fb:rgba(255,255,255,0.06);--fbc:rgba(255,255,255,0.2)">Todos</button>
-        <button class="admin-filter-btn" data-filter="hoteles" onclick="setAdminFilter('hoteles',this)" style="--fc:#a78bfa;--fb:rgba(50,24,106,0.4);--fbc:rgba(167,139,250,0.35)">🏨 Hoteles & Casinos</button>
-        <button class="admin-filter-btn" data-filter="restaurantes" onclick="setAdminFilter('restaurantes',this)" style="--fc:#f87171;--fb:rgba(122,26,26,0.4);--fbc:rgba(248,113,113,0.35)">🍽️ Restaurantes</button>
-        <button class="admin-filter-btn" data-filter="nocturna" onclick="setAdminFilter('nocturna',this)" style="--fc:#c084fc;--fb:rgba(42,24,106,0.4);--fbc:rgba(192,132,252,0.35)">🌙 Vida Nocturna</button>
-        <button class="admin-filter-btn" data-filter="atracciones" onclick="setAdminFilter('atracciones',this)" style="--fc:#34d399;--fb:rgba(6,78,59,0.4);--fbc:rgba(52,211,153,0.35)">🎡 Atracciones</button>
-        <button class="admin-filter-btn" data-filter="shows" onclick="setAdminFilter('shows',this)" style="--fc:#60a5fa;--fb:rgba(26,63,106,0.4);--fbc:rgba(96,165,250,0.35)">🎭 Shows & Eventos</button>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px">
+        <button class="admin-filter-btn cat-chip cat-todos active" data-filter="all" onclick="setAdminFilter('all',this)">Todos</button>
+        <button class="admin-filter-btn cat-chip cat-hoteles" data-filter="hoteles" onclick="setAdminFilter('hoteles',this)">Hoteles & Casinos</button>
+        <button class="admin-filter-btn cat-chip cat-restaurantes" data-filter="restaurantes" onclick="setAdminFilter('restaurantes',this)">Restaurantes</button>
+        <button class="admin-filter-btn cat-chip cat-nocturna" data-filter="nocturna" onclick="setAdminFilter('nocturna',this)">Vida Nocturna</button>
+        <button class="admin-filter-btn cat-chip cat-atracciones" data-filter="atracciones" onclick="setAdminFilter('atracciones',this)">Atracciones</button>
+        <button class="admin-filter-btn cat-chip cat-shows" data-filter="shows" onclick="setAdminFilter('shows',this)">Shows & Eventos</button>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:24px">
         <div style="position:relative;flex:1;max-width:360px">
@@ -1155,18 +1155,20 @@ img { display: block; max-width: 100%; }
 <!-- ══════════════════ TOAST ══════════════════ -->
 <div id="adminToast" style="position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark3);border:1px solid var(--border-2);border-radius:var(--radius);padding:14px 24px;font-size:15px;font-weight:600;color:var(--text);z-index:600;opacity:0;transition:all 0.3s;box-shadow:0 8px 32px rgba(0,0,0,0.5);white-space:nowrap"></div>
 
-.listing-img-hero { width: 100%; height: 400px; object-fit: cover; border-radius: var(--radius-lg); display: block; }
 <!-- Admin CSS -->
 <style>
+.listing-img-hero { width: 100%; height: 400px; object-fit: cover; border-radius: var(--radius-lg); display: block; }
 #adminTableBody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
 #adminTableBody tr:last-child { border-bottom: none; }
 #adminTableBody tr:hover { background: rgba(255,255,255,0.03); }
 #adminTableBody td { padding: 14px 16px; vertical-align: middle; }
-.admin-cat-tag { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
-.cat-hoteles { background: rgba(50,24,106,0.4); color: #a78bfa; border: 1px solid rgba(167,139,250,0.2); }
-.cat-restaurantes { background: rgba(122,26,26,0.4); color: #f87171; border: 1px solid rgba(248,113,113,0.2); }
-.cat-shows { background: rgba(26,63,106,0.4); color: #60a5fa; border: 1px solid rgba(96,165,250,0.2); }
-.cat-nocturna { background: rgba(42,24,106,0.4); color: #c084fc; border: 1px solid rgba(192,132,252,0.2); }
+.cat-chip { display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; border: 1px solid; }
+.cat-todos     { background: rgba(148,163,184,0.10); border-color: rgba(148,163,184,0.20); color: #e2e8f0; }
+.cat-hoteles   { background: rgba(139,92,246,0.10);  border-color: rgba(167,139,250,0.25); color: #ddd6fe; }
+.cat-restaurantes { background: rgba(239,68,68,0.10); border-color: rgba(248,113,113,0.25); color: #fecaca; }
+.cat-nocturna  { background: rgba(99,102,241,0.10);  border-color: rgba(129,140,248,0.25); color: #c7d2fe; }
+.cat-atracciones { background: rgba(16,185,129,0.10); border-color: rgba(52,211,153,0.25); color: #a7f3d0; }
+.cat-shows     { background: rgba(245,158,11,0.10);  border-color: rgba(251,191,36,0.25);  color: #fde68a; }
 .admin-badge-tag { display: inline-block; padding: 2px 8px; background: rgba(245,176,20,0.15); border: 1px solid rgba(245,176,20,0.3); border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); }
 .admin-btn-edit { padding: 6px 12px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 6px; color: var(--text-muted); font-size: 12px; cursor: pointer; transition: all 0.2s; font-family: 'Barlow', sans-serif; }
 .admin-btn-edit:hover { background: rgba(255,255,255,0.1); color: var(--text); border-color: var(--border-2); }
@@ -1456,7 +1458,7 @@ async function applyFilters() {
   const rc = document.getElementById('resultsCount');
   if (rc) rc.innerHTML = `<strong>${results.length}</strong> lugar${results.length!==1?'es':''} encontrado${results.length!==1?'s':''}`;
   const tags = [];
-  if (activeCat) { const lbl={hoteles:'🏨 Hoteles',restaurantes:'🍽️ Restaurantes',shows:'🎭 Shows',nocturna:'🍹 Vida Nocturna'}; tags.push({label:lbl[activeCat],clear:()=>{activeCat='';document.querySelectorAll('.filter-tab').forEach(t=>t.classList.toggle('active',t.dataset.cat===''));applyFilters();}}); }
+  if (activeCat) { const lbl={hoteles:'🏨 Hoteles',restaurantes:'Restaurantes',shows:'🎭 Shows',nocturna:'🍹 Vida Nocturna'}; tags.push({label:lbl[activeCat],clear:()=>{activeCat='';document.querySelectorAll('.filter-tab').forEach(t=>t.classList.toggle('active',t.dataset.cat===''));applyFilters();}}); }
   if (q) tags.push({label:`"${q}"`,clear:()=>{document.getElementById('exploreSearchInput').value='';applyFilters();}});
   activePrices.forEach(p => tags.push({label:p,clear:()=>{activePrices.delete(p);document.querySelector(`[data-price="${p}"]`).classList.remove('active');applyFilters();}}));
   activeStars.forEach(s => tags.push({label:'★'.repeat(s),clear:()=>{activeStars.delete(s);document.querySelector(`[data-stars="${s}"]`).classList.remove('active');applyFilters();}}));
@@ -1620,7 +1622,7 @@ async function renderAdminListings() {
         <div style="font-weight:700;color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:17px">${l.name}</div>
         <div style="font-size:12px;color:var(--text-muted);margin-top:2px">${l.address||'Sin dirección'}</div>
       </td>
-      <td><span class="admin-cat-tag cat-${l.cat}">${l.catLabel}</span></td>
+      <td><span class="cat-chip cat-${l.cat}">${l.catLabel}</span></td>
       <td style="color:var(--gold);letter-spacing:1px">${'★'.repeat(l.stars)}</td>
       <td style="font-weight:700;color:var(--text-muted)">${l.price}</td>
       <td>${l.badge ? `<span class="admin-badge-tag">${l.badge}</span>` : '<span style="color:var(--text-muted);font-size:12px">—</span>'}</td>
