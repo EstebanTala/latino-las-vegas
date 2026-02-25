@@ -1488,7 +1488,7 @@ const REVIEWS = [
 ];
 async function loadListingDetail(slug) {
   const listings = await DATA.getAll();
-  const l = listings.find(x => x.slug === slug);
+  const l = listings.find(x => x.slug === slug || String(x.id) === String(slug));
   if (!l) return;
   document.getElementById('breadCat').textContent = l.catLabel;
   document.getElementById('breadName').textContent = l.name;
@@ -1617,7 +1617,7 @@ async function renderAdminListings() {
   const tbody = document.getElementById('adminTableBody');
   if (!tbody) return;
   tbody.innerHTML = listings.map(l => `
-    <tr style="cursor:pointer" onclick="navigateToListing('${l.slug}')">
+    <tr style="cursor:pointer" onclick="navigateToListing(this.dataset.slug)" data-slug="${l.slug||l.id}">
       <td><span style="font-size:24px">${l.icon}</span></td>
       <td>
         <div style="font-weight:700;color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:17px">${l.name}</div>
@@ -1760,9 +1760,10 @@ async function handleListingSubmit(e) {
   }
 }
 
-function navigateToListing(slug) {
+function navigateToListing(slugOrId) {
+  if (!slugOrId || slugOrId === 'undefined') return;
   showPage('listing');
-  loadListingDetail(slug);
+  loadListingDetail(slugOrId);
 }
 
 function confirmDelete(id, name) {
