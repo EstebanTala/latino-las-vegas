@@ -426,8 +426,9 @@ img { display: block; max-width: 100%; }
             <option value="">Todas las categorías</option>
             <option value="hoteles">Hoteles & Casinos</option>
             <option value="restaurantes">Restaurantes</option>
-            <option value="shows">Shows & Eventos</option>
             <option value="nocturna">Vida Nocturna</option>
+            <option value="atracciones">Atracciones</option>
+            <option value="shows">Shows & Eventos</option>
           </select>
           <button class="search-btn" onclick="doHeroSearch()">Buscar</button>
         </div>
@@ -891,6 +892,15 @@ img { display: block; max-width: 100%; }
   <!-- Table section -->
   <div style="padding:48px 0 80px">
     <div class="container">
+      <!-- Filter buttons -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+        <button class="admin-filter-btn active" data-filter="all" onclick="setAdminFilter('all',this)">Todos</button>
+        <button class="admin-filter-btn" data-filter="hoteles" onclick="setAdminFilter('hoteles',this)">🏨 Hoteles & Casinos</button>
+        <button class="admin-filter-btn" data-filter="restaurantes" onclick="setAdminFilter('restaurantes',this)">🍽️ Restaurantes</button>
+        <button class="admin-filter-btn" data-filter="nocturna" onclick="setAdminFilter('nocturna',this)">🌙 Vida Nocturna</button>
+        <button class="admin-filter-btn" data-filter="atracciones" onclick="setAdminFilter('atracciones',this)">🎡 Atracciones</button>
+        <button class="admin-filter-btn" data-filter="shows" onclick="setAdminFilter('shows',this)">🎭 Shows & Eventos</button>
+      </div>
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:24px">
         <div style="position:relative;flex:1;max-width:360px">
           <input type="text" placeholder="Buscar listings…" oninput="adminSearch(this.value)"
@@ -1582,8 +1592,25 @@ function adminLogout() {
 // ─── ADMIN PANEL ───
 let adminEditId = null;
 
+let _adminFilter = 'all';
+let _adminSearch = '';
+
+function setAdminFilter(filter, btn) {
+  _adminFilter = filter;
+  document.querySelectorAll('.admin-filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderAdminListings();
+}
+
+function adminSearch(val) {
+  _adminSearch = val.toLowerCase();
+  renderAdminListings();
+}
+
 async function renderAdminListings() {
-  const listings = await DATA.getAll();
+  let listings = await DATA.getAll();
+  if (_adminFilter !== 'all') listings = listings.filter(l => l.cat === _adminFilter);
+  if (_adminSearch) listings = listings.filter(l => l.name.toLowerCase().includes(_adminSearch) || (l.address||'').toLowerCase().includes(_adminSearch));
   const tbody = document.getElementById('adminTableBody');
   if (!tbody) return;
   tbody.innerHTML = listings.map(l => `
@@ -1760,15 +1787,6 @@ function showAdminToast(msg) {
   setTimeout(() => { t.style.opacity='0'; t.style.transform='translateY(20px)'; }, 3000);
 }
 
-function adminSearch(q) {
-  const rows = document.querySelectorAll('#adminTableBody tr');
-  q = q.toLowerCase();
-  rows.forEach(row => {
-    const text = row.textContent.toLowerCase();
-    row.style.display = text.includes(q) ? '' : 'none';
-  });
-}
-
 function resetToDefaults() {
   showAdminToast('ℹ️ Los datos viven en Supabase — edítalos desde el panel');
 }
@@ -1802,7 +1820,7 @@ const dotsEl = document.getElementById('heroDots');
 <script>
 // Auto cat label helper
 function autoCatLabel(cat) {
-  const labels = { hoteles:'Hotel & Casino', restaurantes:'Restaurante', shows:'Show & Evento', nocturna:'Bar & Club' };
+  const labels = { hoteles:'Hotel & Casino', restaurantes:'Restaurante', shows:'Show & Evento', nocturna:'Bar & Club', atracciones:'Atracción' };
   const el = document.getElementById('fCatLabel');
   if (el && !el.value) el.value = labels[cat]||'';
 }
