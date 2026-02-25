@@ -1762,8 +1762,7 @@ async function handleListingSubmit(e) {
 
 function navigateToListing(slugOrId) {
   if (!slugOrId || slugOrId === 'undefined') return;
-  showPage('listing');
-  loadListingDetail(slugOrId);
+  navigate('listing', slugOrId);
 }
 
 function confirmDelete(id, name) {
