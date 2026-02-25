@@ -1159,6 +1159,7 @@ img { display: block; max-width: 100%; }
 <style>
 .listing-img-hero { width: 100%; height: 400px; object-fit: cover; border-radius: var(--radius-lg); display: block; }
 #adminTableBody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+#adminTableBody tr:hover { background: rgba(255,255,255,0.04); }
 #adminTableBody tr:last-child { border-bottom: none; }
 #adminTableBody tr:hover { background: rgba(255,255,255,0.03); }
 #adminTableBody td { padding: 14px 16px; vertical-align: middle; }
@@ -1616,16 +1617,16 @@ async function renderAdminListings() {
   const tbody = document.getElementById('adminTableBody');
   if (!tbody) return;
   tbody.innerHTML = listings.map(l => `
-    <tr style="cursor:pointer;user-select:none" onclick="navigateToListing('${l.slug}')" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background=''">
-      <td style="pointer-events:none"><span style="font-size:24px">${l.icon}</span></td>
-      <td style="pointer-events:none">
+    <tr style="cursor:pointer" onclick="navigateToListing('${l.slug}')">
+      <td><span style="font-size:24px">${l.icon}</span></td>
+      <td>
         <div style="font-weight:700;color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:17px">${l.name}</div>
         <div style="font-size:12px;color:var(--text-muted);margin-top:2px">${l.address||'Sin dirección'}</div>
       </td>
-      <td style="pointer-events:none"><span class="cat-chip cat-${l.cat}">${l.catLabel}</span></td>
-      <td style="color:var(--gold);letter-spacing:1px;pointer-events:none">${'★'.repeat(Math.floor(l.stars))}</td>
-      <td style="font-weight:700;color:var(--text-muted);pointer-events:none">${l.price}</td>
-      <td style="pointer-events:none">${l.badge ? `<span class="admin-badge-tag">${l.badge}</span>` : '<span style="color:var(--text-muted);font-size:12px">—</span>'}</td>
+      <td><span class="cat-chip cat-${l.cat}">${l.catLabel}</span></td>
+      <td style="color:var(--gold);letter-spacing:1px">${'★'.repeat(Math.floor(l.stars))}</td>
+      <td style="font-weight:700;color:var(--text-muted)">${l.price}</td>
+      <td>${l.badge ? `<span class="admin-badge-tag">${l.badge}</span>` : '<span style="color:var(--text-muted);font-size:12px">—</span>'}</td>
       <td onclick="event.stopPropagation()">
         <div style="display:flex;gap:8px">
           <button class="admin-btn-edit" onclick="openEditModal(${l.id})">✏️ Editar</button>
