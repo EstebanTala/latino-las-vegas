@@ -973,13 +973,7 @@ img { display: block; max-width: 100%; }
       <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:14px">
         <div>
           <label class="form-label">Estrellas *</label>
-          <select id="fStars" class="form-select" required>
-            <option value="5">★★★★★ (5)</option>
-            <option value="4">★★★★☆ (4)</option>
-            <option value="3">★★★☆☆ (3)</option>
-            <option value="2">★★☆☆☆ (2)</option>
-            <option value="1">★☆☆☆☆ (1)</option>
-          </select>
+          <input type="number" id="fStars" class="form-input" min="1" max="5" step="0.1" placeholder="4.8" value="5" required />
         </div>
         <div>
           <label class="form-label">Precio *</label>
@@ -1319,7 +1313,10 @@ function navigate(page, param) {
 
 // ─── RENDER CARD ───
 function renderCard(l) {
-  const stars = '★'.repeat(l.stars) + '☆'.repeat(5 - l.stars);
+  const fullStars = Math.floor(l.stars);
+  const hasHalf = l.stars % 1 >= 0.5;
+  const emptyStars = 5 - fullStars - (hasHalf ? 1 : 0);
+  const stars = '★'.repeat(fullStars) + (hasHalf ? '½' : '') + '☆'.repeat(emptyStars);
   return `
   <div class="card" onclick="navigate('listing','${l.slug}')">
     <div class="card-img">
@@ -1431,8 +1428,9 @@ async function loadListingDetail(slug) {
   document.getElementById('listingCatTag').textContent = l.catLabel;
   document.getElementById('listingTitle').textContent = l.name;
   document.getElementById('listingTagline').textContent = l.desc;
-  document.getElementById('metaStars').textContent = '★'.repeat(l.stars)+'☆'.repeat(5-l.stars);
-  document.getElementById('metaRating').textContent = l.stars+'.0';
+  const fullS = Math.floor(l.stars), halfS = l.stars%1>=0.5, emptyS = 5-fullS-(halfS?1:0);
+  document.getElementById('metaStars').textContent = '★'.repeat(fullS)+(halfS?'½':'')+'☆'.repeat(emptyS);
+  document.getElementById('metaRating').textContent = l.stars % 1 === 0 ? l.stars+'.0' : l.stars;
   document.getElementById('metaPrice').textContent = l.price;
   const visual = document.getElementById('listingVisual');
   if (l.image) {
@@ -1444,7 +1442,7 @@ async function loadListingDetail(slug) {
   document.getElementById('infoAddress').textContent = l.address||'—';
   document.getElementById('infoPhone').textContent = l.phone||'—';
   document.getElementById('infoHours').textContent = l.hours||'—';
-  document.getElementById('bigStars').textContent = '★'.repeat(l.stars)+'☆'.repeat(5-l.stars);
+  document.getElementById('bigStars').textContent = '★'.repeat(Math.floor(l.stars))+(l.stars%1>=0.5?'½':'')+'☆'.repeat(5-Math.floor(l.stars)-(l.stars%1>=0.5?1:0));
   document.getElementById('bigRating').textContent = l.stars+'.0';
   const mb=document.getElementById('metaBadge');
   if(l.badge){mb.textContent=l.badge;mb.style.display='inline-block';}else{mb.style.display='none';}
@@ -1642,7 +1640,7 @@ async function handleListingSubmit(e) {
     catLabel: document.getElementById('fCatLabel').value,
     icon: document.getElementById('fIcon').value || '📍',
     image: document.getElementById('fImage').value || '',
-    stars: parseInt(document.getElementById('fStars').value),
+    stars: parseFloat(document.getElementById('fStars').value),
     price: document.getElementById('fPrice').value,
     badge: document.getElementById('fBadge').value || null,
     desc: document.getElementById('fDesc').value,
