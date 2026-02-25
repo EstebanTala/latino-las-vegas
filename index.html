@@ -1161,7 +1161,7 @@ const sb = {
     if (opts.eq) Object.entries(opts.eq).forEach(([k,v]) => url += `${k}=eq.${encodeURIComponent(v)}&`);
     if (opts.order) url += `order=${opts.order}&`;
     url += 'limit=500';
-    const r = await fetch(url, { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json' }});
+    const r = await fetch(url, { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', Accept: 'application/json' }});
     return r.json();
   },
   async insert(table, data) {
@@ -1227,7 +1227,8 @@ const DATA = {
   async getAll() {
     if (_listingsCache) return _listingsCache;
     const rows = await sb.query('listings', { select: '*', order: 'id.asc' });
-    _listingsCache = (rows||[]).map(dbToListing);
+    if (!Array.isArray(rows)) { console.error('Supabase error:', rows); return []; }
+    _listingsCache = rows.map(dbToListing);
     return _listingsCache;
   },
   invalidate() { _listingsCache = null; },
@@ -1677,7 +1678,7 @@ async function handleListingSubmit(e) {
     cat: document.getElementById('fCat').value,
     catLabel: document.getElementById('fCatLabel').value,
     icon: document.getElementById('fIcon').value || '📍',
-    image: document.getElementById('fImage').value || '',
+    image: (document.getElementById('fImage') ? document.getElementById('fImage').value : '') || '',
     stars: parseFloat(document.getElementById('fStars').value),
     price: document.getElementById('fPrice').value,
     badge: document.getElementById('fBadge').value || null,
