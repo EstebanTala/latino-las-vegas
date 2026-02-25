@@ -1002,27 +1002,61 @@ img { display: block; max-width: 100%; }
       <!-- Contact -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
         <div>
-          <label class="form-label">Dirección</label>
-          <input type="text" id="fAddress" class="form-input" placeholder="3355 S Las Vegas Blvd" />
-        </div>
-        <div>
-          <label class="form-label">Teléfono</label>
-          <input type="text" id="fPhone" class="form-input" placeholder="(702) 000-0000" />
-        </div>
-      </div>
-      <div style="margin-bottom:20px">
-        <label class="form-label">Horario</label>
-        <input type="text" id="fHours" class="form-input" placeholder="Lun–Dom 11am–10pm" />
-      </div>
-      <!-- Cuisine & Region -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
-        <div>
           <label class="form-label">Tipo de cocina</label>
-          <input type="text" id="fCuisine" class="form-input" placeholder="Ej: Steakhouse, Mariscos, Mexicana" />
+          <div style="position:relative">
+            <div id="cuisineDropdownBtn" onclick="toggleCuisineDropdown()" class="form-input" style="cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none">
+              <span id="cuisineDisplay" style="color:var(--text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:90%">Selecciona…</span>
+              <span style="flex-shrink:0">▾</span>
+            </div>
+            <div id="cuisineDropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--dark3);border:1px solid var(--border);border-radius:var(--radius-sm);z-index:100;max-height:220px;overflow-y:auto;margin-top:4px">
+              <div class="cuisine-opt" data-val="Americana" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Americana</div>
+              <div class="cuisine-opt" data-val="BBQ" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">BBQ</div>
+              <div class="cuisine-opt" data-val="Hamburgesas" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Hamburgesas</div>
+              <div class="cuisine-opt" data-val="Steakhouse" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Steakhouse</div>
+              <div class="cuisine-opt" data-val="Argentina" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Argentina</div>
+              <div class="cuisine-opt" data-val="Brasería" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Brasería</div>
+              <div class="cuisine-opt" data-val="Buffet" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Buffet</div>
+              <div class="cuisine-opt" data-val="Café" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Café</div>
+              <div class="cuisine-opt" data-val="China" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">China</div>
+              <div class="cuisine-opt" data-val="Colombiana" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Colombiana</div>
+              <div class="cuisine-opt" data-val="Coreana" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Coreana</div>
+              <div class="cuisine-opt" data-val="Cubana" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Cubana</div>
+              <div class="cuisine-opt" data-val="Deli" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Deli</div>
+              <div class="cuisine-opt" data-val="Desayunos / Brunch" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Desayunos / Brunch</div>
+              <div class="cuisine-opt" data-val="Española" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Española</div>
+              <div class="cuisine-opt" data-val="Francesa" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Francesa</div>
+              <div class="cuisine-opt" data-val="Griega" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Griega</div>
+              <div class="cuisine-opt" data-val="Hawaiiana" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Hawaiiana</div>
+              <div class="cuisine-opt" data-val="India" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">India</div>
+              <div class="cuisine-opt" data-val="Italiana" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Italiana</div>
+              <div class="cuisine-opt" data-val="Pizza" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Pizza</div>
+              <div class="cuisine-opt" data-val="Japonesa" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Japonesa</div>
+              <div class="cuisine-opt" data-val="Mariscos" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Mariscos</div>
+              <div class="cuisine-opt" data-val="Mexicana" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Mexicana</div>
+              <div class="cuisine-opt" data-val="Nicaragüense" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Nicaragüense</div>
+              <div class="cuisine-opt" data-val="Panadería" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Panadería</div>
+              <div class="cuisine-opt" data-val="Panasíatica" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Panasíatica</div>
+              <div class="cuisine-opt" data-val="Peruana" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Peruana</div>
+              <div class="cuisine-opt" data-val="Salvadoreña" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Salvadoreña</div>
+              <div class="cuisine-opt" data-val="Tailandesa" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Tailandesa</div>
+              <div class="cuisine-opt" data-val="Vegana / Vegetariana" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Vegana / Vegetariana</div>
+              <div class="cuisine-opt" data-val="Venezolana" onclick="toggleCuisineOpt(this)" style="padding:10px 14px;cursor:pointer;font-size:14px;transition:background 0.15s,color 0.15s">Venezolana</div>
+            </div>
+          </div>
         </div>
         <div>
           <label class="form-label">Zona / Región</label>
-          <input type="text" id="fRegion" class="form-input" placeholder="Ej: The Strip, East LV, Henderson" />
+          <select id="fRegion" class="form-select">
+            <option value="">Selecciona…</option>
+            <option>Downtown Las Vegas</option>
+            <option>East LV</option>
+            <option>Enterprise</option>
+            <option>Henderson</option>
+            <option>North Las Vegas</option>
+            <option>Spring Valley</option>
+            <option>Summerlin</option>
+            <option>The Strip</option>
+          </select>
         </div>
       </div>
       <!-- Social links -->
@@ -1136,7 +1170,9 @@ const sb = {
       headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', Prefer: 'return=representation' },
       body: JSON.stringify(data)
     });
-    return r.json();
+    const json = await r.json();
+    if (!r.ok) throw new Error(json.message || JSON.stringify(json));
+    return json;
   },
   async update(table, id, data) {
     const r = await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`, {
@@ -1144,7 +1180,9 @@ const sb = {
       headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', Prefer: 'return=representation' },
       body: JSON.stringify(data)
     });
-    return r.json();
+    const json = await r.json();
+    if (!r.ok) throw new Error(json.message || JSON.stringify(json));
+    return json;
   },
   async delete(table, id) {
     await fetch(`${SUPABASE_URL}/rest/v1/${table}?id=eq.${id}`, {
@@ -1562,7 +1600,7 @@ function openAddModal() {
   document.getElementById('highlight2').value='';
   document.getElementById('highlight3').value='';
   document.getElementById('highlight4').value='';
-  document.getElementById('fCuisine').value='';
+  clearCuisineValue();
   document.getElementById('fRegion').value='';
   document.getElementById('fInstagram').value='';
   document.getElementById('fFacebook').value='';
@@ -1594,7 +1632,7 @@ async function openEditModal(id) {
   document.getElementById('fAddress').value = l.address||'';
   document.getElementById('fPhone').value = l.phone||'';
   document.getElementById('fHours').value = l.hours||'';
-  document.getElementById('fCuisine').value = l.cuisine||'';
+  setCuisineValue(l.cuisine||'');
   document.getElementById('fRegion').value = l.region||'';
   document.getElementById('fInstagram').value = l.instagram||'';
   document.getElementById('fFacebook').value = l.facebook||'';
@@ -1648,7 +1686,7 @@ async function handleListingSubmit(e) {
     address: document.getElementById('fAddress').value,
     phone: document.getElementById('fPhone').value,
     hours: document.getElementById('fHours').value,
-    cuisine: document.getElementById('fCuisine').value,
+    cuisine: getCuisineValue(),
     region: document.getElementById('fRegion').value,
     instagram: document.getElementById('fInstagram').value,
     facebook: document.getElementById('fFacebook').value,
@@ -1658,17 +1696,22 @@ async function handleListingSubmit(e) {
     highlights,
   };
 
-  if (adminEditId) {
-    await DATA.update(adminEditId, listing);
-    showAdminToast('✅ Lugar actualizado correctamente');
-  } else {
-    await DATA.add(listing);
-    showAdminToast('✅ Nuevo lugar agregado correctamente');
+  try {
+    if (adminEditId) {
+      await DATA.update(adminEditId, listing);
+      showAdminToast('✅ Lugar actualizado correctamente');
+    } else {
+      await DATA.add(listing);
+      showAdminToast('✅ Nuevo lugar agregado correctamente');
+    }
+    btn.textContent = origText; btn.disabled = false;
+    closeModal();
+    await renderAdminListings();
+  } catch(err) {
+    console.error('Save error:', err);
+    showAdminToast('❌ Error al guardar: ' + err.message);
+    btn.textContent = origText; btn.disabled = false;
   }
-
-  btn.textContent = origText; btn.disabled = false;
-  closeModal();
-  await renderAdminListings();
 }
 
 function confirmDelete(id, name) {
@@ -1747,6 +1790,56 @@ function autoCatLabel(cat) {
   const el = document.getElementById('fCatLabel');
   if (el && !el.value) el.value = labels[cat]||'';
 }
+
+// Cuisine dropdown
+function toggleCuisineDropdown() {
+  const dd = document.getElementById('cuisineDropdown');
+  dd.style.display = dd.style.display === 'none' ? 'block' : 'none';
+}
+function toggleCuisineOpt(el) {
+  const selected = el.dataset.selected === 'true';
+  el.dataset.selected = selected ? 'false' : 'true';
+  el.style.background = selected ? '' : 'rgba(232,39,42,0.15)';
+  el.style.color = selected ? '' : 'var(--red)';
+  el.style.fontWeight = selected ? '' : '600';
+  updateCuisineDisplay();
+}
+function updateCuisineDisplay() {
+  const selected = Array.from(document.querySelectorAll('.cuisine-opt[data-selected="true"]')).map(el => el.dataset.val);
+  const display = document.getElementById('cuisineDisplay');
+  display.textContent = selected.length ? selected.join(', ') : 'Selecciona…';
+  display.style.color = selected.length ? 'var(--text)' : 'var(--text-muted)';
+}
+function getCuisineValue() {
+  return Array.from(document.querySelectorAll('.cuisine-opt[data-selected="true"]')).map(el => el.dataset.val).join(', ');
+}
+function setCuisineValue(val) {
+  const vals = (val||'').split(', ').map(s => s.trim()).filter(Boolean);
+  document.querySelectorAll('.cuisine-opt').forEach(el => {
+    const isSelected = vals.includes(el.dataset.val);
+    el.dataset.selected = isSelected ? 'true' : 'false';
+    el.style.background = isSelected ? 'rgba(232,39,42,0.15)' : '';
+    el.style.color = isSelected ? 'var(--red)' : '';
+    el.style.fontWeight = isSelected ? '600' : '';
+  });
+  updateCuisineDisplay();
+}
+function clearCuisineValue() {
+  document.querySelectorAll('.cuisine-opt').forEach(el => {
+    el.dataset.selected = 'false';
+    el.style.background = '';
+    el.style.color = '';
+    el.style.fontWeight = '';
+  });
+  updateCuisineDisplay();
+}
+// Close cuisine dropdown when clicking outside
+document.addEventListener('click', e => {
+  if (!e.target.closest('#cuisineDropdownBtn') && !e.target.closest('#cuisineDropdown')) {
+    const dd = document.getElementById('cuisineDropdown');
+    if (dd) dd.style.display = 'none';
+  }
+});
 
 // Image preview
 document.getElementById('fImage').addEventListener('input', function() {
