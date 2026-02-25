@@ -1562,9 +1562,8 @@ async function loadListingDetail(slug) {
   const mapIframe = document.getElementById('listingMapIframe');
   if (l.address && mapCard && mapIframe) {
     const q = encodeURIComponent(l.address + ', Las Vegas, NV');
-    mapIframe.src = \`https://www.google.com/maps/embed/v1/place?key=AIzaSyD-placeholder&q=\${q}\`;
     // Use maps search embed (no API key needed)
-    mapIframe.src = \`https://maps.google.com/maps?q=\${q}&output=embed&z=15\`;
+    mapIframe.src = 'https://maps.google.com/maps?q=' + q + '&output=embed&z=15';
     mapCard.style.display = 'block';
   } else if (mapCard) {
     mapCard.style.display = 'none';
