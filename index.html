@@ -691,6 +691,12 @@ img { display: block; max-width: 100%; }
               <div style="font-size:13px;color:var(--text-muted)">Basado en reseñas de la comunidad</div>
             </div>
           </div>
+          <div class="info-card" id="listingMapCard" style="display:none">
+            <div class="info-card-header">📍 Cómo llegar</div>
+            <div style="padding:0;overflow:hidden;border-radius:0 0 var(--radius) var(--radius)">
+              <iframe id="listingMapIframe" width="100%" height="220" style="border:0;display:block" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
           <button class="btn btn-ghost" style="justify-content:center" onclick="navigate('explore')">← Ver más lugares</button>
         </div>
       </div>
@@ -951,16 +957,38 @@ img { display: block; max-width: 100%; }
           <input type="text" id="fName" class="form-input" placeholder="Ej: The Venetian Las Vegas" required />
         </div>
         <div>
-          <label class="form-label">Ícono (emoji) *</label>
-          <input type="text" id="fIcon" class="form-input" placeholder="🏨" maxlength="4" />
+          <label class="form-label">URL del logo</label>
+          <input type="url" id="fIcon" class="form-input" placeholder="https://ejemplo.com/logo.png" />
+          <div style="font-size:11px;color:var(--text-muted);margin-top:4px">URL de imagen del logo (PNG transparente recomendado)</div>
         </div>
       </div>
-      <!-- Image URL -->
+      <!-- Images -->
       <div style="margin-bottom:14px">
-        <label class="form-label">URL de imagen</label>
-        <input type="url" id="fImage" class="form-input" placeholder="https://ejemplo.com/imagen.jpg" />
-        <div style="font-size:11px;color:var(--text-muted);margin-top:4px">Pega la URL de una imagen (clic derecho en imagen → Copiar dirección de imagen)</div>
-        <div id="fImagePreview" style="margin-top:8px;display:none"><img id="fImagePreviewImg" style="width:100%;height:140px;object-fit:cover;border-radius:8px;border:1px solid var(--border)" /></div>
+        <label class="form-label">Imágenes (hasta 4 URLs)</label>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;gap:8px;align-items:center">
+            <span style="font-size:11px;color:var(--text-muted);width:16px;flex-shrink:0">1</span>
+            <input type="url" id="fImage" class="form-input" placeholder="https://ejemplo.com/imagen1.jpg" style="flex:1" />
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span style="font-size:11px;color:var(--text-muted);width:16px;flex-shrink:0">2</span>
+            <input type="url" id="fImage2" class="form-input" placeholder="https://ejemplo.com/imagen2.jpg" style="flex:1" />
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span style="font-size:11px;color:var(--text-muted);width:16px;flex-shrink:0">3</span>
+            <input type="url" id="fImage3" class="form-input" placeholder="https://ejemplo.com/imagen3.jpg" style="flex:1" />
+          </div>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span style="font-size:11px;color:var(--text-muted);width:16px;flex-shrink:0">4</span>
+            <input type="url" id="fImage4" class="form-input" placeholder="https://ejemplo.com/imagen4.jpg" style="flex:1" />
+          </div>
+        </div>
+        <div id="fImagePreview" style="margin-top:10px;display:none;display:grid;grid-template-columns:repeat(4,1fr);gap:8px" id="fImagePreviewGrid">
+          <img id="fImagePreviewImg" style="width:100%;height:80px;object-fit:cover;border-radius:6px;border:1px solid var(--border);display:none" />
+          <img id="fImagePreviewImg2" style="width:100%;height:80px;object-fit:cover;border-radius:6px;border:1px solid var(--border);display:none" />
+          <img id="fImagePreviewImg3" style="width:100%;height:80px;object-fit:cover;border-radius:6px;border:1px solid var(--border);display:none" />
+          <img id="fImagePreviewImg4" style="width:100%;height:80px;object-fit:cover;border-radius:6px;border:1px solid var(--border);display:none" />
+        </div>
       </div>
       <!-- Row 2 -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
@@ -1227,7 +1255,7 @@ function dbToListing(r) {
     catLabel: r.cat_label, icon: r.icon||'📍', stars: r.stars||5,
     price: r.price||'$$', badge: r.badge||null,
     desc: r.description||'', about: r.about||'',
-    image: r.image||'',
+    image: r.image||'', image2: r.image2||'', image3: r.image3||'', image4: r.image4||'',
     address: r.address||'', phone: r.phone||'', hours: r.hours||'',
     cuisine: r.cuisine||'', region: r.region||'',
     instagram: r.instagram||'', facebook: r.facebook||'', website: r.website||'',
@@ -1513,10 +1541,33 @@ async function loadListingDetail(slug) {
   document.getElementById('metaRating').textContent = l.stars % 1 === 0 ? l.stars+'.0' : l.stars;
   document.getElementById('metaPrice').textContent = l.price;
   const visual = document.getElementById('listingVisual');
-  if (l.image) {
-    visual.innerHTML = `<img src="${l.image}" alt="${l.name}" class="listing-img-hero" onerror="this.parentElement.innerHTML='<div class=listing-icon-bg></div><div class=listing-icon-glow>${l.icon}</div>'" />`;
+  // Build image gallery or fallback
+  const imgs = [l.image, l.image2, l.image3, l.image4].filter(Boolean);
+  if (imgs.length > 1) {
+    visual.innerHTML = `<div style="display:grid;grid-template-columns:2fr 1fr;gap:8px;border-radius:var(--radius-lg);overflow:hidden;height:400px">
+      <img src="${imgs[0]}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'" />
+      <div style="display:flex;flex-direction:column;gap:8px">
+        ${imgs.slice(1).map(u => `<img src="${u}" style="width:100%;flex:1;object-fit:cover;min-height:0" onerror="this.style.display='none'" />`).join('')}
+      </div>
+    </div>`;
+  } else if (imgs.length === 1) {
+    visual.innerHTML = `<img src="${imgs[0]}" alt="${l.name}" class="listing-img-hero" onerror="this.parentElement.innerHTML='<div class=listing-icon-bg></div><div class=listing-icon-glow>${l.icon}</div>'" />`;
   } else {
     visual.innerHTML = `<div class="listing-icon-bg"></div><div class="listing-icon-glow" id="listingIcon">${l.icon}</div>`;
+  }
+  // Show logo in header if fIcon is a URL
+  const isLogoUrl = l.icon && l.icon.startsWith('http');
+  // Map
+  const mapCard = document.getElementById('listingMapCard');
+  const mapIframe = document.getElementById('listingMapIframe');
+  if (l.address && mapCard && mapIframe) {
+    const q = encodeURIComponent(l.address + ', Las Vegas, NV');
+    mapIframe.src = \`https://www.google.com/maps/embed/v1/place?key=AIzaSyD-placeholder&q=\${q}\`;
+    // Use maps search embed (no API key needed)
+    mapIframe.src = \`https://maps.google.com/maps?q=\${q}&output=embed&z=15\`;
+    mapCard.style.display = 'block';
+  } else if (mapCard) {
+    mapCard.style.display = 'none';
   }
   document.getElementById('aboutText').textContent = l.about||l.desc;
   document.getElementById('infoAddress').textContent = l.address||'—';
@@ -1668,7 +1719,10 @@ function openAddModal() {
   document.getElementById('fHappyHourTime').value='';
   document.getElementById('fHappyHourDetails').value='';
   document.getElementById('fImage').value='';
-  document.getElementById('fImagePreview').style.display='none';
+  document.getElementById('fImage2').value='';
+  document.getElementById('fImage3').value='';
+  document.getElementById('fImage4').value='';
+  ['fImagePreviewImg','fImagePreviewImg2','fImagePreviewImg3','fImagePreviewImg4'].forEach(id => { const el = document.getElementById(id); if(el){el.src='';el.style.display='none';} });
   document.getElementById('adminModal').style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
@@ -1702,6 +1756,9 @@ async function openEditModal(id) {
   document.getElementById('fHappyHourTime').value = hhParts[1]||'';
   document.getElementById('fHappyHourDetails').value = l.happyHourDetails||'';
   document.getElementById('fImage').value = l.image||'';
+  document.getElementById('fImage2').value = l.image2||'';
+  document.getElementById('fImage3').value = l.image3||'';
+  document.getElementById('fImage4').value = l.image4||'';
   const imgPreview = document.getElementById('fImagePreview');
   const imgPreviewImg = document.getElementById('fImagePreviewImg');
   if (l.image) { imgPreviewImg.src = l.image; imgPreview.style.display = 'block'; } else { imgPreview.style.display = 'none'; }
@@ -1736,7 +1793,10 @@ async function handleListingSubmit(e) {
     cat: document.getElementById('fCat').value,
     catLabel: document.getElementById('fCatLabel').value,
     icon: document.getElementById('fIcon').value || '📍',
-    image: (document.getElementById('fImage') ? document.getElementById('fImage').value : '') || '',
+    image: document.getElementById('fImage')?.value || '',
+    image2: document.getElementById('fImage2')?.value || '',
+    image3: document.getElementById('fImage3')?.value || '',
+    image4: document.getElementById('fImage4')?.value || '',
     stars: parseFloat(document.getElementById('fStars').value),
     price: document.getElementById('fPrice').value,
     badge: document.getElementById('fBadge').value || null,
@@ -1899,16 +1959,23 @@ document.addEventListener('click', e => {
 });
 
 // Image preview
-document.getElementById('fImage').addEventListener('input', function() {
-  const preview = document.getElementById('fImagePreview');
-  const img = document.getElementById('fImagePreviewImg');
-  if (this.value) {
-    img.src = this.value;
-    preview.style.display = 'block';
-    img.onerror = () => { preview.style.display = 'none'; };
-  } else {
-    preview.style.display = 'none';
-  }
+// Multi-image preview listeners
+['fImage','fImage2','fImage3','fImage4'].forEach((fid, i) => {
+  const input = document.getElementById(fid);
+  if (!input) return;
+  const imgId = i === 0 ? 'fImagePreviewImg' : 'fImagePreviewImg' + (i+1);
+  input.addEventListener('input', function() {
+    const img = document.getElementById(imgId);
+    if (!img) return;
+    if (this.value) {
+      img.src = this.value;
+      img.style.display = 'block';
+      img.onerror = () => { img.style.display = 'none'; };
+    } else {
+      img.src = '';
+      img.style.display = 'none';
+    }
+  });
 });
 
 // Update admin stats after render (uses cached data)
