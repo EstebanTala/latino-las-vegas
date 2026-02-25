@@ -1430,7 +1430,7 @@ function renderCard(l) {
   return `
   <div class="card" onclick="navigate('listing','${l.slug}')">
     <div class="card-img">
-      <div class="card-img-inner">${l.image ? `<img src="${l.image}" alt="${l.name}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:48px>${l.icon && !l.icon.startsWith(\"http\") ? l.icon : \"📍\"}</span>'" />` : (l.icon && !l.icon.startsWith('http') ? `<span style="font-size:48px">${l.icon}</span>` : '<span style="font-size:48px">📍</span>')}</div>
+      <div class="card-img-inner">${cardMedia(l)}</div>
       ${l.badge ? `<div class="card-badge ${['Top Rated','Must See','Top Club'].includes(l.badge) ? 'card-badge-red' : ''}">${l.badge}</div>` : ''}
       <button class="card-fav" onclick="event.stopPropagation()">♡</button>
     </div>
