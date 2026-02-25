@@ -1616,17 +1616,17 @@ async function renderAdminListings() {
   const tbody = document.getElementById('adminTableBody');
   if (!tbody) return;
   tbody.innerHTML = listings.map(l => `
-    <tr>
+    <tr style="cursor:pointer" onclick="navigateToListing('${l.slug}')" onmouseover="this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.background=''">
       <td><span style="font-size:24px">${l.icon}</span></td>
       <td>
         <div style="font-weight:700;color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:17px">${l.name}</div>
         <div style="font-size:12px;color:var(--text-muted);margin-top:2px">${l.address||'Sin dirección'}</div>
       </td>
       <td><span class="cat-chip cat-${l.cat}">${l.catLabel}</span></td>
-      <td style="color:var(--gold);letter-spacing:1px">${'★'.repeat(l.stars)}</td>
+      <td style="color:var(--gold);letter-spacing:1px">${'★'.repeat(Math.floor(l.stars))}</td>
       <td style="font-weight:700;color:var(--text-muted)">${l.price}</td>
       <td>${l.badge ? `<span class="admin-badge-tag">${l.badge}</span>` : '<span style="color:var(--text-muted);font-size:12px">—</span>'}</td>
-      <td>
+      <td onclick="event.stopPropagation()">
         <div style="display:flex;gap:8px">
           <button class="admin-btn-edit" onclick="openEditModal(${l.id})">✏️ Editar</button>
           <button class="admin-btn-delete" onclick="confirmDelete(${l.id},'${l.name.replace(/'/g,"\\'")}')">🗑️ Borrar</button>
@@ -1757,6 +1757,11 @@ async function handleListingSubmit(e) {
     showAdminToast('❌ Error al guardar: ' + err.message);
     btn.textContent = origText; btn.disabled = false;
   }
+}
+
+function navigateToListing(slug) {
+  showPage('listing');
+  loadListingDetail(slug);
 }
 
 function confirmDelete(id, name) {
