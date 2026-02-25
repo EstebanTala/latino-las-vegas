@@ -999,6 +999,21 @@ img { display: block; max-width: 100%; }
         <label class="form-label">Descripción completa</label>
         <textarea id="fAbout" class="form-textarea" style="min-height:90px" placeholder="Descripción detallada del lugar…"></textarea>
       </div>
+      <!-- Address / Phone / Hours -->
+      <div style="margin-bottom:14px">
+        <label class="form-label">Dirección</label>
+        <input type="text" id="fAddress" class="form-input" placeholder="3355 S Las Vegas Blvd" />
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+        <div>
+          <label class="form-label">Teléfono</label>
+          <input type="text" id="fPhone" class="form-input" placeholder="(702) 000-0000" />
+        </div>
+        <div>
+          <label class="form-label">Horario</label>
+          <input type="text" id="fHours" class="form-input" placeholder="Lun-Dom 11am-10pm" />
+        </div>
+      </div>
       <!-- Contact -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
         <div>
@@ -1152,7 +1167,7 @@ img { display: block; max-width: 100%; }
 <script>
 // ─── SUPABASE CONFIG ───
 const SUPABASE_URL = 'https://xednuynwcnjzkrkfyqsa.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhlZG51eW53Y25qemtya2Z5cXNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA0NDIwMzAsImV4cCI6MjA1NjAxODAzMH0.8o91HYfgGF0LP7y3JO2YOoRAg_KcDQNxrIjF4InhlZG';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhlZG51eW53Y25qemtya2Z5cXNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE5OTY1MTUsImV4cCI6MjA4NzU3MjUxNX0.24yny0y4kwAHeWPj6ho80zc46Xsx9riTigrE-bBpPmI';
 
 const sb = {
   async query(table, opts={}) {
