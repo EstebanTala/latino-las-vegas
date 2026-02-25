@@ -94,6 +94,7 @@ img { display: block; max-width: 100%; }
 .card:hover { border-color: rgba(255,255,255,0.14); transform: translateY(-4px); box-shadow: 0 24px 48px rgba(0,0,0,0.5); }
 .card-img { aspect-ratio: 16/10; position: relative; overflow: hidden; background: var(--dark4); }
 .card-img-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 48px; transition: transform 0.4s ease; }
+.card-img-inner img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
 .card:hover .card-img-inner { transform: scale(1.06); }
 .card-badge { position: absolute; top: 12px; left: 12px; background: var(--gold); color: #0C0C0F; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; }
 .card-badge-red { background: var(--red); color: white; box-shadow: 0 0 12px var(--glow-red); }
@@ -637,7 +638,7 @@ img { display: block; max-width: 100%; }
     </div>
     <div class="container" style="padding-bottom:0">
       <div class="listing-visual">
-        <div class="listing-icon-display">
+        <div class="listing-icon-display" id="listingVisual">
           <div class="listing-icon-bg"></div>
           <div class="listing-icon-glow" id="listingIcon">🏛️</div>
         </div>
@@ -944,6 +945,13 @@ img { display: block; max-width: 100%; }
           <input type="text" id="fIcon" class="form-input" placeholder="🏨" maxlength="4" />
         </div>
       </div>
+      <!-- Image URL -->
+      <div style="margin-bottom:14px">
+        <label class="form-label">URL de imagen</label>
+        <input type="url" id="fImage" class="form-input" placeholder="https://ejemplo.com/imagen.jpg" />
+        <div style="font-size:11px;color:var(--text-muted);margin-top:4px">Pega la URL de una imagen (clic derecho en imagen → Copiar dirección de imagen)</div>
+        <div id="fImagePreview" style="margin-top:8px;display:none"><img id="fImagePreviewImg" style="width:100%;height:140px;object-fit:cover;border-radius:8px;border:1px solid var(--border)" /></div>
+      </div>
       <!-- Row 2 -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
         <div>
@@ -1094,6 +1102,7 @@ img { display: block; max-width: 100%; }
 <!-- ══════════════════ TOAST ══════════════════ -->
 <div id="adminToast" style="position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--dark3);border:1px solid var(--border-2);border-radius:var(--radius);padding:14px 24px;font-size:15px;font-weight:600;color:var(--text);z-index:600;opacity:0;transition:all 0.3s;box-shadow:0 8px 32px rgba(0,0,0,0.5);white-space:nowrap"></div>
 
+.listing-img-hero { width: 100%; height: 400px; object-fit: cover; border-radius: var(--radius-lg); display: block; }
 <!-- Admin CSS -->
 <style>
 #adminTableBody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
@@ -1158,6 +1167,7 @@ function dbToListing(r) {
     catLabel: r.cat_label, icon: r.icon||'📍', stars: r.stars||5,
     price: r.price||'$$', badge: r.badge||null,
     desc: r.description||'', about: r.about||'',
+    image: r.image||'',
     address: r.address||'', phone: r.phone||'', hours: r.hours||'',
     cuisine: r.cuisine||'', region: r.region||'',
     instagram: r.instagram||'', facebook: r.facebook||'', website: r.website||'',
@@ -1170,7 +1180,7 @@ function listingToDB(l) {
   return {
     slug: l.slug, name: l.name, cat: l.cat, cat_label: l.catLabel,
     icon: l.icon, stars: l.stars, price: l.price, badge: l.badge||null,
-    description: l.desc, about: l.about, address: l.address, phone: l.phone, hours: l.hours,
+    description: l.desc, about: l.about, image: l.image||null, address: l.address, phone: l.phone, hours: l.hours,
     cuisine: l.cuisine||null, region: l.region||null,
     instagram: l.instagram||null, facebook: l.facebook||null, website: l.website||null,
     happy_hour_days: l.happyHourDays||null, happy_hour_details: l.happyHourDetails||null,
@@ -1313,7 +1323,7 @@ function renderCard(l) {
   return `
   <div class="card" onclick="navigate('listing','${l.slug}')">
     <div class="card-img">
-      <div class="card-img-inner">${l.icon}</div>
+      <div class="card-img-inner">${l.image ? `<img src="${l.image}" alt="${l.name}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:48px>${l.icon}</span>'" />` : l.icon}</div>
       ${l.badge ? `<div class="card-badge ${['Top Rated','Must See','Top Club'].includes(l.badge) ? 'card-badge-red' : ''}">${l.badge}</div>` : ''}
       <button class="card-fav" onclick="event.stopPropagation()">♡</button>
     </div>
@@ -1424,7 +1434,12 @@ async function loadListingDetail(slug) {
   document.getElementById('metaStars').textContent = '★'.repeat(l.stars)+'☆'.repeat(5-l.stars);
   document.getElementById('metaRating').textContent = l.stars+'.0';
   document.getElementById('metaPrice').textContent = l.price;
-  document.getElementById('listingIcon').textContent = l.icon;
+  const visual = document.getElementById('listingVisual');
+  if (l.image) {
+    visual.innerHTML = `<img src="${l.image}" alt="${l.name}" class="listing-img-hero" onerror="this.parentElement.innerHTML='<div class=listing-icon-bg></div><div class=listing-icon-glow>${l.icon}</div>'" />`;
+  } else {
+    visual.innerHTML = `<div class="listing-icon-bg"></div><div class="listing-icon-glow" id="listingIcon">${l.icon}</div>`;
+  }
   document.getElementById('aboutText').textContent = l.about||l.desc;
   document.getElementById('infoAddress').textContent = l.address||'—';
   document.getElementById('infoPhone').textContent = l.phone||'—';
@@ -1557,12 +1572,15 @@ function openAddModal() {
   document.getElementById('fHappyHourDays').value='';
   document.getElementById('fHappyHourTime').value='';
   document.getElementById('fHappyHourDetails').value='';
+  document.getElementById('fImage').value='';
+  document.getElementById('fImagePreview').style.display='none';
   document.getElementById('adminModal').style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
 
-function openEditModal(id) {
-  const l = DATA.listings.find(x => x.id === id);
+async function openEditModal(id) {
+  const listings = await DATA.getAll();
+  const l = listings.find(x => x.id === id);
   if (!l) return;
   adminEditId = id;
   document.getElementById('modalTitle').textContent = 'Editar Lugar';
@@ -1588,6 +1606,10 @@ function openEditModal(id) {
   document.getElementById('fHappyHourDays').value = hhParts[0]||'';
   document.getElementById('fHappyHourTime').value = hhParts[1]||'';
   document.getElementById('fHappyHourDetails').value = l.happyHourDetails||'';
+  document.getElementById('fImage').value = l.image||'';
+  const imgPreview = document.getElementById('fImagePreview');
+  const imgPreviewImg = document.getElementById('fImagePreviewImg');
+  if (l.image) { imgPreviewImg.src = l.image; imgPreview.style.display = 'block'; } else { imgPreview.style.display = 'none'; }
   const h = l.highlights||[];
   document.getElementById('highlight1').value = h[0]||'';
   document.getElementById('highlight2').value = h[1]||'';
@@ -1619,6 +1641,7 @@ async function handleListingSubmit(e) {
     cat: document.getElementById('fCat').value,
     catLabel: document.getElementById('fCatLabel').value,
     icon: document.getElementById('fIcon').value || '📍',
+    image: document.getElementById('fImage').value || '',
     stars: parseInt(document.getElementById('fStars').value),
     price: document.getElementById('fPrice').value,
     badge: document.getElementById('fBadge').value || null,
@@ -1726,6 +1749,19 @@ function autoCatLabel(cat) {
   const el = document.getElementById('fCatLabel');
   if (el && !el.value) el.value = labels[cat]||'';
 }
+
+// Image preview
+document.getElementById('fImage').addEventListener('input', function() {
+  const preview = document.getElementById('fImagePreview');
+  const img = document.getElementById('fImagePreviewImg');
+  if (this.value) {
+    img.src = this.value;
+    preview.style.display = 'block';
+    img.onerror = () => { preview.style.display = 'none'; };
+  } else {
+    preview.style.display = 'none';
+  }
+});
 
 // Update admin stats counts when panel opens
 const _origRenderAdminListings = renderAdminListings;
