@@ -633,7 +633,7 @@ img { display: block; max-width: 100%; }
         </div>
         <div class="listing-actions">
           <button class="btn btn-primary btn-lg" id="listingPhoneBtn">📞 Llamar</button>
-          <button class="btn btn-ghost btn-lg" onclick="navigate('explore')">← Volver</button>
+          <button class="btn btn-ghost btn-lg" id="listingBackBtn" onclick="navigate('explore')">← Volver</button>
         </div>
       </div>
     </div>
@@ -1356,6 +1356,19 @@ function navigate(page, param) {
     currentSlug = param;
     loadListingDetail(param);
     document.getElementById('page-listing').classList.add('active');
+    // Set back button destination based on where we came from
+    const backBtn = document.getElementById('listingBackBtn');
+    if (backBtn) {
+      const fromAdmin = document.querySelector('#page-admin.active') !== null || _listingFromAdmin;
+      _listingFromAdmin = false;
+      if (fromAdmin) {
+        backBtn.textContent = '← Volver al panel';
+        backBtn.onclick = () => navigate('admin');
+      } else {
+        backBtn.textContent = '← Volver';
+        backBtn.onclick = () => navigate('explore');
+      }
+    }
   } else if (page === 'explore') {
     document.getElementById('page-explore').classList.add('active');
     if (param) {
@@ -1760,7 +1773,9 @@ async function handleListingSubmit(e) {
   }
 }
 
+let _listingFromAdmin = false;
 function navigateToListing(slugOrId) {
+  _listingFromAdmin = isAdminLoggedIn();
   if (!slugOrId || slugOrId === 'undefined') return;
   navigate('listing', slugOrId);
 }
@@ -1896,17 +1911,19 @@ document.getElementById('fImage').addEventListener('input', function() {
   }
 });
 
-// Update admin stats counts when panel opens
+// Update admin stats after render (uses cached data)
 const _origRenderAdminListings = renderAdminListings;
 renderAdminListings = async function() {
   await _origRenderAdminListings();
-  const all = await DATA.getAll();
+  const all = await DATA.getAll(); // cached — no extra request
   const hc = document.getElementById('adminHotelCount');
   const rc = document.getElementById('adminRestCount');
   const sc = document.getElementById('adminShowCount');
+  const tc = document.getElementById('adminListingCount');
+  if (tc) tc.textContent = all.length;
   if (hc) hc.textContent = all.filter(l=>l.cat==='hoteles').length;
   if (rc) rc.textContent = all.filter(l=>l.cat==='restaurantes').length;
-  if (sc) sc.textContent = all.filter(l=>l.cat==='shows'||l.cat==='nocturna').length;
+  if (sc) sc.textContent = all.filter(l=>l.cat==='shows'||l.cat==='nocturna'||l.cat==='atracciones').length;
 };
 
 // Close modal on backdrop click
