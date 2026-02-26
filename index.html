@@ -26,27 +26,38 @@
   }
 }
 </script>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ─── RESET & VARS ─── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --red: #E8272A; --red-dark: #C01E21; --red-light: #FF3538;
-  --gold: #F5B014; --gold-dark: #C48C0A;
-  --dark: #0C0C0F; --dark2: #111115; --dark3: #17171D; --dark4: #1E1E26;
-  --card-bg: #14141A;
-  --text: #F0EDE8; --text-2: #C8C4BE; --text-muted: #8A8680;
-  --border: rgba(255,255,255,0.07); --border-2: rgba(255,255,255,0.12);
-  --glow-red: rgba(232,39,42,0.3); --glow-gold: rgba(245,176,20,0.25);
+  /* Brand colors — refined palette */
+  --red: #C42229; --red-dark: #A31B21; --red-light: #D4262D;
+  --gold: #B08928; --gold-dark: #8E6E20; --gold-light: #C9A040;
+
+  /* Light surface system */
+  --cream: #FAF8F5; --cream-2: #F2EFE9; --cream-3: #E8E3DA;
+  --card-bg: #FFFFFF;
+  --text: #1A1714; --text-2: #4A443E; --text-muted: #8A8278;
+  --border: rgba(0,0,0,0.07); --border-2: rgba(0,0,0,0.13);
+  --shadow-card: 0 1px 2px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.06);
+  --shadow-card-hover: 0 8px 32px rgba(0,0,0,0.12), 0 2px 6px rgba(0,0,0,0.05);
+
+  /* Dark surfaces — hero, footer, dark sections */
+  --dark: #16120C; --dark2: #1C170F; --dark3: #24201A; --dark4: #2E2922;
+  --dark-text: #F0EDE8; --dark-text-2: #C8C4BE; --dark-text-muted: #8A8680;
+  --dark-border: rgba(255,255,255,0.07); --dark-border-2: rgba(255,255,255,0.12);
+
+  --glow-red: rgba(196,34,41,0.25); --glow-gold: rgba(176,137,40,0.2);
   --radius: 12px; --radius-sm: 8px; --radius-lg: 16px;
 }
 html { scroll-behavior: smooth; }
-body { background: var(--dark); color: var(--text); font-family: 'Barlow', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { background: var(--cream); color: var(--text); font-family: 'Plus Jakarta Sans', 'Barlow', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
 img { display: block; max-width: 100%; }
 ::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: var(--dark); }
-::-webkit-scrollbar-thumb { background: var(--dark4); border-radius: 3px; }
+::-webkit-scrollbar-track { background: var(--cream-2); }
+::-webkit-scrollbar-thumb { background: var(--cream-3); border-radius: 3px; }
 
 /* ─── PAGE SYSTEM ─── */
 .page { display: none; }
@@ -57,13 +68,13 @@ img { display: block; max-width: 100%; }
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 48px; height: 70px;
-  background: rgba(12,12,15,0.9); backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border); transition: background 0.3s;
+  background: rgba(250,248,245,0.92); backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border); transition: background 0.3s, box-shadow 0.3s;
 }
-.nav.scrolled { background: rgba(12,12,15,0.98); }
+.nav.scrolled { background: rgba(250,248,245,0.98); box-shadow: 0 1px 20px rgba(0,0,0,0.07); }
 .nav-logo {
   font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px;
-  color: var(--text); display: flex; align-items: center; gap: 10px; cursor: pointer;
+  color: var(--text); display: flex; align-items: center; gap: 10px; cursor: pointer; outline: none;
 }
 .nav-badge {
   width: 36px; height: 36px; background: var(--red); border-radius: 8px;
@@ -78,8 +89,8 @@ img { display: block; max-width: 100%; }
   text-transform: uppercase; padding: 8px 16px; border-radius: 6px;
   transition: all 0.2s; cursor: pointer; display: block;
 }
-.nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.05); }
-.nav-links a.active { color: var(--red); background: rgba(232,39,42,0.08); }
+.nav-links a:hover { color: var(--text); background: rgba(0,0,0,0.04); }
+.nav-links a.active { color: var(--red); background: rgba(196,34,41,0.07); }
 .nav-actions { display: flex; gap: 10px; align-items: center; }
 
 /* ─── BUTTONS ─── */
@@ -91,16 +102,18 @@ img { display: block; max-width: 100%; }
   transition: all 0.2s; white-space: nowrap;
 }
 .btn-ghost { background: transparent; border: 1px solid var(--border-2); color: var(--text-muted); }
-.btn-ghost:hover { border-color: rgba(255,255,255,0.25); color: var(--text); }
-.btn-primary { background: var(--red); color: white; box-shadow: 0 0 20px var(--glow-red); }
-.btn-primary:hover { background: var(--red-light); box-shadow: 0 0 28px var(--glow-red); }
-.btn-gold { background: var(--gold); color: #0C0C0F; box-shadow: 0 0 20px var(--glow-gold); }
-.btn-gold:hover { background: #FFB820; }
+.btn-ghost:hover { border-color: rgba(0,0,0,0.22); color: var(--text); background: rgba(0,0,0,0.03); }
+.btn-secondary { background: white; color: var(--text); border: 1px solid var(--border-2); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.btn-secondary:hover { border-color: rgba(0,0,0,0.2); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+.btn-primary { background: var(--red); color: white; box-shadow: 0 2px 8px rgba(196,34,41,0.3), 0 1px 2px rgba(0,0,0,0.15); }
+.btn-primary:hover { background: var(--red-light); box-shadow: 0 4px 16px rgba(196,34,41,0.35), 0 1px 3px rgba(0,0,0,0.15); transform: translateY(-1px); }
+.btn-gold { background: var(--gold); color: #1A1714; box-shadow: 0 2px 8px rgba(176,137,40,0.3); }
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); }
 .btn-lg { padding: 13px 28px; font-size: 15px; }
 
 /* ─── LAYOUT UTILS ─── */
 .container { max-width: 1240px; margin: 0 auto; padding: 0 48px; }
-.section { padding: 80px 0; }
+.section { padding: 80px 0; background: var(--cream); }
 .section-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
 .section-title { font-family: 'Bebas Neue', sans-serif; font-size: 52px; letter-spacing: 2px; line-height: 0.95; color: var(--text); margin-bottom: 6px; }
 .section-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 36px; }
@@ -111,9 +124,10 @@ img { display: block; max-width: 100%; }
 /* ─── CARD ─── */
 .card {
   background: var(--card-bg); border-radius: var(--radius); border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
   overflow: hidden; display: block; transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1); cursor: pointer;
 }
-.card:hover { border-color: rgba(255,255,255,0.14); transform: translateY(-4px); box-shadow: 0 24px 48px rgba(0,0,0,0.5); }
+.card:hover { border-color: rgba(0,0,0,0.1); transform: translateY(-5px); box-shadow: var(--shadow-card-hover); }
 .card-img { aspect-ratio: 16/10; position: relative; overflow: hidden; background: var(--dark4); }
 .card-img-inner { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 48px; transition: transform 0.4s ease; }
 .card-img-inner img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
@@ -133,13 +147,13 @@ img { display: block; max-width: 100%; }
 /* ─── FOOTER ─── */
 
 .ads-hero { padding: 100px 0 60px; text-align: center; position: relative; overflow: hidden; background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(232,39,42,0.1) 0%, transparent 70%); }
-.ads-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 8vw, 96px); letter-spacing: 3px; line-height: 0.9; margin-bottom: 16px; }
-.ads-hero p { font-size: 18px; color: var(--text-muted); max-width: 540px; margin: 0 auto 40px; line-height: 1.7; }
+.ads-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 8vw, 96px); letter-spacing: 3px; line-height: 0.9; margin-bottom: 16px; color: var(--dark-text); }
+.ads-hero p { font-size: 18px; color: var(--dark-text-muted); max-width: 540px; margin: 0 auto 40px; line-height: 1.7; }
 .ads-stats { display: flex; gap: 0; justify-content: center; margin-bottom: 56px; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; max-width: 600px; margin-left: auto; margin-right: auto; background: var(--card-bg); }
 .ads-stat { flex: 1; padding: 28px 20px; text-align: center; border-right: 1px solid var(--border); }
 .ads-stat:last-child { border-right: none; }
 .ads-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--red); letter-spacing: 1px; line-height: 1; }
-.ads-stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
+.ads-stat-label { font-size: 12px; color: var(--dark-text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
 .ads-packages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 56px 0; }
 .ads-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px 28px; position: relative; transition: border-color 0.3s, transform 0.2s; }
 .ads-card:hover { border-color: rgba(232,39,42,0.4); transform: translateY(-3px); }
@@ -164,13 +178,13 @@ img { display: block; max-width: 100%; }
 .ads-contact-box p { color: var(--text-muted); font-size: 15px; margin-bottom: 28px; max-width: 440px; margin-left: auto; margin-right: auto; }
 .ads-contact-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 .footer-ad-cta { background: linear-gradient(135deg, rgba(232,39,42,0.12) 0%, rgba(232,39,42,0.04) 100%); border: 1px solid rgba(232,39,42,0.25); border-radius: var(--radius); padding: 20px 28px; margin-bottom: 40px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
-.footer-ad-cta-text strong { font-size: 14px; color: var(--text); display: block; margin-bottom: 2px; }
-.footer-ad-cta-text span { font-size: 12px; color: var(--text-muted); }
+.footer-ad-cta-text strong { font-size: 14px; color: var(--dark-text); display: block; margin-bottom: 2px; }
+.footer-ad-cta-text span { font-size: 12px; color: var(--dark-text-muted); }
 .footer-ad-btn { background: var(--red); color: white; border: none; border-radius: 6px; padding: 9px 18px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; cursor: pointer; white-space: nowrap; transition: opacity 0.2s; }
 .footer-ad-btn:hover { opacity: 0.85; }
 
-.footer { background: var(--dark2); border-top: 1px solid var(--border); padding: 56px 0 28px; }
-.trust-bar { background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 14px 0; }
+.footer { background: var(--dark); border-top: 1px solid var(--dark-border); padding: 56px 0 28px; }
+.trust-bar { background: var(--cream-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 14px 0; }
 .trust-inner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; }
 .trust-item { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--text-muted); padding: 6px 28px; white-space: nowrap; transition: color 0.2s; }
 .trust-item:hover { color: var(--text); }
@@ -180,16 +194,19 @@ img { display: block; max-width: 100%; }
 .seo-intro { padding: 40px 0 0; }
 .seo-intro-text { max-width: 800px; font-size: 15px; color: var(--text-muted); line-height: 1.8; margin-top: 12px; }
 .seo-intro-text p { margin-bottom: 12px; }
-.footer-brand p { font-size: 14px; color: var(--text-muted); line-height: 1.75; max-width: 280px; margin-top: 16px; }
-.footer-col h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 18px; }
+.footer-brand p { font-size: 14px; color: var(--dark-text-muted); line-height: 1.75; max-width: 280px; margin-top: 16px; }
+.footer .nav-logo { color: var(--dark-text); outline: none; }
+.footer .nav-logo * { outline: none; }
+.footer .nav-logo .red { color: var(--red); }
+.footer-col h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--dark-text-muted); margin-bottom: 18px; }
 .footer-col ul { list-style: none; }
 .footer-col ul li { margin-bottom: 10px; }
-.footer-col ul li a { font-size: 14px; color: var(--text-muted); transition: color 0.2s; cursor: pointer; }
-.footer-col ul li a:hover { color: var(--text); }
-.footer-bottom { padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--text-muted); }
+.footer-col ul li a { font-size: 14px; color: var(--dark-text-muted); transition: color 0.2s; cursor: pointer; }
+.footer-col ul li a:hover { color: var(--dark-text); }
+.footer-bottom { padding-top: 24px; border-top: 1px solid var(--dark-border); display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: var(--dark-text-muted); }
 .footer-socials { display: flex; gap: 10px; }
-.social-btn { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 15px; transition: all 0.2s; cursor: pointer; }
-.social-btn:hover { background: rgba(255,255,255,0.09); border-color: var(--border-2); }
+.social-btn { width: 34px; height: 34px; border-radius: 8px; background: rgba(255,255,255,0.05); border: 1px solid var(--dark-border); display: flex; align-items: center; justify-content: center; font-size: 15px; transition: all 0.2s; cursor: pointer; }
+.social-btn:hover { background: rgba(255,255,255,0.1); border-color: var(--dark-border-2); }
 
 /* ─── ANIMATIONS ─── */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
@@ -212,10 +229,10 @@ img { display: block; max-width: 100%; }
 }
 .hero-bg {
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(232,39,42,0.2) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 40% at 15% 60%, rgba(245,176,20,0.07) 0%, transparent 50%),
-    radial-gradient(ellipse 40% 40% at 85% 30%, rgba(20,60,200,0.06) 0%, transparent 50%),
-    linear-gradient(180deg, #0C0C0F 0%, #0F0F14 60%, #0A0A10 100%);
+  background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(196,34,41,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 15% 60%, rgba(176,137,40,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 85% 30%, rgba(60,40,20,0.15) 0%, transparent 50%),
+    linear-gradient(180deg, #16120C 0%, #1A160E 60%, #12100A 100%);
 }
 .hero-grid {
   position: absolute; inset: 0;
@@ -228,34 +245,34 @@ img { display: block; max-width: 100%; }
 .hero-content { position: relative; z-index: 2; max-width: 820px; }
 .hero-eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(232,39,42,0.1); border: 1px solid rgba(232,39,42,0.25); border-radius: 100px;
+  background: rgba(196,34,41,0.12); border: 1px solid rgba(196,34,41,0.3); border-radius: 100px;
   padding: 7px 18px; font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--red); margin-bottom: 32px;
 }
 .hero-dot { width: 7px; height: 7px; background: var(--red); border-radius: 50%; box-shadow: 0 0 8px var(--red); animation: pulse 2s ease infinite; }
-.hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(80px, 13vw, 148px); line-height: 0.88; letter-spacing: 4px; margin-bottom: 10px; }
-.hero h1 .outline { color: transparent; -webkit-text-stroke: 2px var(--red); filter: drop-shadow(0 0 24px rgba(232,39,42,0.6)); }
-.hero-subtitle { font-size: 18px; color: var(--text-2); margin-bottom: 52px; font-weight: 400; line-height: 1.6; }
-.hero-subtitle strong { color: var(--gold); font-weight: 600; }
+.hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(80px, 13vw, 148px); line-height: 0.88; letter-spacing: 4px; margin-bottom: 10px; color: var(--dark-text); }
+.hero h1 .outline { color: transparent; -webkit-text-stroke: 2px var(--red); }
+.hero-subtitle { font-size: 18px; color: var(--dark-text-2); margin-bottom: 52px; font-weight: 400; line-height: 1.6; }
+.hero-subtitle strong { color: var(--gold-light); font-weight: 600; }
 .search-wrap { max-width: 700px; margin: 0 auto 20px; }
 .search-box {
-  display: flex; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.11);
-  border-radius: var(--radius); overflow: hidden; backdrop-filter: blur(12px); transition: border-color 0.3s;
+  display: flex; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius); overflow: hidden; backdrop-filter: blur(16px); transition: border-color 0.3s, box-shadow 0.3s;
 }
-.search-box:focus-within { border-color: rgba(232,39,42,0.45); box-shadow: 0 0 0 3px rgba(232,39,42,0.1); }
-.search-input { flex: 1; background: none; border: none; outline: none; padding: 17px 22px; color: var(--text); font-family: 'Barlow', sans-serif; font-size: 15px; }
-.search-input::placeholder { color: var(--text-muted); }
-.search-divider { width: 1px; background: var(--border); margin: 10px 0; }
-.search-select { background: transparent; border: none; outline: none; color: var(--text-muted); padding: 17px 18px; font-family: 'Barlow', sans-serif; font-size: 14px; cursor: pointer; min-width: 160px; }
+.search-box:focus-within { border-color: rgba(255,255,255,0.4); box-shadow: 0 0 0 3px rgba(255,255,255,0.08); }
+.search-input { flex: 1; background: none; border: none; outline: none; padding: 17px 22px; color: var(--dark-text); font-family: 'Barlow', sans-serif; font-size: 15px; }
+.search-input::placeholder { color: var(--dark-text-muted); }
+.search-divider { width: 1px; background: rgba(255,255,255,0.12); margin: 10px 0; }
+.search-select { background: transparent; border: none; outline: none; color: var(--dark-text-muted); padding: 17px 18px; font-family: 'Barlow', sans-serif; font-size: 14px; cursor: pointer; min-width: 160px; }
 .search-select option { background: var(--dark3); }
 .search-btn { background: var(--red); border: none; padding: 17px 30px; color: white; font-family: 'Barlow Condensed', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
 .search-btn:hover { background: var(--red-light); }
 .quick-tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
-.quick-tag { padding: 7px 16px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 100px; font-size: 13px; color: var(--text-muted); cursor: pointer; transition: all 0.2s; }
-.quick-tag:hover { background: rgba(255,255,255,0.09); color: var(--text); border-color: var(--border-2); }
+.quick-tag { padding: 7px 16px; background: rgba(255,255,255,0.06); border: 1px solid var(--dark-border); border-radius: 100px; font-size: 13px; color: var(--dark-text-muted); cursor: pointer; transition: all 0.2s; }
+.quick-tag:hover { background: rgba(255,255,255,0.11); color: var(--dark-text); border-color: var(--dark-border-2); }
 .hero-stats { position: absolute; bottom: 44px; left: 50%; transform: translateX(-50%); display: flex; gap: 56px; z-index: 2; }
-.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--gold); letter-spacing: 1px; line-height: 1; }
-.stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); margin-top: 4px; }
-.cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--gold-light); letter-spacing: 1px; line-height: 1; }
+.stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--dark-text-muted); margin-top: 4px; }
+.cat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
 .cat-card { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 3/4; cursor: pointer; display: flex; flex-direction: column; transition: transform 0.3s cubic-bezier(0.25,0.8,0.25,1); }
 .cat-card:hover { transform: translateY(-5px); }
 .cat-bg { position: absolute; inset: 0; transition: transform 0.4s ease; }
@@ -274,23 +291,24 @@ img { display: block; max-width: 100%; }
 .cat-card:hover .cat-arrow { transform: translateX(4px); }
 .listings-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 .listings-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.featured-belt { background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 72px 0; }
+.featured-belt { background: var(--dark); border-top: 1px solid var(--dark-border); border-bottom: 1px solid var(--dark-border); padding: 72px 0; }
 .featured-inner { display: grid; grid-template-columns: 1fr 1.7fr; gap: 72px; align-items: center; }
-.feat-text .section-title { font-size: 56px; margin-bottom: 16px; }
-.feat-text p { color: var(--text-muted); font-size: 16px; line-height: 1.75; margin-bottom: 28px; max-width: 380px; }
+.feat-text .section-title { font-size: 56px; margin-bottom: 16px; color: var(--dark-text); }
+.feat-text p { color: var(--dark-text-muted); font-size: 16px; line-height: 1.75; margin-bottom: 28px; max-width: 380px; }
 .feat-cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.feat-card-small { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px 20px; transition: all 0.25s; cursor: pointer; }
-.feat-card-small:hover { border-color: rgba(232,39,42,0.3); background: rgba(232,39,42,0.04); transform: translateY(-2px); }
+.feat-card-small { background: rgba(255,255,255,0.05); border: 1px solid var(--dark-border); border-radius: var(--radius); padding: 22px 20px; transition: all 0.25s; cursor: pointer; }
+.feat-card-small:hover { border-color: rgba(196,34,41,0.4); background: rgba(196,34,41,0.06); transform: translateY(-2px); }
 .feat-card-icon { font-size: 30px; margin-bottom: 12px; }
-.feat-card-name { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-.feat-card-sub { font-size: 12px; color: var(--text-muted); font-style: italic; }
+.feat-card-name { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: var(--dark-text); margin-bottom: 4px; }
+.feat-card-sub { font-size: 12px; color: var(--dark-text-muted); font-style: italic; }
 .nl-section { padding: 80px 0; text-align: center; position: relative; overflow: hidden; }
-.nl-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(232,39,42,0.07) 0%, transparent 70%); }
+.nl-section { background: var(--cream-2); }
+.nl-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(196,34,41,0.05) 0%, transparent 70%); }
 .nl-inner { max-width: 540px; margin: 0 auto; position: relative; }
 .nl-title { font-family: 'Bebas Neue', sans-serif; font-size: 56px; letter-spacing: 2px; margin-bottom: 12px; }
 .nl-sub { color: var(--text-muted); margin-bottom: 32px; font-size: 16px; line-height: 1.7; }
-.nl-form { display: flex; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); background: var(--card-bg); transition: border-color 0.3s; }
-.nl-form:focus-within { border-color: rgba(232,39,42,0.4); box-shadow: 0 0 0 3px rgba(232,39,42,0.08); }
+.nl-form { display: flex; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); background: white; box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: border-color 0.3s, box-shadow 0.3s; }
+.nl-form:focus-within { border-color: rgba(196,34,41,0.35); box-shadow: 0 4px 20px rgba(196,34,41,0.08); }
 .nl-input { flex: 1; background: none; border: none; outline: none; padding: 14px 20px; color: var(--text); font-family: 'Barlow', sans-serif; font-size: 15px; }
 .nl-input::placeholder { color: var(--text-muted); }
 .nl-btn { background: var(--red); border: none; padding: 14px 24px; color: white; font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
@@ -300,36 +318,37 @@ img { display: block; max-width: 100%; }
 /* ══════════════════════════════
    EXPLORE PAGE
 ══════════════════════════════ */
-.page-hero { padding: 140px 0 60px; background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(232,39,42,0.12) 0%, transparent 60%), linear-gradient(180deg, #0C0C0F 0%, #0F0F12 100%); border-bottom: 1px solid var(--border); }
+.page-hero { padding: 140px 0 60px; background: radial-gradient(ellipse 70% 60% at 50% 100%, rgba(196,34,41,0.15) 0%, transparent 60%), linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%); border-bottom: 1px solid var(--dark-border); }
 .page-hero-inner { text-align: center; }
-.page-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 80px; letter-spacing: 4px; line-height: 0.9; margin-bottom: 16px; }
+.page-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 80px; letter-spacing: 4px; line-height: 0.9; margin-bottom: 16px; color: var(--dark-text); }
 .page-hero h1 span { color: var(--red); }
-.page-hero p { font-size: 17px; color: var(--text-muted); margin-bottom: 40px; }
-.explore-search-box { display: flex; max-width: 740px; margin: 0 auto; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.11); border-radius: var(--radius); overflow: hidden; backdrop-filter: blur(12px); transition: border-color 0.3s; }
-.explore-search-box:focus-within { border-color: rgba(232,39,42,0.45); }
-.es-input { flex: 1; background: none; border: none; outline: none; padding: 15px 20px; color: var(--text); font-family: 'Barlow', sans-serif; font-size: 15px; }
-.es-input::placeholder { color: var(--text-muted); }
+.page-hero p { font-size: 17px; color: var(--dark-text-muted); margin-bottom: 40px; }
+.explore-search-box { display: flex; max-width: 740px; margin: 0 auto; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.18); border-radius: var(--radius); overflow: hidden; backdrop-filter: blur(16px); transition: border-color 0.3s; }
+.explore-search-box:focus-within { border-color: rgba(255,255,255,0.35); }
+.es-input { flex: 1; background: none; border: none; outline: none; padding: 15px 20px; color: var(--dark-text); font-family: 'Barlow', sans-serif; font-size: 15px; }
+.es-input::placeholder { color: var(--dark-text-muted); }
 .es-btn { background: var(--red); border: none; padding: 15px 26px; color: white; font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; }
 .es-btn:hover { background: var(--red-light); }
-.filter-bar { background: var(--dark2); border-bottom: 1px solid var(--border); position: sticky; top: 70px; z-index: 100; }
+.filter-bar { background: var(--cream); border-bottom: 1px solid var(--border); position: sticky; top: 70px; z-index: 100; box-shadow: 0 2px 12px rgba(0,0,0,0.04); }
 .filter-bar-inner { display: flex; align-items: center; overflow-x: auto; padding: 0 48px; }
 .filter-tab { padding: 16px 20px; font-size: 13px; font-weight: 600; letter-spacing: 0.5px; color: var(--text-muted); cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; font-family: 'Barlow', sans-serif; }
+.filter-tab:hover { color: var(--text); }
 .filter-tab:hover { color: var(--text); }
 .filter-tab.active { color: var(--red); border-bottom-color: var(--red); }
 .results-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
 .results-count { font-size: 14px; color: var(--text-muted); }
 .results-count strong { color: var(--text); }
-.sort-select { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-muted); padding: 8px 14px; font-family: 'Barlow', sans-serif; font-size: 13px; outline: none; cursor: pointer; }
-.sort-select option { background: var(--dark3); }
-.explore-layout { padding: 48px 0 80px; }
+.sort-select { background: white; border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text-muted); padding: 8px 14px; font-family: 'Barlow', sans-serif; font-size: 13px; outline: none; cursor: pointer; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.sort-select option { background: white; color: var(--text); }
+.explore-layout { padding: 48px 0 80px; background: var(--cream); }
 .explore-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .empty-state { grid-column: 1/-1; text-align: center; padding: 80px 20px; }
 .empty-icon { font-size: 56px; margin-bottom: 16px; opacity: 0.4; }
 .empty-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 8px; }
 .empty-sub { font-size: 14px; color: var(--text-muted); }
 .price-filters, .stars-filter { display: flex; gap: 8px; flex-wrap: wrap; }
-.price-btn, .stars-btn { padding: 6px 14px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: all 0.2s; font-family: 'Barlow', sans-serif; }
-.price-btn:hover, .stars-btn:hover { border-color: var(--border-2); color: var(--text); }
+.price-btn, .stars-btn { padding: 6px 14px; background: white; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; font-weight: 700; color: var(--text-muted); cursor: pointer; transition: all 0.2s; font-family: 'Barlow', sans-serif; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
+.price-btn:hover, .stars-btn:hover { border-color: var(--border-2); color: var(--text); box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
 .price-btn.active { background: rgba(232,39,42,0.1); border-color: rgba(232,39,42,0.4); color: var(--red); }
 .stars-btn { color: var(--gold); }
 .stars-btn.active { background: rgba(245,176,20,0.1); border-color: rgba(245,176,20,0.4); }
@@ -344,38 +363,38 @@ img { display: block; max-width: 100%; }
 /* ══════════════════════════════
    LISTING DETAIL PAGE
 ══════════════════════════════ */
-.listing-hero { padding: 120px 0 0; background: linear-gradient(180deg, #0C0C0F 0%, #0F0F14 100%); }
-.breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); margin-bottom: 28px; }
-.breadcrumb span { color: var(--border-2); }
-.breadcrumb a { color: var(--text-muted); transition: color 0.2s; cursor: pointer; }
-.breadcrumb a:hover { color: var(--text); }
+.listing-hero { padding: 120px 0 0; background: linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%); }
+.breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--dark-text-muted); margin-bottom: 28px; }
+.breadcrumb span { color: var(--dark-border-2); }
+.breadcrumb a { color: var(--dark-text-muted); transition: color 0.2s; cursor: pointer; }
+.breadcrumb a:hover { color: var(--dark-text); }
 .listing-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; padding-bottom: 40px; }
 .listing-header-left { flex: 1; }
 .listing-cat-tag { display: inline-flex; align-items: center; background: rgba(232,39,42,0.1); border: 1px solid rgba(232,39,42,0.25); border-radius: 100px; padding: 5px 14px; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
-.listing-main-title { font-family: 'Bebas Neue', sans-serif; font-size: 72px; letter-spacing: 3px; line-height: 0.92; margin-bottom: 16px; }
-.listing-tagline { font-size: 18px; color: var(--text-2); font-style: italic; margin-bottom: 24px; }
+.listing-main-title { font-family: 'Bebas Neue', sans-serif; font-size: 72px; letter-spacing: 3px; line-height: 0.92; margin-bottom: 16px; color: var(--dark-text); }
+.listing-tagline { font-size: 18px; color: var(--dark-text-2); font-style: italic; margin-bottom: 24px; }
 .listing-meta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
 .meta-stars { font-size: 18px; color: var(--gold); letter-spacing: 2px; }
-.meta-rating { font-size: 22px; font-weight: 700; color: var(--text); font-family: 'Barlow Condensed', sans-serif; }
+.meta-rating { font-size: 22px; font-weight: 700; color: var(--dark-text); font-family: 'Barlow Condensed', sans-serif; }
 .meta-reviews { font-size: 13px; color: var(--text-muted); }
 .meta-sep { width: 1px; height: 20px; background: var(--border-2); }
-.meta-price { font-size: 20px; font-weight: 700; color: var(--text); font-family: 'Barlow Condensed', sans-serif; letter-spacing: 1px; }
+.meta-price { font-size: 20px; font-weight: 700; color: var(--dark-text); font-family: 'Barlow Condensed', sans-serif; letter-spacing: 1px; }
 .meta-badge { background: var(--gold); color: #0C0C0F; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; }
 .listing-actions { display: flex; flex-direction: column; gap: 10px; min-width: 220px; }
-.listing-visual { background: var(--dark3); border-radius: var(--radius-lg) var(--radius-lg) 0 0; border-top: 1px solid var(--border); border-left: 1px solid var(--border); border-right: 1px solid var(--border); overflow: hidden; }
+.listing-visual { background: var(--dark3); border-radius: var(--radius-lg) var(--radius-lg) 0 0; border-top: 1px solid var(--dark-border); border-left: 1px solid var(--dark-border); border-right: 1px solid var(--dark-border); overflow: hidden; }
 .listing-icon-display { height: 380px; display: flex; align-items: center; justify-content: center; font-size: 120px; position: relative; overflow: hidden; }
 .listing-icon-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(232,39,42,0.1) 0%, transparent 70%); }
 .listing-icon-glow { position: relative; z-index: 1; filter: drop-shadow(0 0 40px rgba(255,255,255,0.15)); animation: iconFloat 4s ease-in-out infinite; }
-.listing-body { padding: 64px 0 80px; }
+.listing-body { padding: 64px 0 80px; background: var(--cream); }
 .listing-layout { display: grid; grid-template-columns: 1fr 340px; gap: 48px; align-items: start; }
 .listing-main section { margin-bottom: 48px; }
 .section-subtitle { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
 .about-text { font-size: 16px; color: var(--text-2); line-height: 1.8; }
 .highlights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.highlight-item { display: flex; align-items: center; gap: 10px; background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; font-size: 14px; color: var(--text-2); }
-.highlight-dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 6px var(--red); }
+.highlight-item { display: flex; align-items: center; gap: 10px; background: white; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; font-size: 14px; color: var(--text-2); box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+.highlight-dot { width: 8px; height: 8px; background: var(--red); border-radius: 50%; flex-shrink: 0; }
 .listing-sidebar { position: sticky; top: 90px; display: flex; flex-direction: column; gap: 16px; }
-.info-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.info-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-card); }
 .info-card-header { padding: 16px 20px; border-bottom: 1px solid var(--border); font-family: 'Barlow Condensed', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); }
 .info-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 20px; border-bottom: 1px solid var(--border); font-size: 14px; }
 .info-item:last-child { border-bottom: none; }
@@ -384,7 +403,7 @@ img { display: block; max-width: 100%; }
 .info-value { color: var(--text-2); }
 .open-badge { display: inline-block; padding: 2px 8px; background: rgba(40,200,80,0.12); border: 1px solid rgba(40,200,80,0.3); border-radius: 4px; font-size: 11px; font-weight: 700; color: #3DD68C; letter-spacing: 0.5px; }
 .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.review-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 12px; }
+.review-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 12px; box-shadow: var(--shadow-card); }
 .review-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
 .reviewer-name { font-weight: 700; font-size: 15px; color: var(--text); }
 .reviewer-date { font-size: 12px; color: var(--text-muted); }
@@ -394,65 +413,65 @@ img { display: block; max-width: 100%; }
 /* ══════════════════════════════
    ABOUT PAGE
 ══════════════════════════════ */
-.about-hero { padding: 140px 0 80px; text-align: center; position: relative; overflow: hidden; background: linear-gradient(180deg, #0C0C0F 0%, #0F0F14 100%); }
+.about-hero { padding: 140px 0 80px; text-align: center; position: relative; overflow: hidden; background: linear-gradient(180deg, var(--dark) 0%, var(--dark2) 100%); }
 .about-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 80%, rgba(232,39,42,0.12) 0%, transparent 60%); }
 .about-hero-inner { position: relative; }
-.about-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 96px; letter-spacing: 4px; line-height: 0.9; margin-bottom: 20px; }
+.about-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: 96px; letter-spacing: 4px; line-height: 0.9; margin-bottom: 20px; color: var(--dark-text); }
 .about-hero h1 span { color: var(--red); }
-.about-hero p { font-size: 19px; color: var(--text-2); max-width: 600px; margin: 0 auto 36px; line-height: 1.7; }
+.about-hero p { font-size: 19px; color: var(--dark-text-2); max-width: 600px; margin: 0 auto 36px; line-height: 1.7; }
 .mission-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
 .mission-text .section-title { font-size: 60px; margin-bottom: 20px; }
 .mission-text p { color: var(--text-2); font-size: 16px; line-height: 1.8; margin-bottom: 20px; }
 .mission-visual { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.mission-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 22px; text-align: center; transition: all 0.25s; }
-.mission-card:hover { border-color: rgba(232,39,42,0.25); transform: translateY(-3px); }
+.mission-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 22px; text-align: center; transition: all 0.25s; box-shadow: var(--shadow-card); }
+.mission-card:hover { border-color: rgba(196,34,41,0.25); transform: translateY(-3px); box-shadow: var(--shadow-card-hover); }
 .mission-icon { font-size: 36px; margin-bottom: 12px; }
 .mission-num { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--gold); letter-spacing: 1px; line-height: 1; margin-bottom: 4px; }
 .mission-label { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); }
-.team-section { padding: 80px 0; background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.team-section { padding: 80px 0; background: var(--cream-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
 .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.team-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; text-align: center; transition: all 0.25s; }
-.team-card:hover { border-color: var(--border-2); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
-.team-avatar { height: 180px; background: var(--dark3); display: flex; align-items: center; justify-content: center; font-size: 72px; position: relative; overflow: hidden; }
-.team-avatar::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(232,39,42,0.08) 0%, transparent 70%); }
+.team-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; text-align: center; transition: all 0.25s; box-shadow: var(--shadow-card); }
+.team-card:hover { border-color: var(--border-2); transform: translateY(-4px); box-shadow: var(--shadow-card-hover); }
+.team-avatar { height: 180px; background: var(--cream-2); display: flex; align-items: center; justify-content: center; font-size: 72px; position: relative; overflow: hidden; }
+.team-avatar::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(196,34,41,0.05) 0%, transparent 70%); }
 .team-body { padding: 24px 20px; }
 .team-name { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
 .team-role { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
 .team-bio { font-size: 13px; color: var(--text-muted); line-height: 1.6; font-style: italic; }
 .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-.value-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; transition: all 0.25s; }
-.value-card:hover { border-color: rgba(232,39,42,0.25); }
+.value-card { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; transition: all 0.25s; box-shadow: var(--shadow-card); }
+.value-card:hover { border-color: rgba(196,34,41,0.25); box-shadow: var(--shadow-card-hover); transform: translateY(-2px); }
 .value-icon { font-size: 36px; margin-bottom: 16px; }
 .value-title { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
 .value-text { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
-.contact-section { padding: 80px 0; background: var(--dark2); border-top: 1px solid var(--border); }
+.contact-section { padding: 80px 0; background: var(--dark); border-top: 1px solid var(--dark-border); }
 .contact-layout { display: grid; grid-template-columns: 1fr 1.4fr; gap: 72px; align-items: start; }
-.contact-info .section-title { font-size: 52px; margin-bottom: 16px; }
-.contact-info > p { color: var(--text-2); font-size: 16px; line-height: 1.75; margin-bottom: 36px; }
+.contact-info .section-title { font-size: 52px; margin-bottom: 16px; color: var(--dark-text); }
+.contact-info > p { color: var(--dark-text-2); font-size: 16px; line-height: 1.75; margin-bottom: 36px; }
 .contact-items { display: flex; flex-direction: column; gap: 16px; }
-.contact-item { display: flex; align-items: flex-start; gap: 16px; padding: 16px 18px; background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-sm); transition: border-color 0.2s; }
-.contact-item:hover { border-color: var(--border-2); }
+.contact-item { display: flex; align-items: flex-start; gap: 16px; padding: 16px 18px; background: rgba(255,255,255,0.06); border: 1px solid var(--dark-border); border-radius: var(--radius-sm); transition: border-color 0.2s; }
+.contact-item:hover { border-color: var(--dark-border-2); }
 .ci-icon { font-size: 22px; flex-shrink: 0; }
-.ci-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); font-weight: 700; margin-bottom: 3px; }
-.ci-value { font-size: 15px; color: var(--text-2); }
-.contact-form-wrap { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px; }
-.form-title { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700; color: var(--text); margin-bottom: 28px; letter-spacing: 0.5px; }
+.ci-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--dark-text-muted); font-weight: 700; margin-bottom: 3px; }
+.ci-value { font-size: 15px; color: var(--dark-text-2); }
+.contact-form-wrap { background: rgba(255,255,255,0.06); border: 1px solid var(--dark-border); border-radius: var(--radius-lg); padding: 36px; }
+.form-title { font-family: 'Barlow Condensed', sans-serif; font-size: 28px; font-weight: 700; color: var(--dark-text); margin-bottom: 28px; letter-spacing: 0.5px; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .form-group { margin-bottom: 16px; }
-.form-label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
-.form-input, .form-select, .form-textarea { width: 100%; background: var(--dark3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; color: var(--text); font-family: 'Barlow', sans-serif; font-size: 15px; outline: none; transition: border-color 0.2s; }
-.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: rgba(232,39,42,0.4); box-shadow: 0 0 0 3px rgba(232,39,42,0.08); }
-.form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); }
+.form-label { display: block; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--dark-text-muted); margin-bottom: 8px; }
+.form-input, .form-select, .form-textarea { width: 100%; background: rgba(255,255,255,0.07); border: 1px solid var(--dark-border); border-radius: var(--radius-sm); padding: 12px 16px; color: var(--dark-text); font-family: 'Barlow', sans-serif; font-size: 15px; outline: none; transition: border-color 0.2s; }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: rgba(196,34,41,0.45); box-shadow: 0 0 0 3px rgba(196,34,41,0.1); }
+.form-input::placeholder, .form-textarea::placeholder { color: var(--dark-text-muted); }
 .form-select { cursor: pointer; }
-.form-select option { background: var(--dark3); }
+.form-select option { background: var(--dark3); color: var(--dark-text); }
 .form-textarea { min-height: 120px; resize: vertical; line-height: 1.6; }
-.form-submit { width: 100%; padding: 14px; background: var(--red); color: white; border: none; border-radius: var(--radius-sm); font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: background 0.2s; box-shadow: 0 0 20px var(--glow-red); }
+.form-submit { width: 100%; padding: 14px; background: var(--red); color: white; border: none; border-radius: var(--radius-sm); font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 8px rgba(196,34,41,0.35); }
 .form-submit:hover { background: var(--red-light); }
 .form-success { display: none; text-align: center; padding: 20px; background: rgba(40,200,80,0.08); border: 1px solid rgba(40,200,80,0.2); border-radius: var(--radius-sm); margin-top: 12px; color: #3DD68C; font-weight: 600; }
 .faq-section { padding: 80px 0; }
 .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.faq-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; transition: border-color 0.2s; }
-.faq-item:hover { border-color: var(--border-2); }
+.faq-item { background: white; border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; transition: all 0.2s; box-shadow: var(--shadow-card); }
+.faq-item:hover { border-color: rgba(196,34,41,0.2); box-shadow: var(--shadow-card-hover); }
 .faq-q { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
 .faq-a { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
 </style>
@@ -504,10 +523,10 @@ img { display: block; max-width: 100%; }
         </div>
       </div>
       <div class="quick-tags fade-up-4">
-        <span class="quick-tag" onclick="navigate('explore','hoteles')">🏨 Hoteles en el Strip</span>
+        <span class="quick-tag" onclick="navigate('explore','hoteles')">🏨 Hoteles & Casinos</span>
         <span class="quick-tag" onclick="navigate('explore','restaurantes')">🌮 Comida Latina</span>
         <span class="quick-tag" onclick="navigate('explore','hoteles')">🎰 Casinos</span>
-        <span class="quick-tag" onclick="navigate('explore','shows')">🎭 Shows</span>
+        <span class="quick-tag" onclick="navigate('explore','shows')">🎭 Shows & Eventos</span>
         <span class="quick-tag" onclick="navigate('explore','nocturna')">🍹 Vida Nocturna</span>
       </div>
     </div>
@@ -557,8 +576,13 @@ img { display: block; max-width: 100%; }
         </div>
         <div class="cat-card" onclick="navigate('explore','nocturna')">
           <div class="cat-bg bg-nocturna"></div><div class="cat-icon-big">🍹</div>
-          <div class="cat-pill">10 lugares</div>
+          <div class="cat-pill">5 lugares</div>
           <div class="cat-info"><span class="cat-name">Vida Nocturna</span><span class="cat-desc-sm">Clubes y cócteles hasta tarde</span><span class="cat-arrow">Explorar →</span></div>
+        </div>
+        <div class="cat-card" onclick="navigate('explore','atracciones')">
+          <div class="cat-bg" style="background:linear-gradient(145deg,#0a1f10 0%,#1a4a25 40%,#0a1508 100%)"></div><div class="cat-icon-big">🗺️</div>
+          <div class="cat-pill">8 lugares</div>
+          <div class="cat-info"><span class="cat-name">Atracciones</span><span class="cat-desc-sm">Tours, spas y experiencias</span><span class="cat-arrow">Explorar →</span></div>
         </div>
       </div>
     </div>
@@ -1025,6 +1049,11 @@ img { display: block; max-width: 100%; }
   <div id="footer-ads"></div>
 </div>
 
+<!-- ══════════════════ ATRACCIONES PAGE (redirect to explore) ══════════════════ -->
+<div id="page-atracciones" class="page">
+  <div id="footer-atracciones"></div>
+</div>
+
 <!-- ══════════════════ ADMIN LOGIN ══════════════════ -->
 <div id="page-admin-login" class="page">
   <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(232,39,42,0.08) 0%,transparent 70%)">
@@ -1477,9 +1506,21 @@ let _listingsCache = null;
 const DATA = {
   async getAll() {
     if (_listingsCache) return _listingsCache;
-    const rows = await sb.query('listings', { select: '*', order: 'id.asc' });
-    if (!Array.isArray(rows)) { console.error('Supabase error:', rows); return []; }
-    _listingsCache = rows.map(dbToListing);
+    // Always start with DEFAULT_LISTINGS so page renders immediately
+    _listingsCache = DEFAULT_LISTINGS;
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 4000);
+      const r = await fetch(
+        `${SUPABASE_URL}/rest/v1/listings?select=*&order=id.asc&limit=500`,
+        { headers: { apikey: SUPABASE_KEY, Authorization: `Bearer ${SUPABASE_KEY}`, Accept: 'application/json' }, signal: controller.signal }
+      );
+      clearTimeout(timeout);
+      const rows = await r.json();
+      if (Array.isArray(rows) && rows.length > 0) {
+        _listingsCache = rows.map(dbToListing);
+      }
+    } catch(e) { /* Network/timeout — use DEFAULT_LISTINGS already set */ }
     return _listingsCache;
   },
   invalidate() { _listingsCache = null; },
@@ -1504,22 +1545,54 @@ const DATA = {
 
 // ─── FALLBACK DEFAULT LISTINGS (only used if DB empty) ───
 const DEFAULT_LISTINGS = [
-  { id:1, slug:'venetian', name:'The Venetian Las Vegas', cat:'hoteles', catLabel:'Hotel & Casino', region:'The Strip', icon:'🏛️', stars:5, price:'$$$', badge:'Top Rated', desc:'El hotel más elegante del Strip reimagina la belleza de Venecia con suites de más de 720 pies cuadrados, canales interiores y góndolas reales. Con más de 30 restaurantes, un casino de clase mundial y el spa Canyon Ranch, es la opción perfecta para quienes buscan lo mejor de Las Vegas sin compromisos.', address:'3355 S Las Vegas Blvd', phone:'(702) 414-1000', hours:'Abierto 24 horas', highlights:['Suites de 720 sq ft','Casino de clase mundial','Más de 30 restaurantes','Spa The Canyon Ranch'], about:'The Venetian es uno de los hoteles más icónicos del Strip de Las Vegas. Inspirado en la arquitectura veneciana con canales interiores y góndolas, ofrece suites de lujo que empiezan en 720 pies cuadrados — todas con sala de estar separada. Su casino de clase mundial, más de 30 restaurantes de renombre y el spa Canyon Ranch lo convierten en destino obligado para la comunidad latina que visita Las Vegas.' },
-  { id:2, slug:'mandalay-bay', name:'Mandalay Bay', cat:'hoteles', catLabel:'Hotel & Casino', region:'The Strip', icon:'🌴', stars:5, price:'$$$', badge:null, desc:'El resort tropical del Strip con la playa de arena más famosa de Las Vegas. Once acres de piscinas, olas artificiales y arena real crean una experiencia única en el desierto. Perfecto para familias y grupos que quieren combinar playa, casino y entretenimiento de primer nivel en un solo lugar.', address:'3950 S Las Vegas Blvd', phone:'(702) 632-7777', hours:'Abierto 24 horas', highlights:['Playa privada de arena','Aqua Pool con olas','House of Blues','Michelob Ultra Arena'], about:'Mandalay Bay ofrece una experiencia única con su famosa playa de arena de once acres y piscina con olas artificiales. Ubicado en el extremo sur del Strip, es el destino perfecto para quienes buscan lujo tropical combinado con la emoción de Las Vegas. Su arena de entretenimiento recibe los mejores conciertos y eventos de la ciudad.' },
-  { id:3, slug:'mgm-grand', name:'MGM Grand', cat:'hoteles', catLabel:'Hotel & Casino', region:'The Strip', icon:'🦁', stars:5, price:'$$$', badge:null, desc:'Uno de los hoteles más grandes del mundo con todo lo que Las Vegas puede ofrecer bajo un mismo techo. Casino enorme, pool complex de 6.5 acres, spa de lujo y el legendario restaurante Joel Robuchon. En el corazón del Strip, a pasos de todo — ideal para grupos que quieren comodidad y entretenimiento sin límites.', address:'3799 S Las Vegas Blvd', phone:'(702) 891-1111', hours:'Abierto 24 horas', highlights:['Grand Garden Arena','Spa & Health Club','Pool complex de 6.5 acres','Joel Robuchon restaurant'], about:'MGM Grand es uno de los hoteles más grandes del mundo, con un casino enorme y más de 5,000 habitaciones. Su complejo de piscinas de 6.5 acres, múltiples spas y algunos de los mejores restaurantes de Las Vegas lo hacen perfecto para grupos grandes. La Grand Garden Arena recibe los eventos de boxeo y conciertos más importantes de la ciudad.' },
-  { id:4, slug:'south-point', name:'South Point Hotel & Spa', cat:'hoteles', catLabel:'Hotel & Casino', region:'South Las Vegas', icon:'🎰', stars:4, price:'$$', badge:null, desc:'El favorito auténtico de los residentes locales, alejado del caos del Strip. Precios accesibles, bowling de 64 pistas, cine de 16 pantallas, arena equestre y spa completo. Ideal para familias latinas que quieren una experiencia real de Las Vegas sin pagar precios inflados de resort — todo en un solo complejo.', address:'9777 Las Vegas Blvd S', phone:'(702) 796-7111', hours:'Abierto 24 horas', highlights:['Bowling center 64 pistas','Arena equestre','Spa completo','Cine 16 pantallas'], about:'South Point es el favorito genuino de la comunidad local de Las Vegas. Ubicado en el sur del Strip, lejos del turismo masivo, ofrece precios honestos y una experiencia completa: bowling, cine, spa, arena equestre y casino sin la presión de los grandes resorts. Es la elección inteligente para familias latinas que quieren disfrutar Las Vegas a su manera.' },
+  { id:1, slug:'venetian', name:'The Venetian Las Vegas', cat:'hoteles', catLabel:'Hoteles & Casinos', region:'The Strip', icon:'🏛️', stars:5, price:'$$$', badge:'Top Rated', desc:'El hotel más elegante del Strip reimagina la belleza de Venecia con suites de más de 720 pies cuadrados, canales interiores y góndolas reales. Con más de 30 restaurantes, un casino de clase mundial y el spa Canyon Ranch, es la opción perfecta para quienes buscan lo mejor de Las Vegas sin compromisos.', address:'3355 S Las Vegas Blvd', phone:'(702) 414-1000', hours:'Abierto 24 horas', highlights:['Suites de 720 sq ft','Casino de clase mundial','Más de 30 restaurantes','Spa The Canyon Ranch'], about:'The Venetian es uno de los hoteles más icónicos del Strip de Las Vegas. Inspirado en la arquitectura veneciana con canales interiores y góndolas, ofrece suites de lujo que empiezan en 720 pies cuadrados — todas con sala de estar separada. Su casino de clase mundial, más de 30 restaurantes de renombre y el spa Canyon Ranch lo convierten en destino obligado para la comunidad latina que visita Las Vegas.' },
+  { id:2, slug:'mandalay-bay', name:'Mandalay Bay', cat:'hoteles', catLabel:'Hoteles & Casinos', region:'The Strip', icon:'🌴', stars:5, price:'$$$', badge:null, desc:'El resort tropical del Strip con la playa de arena más famosa de Las Vegas. Once acres de piscinas, olas artificiales y arena real crean una experiencia única en el desierto. Perfecto para familias y grupos que quieren combinar playa, casino y entretenimiento de primer nivel en un solo lugar.', address:'3950 S Las Vegas Blvd', phone:'(702) 632-7777', hours:'Abierto 24 horas', highlights:['Playa privada de arena','Aqua Pool con olas','House of Blues','Michelob Ultra Arena'], about:'Mandalay Bay ofrece una experiencia única con su famosa playa de arena de once acres y piscina con olas artificiales. Ubicado en el extremo sur del Strip, es el destino perfecto para quienes buscan lujo tropical combinado con la emoción de Las Vegas. Su arena de entretenimiento recibe los mejores conciertos y eventos de la ciudad.' },
+  { id:3, slug:'mgm-grand', name:'MGM Grand', cat:'hoteles', catLabel:'Hoteles & Casinos', region:'The Strip', icon:'🦁', stars:5, price:'$$$', badge:null, desc:'Uno de los hoteles más grandes del mundo con todo lo que Las Vegas puede ofrecer bajo un mismo techo. Casino enorme, pool complex de 6.5 acres, spa de lujo y el legendario restaurante Joel Robuchon. En el corazón del Strip, a pasos de todo — ideal para grupos que quieren comodidad y entretenimiento sin límites.', address:'3799 S Las Vegas Blvd', phone:'(702) 891-1111', hours:'Abierto 24 horas', highlights:['Grand Garden Arena','Spa & Health Club','Pool complex de 6.5 acres','Joel Robuchon restaurant'], about:'MGM Grand es uno de los hoteles más grandes del mundo, con un casino enorme y más de 5,000 habitaciones. Su complejo de piscinas de 6.5 acres, múltiples spas y algunos de los mejores restaurantes de Las Vegas lo hacen perfecto para grupos grandes. La Grand Garden Arena recibe los eventos de boxeo y conciertos más importantes de la ciudad.' },
+  { id:4, slug:'south-point', name:'South Point Hotel & Spa', cat:'hoteles', catLabel:'Hoteles & Casinos', region:'South Las Vegas', icon:'🎰', stars:4, price:'$$', badge:null, desc:'El favorito auténtico de los residentes locales, alejado del caos del Strip. Precios accesibles, bowling de 64 pistas, cine de 16 pantallas, arena equestre y spa completo. Ideal para familias latinas que quieren una experiencia real de Las Vegas sin pagar precios inflados de resort — todo en un solo complejo.', address:'9777 Las Vegas Blvd S', phone:'(702) 796-7111', hours:'Abierto 24 horas', highlights:['Bowling center 64 pistas','Arena equestre','Spa completo','Cine 16 pantallas'], about:'South Point es el favorito genuino de la comunidad local de Las Vegas. Ubicado en el sur del Strip, lejos del turismo masivo, ofrece precios honestos y una experiencia completa: bowling, cine, spa, arena equestre y casino sin la presión de los grandes resorts. Es la elección inteligente para familias latinas que quieren disfrutar Las Vegas a su manera.' },
   { id:5, slug:'primal-steakhouse', name:'Primal Steakhouse', cat:'restaurantes', catLabel:'Steakhouse', region:'East Las Vegas', icon:'🥩', stars:5, price:'$$$$', badge:'Destacado', cuisine:'Steakhouse', instagram:'https://instagram.com/primalsteakhouselv', facebook:'https://facebook.com/primalsteakhouselv', website:'https://primalsteakhouse.com', happyHourDays:'Lunes a Jueves · Toda la noche', happyHourDetails:'• $8 tragos de la casa\n• $10 cocteles de la casa\n• $5 cervezas de barril (16 oz)\n\nDebe consumirse en la barra', desc:'El steakhouse más espectacular de Las Vegas fuera del Strip, donde cada corte USDA Prime se convierte en un evento. Ambiente medieval con toques contemporáneos, carta de vinos premium y presentaciones que enamoran desde que llegan a la mesa. Ideal para celebraciones especiales, cenas de negocios o cuando simplemente quieres la mejor carne de la ciudad.', address:'3568 S Maryland Pkwy, Las Vegas, NV 89169', phone:'(702) 262-4900', hours:'Dom–Jue 5pm–10pm, Vie–Sáb 5pm–11pm', highlights:['Cortes USDA Prime','Ambiente espectacular','Selección de vinos','Chef de renombre'], about:'Primal Steakhouse & Supper Club es el steakhouse más único de Las Vegas fuera del Strip. Combina cortes premium USDA Prime con un ambiente elegante de inspiración medieval y contemporánea. Sus presentaciones dramáticas, carta de vinos cuidadosamente seleccionada y servicio impecable lo convierten en la opción número uno para celebraciones especiales de la comunidad latina en Las Vegas.' },
   { id:6, slug:'havana-grill', name:'Havana Grill', cat:'restaurantes', catLabel:'Cocina Cubana', region:'West Las Vegas', icon:'🇨🇺', stars:5, price:'$$', badge:null, desc:'La cocina cubana más auténtica de Las Vegas con recetas familiares que saben a La Habana. Ropa vieja deshilachada a fuego lento, tostones crujientes, yuca con mojo y mojitos artesanales preparados con hierbabuena fresca. Un restaurante familiar con alma latina donde la comunidad cubana y caribeña se encuentra semana tras semana.', address:'3900 W Flamingo Rd', phone:'(702) 364-0990', hours:'Lun–Dom 11am–10pm', highlights:['Ropa vieja auténtica','Mojitos artesanales','Música en vivo fines de semana','Ambiente familiar'], about:'Havana Grill lleva la auténtica cocina cubana al corazón del oeste de Las Vegas. Con recetas familiares transmitidas por generaciones y una atmósfera cálida que recuerda a La Habana, es el lugar preferido de la comunidad cubana y caribeña de la ciudad. Los fines de semana, la música en vivo transforma el restaurante en el punto de encuentro cultural más vibrante de la zona.' },
   { id:7, slug:'el-ausente', name:'El Ausente', cat:'restaurantes', catLabel:'Mariscos', region:'West Las Vegas', icon:'🌊', stars:4, price:'$$', badge:null, desc:'Los mariscos sinaloenses más frescos y auténticos de Las Vegas, preparados como en la costa de México. Ceviche de camarón desbordante, caldo de siete mares humeante, aguachile verde y micheladas preparadas con chamoy y chile piquín. El favorito indiscutible de la comunidad mexicana — aquí no hay imitaciones, solo sabor real.', address:'5765 W Spring Mountain Rd', phone:'(702) 220-6644', hours:'Lun–Dom 10am–11pm', highlights:['Ceviche de camarón','Micheladas especiales','Caldo de mariscos','Ambiente familiar'], about:'El Ausente es el corazón de la comunidad sinaloense en Las Vegas. Sus mariscos frescos traídos directamente de proveedores de confianza, micheladas artesanales y el ambiente familiar auténtico lo han convertido en institución para la comunidad mexicana. Generaciones de familias latinas celebran aquí sus momentos importantes — desde quince años hasta graduaciones y cumpleaños.' },
   { id:8, slug:'agave-bar', name:'Agave Bar & Grill', cat:'restaurantes', catLabel:'Bar & Cocina', region:'West Las Vegas', icon:'🌵', stars:4, price:'$$', badge:null, desc:'Cocina mexicana fresca y vibrante con terraza exterior junto a la piscina — el spot perfecto para el happy hour latino. Margaritas artesanales con mezcal de calidad, tacos de autor con ingredientes frescos y una carta de cócteles que no se encuentra en ningún otro lugar del oeste de Las Vegas. Ambiente relajado, música buena, precios honestos.', address:'3400 S Jones Blvd', phone:'(702) 259-7777', hours:'Lun–Dom 12pm–12am', highlights:['Terraza junto a la piscina','Margaritas artesanales','Tacos de autor','Happy hour diario'], about:'Agave Bar & Grill es el destino perfecto para disfrutar de cocina mexicana fresca en un ambiente relajado. Su terraza exterior junto a la piscina y las mejores margaritas artesanales del oeste de Las Vegas lo han convertido en el spot favorito para happy hour de la comunidad latina. Con tacos de autor y precios accesibles, es una visita obligada cualquier día de la semana.' },
   { id:9, slug:'brasa-roja', name:'Brasa Roja', cat:'restaurantes', catLabel:'Cocina Colombiana', region:'North Las Vegas', icon:'🍗', stars:5, price:'$$', badge:null, desc:'El pollo a la brasa colombiano más auténtico de Las Vegas, marinado con especias secretas y cocinado lentamente sobre carbón. Arepas caseras esponjosas, ají casero que pica justo, arroz con coco y porciones tan generosas que siempre hay para llevar. La comunidad colombiana tiene aquí su lugar sagrado — y los que no son colombianos, vuelven igual.', address:'3101 N Rancho Dr', phone:'(702) 638-0101', hours:'Lun–Dom 11am–10pm', highlights:['Pollo a la brasa auténtico','Arepas caseras','Ají y salsas especiales','Porciones generosas'], about:'Brasa Roja lleva la tradición del pollo asado colombiano a Las Vegas con recetas originales y técnicas de cocina que preservan el sabor auténtico. Con porciones generosas y precios muy accesibles, este restaurante familiar se ha convertido en el punto de reunión de la comunidad colombiana y latinoamericana del norte de Las Vegas. Sus arepas caseras y salsas artesanales son únicas en la ciudad.' },
-  { id:10, slug:'cirque-mystere', name:'Cirque du Soleil — Mystère', cat:'shows', catLabel:'Circo & Espectáculo', region:'The Strip', icon:'🎭', stars:5, price:'$$$', badge:'Must See', desc:'El show más longevo e icónico de Las Vegas lleva más de 25 años dejando sin aliento a cada público. Acrobacias de élite que desafían la física, música original en vivo compuesta especialmente para el show y una producción visual épica que ninguna otra ciudad del mundo puede replicar. Apto para toda la familia — una experiencia que define Las Vegas.', address:'Treasure Island, 3300 Las Vegas Blvd S', phone:'(702) 894-7722', hours:'Mar–Sáb 7pm y 9:30pm', highlights:['Acrobacias de élite','Producción visual épica','Más de 25 años en escena','Apto para toda la familia'], about:'Mystère es el show más longevo de Las Vegas y uno de los más aclamados del mundo. Con acrobacias increíbles, música original compuesta especialmente para la producción y un despliegue visual extraordinario, lleva más de 25 años emocionando a públicos de todo el mundo. Es el show perfecto para familias latinas que visitan Las Vegas por primera o décima vez.' },
-  { id:11, slug:'absinthe', name:'ABSINTHE', cat:'shows', catLabel:'Varieté Adulto', region:'The Strip', icon:'🎪', stars:5, price:'$$$', badge:null, desc:'El show más irreverente y atrevido de Las Vegas en un teatro circular íntimo dentro de Caesars Palace. Acrobacias de circo de clase mundial combinadas con comedia adulta sin filtros y un anfitrión que se roba cada noche. Solo para mayores de 18 años — si buscas algo completamente diferente a todo lo que has visto, este es tu show.', address:'Caesars Palace, 3570 Las Vegas Blvd S', phone:'(800) 745-3000', hours:'Mié–Dom 8pm y 10pm', highlights:['Show para mayores de 18','Acrobacias impresionantes','Comedia irreverente','Teatro circular íntimo'], about:'ABSINTHE es el show más atrevido y auténtico de Las Vegas. En un teatro circular de carpa con capacidad íntima dentro de Caesars Palace, disfrutarás de acrobacias de clase mundial combinadas con comedia adulta sin filtros. Su anfitrión único y los artistas internacionales crean una experiencia imposible de olvidar — solo para adultos que quieren algo radicalmente diferente.' },
-  { id:12, slug:'blue-man-group', name:'Blue Man Group', cat:'shows', catLabel:'Entretenimiento Familiar', region:'The Strip', icon:'🥁', stars:4, price:'$$', badge:null, desc:'El show más original y divertido de Las Vegas donde tres hombres azules crean música percusiva, arte visual y comedia pura sin decir una sola palabra. Una experiencia sensorial única con efectos especiales, participación del público y energía contagiosa que fascina por igual a niños, adultos y abuelos. El show familiar perfecto para grupos de cualquier tamaño.', address:'Luxor Hotel, 3900 Las Vegas Blvd S', phone:'(702) 262-4400', hours:'Lun–Dom 7pm', highlights:['Show familiar','Música percusiva original','Efectos visuales únicos','Interacción con el público'], about:'Blue Man Group es un espectáculo completamente diferente a todo lo que existe en Las Vegas. Tres hombres azules crean música percusiva en vivo, arte visual en tiempo real y comedia física sin pronunciar una sola palabra — lo que lo hace perfecto para toda la familia sin importar el idioma. En el Luxor, es el show más accesible en precio y en contenido de todo el Strip.' },
-  { id:13, slug:'omnia', name:'OMNIA Nightclub', cat:'nocturna', catLabel:'Club Nocturno', region:'The Strip', icon:'💫', stars:5, price:'$$$', badge:'Top Club', desc:'El club más exclusivo y espectacular de Las Vegas dentro de Caesars Palace, considerado uno de los mejores del mundo. Su chandelier kinético gigante desciende sobre la pista mientras DJs de clase mundial mueven a miles de personas en varios niveles. La terraza con vista panorámica al Strip es única en su tipo. La experiencia definitiva de vida nocturna en Las Vegas.', address:'Caesars Palace, 3570 Las Vegas Blvd S', phone:'(702) 785-6200', hours:'Vie–Dom 10:30pm–4am', highlights:['DJs de clase mundial','Chandelier interactivo','Terrace con vista al Strip','VIP tables'], about:'OMNIA en Caesars Palace es consistentemente reconocido como uno de los mejores nightclubs del mundo. Su enorme chandelier kinético, producción de luces y sonido de nivel superior, y la terraza con vista panorámica al Strip crean una experiencia que no tiene paralelo en Las Vegas. Con los mejores DJs internacionales cada fin de semana, es el estándar máximo de la vida nocturna de la ciudad.' },
-  { id:14, slug:'drais', name:"Drai's Beachclub & Nightclub", cat:'nocturna', catLabel:'Club & Beach', region:'The Strip', icon:'🏖️', stars:5, price:'$$$', badge:null, desc:'El único club de día y noche en azotea del Strip con piscina real, vistas panorámicas y los mejores afterhours de Las Vegas. Beach club de lujo de día con DJs y daiquiris junto a la piscina. Por la noche, el templo del hip-hop y R&B latino que sigue hasta las 6am. Dos experiencias completamente diferentes en un mismo lugar icónico.', address:'The Cromwell, 3595 Las Vegas Blvd S', phone:'(702) 777-3800', hours:'Vier–Dom día y noche', highlights:['Rooftop con piscina','Vistas panorámicas al Strip','Hip-hop y R&B','Afterhours hasta las 6am'], about:"Drai's combina lo mejor del entretenimiento de día y noche en una experiencia rooftop única sobre The Cromwell. Su beach club con piscina es el destino más chic del Strip durante el día, mientras que por la noche se convierte en el club de hip-hop y R&B más importante de Las Vegas, con afterhours legendarios que duran hasta el amanecer. Favorito indiscutible de la comunidad latina." },
-  { id:15, slug:'jose-cuervo', name:'Jose Cuervo Tequilería', cat:'nocturna', catLabel:'Bar & Cantina', region:'The Strip', icon:'🍹', stars:4, price:'$$', badge:null, desc:'La cantina latina más auténtica del Strip con más de 250 tequilas y mezcales premium de todas las regiones de México. Música en vivo todas las noches, cócteles artesanales preparados con técnica y respeto por el agave, y un ambiente festivo y cálido que se siente como estar en México. El spot perfecto para la comunidad latina que quiere festejar en el Strip.', address:'3200 Las Vegas Blvd S', phone:'(702) 693-8300', hours:'Lun–Dom 6pm–2am', highlights:['250+ tequilas y mezcales','Música en vivo','Margaritas artesanales','Ambiente latino'], about:'La Jose Cuervo Tequilería es el corazón latino del Strip. Con más de 250 tequilas y mezcales cuidadosamente seleccionados de todas las regiones de México, música en vivo cada noche y un ambiente festivo incomparable, es el punto de encuentro obligado para la comunidad latina que visita Las Vegas. Sus bartenders expertos en mezcal y tequila preparan algunos de los mejores cócteles del Strip.' },
-  { id:16, slug:'chapos', name:"Chapó's Bar & Lounge", cat:'nocturna', catLabel:'Lounge Latino', region:'West Las Vegas', icon:'🎺', stars:4, price:'$$', badge:null, desc:'El lounge latino más querido de Las Vegas fuera del Strip, donde la banda toca cumbias, norteñas y música de banda hasta las 3am. Sin pretensiones, sin precios inflados de resort — solo música en vivo auténtica, cocina mexicana de medianoche y el ambiente familiar y vibrante que la comunidad latina ha hecho suyo semana tras semana desde hace años.', address:'4850 W Flamingo Rd', phone:'(702) 876-2100', hours:'Mié–Dom 8pm–3am', highlights:['Bandas en vivo','Cumbias y norteñas','Sin cover miércoles','Cocina mexicana'], about:"Chapó's es el punto de encuentro más auténtico de la comunidad latina en Las Vegas. Lejos del Strip y sin los precios inflados de los grandes clubes, ofrece bandas en vivo tocando cumbias, norteñas y banda en un ambiente familiar y festivo que sientes como propio desde la primera visita. La cocina mexicana de medianoche y las noches sin cover los miércoles lo hacen irresistible." },
+  { id:10, slug:'cirque-mystere', name:'Cirque du Soleil — Mystère', cat:'shows', catLabel:'Shows & Eventos', region:'The Strip', icon:'🎭', stars:5, price:'$$$', badge:'Must See', desc:'El show más longevo e icónico de Las Vegas lleva más de 25 años dejando sin aliento a cada público. Acrobacias de élite que desafían la física, música original en vivo compuesta especialmente para el show y una producción visual épica que ninguna otra ciudad del mundo puede replicar. Apto para toda la familia — una experiencia que define Las Vegas.', address:'Treasure Island, 3300 Las Vegas Blvd S', phone:'(702) 894-7722', hours:'Mar–Sáb 7pm y 9:30pm', highlights:['Acrobacias de élite','Producción visual épica','Más de 25 años en escena','Apto para toda la familia'], about:'Mystère es el show más longevo de Las Vegas y uno de los más aclamados del mundo. Con acrobacias increíbles, música original compuesta especialmente para la producción y un despliegue visual extraordinario, lleva más de 25 años emocionando a públicos de todo el mundo. Es el show perfecto para familias latinas que visitan Las Vegas por primera o décima vez.' },
+  { id:11, slug:'absinthe', name:'ABSINTHE', cat:'shows', catLabel:'Shows & Eventos', region:'The Strip', icon:'🎪', stars:5, price:'$$$', badge:null, desc:'El show más irreverente y atrevido de Las Vegas en un teatro circular íntimo dentro de Caesars Palace. Acrobacias de circo de clase mundial combinadas con comedia adulta sin filtros y un anfitrión que se roba cada noche. Solo para mayores de 18 años — si buscas algo completamente diferente a todo lo que has visto, este es tu show.', address:'Caesars Palace, 3570 Las Vegas Blvd S', phone:'(800) 745-3000', hours:'Mié–Dom 8pm y 10pm', highlights:['Show para mayores de 18','Acrobacias impresionantes','Comedia irreverente','Teatro circular íntimo'], about:'ABSINTHE es el show más atrevido y auténtico de Las Vegas. En un teatro circular de carpa con capacidad íntima dentro de Caesars Palace, disfrutarás de acrobacias de clase mundial combinadas con comedia adulta sin filtros. Su anfitrión único y los artistas internacionales crean una experiencia imposible de olvidar — solo para adultos que quieren algo radicalmente diferente.' },
+  { id:12, slug:'blue-man-group', name:'Blue Man Group', cat:'shows', catLabel:'Shows & Eventos', region:'The Strip', icon:'🥁', stars:4, price:'$$', badge:null, desc:'El show más original y divertido de Las Vegas donde tres hombres azules crean música percusiva, arte visual y comedia pura sin decir una sola palabra. Una experiencia sensorial única con efectos especiales, participación del público y energía contagiosa que fascina por igual a niños, adultos y abuelos. El show familiar perfecto para grupos de cualquier tamaño.', address:'Luxor Hotel, 3900 Las Vegas Blvd S', phone:'(702) 262-4400', hours:'Lun–Dom 7pm', highlights:['Show familiar','Música percusiva original','Efectos visuales únicos','Interacción con el público'], about:'Blue Man Group es un espectáculo completamente diferente a todo lo que existe en Las Vegas. Tres hombres azules crean música percusiva en vivo, arte visual en tiempo real y comedia física sin pronunciar una sola palabra — lo que lo hace perfecto para toda la familia sin importar el idioma. En el Luxor, es el show más accesible en precio y en contenido de todo el Strip.' },
+  { id:13, slug:'omnia', name:'OMNIA Nightclub', cat:'nocturna', catLabel:'Vida Nocturna', region:'The Strip', icon:'💫', stars:5, price:'$$$', badge:'Top Club', desc:'El club más exclusivo y espectacular de Las Vegas dentro de Caesars Palace, considerado uno de los mejores del mundo. Su chandelier kinético gigante desciende sobre la pista mientras DJs de clase mundial mueven a miles de personas en varios niveles. La terraza con vista panorámica al Strip es única en su tipo. La experiencia definitiva de vida nocturna en Las Vegas.', address:'Caesars Palace, 3570 Las Vegas Blvd S', phone:'(702) 785-6200', hours:'Vie–Dom 10:30pm–4am', highlights:['DJs de clase mundial','Chandelier interactivo','Terrace con vista al Strip','VIP tables'], about:'OMNIA en Caesars Palace es consistentemente reconocido como uno de los mejores nightclubs del mundo. Su enorme chandelier kinético, producción de luces y sonido de nivel superior, y la terraza con vista panorámica al Strip crean una experiencia que no tiene paralelo en Las Vegas. Con los mejores DJs internacionales cada fin de semana, es el estándar máximo de la vida nocturna de la ciudad.' },
+  { id:14, slug:'drais', name:"Drai\'s Beachclub & Nightclub", cat:'nocturna', catLabel:'Vida Nocturna', region:'The Strip', icon:'🏖️', stars:5, price:'$$$', badge:null, desc:'El único club de día y noche en azotea del Strip con piscina real, vistas panorámicas y los mejores afterhours de Las Vegas. Beach club de lujo de día con DJs y daiquiris junto a la piscina. Por la noche, el templo del hip-hop y R&B latino que sigue hasta las 6am. Dos experiencias completamente diferentes en un mismo lugar icónico.', address:'The Cromwell, 3595 Las Vegas Blvd S', phone:'(702) 777-3800', hours:'Vier–Dom día y noche', highlights:['Rooftop con piscina','Vistas panorámicas al Strip','Hip-hop y R&B','Afterhours hasta las 6am'], about:"Drai\'s combina lo mejor del entretenimiento de día y noche en una experiencia rooftop única sobre The Cromwell. Su beach club con piscina es el destino más chic del Strip durante el día, mientras que por la noche se convierte en el club de hip-hop y R&B más importante de Las Vegas, con afterhours legendarios que duran hasta el amanecer. Favorito indiscutible de la comunidad latina." },
+  { id:15, slug:'jose-cuervo', name:'Jose Cuervo Tequilería', cat:'nocturna', catLabel:'Vida Nocturna', region:'The Strip', icon:'🍹', stars:4, price:'$$', badge:null, desc:'La cantina latina más auténtica del Strip con más de 250 tequilas y mezcales premium de todas las regiones de México. Música en vivo todas las noches, cócteles artesanales preparados con técnica y respeto por el agave, y un ambiente festivo y cálido que se siente como estar en México. El spot perfecto para la comunidad latina que quiere festejar en el Strip.', address:'3200 Las Vegas Blvd S', phone:'(702) 693-8300', hours:'Lun–Dom 6pm–2am', highlights:['250+ tequilas y mezcales','Música en vivo','Margaritas artesanales','Ambiente latino'], about:'La Jose Cuervo Tequilería es el corazón latino del Strip. Con más de 250 tequilas y mezcales cuidadosamente seleccionados de todas las regiones de México, música en vivo cada noche y un ambiente festivo incomparable, es el punto de encuentro obligado para la comunidad latina que visita Las Vegas. Sus bartenders expertos en mezcal y tequila preparan algunos de los mejores cócteles del Strip.' },
+  { id:16, slug:'chapos', name:"Chapó\'s Bar & Lounge", cat:'nocturna', catLabel:'Vida Nocturna', region:'West Las Vegas', icon:'🎺', stars:4, price:'$$', badge:null, desc:'El lounge latino más querido de Las Vegas fuera del Strip, donde la banda toca cumbias, norteñas y música de banda hasta las 3am. Sin pretensiones, sin precios inflados de resort — solo música en vivo auténtica, cocina mexicana de medianoche y el ambiente familiar y vibrante que la comunidad latina ha hecho suyo semana tras semana desde hace años.', address:'4850 W Flamingo Rd', phone:'(702) 876-2100', hours:'Mié–Dom 8pm–3am', highlights:['Bandas en vivo','Cumbias y norteñas','Sin cover miércoles','Cocina mexicana'], about:"Chapó\'s es el punto de encuentro más auténtico de la comunidad latina en Las Vegas. Lejos del Strip y sin los precios inflados de los grandes clubes, ofrece bandas en vivo tocando cumbias, norteñas y banda en un ambiente familiar y festivo que sientes como propio desde la primera visita. La cocina mexicana de medianoche y las noches sin cover los miércoles lo hacen irresistible." },
+
+  // ─── HOTELES (2 more) ───
+  { id:17, slug:'bellagio', name:'Bellagio Las Vegas', cat:'hoteles', catLabel:'Hoteles & Casinos', region:'The Strip', icon:'⛲', stars:5, price:'$$$$', badge:'Icónico', desc:'El hotel más fotografiado del mundo y símbolo eterno de Las Vegas. Sus fuentes danzantes frente al Strip son el espectáculo gratuito más visto de la ciudad. Suites de lujo, el casino más elegante de Nevada, galerías de arte y restaurantes con estrellas Michelin — el estándar máximo del Strip.', address:'3600 S Las Vegas Blvd', phone:'(702) 693-7111', hours:'Abierto 24 horas', highlights:['Fuentes danzantes gratuitas','Galería de arte','Restaurantes Michelin','Spa de lujo'], about:'El Bellagio es el hotel más icónico de Las Vegas y uno de los más reconocibles del mundo. Sus legendarias fuentes danzantes frente al Strip son el espectáculo gratuito más visitado de la ciudad. Con suites de lujo, el casino más refinado de Nevada, restaurantes con estrellas Michelin y una galería de arte de clase mundial, el Bellagio define lo que significa el lujo en Las Vegas.' },
+  { id:18, slug:'wynn', name:'Wynn Las Vegas', cat:'hoteles', catLabel:'Hoteles & Casinos', region:'The Strip', icon:'🌸', stars:5, price:'$$$$', badge:null, desc:'El resort más galardonado de Las Vegas, donde cada detalle ha sido diseñado con obsesiva atención a la calidad. Habitaciones con vistas privilegiadas al Strip o a los jardines interiores, casino íntimo y sofisticado, piscinas de ensueño y la mejor colección de restaurantes premium de toda la ciudad. Para quien quiere lo mejor sin compromiso.', address:'3131 Las Vegas Blvd S', phone:'(702) 770-7000', hours:'Abierto 24 horas', highlights:['Resort más premiado de Vegas','Casino íntimo y refinado','Piscinas con cabañas','Restaurantes de autor'], about:'Wynn Las Vegas ha ganado más premios Forbes Five-Star que cualquier otro resort en el mundo. Fundado por Steve Wynn con una visión de perfección absoluta, ofrece habitaciones de diseño exquisito, un casino íntimo y sofisticado muy diferente al caos de otros resorts, piscinas privadas con cabañas y una selección de restaurantes que ningún otro hotel en Las Vegas puede igualar.' },
+
+  // ─── RESTAURANTES (5 more) ───
+  { id:19, slug:'javieres', name:"Javier\'s", cat:'restaurantes', catLabel:'Cocina Mexicana Premium', region:'The Strip', icon:'🌺', stars:5, price:'$$$', badge:'Destacado', cuisine:'Mexicana de Autor', desc:'La cocina mexicana más sofisticada y elegante del Strip dentro del ARIA Resort. Mariscos de primera, tacos de autor y margaritas artesanales en un ambiente que combina arquitectura mexicana contemporánea con la opulencia de Las Vegas. El lugar donde la comunidad latina celebra las ocasiones más especiales — bodas, cumpleaños, aniversarios.', address:'ARIA Resort, 3730 Las Vegas Blvd S', phone:'(702) 590-8880', hours:'Dom–Jue 5pm–11pm, Vie–Sáb 5pm–12am', highlights:['Cocina mexicana de autor','Interior diseñado en México','Margaritas premium','Ambiente de celebración'], about:"Javier\'s en el ARIA es el restaurante mexicano más elegante de Las Vegas. Con un interior diseñado por arquitectos mexicanos que combina materiales artesanales con lujo contemporáneo, ofrece una experiencia gastronómica que va mucho más allá de la comida típica. Sus mariscos frescos, tacos de autor y carta de tequilas premium lo hacen el favorito de la comunidad latina para celebraciones especiales." },
+  { id:20, slug:'hussongs-cantina', name:"Hussong\'s Cantina", cat:'restaurantes', catLabel:'Cantina Mexicana', region:'The Strip', icon:'🎸', stars:4, price:'$$', badge:null, cuisine:'Mexicana', desc:'La cantina mexicana más auténtica del Strip con raíces en la legendaria Hussong\'s de Ensenada, Baja California — la cantina que inventó la margarita original en 1941. Ambiente festivo sin pretensiones, tacos, quesadillas y guacamole preparado en mesa, cervezas heladas y la energía de una noche mexicana genuina a pasos del casino.', address:'Mandalay Bay, 3950 Las Vegas Blvd S', phone:'(702) 632-9333', hours:'Lun–Dom 11am–2am', highlights:['Historia de la margarita original','Guacamole en mesa','Ambiente festivo auténtico','Abierto hasta las 2am'], about:"Hussong\'s Cantina en Mandalay Bay es la extensión de la cantina más famosa de Baja California — el lugar donde, según la leyenda, se inventó la margarita en 1941. Con un ambiente festivo y auténtico muy diferente a los bares del Strip, sirve tacos, burritos y guacamole preparado en mesa mientras la música en vivo mantiene el ánimo toda la noche. Favorito de turistas mexicanos que quieren algo familiar." },
+  { id:21, slug:'lindo-michoacan', name:'Lindo Michoacán', cat:'restaurantes', catLabel:'Cocina Mexicana Tradicional', region:'East Las Vegas', icon:'🌽', stars:5, price:'$$', badge:'Institución', cuisine:'Mexicana Regional', desc:'La institución mexicana más querida de Las Vegas, abierta desde 1990 y favorita de generaciones de familias latinas. Mole negro auténtico, chiles en nogada de temporada, pozole rojo y birria de res que tarda horas en prepararse. El restaurante donde los mexicanos que viven en Las Vegas llevan a su familia cuando visita — la prueba máxima de autenticidad.', address:'2655 E Desert Inn Rd', phone:'(702) 735-6828', hours:'Lun–Dom 11am–10pm', highlights:['Abierto desde 1990','Mole negro auténtico','Chiles en nogada','Favorito de la comunidad local'], about:'Lindo Michoacán es la institución mexicana más antigua y querida de Las Vegas. Abierto desde 1990, ha alimentado a generaciones de familias latinas que viven en la ciudad y a miles de turistas mexicanos que buscan sabores genuinos lejos del Strip. Su mole negro preparado con décadas de tradición, sus chiles en nogada de temporada y su birria de res lo hacen irreemplazable en el panorama culinario latino de Las Vegas.' },
+  { id:22, slug:'tacos-el-gordo', name:'Tacos El Gordo', cat:'restaurantes', catLabel:'Tacos Tijuana', region:'The Strip', icon:'🌮', stars:5, price:'$', badge:'Favorito Local', cuisine:'Tacos de Tijuana', desc:'Los tacos de Tijuana más auténticos del mundo, a pasos del Strip. Adobada cortada directo del trompo, cabeza, buche y lengua en tortillas recién hechas a mano — exactamente como en la Calle Sexta de TJ. Abierto hasta tarde, precios de taquería de barrio, filas que no mienten. El secreto mejor guardado de Las Vegas para cualquier mexicano que sabe comer.', address:'3049 Las Vegas Blvd S', phone:'(702) 759-6744', hours:'Lun–Dom 10am–4am', highlights:['Trompo de adobada auténtico','Tortillas hechas a mano','Abierto hasta las 4am','Precios de taquería'], about:'Tacos El Gordo es el taco más famoso y auténtico del Strip y uno de los mejor valorados de todo Las Vegas. Con un estilo directamente importado de Tijuana — trompo de adobada, tortillas hechas a mano, variedad de guisados — ha conquistado tanto a la comunidad local como a turistas mexicanos que no conciben visitar Las Vegas sin pasar al menos una noche aquí. Las filas a las 2am lo dicen todo.' },
+  { id:23, slug:'oscar-steakhouse', name:"Oscar\'s Steakhouse", cat:'restaurantes', catLabel:'Steakhouse', region:'Downtown', icon:'🎩', stars:4, price:'$$$', badge:null, cuisine:'Steakhouse', desc:'El steakhouse más histórico y con más carácter de Las Vegas, dentro de la cúpula del Plaza Hotel en el corazón de Fremont Street. Fundado por Oscar Goodman — el exalcalde más famoso y extravagante de la historia de Las Vegas. Cortes de res perfectos, martinis legendarios y una historia que pocos restaurantes en el mundo pueden igualar. Downtown en su máxima expresión.', address:'Plaza Hotel, 1 Main St', phone:'(702) 386-7227', hours:'Mar–Dom 5pm–10pm', highlights:['Vista panorámica de Fremont','Fundado por el exalcalde','Cúpula del Plaza Hotel','Martinis legendarios'], about:"Oscar\'s Steakhouse es una de las experiencias gastronómicas más únicas de Las Vegas. Ubicado en la cúpula del histórico Plaza Hotel con vista panorámica de Fremont Street y del Downtown de Las Vegas, fue fundado por Oscar Goodman — el alcalde más icónico de la ciudad, conocido por su amor al martini y los personajes pintorescos. Sus cortes de res y su historia lo hacen visita obligada para cualquier visitante que quiera conocer el alma real de Las Vegas." },
+
+  // ─── TOURS & EXPERIENCIAS (nueva categoría) ───
+  { id:24, slug:'grand-canyon-tour', name:'Grand Canyon South Rim Tours', cat:'atracciones', catLabel:'Excursión', region:'Excursión', icon:'🏜️', stars:5, price:'$$$', badge:'Must Do', desc:'La excursión más espectacular desde Las Vegas — el Gran Cañón del Colorado, una de las 7 maravillas del mundo natural. Tours en autobús o helicóptero con guías en español, salidas diarias desde el Strip, visita al Skywalk de vidrio sobre el abismo y almuerzo incluido. Una experiencia que ningún visitante latino debería perderse, especialmente con niños.', address:'Salidas desde el Strip', phone:'Ver opciones', hours:'Salidas diarias 6am–7am', highlights:['Guías en español disponibles','Opción en helicóptero','Skywalk de cristal','Almuerzo incluido en tours premium'], about:'El Gran Cañón del Colorado es la excursión más popular y espectacular desde Las Vegas. A solo 4 horas en autobús o 45 minutos en helicóptero, el borde sur ofrece vistas que literalmente quitan el aliento — uno de los paisajes más fotografiados del planeta. Múltiples operadores ofrecen tours con guías en español, salidas diarias desde los principales hoteles del Strip y opciones para todos los presupuestos.' },
+  { id:25, slug:'helicopter-tours-vegas', name:'Helicóptero sobre Las Vegas', cat:'atracciones', catLabel:'Tour en Helicóptero', region:'The Strip', icon:'🚁', stars:5, price:'$$$$', badge:null, desc:'La forma más espectacular de ver Las Vegas desde el aire — el Strip de noche desde un helicóptero es una de las experiencias más impactantes que cualquier visitante puede vivir. Tours nocturnos de 12 a 15 minutos sobre las luces del Strip, con opción de combinar con cena y champán. Una propuesta perfecta para parejas celebrando algo especial en Las Vegas.', address:'Múltiples helipuertos en el Strip', phone:'Ver operadores', hours:'Tours diurnos y nocturnos', highlights:['Strip de noche desde el aire','Tours de 12–15 minutos','Paquetes para parejas','Champán incluido en premium'], about:'Ver Las Vegas desde un helicóptero de noche es una de las experiencias más únicas e impactantes que la ciudad ofrece. El Strip iluminado, las luces de los casinos y la extensión infinita del desierto forman un panorama que ninguna foto puede capturar del todo. Varios operadores salen desde helipuertos en el Strip con tours diurnos y nocturnos, con opciones que incluyen champán y paquetes para celebraciones especiales.' },
+  { id:26, slug:'fremont-street', name:'Fremont Street Experience', cat:'atracciones', catLabel:'Experiencia Gratuita', region:'Downtown', icon:'💡', stars:4, price:'$', badge:'Gratis', desc:'El espectáculo de luz y sonido más grande del mundo, cubierto por 1,500 pies de LEDs sobre el casino original de Las Vegas. Fremont Street es el corazón histórico de la ciudad — aquí comenzó todo. Bandas en vivo, zipline sobre la multitud, casinos clásicos con mesas de $5 y el ambiente más auténtico y accesible de Las Vegas, muy lejos del turismo masivo del Strip.', address:'Fremont St, Downtown Las Vegas', phone:'(702) 678-5777', hours:'Espectáculos 6pm–2am', highlights:['Espectáculo de LEDs gratuito','Zipline sobre la multitud','Bandas en vivo','Casinos desde $5'], about:'Fremont Street Experience es el corazón histórico de Las Vegas y uno de los espectáculos nocturnos más únicos del mundo. La bóveda de LEDs de 1,500 pies de largo cubre la calle original de los casinos de los años 50, creando un espectáculo gratuito de luz y sonido cada hora desde las 6pm. Con bandas en vivo, zipline y casinos clásicos con apuestas mínimas bajas, es la alternativa perfecta al caos del Strip.' },
+  { id:27, slug:'hoover-dam', name:'Presa Hoover Dam', cat:'atracciones', catLabel:'Atracción Histórica', region:'Excursión', icon:'🏗️', stars:4, price:'$$', badge:null, desc:'Una de las obras de ingeniería más impresionantes del siglo XX, a solo 40 minutos de Las Vegas. La Presa Hoover es visita obligada para familias y amantes de la historia — tours del interior con guías, el mirador en la frontera Nevada-Arizona y el Lake Mead, el lago artificial más grande de Estados Unidos. Una mañana perfecta fuera del casino.', address:'A 40 min de Las Vegas', phone:'(702) 494-2517', hours:'8am–4:30pm todos los días', highlights:['A 40 min del Strip','Tours del interior','Vista del Lake Mead','Frontera NV–AZ'], about:'La Presa Hoover es una de las maravillas de la ingeniería moderna y una visita histórica imprescindible cuando se está en Las Vegas. Construida durante la Gran Depresión entre 1931 y 1936, la presa represó el río Colorado creando el Lake Mead — el lago artificial más grande de Estados Unidos. Tours del interior con guías explican la historia y mecánica de esta obra monumental que sigue generando electricidad para millones de hogares.' },
+  { id:28, slug:'mob-museum', name:'The Mob Museum', cat:'atracciones', catLabel:'Museo', region:'Downtown', icon:'🕵️', stars:4, price:'$$', badge:null, desc:'El museo más entretenido y único de Las Vegas, dedicado a la historia de la mafia americana y su relación con la ciudad. Exposiciones interactivas, artefactos reales del crimen organizado, sala de juicio auténtica donde se juzgó a Al Capone y un speakeasy clandestino en el sótano con cócteles de la era de la Prohibición. Perfecto para grupos adultos y aficionados a los true crime.', address:'300 Stewart Ave, Downtown', phone:'(702) 229-2734', hours:'Lun–Dom 9am–9pm', highlights:['Historia real de la mafia','Sala de juicio de Al Capone','Speakeasy en el sótano','Exposiciones interactivas'], about:'The Mob Museum es uno de los museos más fascinantes e interactivos de Estados Unidos. Ubicado en el edificio del tribunal federal histórico de Downtown Las Vegas — donde realmente se juzgaron casos de crimen organizado — cuenta la historia real de la mafia americana con artefactos originales, tecnología inmersiva y recreaciones que te meten dentro de la historia. Su speakeasy clandestino en el sótano es el broche perfecto para la visita.' },
+
+  // ─── SHOWS (2 more) ───
+  { id:29, slug:'penn-teller', name:'Penn & Teller', cat:'shows', catLabel:'Shows & Eventos', region:'The Strip', icon:'🎩', stars:5, price:'$$$', badge:null, desc:'El dúo de magia más famoso del mundo con residencia permanente en el Rio Las Vegas. Penn & Teller llevan más de 40 años desafiando la realidad combinando ilusionismo de primer nivel con comedia inteligente y crítica cultural sin filtros. El show más sofisticado e intelectualmente estimulante de Las Vegas — completamente diferente a cualquier otro espectáculo de magia que hayas visto.', address:'Rio All-Suite Hotel, 3700 W Flamingo Rd', phone:'(702) 777-7776', hours:'Mié–Dom 9pm', highlights:['40 años de trayectoria','Magia de nivel mundial','Comedia inteligente','Meet & greet después del show'], about:'Penn & Teller son el dúo de magia más longevo y respetado de Las Vegas con décadas de residencia permanente en el Rio. A diferencia de otros shows de magia, Penn & Teller revelan algunos de sus trucos de forma irónica mientras demuestra que aun sabiendo cómo se hace, el efecto sigue siendo imposible de explicar. Su meet & greet post-show con el público es una rareza en Las Vegas que los fans aprecian enormemente.' },
+  { id:30, slug:'david-copperfield', name:'David Copperfield', cat:'shows', catLabel:'Shows & Eventos', region:'The Strip', icon:'✨', stars:5, price:'$$$', badge:null, desc:'El mago más famoso de la historia humana con residencia permanente en el MGM Grand. David Copperfield ha vendido más entradas que cualquier otro artista en solitario en la historia del entretenimiento. Sus ilusiones a gran escala desafían completamente la lógica y la física — hacer desaparecer la Estatua de la Libertad fue solo el principio. Un show imprescindible para cualquier amante de la magia.', address:'MGM Grand, 3799 Las Vegas Blvd S', phone:'(702) 891-7777', hours:'Vie–Mar 7pm y 9:30pm', highlights:['El mago más famoso del mundo','Ilusiones a gran escala','Récord Guinness de taquilla','Producción sin igual'], about:'David Copperfield es reconocido por el Libro Guinness como el mago más exitoso en la historia del entretenimiento, habiendo vendido más entradas en solitario que cualquier otro artista. Su residencia permanente en el MGM Grand ofrece ilusiones a gran escala con producción espectacular que hace parecer pequeños a la mayoría de los shows de Las Vegas. Una visita obligada para familias y cualquiera que quiera ver al maestro absoluto de la magia.' },
+
+  // ─── NOCTURNA (1 more) ───
+  { id:31, slug:'xyz-cantina', name:'XS Nightclub', cat:'nocturna', catLabel:'Vida Nocturna', region:'The Strip', icon:'🌙', stars:5, price:'$$$$', badge:null, desc:'El nightclub más rentable del mundo según Forbes, dentro del Wynn Las Vegas. XS define lo que es un club de lujo absoluto — producción de sonido y luces sin rival, piscina exterior integrada en la pista de baile, DJs residentes de la élite mundial como Diplo y DJ Snake, y un ambiente donde la lista de espera puede durar semanas. La experiencia de vida nocturna más exclusiva de Las Vegas.', address:'Encore at Wynn, 3131 Las Vegas Blvd S', phone:'(702) 770-0097', hours:'Vie–Lun 10:30pm–4am', highlights:['Club más rentable del mundo Forbes','Piscina en la pista de baile','DJs Diplo y DJ Snake','Terraza exterior'], about:'XS en el Encore at Wynn ha sido clasificado consistentemente como el nightclub más rentable del mundo por Forbes. Con una piscina exterior integrada en la pista principal, estatuas doradas de torsos humanos decorando las paredes y una producción audiovisual que supera cualquier club en el planeta, XS es la experiencia nocturna definitiva de Las Vegas para quienes buscan y pueden pagar lo máximo.' },
+
+  // ─── SPAS & BIENESTAR ───
+  { id:32, slug:'qua-baths-spa', name:'Qua Baths & Spa', cat:'atracciones', catLabel:'Spa de Lujo', region:'The Strip', icon:'🛁', stars:5, price:'$$$', badge:null, desc:'El spa más icónico del Strip dentro de Caesars Palace, con la experiencia romana de baños termales reinventada para Las Vegas. Tres piscinas termales a diferentes temperaturas, sala de hielo con nieve cayendo del techo, suites de tratamiento privadas y una carta de masajes y tratamientos que abarca desde técnicas antiguas romanas hasta innovaciones contemporáneas. El mejor día de descanso que Las Vegas puede ofrecer.', address:'Caesars Palace, 3570 Las Vegas Blvd S', phone:'(702) 731-7776', hours:'Lun–Dom 9am–8pm', highlights:['Piscinas termales romanas','Sala de nieve única','Tratamientos exclusivos','Acceso al pool de Caesars'], about:'Qua Baths & Spa en Caesars Palace es una de las experiencias de bienestar más únicas del Strip. Inspirado en las termas romanas antiguas, ofrece tres piscinas termales a diferentes temperaturas, una sala de nieve donde cae nieve real del techo, y una selección de tratamientos que combina técnicas milenarias con tecnología contemporánea. El espacio ideal para recuperarse entre días intensos de turismo en Las Vegas.' },
+  { id:33, slug:'canyon-ranch-spa', name:'Canyon Ranch SpaClub', cat:'atracciones', catLabel:'Spa & Bienestar', region:'The Strip', icon:'🌿', stars:5, price:'$$$$', badge:'Premium', desc:'El spa más completo y lujoso de Las Vegas dentro del Venetian, con la reputación de ser el mejor del país. Más de 134 tratamientos disponibles, médicos y nutricionistas en el equipo, fitness center de 40,000 pies cuadrados con piscina olímpica y clases de yoga y meditación. Para quienes entienden que el bienestar real va más allá de un masaje — es la experiencia de salud integral más completa del Strip.', address:'The Venetian, 3355 Las Vegas Blvd S', phone:'(702) 414-3600', hours:'Lun–Dom 6am–8pm', highlights:['134+ tratamientos','Médicos en el equipo','Piscina olímpica','Clases de yoga y meditación'], about:'Canyon Ranch SpaClub en el Venetian es ampliamente reconocido como uno de los mejores spas de Estados Unidos. Con más de 134 tratamientos disponibles, un equipo que incluye médicos y nutricionistas, un fitness center de 40,000 pies cuadrados y piscina olímpica, va mucho más allá de un spa convencional. Es el destino de bienestar más completo del Strip — ideal para viajeros que buscan descanso profundo además de entretenimiento.' },
+
+  // ─── SHOPPING ───
+  { id:34, slug:'forum-shops', name:'The Forum Shops', cat:'atracciones', catLabel:'Shopping', region:'The Strip', icon:'🛍️', stars:4, price:'$$$', badge:null, desc:'El centro comercial más exclusivo y teatral del mundo, integrado dentro de Caesars Palace con arquitectura de Roma antigua, cielo pintado que cambia de día a noche y estatuas animadas que cobran vida cada hora. Más de 160 tiendas de lujo internacional — Versace, Gucci, Louis Vuitton — y restaurantes de renombre. El shopping de lujo latino por excelencia en Las Vegas.', address:'Caesars Palace, 3570 Las Vegas Blvd S', phone:'(702) 893-4800', hours:'Lun–Dom 10am–11pm', highlights:['160+ tiendas de lujo','Estatuas animadas cada hora','Cielo artificial único','Restaurantes premium'], about:'The Forum Shops en Caesars Palace es uno de los centros comerciales más exitosos por pie cuadrado del mundo y el más dramático visualmente. Con arquitectura inspirada en la Roma antigua, un techo pintado que simula el cielo cambiando de amanecer a atardecer, y más de 160 tiendas de las marcas de lujo más exclusivas del planeta, es el destino de compras favorito de turistas latinoamericanos que buscan marcas internacionales en Las Vegas.' },
 ];
 
 // ─── FOOTER HTML ───
@@ -1528,7 +1601,7 @@ const FOOTER_HTML = `
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="nav-logo" onclick="navigate('home')" style="cursor:pointer"><div class="nav-badge">LLV</div>Latino<span class="red">LV</span></div>
+        <div class="nav-logo" onclick="navigate('home')" style="cursor:pointer;color:#F0EDE8"><div class="nav-badge">LLV</div>Latino<span class="red">LV</span></div>
         <p>Tu guía en español para descubrir lo mejor de Las Vegas — hoteles, restaurantes, shows y vida nocturna.</p>
       </div>
       <div class="footer-col"><h4>Explorar</h4><ul>
@@ -1568,7 +1641,7 @@ const FOOTER_HTML = `
   </div>
 </footer>`;
 
-['home','explore','listing','about','ads','admin'].forEach(id => {
+['home','explore','listing','about','ads','atracciones','admin-login','admin'].forEach(id => {
   const el = document.getElementById('footer-' + id);
   if (el) el.innerHTML = FOOTER_HTML;
 });
@@ -1577,7 +1650,7 @@ const FOOTER_HTML = `
 let currentPage = 'home';
 let currentSlug = null;
 
-function navigate(page, param) {
+async function navigate(page, param) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
   const navEl = document.getElementById('nav-' + (['listing','admin'].includes(page) ? 'explore' : page));
@@ -1618,7 +1691,7 @@ function navigate(page, param) {
     renderAdminListings();
   } else {
     document.getElementById('page-home').classList.add('active');
-    renderHome();
+    await renderHome();
   }
   currentPage = page;
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -1656,6 +1729,11 @@ const SEO_DATA = {
     desc: 'Guía de shows y eventos en Las Vegas explicada en español. Cirque du Soleil, comedias, magia y más — todo lo que necesitas saber para elegir el show perfecto.',
     schema: { "@context":"https://schema.org","@type":"CollectionPage","name":"Shows en Las Vegas","description":"Guía de shows y eventos en Las Vegas en español.","url":"https://latino-las-vegas.vercel.app/shows","inLanguage":"es" },
     intro: '<p>Los shows de Las Vegas son una experiencia única en el mundo. Desde las producciones épicas del Cirque du Soleil hasta shows de magia, comedia y variedades — hay opciones para todos los presupuestos y gustos.</p><p>Nuestra guía en español te explica qué esperar de cada show, cuánto cuestan las entradas, qué edades son apropiadas y cómo conseguir los mejores asientos. Sin sorpresas, sin barreras del idioma.</p>'
+  },
+    atracciones: {
+    title: 'Atracciones en Las Vegas en Español | Latino Las Vegas',
+    desc: 'Las mejores atracciones de Las Vegas para visitantes latinos — Gran Cañón, helicóptero, spas, museos, shopping y más.',
+    schema: { "@context":"https://schema.org","@type":"CollectionPage","name":"Atracciones en Las Vegas","description":"Las mejores atracciones, tours, spas y experiencias en Las Vegas para visitantes latinos","inLanguage":"es" }
   },
   nocturna: {
     title: 'Vida Nocturna en Las Vegas en Español | Latino LV',
@@ -1738,7 +1816,7 @@ function setSchema(schemaObj) {
 // ─── URL ROUTING ───
 const URL_MAP = {
   home: '/', explore: '/explorar', about: '/nosotros', ads: '/anunciate', admin: '/admin',
-  hoteles: '/hoteles', restaurantes: '/restaurantes', shows: '/shows', nocturna: '/vida-nocturna'
+  hoteles: '/hoteles', restaurantes: '/restaurantes', shows: '/shows', nocturna: '/vida-nocturna', atracciones: '/atracciones'
 };
 
 function updateURL(page, param) {
