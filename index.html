@@ -1424,6 +1424,12 @@ function navigate(page, param) {
 }
 
 // ─── RENDER CARD ───
+function cardMedia(l) {
+  const ic = (l.icon && !l.icon.startsWith('http')) ? l.icon : '📍';
+  if (l.image) return '<img src="' + l.image + '" alt="" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display=\'none\'"/>';
+  return '<span style="font-size:48px">' + ic + '</span>';
+}
+
 function renderCard(l) {
   const fullStars = Math.floor(l.stars);
   const hasHalf = l.stars % 1 >= 0.5;
@@ -1547,13 +1553,13 @@ async function loadListingDetail(slug) {
   const visual = document.getElementById('listingVisual');
   const imgs = [l.image, l.image2, l.image3, l.image4].filter(Boolean);
   const hasLogo = l.icon && l.icon.startsWith('http');
-  const logoOverlay = hasLogo ? '<div style="position:absolute;bottom:16px;left:16px;z-index:10;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);border-radius:10px;padding:8px 12px;border:1px solid rgba(255,255,255,0.1)"><img src="' + l.icon + '" style="height:36px;max-width:120px;object-fit:contain;display:block" onerror="this.parentElement.style.display='none'" /></div>' : '';
+  const logoOverlay = hasLogo ? '<div style="position:absolute;bottom:16px;left:16px;z-index:10;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);border-radius:10px;padding:8px 12px;border:1px solid rgba(255,255,255,0.1)"><img src="' + l.icon + '" style="height:36px;max-width:120px;object-fit:contain;display:block" onerror="this.parentElement.style.display=\'none\'" /></div>' : '';
   if (imgs.length > 1) {
-    visual.innerHTML = '<div style="position:relative;border-radius:var(--radius-lg);overflow:hidden;height:400px"><div style="display:grid;grid-template-columns:2fr 1fr;gap:8px;height:100%"><img src="' + imgs[0] + '" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'" /><div style="display:flex;flex-direction:column;gap:8px">' + imgs.slice(1).map(u => '<img src="' + u + '" style="width:100%;flex:1;object-fit:cover;min-height:0" onerror="this.style.display='none'" />').join('') + '</div></div>' + logoOverlay + '</div>';
+    visual.innerHTML = '<div style="position:relative;border-radius:var(--radius-lg);overflow:hidden;height:400px"><div style="display:grid;grid-template-columns:2fr 1fr;gap:8px;height:100%"><img src="' + imgs[0] + '" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display=\'none\'" /><div style="display:flex;flex-direction:column;gap:8px">' + imgs.slice(1).map(u => '<img src="' + u + '" style="width:100%;flex:1;object-fit:cover;min-height:0" onerror="this.style.display=\'none\'" />').join('') + '</div></div>' + logoOverlay + '</div>';
   } else if (imgs.length === 1) {
-    visual.innerHTML = '<div style="position:relative"><img src="' + imgs[0] + '" alt="' + l.name + '" class="listing-img-hero" onerror="this.style.display='none'" />' + logoOverlay + '</div>';
+    visual.innerHTML = '<div style="position:relative"><img src="' + imgs[0] + '" alt="' + l.name + '" class="listing-img-hero" onerror="this.style.display=\'none\'" />' + logoOverlay + '</div>';
   } else if (hasLogo) {
-    visual.innerHTML = '<div class="listing-icon-bg"></div><div class="listing-icon-glow"><img src="' + l.icon + '" style="max-width:160px;max-height:160px;object-fit:contain" onerror="this.style.display='none'" /></div>';
+    visual.innerHTML = '<div class="listing-icon-bg"></div><div class="listing-icon-glow"><img src="' + l.icon + '" style="max-width:160px;max-height:160px;object-fit:contain" onerror="this.style.display=\'none\'" /></div>';
   } else {
     visual.innerHTML = '<div class="listing-icon-bg"></div><div class="listing-icon-glow" id="listingIcon">' + (l.icon || '📍') + '</div>';
   }
@@ -1690,7 +1696,7 @@ async function renderAdminListings() {
   if (!tbody) return;
   tbody.innerHTML = listings.map(l => `
     <tr style="cursor:pointer" onclick="navigateToListing(this.dataset.slug)" data-slug="${l.slug||l.id}">
-      <td>${l.icon && l.icon.startsWith("http") ? `<img src="${l.icon}" style="width:32px;height:32px;object-fit:contain;border-radius:4px" onerror="this.style.display='none'" />` : `<span style="font-size:24px">${l.icon}</span>`}</td>
+      <td>${l.icon && l.icon.startsWith("http") ? `<img src="${l.icon}" style="width:32px;height:32px;object-fit:contain;border-radius:4px" onerror="this.style.display=\'none\'" />` : `<span style="font-size:24px">${l.icon}</span>`}</td>
       <td>
         <div style="font-weight:700;color:var(--text);font-family:'Barlow Condensed',sans-serif;font-size:17px">${l.name}</div>
         <div style="font-size:12px;color:var(--text-muted);margin-top:2px">${l.address||'Sin dirección'}</div>
