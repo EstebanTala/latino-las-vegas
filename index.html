@@ -4,6 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Latino Las Vegas — Tu Guía en Español</title>
+<meta name="description" content="Tu guía completa en español para Las Vegas. Hoteles, restaurantes, shows y vida nocturna — reseñas verificadas y contenido curado para la comunidad latina." />
+<meta name="keywords" content="restaurantes en las vegas, hoteles en las vegas, shows en las vegas, vida nocturna las vegas, guia latina las vegas" />
+<meta property="og:title" content="Latino Las Vegas — Tu Guía en Español" />
+<meta property="og:description" content="Hoteles, restaurantes, shows y vida nocturna en Las Vegas — todo en español." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://latino-las-vegas.vercel.app" />
+<link rel="canonical" href="https://latino-las-vegas.vercel.app" />
+<script type="application/ld+json" id="schemaMarkup">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Latino Las Vegas",
+  "url": "https://latino-las-vegas.vercel.app",
+  "description": "Guía en español de Las Vegas — hoteles, restaurantes, shows y vida nocturna para la comunidad latina.",
+  "inLanguage": "es",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://latino-las-vegas.vercel.app/restaurantes",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ─── RESET & VARS ─── */
@@ -110,7 +132,16 @@ img { display: block; max-width: 100%; }
 
 /* ─── FOOTER ─── */
 .footer { background: var(--dark2); border-top: 1px solid var(--border); padding: 56px 0 28px; }
+.trust-bar { background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 14px 0; }
+.trust-inner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; }
+.trust-item { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: var(--text-muted); padding: 6px 28px; white-space: nowrap; transition: color 0.2s; }
+.trust-item:hover { color: var(--text); }
+.trust-icon { font-size: 15px; }
+.trust-divider { width: 1px; height: 20px; background: var(--border); }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+.seo-intro { padding: 40px 0 0; }
+.seo-intro-text { max-width: 800px; font-size: 15px; color: var(--text-muted); line-height: 1.8; margin-top: 12px; }
+.seo-intro-text p { margin-bottom: 12px; }
 .footer-brand p { font-size: 14px; color: var(--text-muted); line-height: 1.75; max-width: 280px; margin-top: 16px; }
 .footer-col h4 { font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 18px; }
 .footer-col ul { list-style: none; }
@@ -417,7 +448,7 @@ img { display: block; max-width: 100%; }
     <div class="hero-content">
       <div class="hero-eyebrow fade-up"><span class="hero-dot"></span> Tu guía en español · Las Vegas, NV</div>
       <h1 class="fade-up-1">EXPLORA<br><span class="outline">LAS VEGAS</span></h1>
-      <p class="hero-subtitle fade-up-2">Hoteles, casinos, restaurantes y experiencias — <strong>en tu idioma</strong></p>
+      <p class="hero-subtitle fade-up-2">Hoteles, restaurantes y experiencias verificadas en Las Vegas — <strong>todo en español.</strong></p>
       <div class="search-wrap fade-up-3">
         <div class="search-box">
           <input type="text" class="search-input" id="heroSearch" placeholder="¿Qué estás buscando? (hotel, restaurante, show…)" />
@@ -447,6 +478,20 @@ img { display: block; max-width: 100%; }
       <div class="stat"><div class="stat-num">100%</div><div class="stat-label">En Español</div></div>
     </div>
   </section>
+
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-inner">
+        <div class="trust-item"><span class="trust-icon">📍</span><span>Más de 50 lugares listados</span></div>
+        <div class="trust-divider"></div>
+        <div class="trust-item"><span class="trust-icon">🔄</span><span>Actualizado semanalmente</span></div>
+        <div class="trust-divider"></div>
+        <div class="trust-item"><span class="trust-icon">✅</span><span>Reseñas verificadas</span></div>
+        <div class="trust-divider"></div>
+        <div class="trust-item"><span class="trust-icon">⭐</span><span>Contenido curado</span></div>
+      </div>
+    </div>
+  </div>
 
   <div class="divider"></div>
   <section class="section">
@@ -567,6 +612,11 @@ img { display: block; max-width: 100%; }
       <button class="filter-tab" data-cat="restaurantes" onclick="setCat(this,'restaurantes')">Restaurantes</button>
       <button class="filter-tab" data-cat="shows" onclick="setCat(this,'shows')">Shows & Eventos</button>
       <button class="filter-tab" data-cat="nocturna" onclick="setCat(this,'nocturna')">🍹 Vida Nocturna</button>
+    </div>
+  </div>
+  <div id="seoIntroBlock" class="seo-intro" style="display:none">
+    <div class="container">
+      <div class="seo-intro-text" id="seoIntroText"></div>
     </div>
   </div>
   <div class="explore-layout">
@@ -1421,7 +1471,152 @@ function navigate(page, param) {
   }
   currentPage = page;
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  updateSEO(page, param);
+  updateURL(page, param);
 }
+
+// ─── SEO CONTENT PER CATEGORY ───
+const SEO_DATA = {
+  home: {
+    title: 'Latino Las Vegas — Tu Guía en Español',
+    desc: 'Tu guía completa en español para Las Vegas. Hoteles, restaurantes, shows y vida nocturna — reseñas verificadas y contenido curado para la comunidad latina.',
+    schema: { "@context":"https://schema.org","@type":"WebSite","name":"Latino Las Vegas","url":"https://latino-las-vegas.vercel.app","description":"Guía en español de Las Vegas para la comunidad latina.","inLanguage":"es" }
+  },
+  explore: {
+    title: 'Explorar Las Vegas en Español | Latino LV',
+    desc: 'Directorio completo de hoteles, restaurantes, shows y vida nocturna en Las Vegas. Todo verificado y en español para la comunidad latina.',
+    schema: { "@context":"https://schema.org","@type":"CollectionPage","name":"Explorar Las Vegas","description":"Directorio completo de lugares en Las Vegas en español.","url":"https://latino-las-vegas.vercel.app/explorar","inLanguage":"es" },
+    intro: '<p>Descubre lo mejor de Las Vegas con nuestra guía completa en español. Desde los grandes hoteles del Strip hasta los restaurantes más auténticos de la comunidad latina, tenemos todo curado y verificado para ti.</p><p>Usa los filtros para encontrar exactamente lo que buscas — ya sea una cena romántica, una noche de shows, el mejor casino o los clubes más exclusivos de la ciudad.</p>'
+  },
+  hoteles: {
+    title: 'Hoteles en Las Vegas en Español | Latino LV',
+    desc: 'Los mejores hoteles y casinos en Las Vegas explicados en español. Comparativas, precios y reseñas verificadas para que elijas con confianza.',
+    schema: { "@context":"https://schema.org","@type":"CollectionPage","name":"Hoteles en Las Vegas","description":"Guía de hoteles y casinos en Las Vegas en español.","url":"https://latino-las-vegas.vercel.app/hoteles","inLanguage":"es" },
+    intro: '<p>Las Vegas tiene algunos de los hoteles más espectaculares del mundo — desde el lujo extremo del Venetian hasta opciones más accesibles perfectas para familias. Nuestra guía en español te ayuda a comparar ubicación, precio y amenidades sin barreras.</p><p>Todos los hoteles listados han sido revisados por nuestra comunidad latina. Encontrarás información sobre casinos, piscinas, spas y restaurantes dentro de cada propiedad para que no te sorprendas al llegar.</p>'
+  },
+  restaurantes: {
+    title: 'Restaurantes en Las Vegas en Español | Latino LV',
+    desc: 'Los mejores restaurantes en Las Vegas recomendados en español. Cocina latina, mexicana, cubana y más — reseñas verificadas por la comunidad.',
+    schema: { "@context":"https://schema.org","@type":"CollectionPage","name":"Restaurantes en Las Vegas","description":"Guía de restaurantes en Las Vegas en español para la comunidad latina.","url":"https://latino-las-vegas.vercel.app/restaurantes","inLanguage":"es" },
+    intro: '<p>Más allá de los buffets del Strip, Las Vegas esconde una escena gastronómica latina increíble. Desde auténticos taquerías y mariscos sinaloenses hasta cocina cubana y colombiana — la comunidad latina ha construido una oferta culinaria que no encontrarás en ninguna guía turística convencional.</p><p>Todos los restaurantes listados han sido recomendados y verificados por miembros de nuestra comunidad. Incluimos horarios reales, precios actualizados y qué pedir en cada lugar para que tu experiencia sea perfecta.</p>'
+  },
+  shows: {
+    title: 'Shows en Las Vegas en Español | Latino LV',
+    desc: 'Guía de shows y eventos en Las Vegas explicada en español. Cirque du Soleil, comedias, magia y más — todo lo que necesitas saber para elegir el show perfecto.',
+    schema: { "@context":"https://schema.org","@type":"CollectionPage","name":"Shows en Las Vegas","description":"Guía de shows y eventos en Las Vegas en español.","url":"https://latino-las-vegas.vercel.app/shows","inLanguage":"es" },
+    intro: '<p>Los shows de Las Vegas son una experiencia única en el mundo. Desde las producciones épicas del Cirque du Soleil hasta shows de magia, comedia y variedades — hay opciones para todos los presupuestos y gustos.</p><p>Nuestra guía en español te explica qué esperar de cada show, cuánto cuestan las entradas, qué edades son apropiadas y cómo conseguir los mejores asientos. Sin sorpresas, sin barreras del idioma.</p>'
+  },
+  nocturna: {
+    title: 'Vida Nocturna en Las Vegas en Español | Latino LV',
+    desc: 'Los mejores clubes, bares y cantinas en Las Vegas para la comunidad latina. Guía completa en español de la vida nocturna de Las Vegas.',
+    schema: { "@context":"https://schema.org","@type":"CollectionPage","name":"Vida Nocturna en Las Vegas","description":"Guía de vida nocturna en Las Vegas en español para la comunidad latina.","url":"https://latino-las-vegas.vercel.app/vida-nocturna","inLanguage":"es" },
+    intro: '<p>La vida nocturna de Las Vegas es legendaria — pero no todos los clubes son iguales, y navigarla sin conocer la ciudad puede costarte caro. Nuestra guía en español te lleva a los mejores clubes latinos, cantinas, lounges y spots donde la comunidad se reúne.</p><p>Desde el OMNIA en Caesars hasta las cantinas más auténticas del oeste de Las Vegas, tenemos todos los precios de entrada, horarios reales y lo que necesitas saber para tener la mejor noche de tu vida.</p>'
+  },
+  about: {
+    title: 'Sobre Nosotros | Latino Las Vegas',
+    desc: 'Conoce el equipo detrás de Latino Las Vegas — la guía en español más completa de Las Vegas para la comunidad latina.',
+    schema: { "@context":"https://schema.org","@type":"AboutPage","name":"Sobre Latino Las Vegas","description":"Conoce el equipo detrás de Latino Las Vegas.","url":"https://latino-las-vegas.vercel.app/nosotros","inLanguage":"es" }
+  }
+};
+
+function updateSEO(page, param) {
+  let key = page;
+  if (page === 'explore' && param) key = param;
+  if (page === 'listing' && param) {
+    // For individual listing pages
+    const listing = (window._cachedListings || []).find(l => l.slug === param || String(l.id) === String(param));
+    if (listing) {
+      const catMap = { hoteles:'hotel', restaurantes:'restaurante', shows:'show', nocturna:'club', atracciones:'atracción' };
+      document.title = listing.name + ' — ' + (catMap[listing.cat] || 'lugar') + ' en Las Vegas | Latino LV';
+      setMetaDesc(listing.desc + ' Ubicado en ' + (listing.address || 'Las Vegas') + '.');
+      setSchema({
+        "@context": "https://schema.org",
+        "@type": listing.cat === 'hoteles' ? 'LodgingBusiness' : listing.cat === 'restaurantes' ? 'Restaurant' : 'LocalBusiness',
+        "name": listing.name,
+        "description": listing.about || listing.desc,
+        "address": { "@type": "PostalAddress", "streetAddress": listing.address || '', "addressLocality": "Las Vegas", "addressRegion": "NV", "addressCountry": "US" },
+        "telephone": listing.telephone || listing.phone || '',
+        "openingHours": listing.hours || '',
+        "inLanguage": "es"
+      });
+      // Hide SEO intro block on listing pages
+      const introBlock = document.getElementById('seoIntroBlock');
+      if (introBlock) introBlock.style.display = 'none';
+      return;
+    }
+  }
+
+  const data = SEO_DATA[key] || SEO_DATA[page] || SEO_DATA.home;
+  document.title = data.title;
+  setMetaDesc(data.desc);
+  if (data.schema) setSchema(data.schema);
+
+  // Show/hide SEO intro block
+  const introBlock = document.getElementById('seoIntroBlock');
+  const introText = document.getElementById('seoIntroText');
+  if (introBlock && introText) {
+    if (data.intro && (page === 'explore')) {
+      introText.innerHTML = data.intro;
+      introBlock.style.display = 'block';
+    } else {
+      introBlock.style.display = 'none';
+    }
+  }
+}
+
+function setMetaDesc(desc) {
+  let el = document.querySelector('meta[name="description"]');
+  if (el) el.setAttribute('content', desc);
+}
+
+function setSchema(schemaObj) {
+  let el = document.getElementById('schemaMarkup');
+  if (el) el.textContent = JSON.stringify(schemaObj, null, 2);
+}
+
+// ─── URL ROUTING ───
+const URL_MAP = {
+  home: '/', explore: '/explorar', about: '/nosotros', admin: '/admin',
+  hoteles: '/hoteles', restaurantes: '/restaurantes', shows: '/shows', nocturna: '/vida-nocturna'
+};
+
+function updateURL(page, param) {
+  let path = '/';
+  if (page === 'listing' && param) path = '/' + param;
+  else if (page === 'explore' && param && URL_MAP[param]) path = URL_MAP[param];
+  else if (URL_MAP[page]) path = URL_MAP[page];
+  if (window.location.pathname !== path) {
+    window.history.pushState({ page, param }, '', path);
+  }
+}
+
+// ─── HANDLE BROWSER BACK/FORWARD ───
+window.addEventListener('popstate', (e) => {
+  if (e.state) {
+    navigate(e.state.page, e.state.param);
+  } else {
+    navigate('home');
+  }
+});
+
+// ─── HANDLE DIRECT URL LOAD ───
+(function handleInitialURL() {
+  const path = window.location.pathname;
+  const reverseURL = Object.entries(URL_MAP).find(([k,v]) => v === path);
+  if (path === '/' || path === '') return; // home is default
+  if (reverseURL) {
+    const key = reverseURL[0];
+    if (['hoteles','restaurantes','shows','nocturna'].includes(key)) {
+      setTimeout(() => navigate('explore', key), 0);
+    } else if (key !== 'home') {
+      setTimeout(() => navigate(key), 0);
+    }
+  } else if (path.length > 1) {
+    // Could be a listing slug
+    const slug = path.replace('/', '');
+    setTimeout(() => navigate('listing', slug), 100);
+  }
+})();
 
 // ─── RENDER CARD ───
 function cardMedia(l) {
@@ -1457,6 +1652,7 @@ function renderCard(l) {
 // ─── HOME ───
 async function renderHome() {
   const listings = await DATA.getAll();
+  window._cachedListings = listings;
   const hotels = listings.filter(l => l.cat === 'hoteles');
   const restaurants = listings.filter(l => l.cat === 'restaurantes').slice(0, 4);
   const shows = listings.filter(l => l.cat === 'shows' || l.cat === 'nocturna').slice(0, 3);
