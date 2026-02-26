@@ -131,6 +131,44 @@ img { display: block; max-width: 100%; }
 .card-price { font-size: 12px; font-weight: 700; color: var(--text-muted); letter-spacing: 1px; }
 
 /* ─── FOOTER ─── */
+
+.ads-hero { padding: 100px 0 60px; text-align: center; position: relative; overflow: hidden; background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(232,39,42,0.1) 0%, transparent 70%); }
+.ads-hero h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 8vw, 96px); letter-spacing: 3px; line-height: 0.9; margin-bottom: 16px; }
+.ads-hero p { font-size: 18px; color: var(--text-muted); max-width: 540px; margin: 0 auto 40px; line-height: 1.7; }
+.ads-stats { display: flex; gap: 0; justify-content: center; margin-bottom: 56px; border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; max-width: 600px; margin-left: auto; margin-right: auto; background: var(--card-bg); }
+.ads-stat { flex: 1; padding: 28px 20px; text-align: center; border-right: 1px solid var(--border); }
+.ads-stat:last-child { border-right: none; }
+.ads-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--red); letter-spacing: 1px; line-height: 1; }
+.ads-stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px; }
+.ads-packages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 56px 0; }
+.ads-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px 28px; position: relative; transition: border-color 0.3s, transform 0.2s; }
+.ads-card:hover { border-color: rgba(232,39,42,0.4); transform: translateY(-3px); }
+.ads-card.featured-card { border-color: var(--red); background: linear-gradient(135deg, rgba(232,39,42,0.06) 0%, var(--card-bg) 100%); }
+.ads-card-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--red); color: white; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 14px; border-radius: 20px; white-space: nowrap; }
+.ads-card-icon { font-size: 32px; margin-bottom: 16px; }
+.ads-card-name { font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 6px; }
+.ads-card-price { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--red); line-height: 1; margin-bottom: 4px; }
+.ads-card-price span { font-size: 18px; color: var(--text-muted); font-family: 'Barlow', sans-serif; font-weight: 400; }
+.ads-card-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; }
+.ads-card-features { list-style: none; margin-bottom: 28px; }
+.ads-card-features li { font-size: 13px; color: var(--text-muted); padding: 7px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+.ads-card-features li:last-child { border-bottom: none; }
+.ads-card-features li::before { content: "✓"; color: var(--red); font-weight: 700; }
+.ads-why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 40px 0; }
+.ads-why-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; text-align: center; }
+.ads-why-icon { font-size: 28px; margin-bottom: 12px; }
+.ads-why-title { font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.ads-why-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+.ads-contact-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 48px; text-align: center; margin: 40px 0; }
+.ads-contact-box h3 { font-family: 'Bebas Neue', sans-serif; font-size: 42px; letter-spacing: 2px; margin-bottom: 12px; }
+.ads-contact-box p { color: var(--text-muted); font-size: 15px; margin-bottom: 28px; max-width: 440px; margin-left: auto; margin-right: auto; }
+.ads-contact-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.footer-ad-cta { background: linear-gradient(135deg, rgba(232,39,42,0.12) 0%, rgba(232,39,42,0.04) 100%); border: 1px solid rgba(232,39,42,0.25); border-radius: var(--radius); padding: 20px 28px; margin-bottom: 40px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.footer-ad-cta-text strong { font-size: 14px; color: var(--text); display: block; margin-bottom: 2px; }
+.footer-ad-cta-text span { font-size: 12px; color: var(--text-muted); }
+.footer-ad-btn { background: var(--red); color: white; border: none; border-radius: 6px; padding: 9px 18px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; cursor: pointer; white-space: nowrap; transition: opacity 0.2s; }
+.footer-ad-btn:hover { opacity: 0.85; }
+
 .footer { background: var(--dark2); border-top: 1px solid var(--border); padding: 56px 0 28px; }
 .trust-bar { background: var(--dark2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 14px 0; }
 .trust-inner { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; }
@@ -431,6 +469,7 @@ img { display: block; max-width: 100%; }
     <li><a id="nav-home" onclick="navigate('home')">Inicio</a></li>
     <li><a id="nav-explore" onclick="navigate('explore')">Explorar</a></li>
     <li><a id="nav-about" onclick="navigate('about')">Nosotros</a></li>
+    <li><a id="nav-ads" onclick="navigate('ads')" style="color:var(--red);font-weight:600">Anúnciate</a></li>
     <li><a id="nav-contact" onclick="navigate('about','contact')">Contacto</a></li>
   </ul>
   <div class="nav-actions">
@@ -883,6 +922,108 @@ img { display: block; max-width: 100%; }
 </div>
 
 
+
+<!-- ══════════════════ ANUNCIATE ══════════════════ -->
+<div id="page-ads" class="page">
+  <div class="ads-hero">
+    <div class="container">
+      <div class="section-eyebrow">Para negocios</div>
+      <h1>LLEGA A LA<br><span class="red">COMUNIDAD LATINA</span></h1>
+      <p>Latino Las Vegas es la guía de referencia en español para visitantes y residentes latinos en Las Vegas. Pon tu negocio frente a las personas correctas.</p>
+      <div class="ads-stats" style="margin-bottom:40px">
+        <div class="ads-stat"><div class="ads-stat-num">50+</div><div class="ads-stat-label">Lugares listados</div></div>
+        <div class="ads-stat"><div class="ads-stat-num">100%</div><div class="ads-stat-label">En español</div></div>
+        <div class="ads-stat"><div class="ads-stat-num">LV</div><div class="ads-stat-label">Mercado local</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div style="text-align:center;margin-bottom:16px">
+      <div class="section-eyebrow">Opciones de visibilidad</div>
+      <div class="section-title">Elige Tu Plan</div>
+    </div>
+    <div class="ads-packages">
+      <div class="ads-card">
+        <div class="ads-card-icon">📋</div>
+        <div class="ads-card-name">Listado Básico</div>
+        <div class="ads-card-price">Gratis<span>/siempre</span></div>
+        <div class="ads-card-desc">Aparece en nuestro directorio con información esencial de tu negocio.</div>
+        <ul class="ads-card-features">
+          <li>Perfil con nombre y categoría</li>
+          <li>Dirección y teléfono</li>
+          <li>Horarios de apertura</li>
+          <li>Descripción básica</li>
+        </ul>
+        <button class="btn btn-secondary" onclick="navigate('about','contact')" style="width:100%">Solicitar listado</button>
+      </div>
+      <div class="ads-card featured-card">
+        <div class="ads-card-badge">Más Popular</div>
+        <div class="ads-card-icon">⭐</div>
+        <div class="ads-card-name">Listado Destacado</div>
+        <div class="ads-card-price">$79<span>/mes</span></div>
+        <div class="ads-card-desc">Destaca sobre la competencia con badge "Destacado" y posición prioritaria en búsquedas.</div>
+        <ul class="ads-card-features">
+          <li>Todo lo del plan básico</li>
+          <li>Badge "Destacado" en rojo</li>
+          <li>Posición prioritaria en categoría</li>
+          <li>Galería de hasta 4 fotos</li>
+          <li>Links a redes sociales y web</li>
+          <li>Sección Happy Hour</li>
+        </ul>
+        <button class="btn btn-primary" onclick="navigate('about','contact')" style="width:100%">Empezar ahora</button>
+      </div>
+      <div class="ads-card">
+        <div class="ads-card-icon">🚀</div>
+        <div class="ads-card-name">Patrocinado</div>
+        <div class="ads-card-price">$199<span>/mes</span></div>
+        <div class="ads-card-desc">Máxima visibilidad. Tu negocio en la página de inicio y en banners de categoría.</div>
+        <ul class="ads-card-features">
+          <li>Todo lo del plan destacado</li>
+          <li>Aparición en página de inicio</li>
+          <li>Banner en página de categoría</li>
+          <li>Etiqueta "Patrocinado"</li>
+          <li>Reporte mensual de visitas</li>
+          <li>Soporte prioritario</li>
+        </ul>
+        <button class="btn btn-secondary" onclick="navigate('about','contact')" style="width:100%">Contactar</button>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin:56px 0 16px">
+      <div class="section-eyebrow">Por qué elegirnos</div>
+      <div class="section-title">Tu Negocio, Su Idioma</div>
+    </div>
+    <div class="ads-why">
+      <div class="ads-why-card">
+        <div class="ads-why-icon">🎯</div>
+        <div class="ads-why-title">Audiencia Específica</div>
+        <div class="ads-why-text">Llegamos directamente a visitantes y residentes latinos que buscan negocios que los entiendan — en español, sin barreras.</div>
+      </div>
+      <div class="ads-why-card">
+        <div class="ads-why-icon">✅</div>
+        <div class="ads-why-title">Contenido Verificado</div>
+        <div class="ads-why-text">Todos los listados son revisados por nuestro equipo. Tu negocio aparece en un entorno de confianza, no en un directorio genérico.</div>
+      </div>
+      <div class="ads-why-card">
+        <div class="ads-why-icon">📈</div>
+        <div class="ads-why-title">Sin Contratos Largos</div>
+        <div class="ads-why-text">Paga mes a mes, cancela cuando quieras. Creemos en resultados, no en atraparte. Si no funciona, no pagas más.</div>
+      </div>
+    </div>
+
+    <div class="ads-contact-box">
+      <h3>¿LISTO PARA EMPEZAR?</h3>
+      <p>Escríbenos y te tenemos en el directorio en menos de 48 horas. Sin formularios complicados, sin burocracia.</p>
+      <div class="ads-contact-actions">
+        <a href="mailto:hola@latinolasvegas.com" class="btn btn-primary btn-lg">✉️ Escribir ahora</a>
+        <button class="btn btn-secondary btn-lg" onclick="navigate('about','contact')">Ver contacto</button>
+      </div>
+      <p style="font-size:12px;color:var(--text-muted);margin-top:20px;margin-bottom:0">Respondemos en menos de 24 horas · Lunes a Viernes</p>
+    </div>
+  </div>
+  <div id="footer-ads"></div>
+</div>
 
 <!-- ══════════════════ ADMIN LOGIN ══════════════════ -->
 <div id="page-admin-login" class="page">
@@ -1399,6 +1540,7 @@ const FOOTER_HTML = `
       <div class="footer-col"><h4>Sitio</h4><ul>
         <li><a onclick="navigate('about')">Nosotros</a></li>
         <li><a onclick="navigate('about','contact')">Contacto</a></li>
+        <li><a onclick="navigate('ads')">Anúnciate</a></li>
         <li><a onclick="navigate('admin')">Admin</a></li>
       </ul></div>
       <div class="footer-col"><h4>Legal</h4><ul>
@@ -1406,6 +1548,13 @@ const FOOTER_HTML = `
         <li><a>Términos de uso</a></li>
         <li><a>Cookies</a></li>
       </ul></div>
+    </div>
+    <div class="footer-ad-cta">
+      <div class="footer-ad-cta-text">
+        <strong>¿Tienes un negocio en Las Vegas?</strong>
+        <span>Aparece en nuestra guía y llega a la comunidad latina.</span>
+      </div>
+      <button class="footer-ad-btn" onclick="navigate('ads')">Anúnciate con nosotros →</button>
     </div>
     <div class="footer-bottom">
       <span>© 2025 Latino Las Vegas · Guía en español de Las Vegas</span>
@@ -1419,7 +1568,7 @@ const FOOTER_HTML = `
   </div>
 </footer>`;
 
-['home','explore','listing','about','admin'].forEach(id => {
+['home','explore','listing','about','ads','admin'].forEach(id => {
   const el = document.getElementById('footer-' + id);
   if (el) el.innerHTML = FOOTER_HTML;
 });
@@ -1458,6 +1607,8 @@ function navigate(page, param) {
       document.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === param));
     }
     applyFilters();
+  } else if (page === 'ads') {
+    document.getElementById('page-ads').classList.add('active');
   } else if (page === 'about') {
     document.getElementById('page-about').classList.add('active');
     if (param === 'contact') setTimeout(scrollToContact, 100);
@@ -1511,6 +1662,16 @@ const SEO_DATA = {
     desc: 'Los mejores clubes, bares y cantinas en Las Vegas para la comunidad latina. Guía completa en español de la vida nocturna de Las Vegas.',
     schema: { "@context":"https://schema.org","@type":"CollectionPage","name":"Vida Nocturna en Las Vegas","description":"Guía de vida nocturna en Las Vegas en español para la comunidad latina.","url":"https://latino-las-vegas.vercel.app/vida-nocturna","inLanguage":"es" },
     intro: '<p>La vida nocturna de Las Vegas es legendaria — pero no todos los clubes son iguales, y navigarla sin conocer la ciudad puede costarte caro. Nuestra guía en español te lleva a los mejores clubes latinos, cantinas, lounges y spots donde la comunidad se reúne.</p><p>Desde el OMNIA en Caesars hasta las cantinas más auténticas del oeste de Las Vegas, tenemos todos los precios de entrada, horarios reales y lo que necesitas saber para tener la mejor noche de tu vida.</p>'
+  },
+  ads: {
+    title: 'Anúnciate con Nosotros | Latino Las Vegas',
+    desc: 'Llega a la comunidad latina de Las Vegas. Listados destacados, patrocinios y más. Pon tu negocio frente a los clientes correctos.',
+    schema: { "@context":"https://schema.org","@type":"WebPage","name":"Anúnciate en Latino Las Vegas","description":"Opciones de publicidad y listados para negocios que quieren llegar a la comunidad latina de Las Vegas.","url":"https://latino-las-vegas.vercel.app/anunciate","inLanguage":"es" }
+  },
+  ads: {
+    title: 'Anúnciate con Nosotros | Latino Las Vegas',
+    desc: 'Llega a la comunidad latina de Las Vegas. Listados destacados, patrocinios y más. Pon tu negocio frente a los clientes correctos.',
+    schema: { "@context":"https://schema.org","@type":"WebPage","name":"Anúnciate en Latino Las Vegas","description":"Opciones de publicidad y listados para negocios en Las Vegas.","url":"https://latino-las-vegas.vercel.app/anunciate","inLanguage":"es" }
   },
   about: {
     title: 'Sobre Nosotros | Latino Las Vegas',
@@ -1576,7 +1737,7 @@ function setSchema(schemaObj) {
 
 // ─── URL ROUTING ───
 const URL_MAP = {
-  home: '/', explore: '/explorar', about: '/nosotros', admin: '/admin',
+  home: '/', explore: '/explorar', about: '/nosotros', ads: '/anunciate', admin: '/admin',
   hoteles: '/hoteles', restaurantes: '/restaurantes', shows: '/shows', nocturna: '/vida-nocturna'
 };
 
