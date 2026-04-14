@@ -39,34 +39,29 @@ const faqJsonLd = {
 };
 
 export default function RestaurantesMexicanosGuide() {
-  const [restaurants, setRestaurants] = useState<any[]>([]
-  const [loading, setLoading] = useState(true
+  const [restaurants, setRestaurants] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     document.title = PAGE_TITLE;
-    const meta = document.querySelector('meta[name="description"]'
-    if (meta) meta.setAttribute("content", PAGE_DESCRIPTION
+    const meta = document.querySelector('meta[name="description"]');
+    if (meta) meta.setAttribute("content", PAGE_DESCRIPTION);
 
     async function fetchRestaurants() {
       const { data } = await supabase
         .from("listings")
-        .select("name, slug, image, image2, google_rating, price, region, description, cat_label, recomendacion_resumen, recomendado_bullets")
+        .select("name, slug, image, image2, google_rating, price, region, description, cuisine, recomendacion_resumen, recomendado_bullets")
         .eq("cuisine", "Mexicana")
-        .order("google_rating", { ascending: false }).limit(10
+        .order("google_rating", { ascending: false })
+        .limit(10);
 
       if (data) {
-        // All results are already Mexican
-          
-          
-          
-          
-        
-        setRestaurants(mexican.length > 0 ? mexican : data.slice(0, 8)
+        setRestaurants(data);
       }
-      setLoading(false
+      setLoading(false);
     }
-    fetchRestaurants(
-  }, []
+    fetchRestaurants();
+  }, []);
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -98,21 +93,21 @@ export default function RestaurantesMexicanosGuide() {
         <div className="container relative">
           <div className="flex items-center justify-center gap-2 mb-6">
             <Link href="/" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Inicio</Link>
-            <span className="text-dark-text-muted text-[12px]">&rsaquo;</span>
+            <span className="text-dark-text-muted text-[12px]">{"\u203A"}</span>
             <Link href="/restaurantes" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Restaurantes</Link>
-            <span className="text-dark-text-muted text-[12px]">&rsaquo;</span>
+            <span className="text-dark-text-muted text-[12px]">{"\u203A"}</span>
             <span className="text-[12px] text-dark-text-muted">Mexicanos</span>
           </div>
-          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">Gu&iacute;a local</div>
+          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">{"Gu\u00eda local"}</div>
           <h1 className="font-display text-[clamp(48px,8vw,96px)] tracking-[4px] leading-[0.9] mb-5 text-dark-text">
             RESTAURANTES<br /><span className="text-red">MEXICANOS</span>
           </h1>
           <p className="text-[19px] text-dark-text-2 max-w-[640px] mx-auto mb-9 leading-relaxed">
-            Los mejores restaurantes mexicanos en Las Vegas &mdash; desde taquer&iacute;as callejeras hasta alta cocina. Rese&ntilde;as honestas de un local que realmente come aqu&iacute;.
+            {"Los mejores restaurantes mexicanos en Las Vegas \u2014 desde taquer\u00edas callejeras hasta alta cocina. Rese\u00f1as honestas de un local que realmente come aqu\u00ed."}
           </p>
           <div className="flex justify-center">
             <Link href="/explorar?cat=restaurantes&cocina=mexicano" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all">
-              Explorar restaurantes mexicanos &rarr;
+              {"Explorar restaurantes mexicanos \u2192"}
             </Link>
           </div>
         </div>
@@ -121,10 +116,10 @@ export default function RestaurantesMexicanosGuide() {
       {/* Intro */}
       <section className="py-16 bg-background">
         <div className="container max-w-[800px]">
-          <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">Las Vegas es una de las ciudades con m&aacute;s opciones de comida mexicana fuera de M&eacute;xico. Desde taquer&iacute;as abiertas hasta las 3am hasta restaurantes de alta cocina en el Strip &mdash; hay opciones para todos los gustos y presupuestos.</p>
-          <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">Esta gu&iacute;a re&uacute;ne los restaurantes mexicanos m&aacute;s populares y mejor calificados de Las Vegas. Investigamos rese&ntilde;as, hablamos con la comunidad, y seleccionamos los que consistentemente reciben las mejores recomendaciones.</p>
-          <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">Si ya visitaste alguno de estos lugares, d&eacute;janos saber tu experiencia &mdash; esta gu&iacute;a crece con la comunidad.</p>
-          <p className="text-[13px] text-muted-foreground/60">&Uacute;ltima actualizaci&oacute;n: abril 2026</p>
+          <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">{"Las Vegas es una de las ciudades con m\u00e1s opciones de comida mexicana fuera de M\u00e9xico. Desde taquer\u00edas abiertas hasta las 3am hasta restaurantes de alta cocina en el Strip \u2014 hay opciones para todos los gustos y presupuestos."}</p>
+          <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">{"Esta gu\u00eda re\u00fane los restaurantes mexicanos m\u00e1s populares y mejor calificados de Las Vegas. Investigamos rese\u00f1as, hablamos con la comunidad, y seleccionamos los que consistentemente reciben las mejores recomendaciones."}</p>
+          <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">{"Si ya visitaste alguno de estos lugares, d\u00e9janos saber tu experiencia \u2014 esta gu\u00eda crece con la comunidad."}</p>
+          <p className="text-[13px] text-muted-foreground/60">{"\u00daltima actualizaci\u00f3n: abril 2026"}</p>
         </div>
       </section>
 
@@ -143,12 +138,12 @@ export default function RestaurantesMexicanosGuide() {
                     <div className="flex gap-0 overflow-hidden">
                       {r.image && (
                         <div className={`relative ${r.image2 ? "w-1/2" : "w-full"} h-[220px] md:h-[260px]`}>
-                          <img src={r.image} alt={`${r.name} — restaurante mexicano en Las Vegas`} className="w-full h-full object-cover" loading={i < 3 ? "eager" : "lazy"} />
+                          <img src={r.image} alt={`${r.name} \u2014 restaurante mexicano en Las Vegas`} className="w-full h-full object-cover" loading={i < 3 ? "eager" : "lazy"} />
                         </div>
                       )}
                       {r.image2 && (
                         <div className={`relative ${r.image ? "w-1/2" : "w-full"} h-[220px] md:h-[260px]`}>
-                          <img src={r.image2} alt={`${r.name} — comida y ambiente`} className="w-full h-full object-cover" loading="lazy" />
+                          <img src={r.image2} alt={`${r.name} \u2014 comida y ambiente`} className="w-full h-full object-cover" loading="lazy" />
                         </div>
                       )}
                     </div>
@@ -162,8 +157,10 @@ export default function RestaurantesMexicanosGuide() {
                         </h2>
                       </div>
                       <div className="text-right">
-                        <div className="text-[15px] font-bold text-gold">{r.google_rating ? `★ ${r.google_rating}` : ""}</div>
-                        <div className="text-[13px] text-muted-foreground">{r.price || ""} {r.region ? `· ${r.region}` : ""}</div>
+                        {r.google_rating && (
+                          <div className="text-[15px] font-bold text-gold">{`\u2605 ${r.google_rating}`}</div>
+                        )}
+                        <div className="text-[13px] text-muted-foreground">{r.price || ""}{r.region ? ` \u00b7 ${r.region}` : ""}</div>
                       </div>
                     </div>
                     <p className="text-[15px] text-foreground/80 leading-relaxed mb-5">{r.description}</p>
@@ -203,18 +200,18 @@ export default function RestaurantesMexicanosGuide() {
       {/* Related Guides */}
       <section className="py-16 bg-background border-t border-border">
         <div className="container max-w-[900px]">
-          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5 text-center">Gu&iacute;as relacionadas</div>
-          <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] text-center mb-10">EXPLORA M&Aacute;S DE LAS VEGAS</h2>
+          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5 text-center">{"Gu\u00edas relacionadas"}</div>
+          <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] text-center mb-10">{"EXPLORA M\u00c1S DE LAS VEGAS"}</h2>
           <div className="grid md:grid-cols-2 gap-4">
             <Link href="/guia/shows-en-espanol-las-vegas" className="group block rounded-xl border border-border p-6 hover:border-red/30 hover:shadow-card transition-all">
-              <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-2 block">Gu&iacute;a</span>
-              <span className="font-condensed text-[22px] font-bold group-hover:text-red transition-colors block mb-2">Shows en Espa&ntilde;ol</span>
-              <span className="text-[13px] text-muted-foreground">Los mejores espect&aacute;culos y shows que puedes disfrutar en espa&ntilde;ol en Las Vegas.</span>
+              <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-2 block">{"Gu\u00eda"}</span>
+              <span className="font-condensed text-[22px] font-bold group-hover:text-red transition-colors block mb-2">{"Shows en Espa\u00f1ol"}</span>
+              <span className="text-[13px] text-muted-foreground">{"Los mejores espect\u00e1culos y shows que puedes disfrutar en espa\u00f1ol en Las Vegas."}</span>
             </Link>
             <Link href="/guia/vida-nocturna-latina-las-vegas" className="group block rounded-xl border border-border p-6 hover:border-red/30 hover:shadow-card transition-all">
-              <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-2 block">Gu&iacute;a</span>
+              <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-2 block">{"Gu\u00eda"}</span>
               <span className="font-condensed text-[22px] font-bold group-hover:text-red transition-colors block mb-2">Vida Nocturna Latina</span>
-              <span className="text-[13px] text-muted-foreground">Clubs, bares y noches latinas &mdash; reggaet&oacute;n, salsa, bachata y m&aacute;s en Las Vegas.</span>
+              <span className="text-[13px] text-muted-foreground">{"Clubs, bares y noches latinas \u2014 reggaet\u00f3n, salsa, bachata y m\u00e1s en Las Vegas."}</span>
             </Link>
           </div>
         </div>
@@ -223,11 +220,11 @@ export default function RestaurantesMexicanosGuide() {
       {/* Bottom CTA */}
       <section className="py-16 bg-dark-2 text-center">
         <div className="container max-w-[600px]">
-          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">Explora m&aacute;s</div>
-          <h2 className="font-display text-[48px] tracking-[2px] text-dark-text mb-4">&iquest;Buscas M&aacute;s Opciones?</h2>
-          <p className="text-dark-text-2 leading-relaxed mb-8">Nuestro directorio tiene restaurantes de todo tipo en Las Vegas &mdash; desde comida peruana y colombiana hasta los mejores buffets.</p>
+          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">{"Explora m\u00e1s"}</div>
+          <h2 className="font-display text-[48px] tracking-[2px] text-dark-text mb-4">{"\u00bfBuscas M\u00e1s Opciones?"}</h2>
+          <p className="text-dark-text-2 leading-relaxed mb-8">{"Nuestro directorio tiene restaurantes de todo tipo en Las Vegas \u2014 desde comida peruana y colombiana hasta los mejores buffets."}</p>
           <div className="flex gap-3 justify-center flex-wrap">
-            <Link href="/explorar?cat=restaurantes" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all">Ver todos los restaurantes &rarr;</Link>
+            <Link href="/explorar?cat=restaurantes" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all">{"Ver todos los restaurantes \u2192"}</Link>
             <Link href="/hoteles" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm border border-[rgba(255,255,255,0.15)] text-dark-text-2 hover:text-dark-text hover:border-[rgba(255,255,255,0.3)] transition-all">Hoteles en Las Vegas</Link>
           </div>
         </div>
@@ -235,5 +232,5 @@ export default function RestaurantesMexicanosGuide() {
 
       <Footer />
     </>
-  
+  );
 }
