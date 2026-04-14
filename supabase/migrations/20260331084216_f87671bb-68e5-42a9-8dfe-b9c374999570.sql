@@ -1,0 +1,1 @@
+ALTER TABLE public.listings ADD COLUMN minimum_age text DEFAULT NULL;

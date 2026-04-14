@@ -1,0 +1,1 @@
+UPDATE taxonomy_amenities SET name = 'Valet', slug = 'valet' WHERE id = '8e15aad6-9190-4af6-92c9-6da2191f1313';

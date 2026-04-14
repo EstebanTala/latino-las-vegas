@@ -1,0 +1,1 @@
+ALTER TABLE public.listings ADD COLUMN trending_tag text DEFAULT NULL;

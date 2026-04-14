@@ -1,0 +1,1 @@
+ALTER TABLE public.listings ALTER COLUMN cuisine TYPE text[] USING CASE WHEN cuisine IS NULL THEN NULL ELSE ARRAY[cuisine] END;

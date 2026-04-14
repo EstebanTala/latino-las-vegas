@@ -1,0 +1,1 @@
+ALTER TABLE public.listings ADD COLUMN order_online_url text, ADD COLUMN reservation_url text;

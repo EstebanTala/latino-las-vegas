@@ -1,0 +1,1 @@
+ALTER TABLE public.listings ADD COLUMN useful_info jsonb DEFAULT NULL;

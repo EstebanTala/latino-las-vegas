@@ -1,0 +1,1 @@
+ALTER TABLE public.listings ADD COLUMN popular_dishes jsonb DEFAULT NULL;

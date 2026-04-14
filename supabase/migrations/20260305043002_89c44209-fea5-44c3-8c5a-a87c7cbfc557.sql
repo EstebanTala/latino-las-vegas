@@ -1,0 +1,1 @@
+ALTER TABLE public.taxonomy_amenities ADD COLUMN icon text DEFAULT NULL;

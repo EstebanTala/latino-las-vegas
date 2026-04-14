@@ -1,0 +1,1 @@
+ALTER TABLE public.listings ADD COLUMN IF NOT EXISTS tiktok TEXT, ADD COLUMN IF NOT EXISTS twitter_x TEXT;
