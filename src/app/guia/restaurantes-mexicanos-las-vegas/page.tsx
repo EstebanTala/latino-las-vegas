@@ -149,18 +149,16 @@ export default function RestaurantesMexicanosGuide() {
                     </div>
                   )}
                   <div className="p-6 md:p-8">
-                    <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
-                      <div>
-                        <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-1 block">#{i + 1}</span>
-                        <h2 className="font-condensed text-[28px] font-bold leading-tight">
-                          <Link href={`/lugar/${r.slug}`} className="hover:text-red transition-colors">{r.name}</Link>
-                        </h2>
-                      </div>
-                      <div className="text-right">
-                        {r.google_rating && (
-                          <div className="text-[15px] font-bold text-gold">{`\u2605 ${r.google_rating}`}</div>
-                        )}
-                        <div className="text-[13px] text-muted-foreground">{r.price || ""}{r.region ? ` \u00b7 ${r.region}` : ""}</div>
+                    <div className="mb-4">
+                      <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-1 block">#{i + 1}</span>
+                      <h2 className="font-condensed text-[28px] font-bold leading-tight mb-2">
+                        <Link href={`/lugar/${r.slug}`} className="hover:text-red transition-colors">{r.name}</Link>
+                      </h2>
+                      <div className="flex items-center gap-1.5 text-[14px]">
+                        {r.google_rating && <span className="font-bold text-gold">{`\u2605 ${r.google_rating}`}</span>}
+                        {r.google_rating && <span className="text-muted-foreground">\u00b7</span>}
+                        {r.price && <span className="text-muted-foreground">{r.price}</span>}
+                        {r.region && <span className="text-muted-foreground">{`\u00b7 ${r.region}`}</span>}
                       </div>
                     </div>
                     <p className="text-[15px] text-foreground/80 leading-relaxed mb-5">{r.description}</p>
