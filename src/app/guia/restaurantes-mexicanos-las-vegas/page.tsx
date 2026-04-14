@@ -50,9 +50,9 @@ export default function RestaurantesMexicanosGuide() {
     async function fetchRestaurants() {
       const { data } = await supabase
         .from("listings")
-        .select("name, slug, image, image2, stars, price, region, description, cat_label, recomendacion_resumen, recomendado_bullets")
+        .select("name, slug, image, image2, google_rating, price, region, description, cat_label, recomendacion_resumen, recomendado_bullets")
         .eq("cat_label", "Restaurantes")
-        .order("stars", { ascending: false });
+        .order("google_rating", { ascending: false }).limit(10);
 
       if (data) {
         const mexican = data.filter((r: any) =>
@@ -162,7 +162,7 @@ export default function RestaurantesMexicanosGuide() {
                         </h2>
                       </div>
                       <div className="text-right">
-                        <div className="text-[15px] font-bold text-gold">{r.stars ? `★ ${r.stars}` : ""}</div>
+                        <div className="text-[15px] font-bold text-gold">{r.google_rating ? `★ ${r.google_rating}` : ""}</div>
                         <div className="text-[13px] text-muted-foreground">{r.price || ""} {r.region ? `· ${r.region}` : ""}</div>
                       </div>
                     </div>
