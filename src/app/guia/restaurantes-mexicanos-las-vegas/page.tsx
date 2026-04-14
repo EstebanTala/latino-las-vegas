@@ -52,7 +52,7 @@ export default function RestaurantesMexicanosGuide() {
         .from("listings")
         .select("name, slug, image, image2, google_rating, price, region, description, cuisine, recomendacion_resumen, recomendado_bullets")
         .contains("cuisine", ["Mexicana"])
-        .order("google_rating", { ascending: false })
+        .order("google_rating", { ascending: false }).order("google_user_ratings_total", { ascending: false })
         .limit(10);
 
       if (data) {
