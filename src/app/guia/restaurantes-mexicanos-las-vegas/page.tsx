@@ -12,18 +12,20 @@ const faqItems = [
   {
     question: "¿Cuál es el mejor restaurante mexicano en Las Vegas?",
     answer: "Depende de lo que busques. Para tacos auténticos estilo Tijuana, Tacos El Gordo es la opción más popular. Para una experiencia de lujo, Casa Playa en el Wynn es difícil de superar. Para mariscos, Lindo Michoacán y Mariscos Playa Escondida son los favoritos de la comunidad.",
-  },stion: "¿Dónde puedo encontratacos baratos en Las Vegas?",
+  },
+  {
+    question: "¿Dónde puedo encontrar tacos baratos en Las Vegas?",
     answer: "Tacos El Gordo en el Strip ofrece tacos auténticos a buen precio y está abierto hasta las 3am. Casa El Desayuno tiene opciones de desayuno mexicano muy accesibles en múltiples ubicaciones.",
   },
   {
     question: "¿Cuál es el mejor restaurante mexicano cerca del Strip?",
-    answer: "Tacos El Gordo está directamente en el Strip. El Dorado Cantina está a pasos del St estacionamiento gratis. Casa Playa está dentro del Wynn en el corazón del Strip.",
+    answer: "Tacos El Gordo está directamente en el Strip. El Dorado Cantina está a pasos del Strip con estacionamiento gratis. Casa Playa está dentro del Wynn en el corazón del Strip.",
   },
   {
     question: "¿Hay opciones de comida mexicana de lujo en Las Vegas?",
     answer: "Sí. Casa Playa en el Wynn ofrece cocina costera mexicana de alta calidad. Il Toro E La Capra en Downtown fusiona sabores mexicanos con técnicas italianas en un ambiente de fine dining.",
   },
-];
+]];
 
 const faqJsonLd = {
  ntext": "https://schema.org",
