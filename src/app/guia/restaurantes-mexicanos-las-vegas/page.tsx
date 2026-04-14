@@ -84,7 +84,6 @@ export default function RestaurantesMexicanosGuide() {
           <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">{"Las Vegas es una de las ciudades con m\u00e1s opciones de comida mexicana fuera de M\u00e9xico. Desde taquer\u00edas abiertas hasta las 3am hasta restaurantes de alta cocina en el Strip \u2014 hay opciones para todos los gustos y presupuestos."}</p>
           <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">{"Esta gu\u00eda re\u00fane los restaurantes mexicanos m\u00e1s populares y mejor calificados de Las Vegas. Investigamos rese\u00f1as, hablamos con la comunidad, y seleccionamos los que consistentemente reciben las mejores recomendaciones."}</p>
           <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">{"Si ya visitaste alguno de estos lugares, d\u00e9janos saber tu experiencia \u2014 esta gu\u00eda crece con la comunidad."}</p>
-          <p className="text-[13px] text-muted-foreground/60">{"\u00daltima actualizaci\u00f3n: abril 2026"}</p>
         </div>
       </section>
 
