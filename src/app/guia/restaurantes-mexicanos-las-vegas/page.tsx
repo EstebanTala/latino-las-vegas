@@ -39,34 +39,34 @@ const faqJsonLd = {
 };
 
 export default function RestaurantesMexicanosGuide() {
-  const [restaurants, setRestaurants] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [restaurants, setRestaurants] = useState<any[]>([]
+  const [loading, setLoading] = useState(true
 
   useEffect(() => {
     document.title = PAGE_TITLE;
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", PAGE_DESCRIPTION);
+    const meta = document.querySelector('meta[name="description"]'
+    if (meta) meta.setAttribute("content", PAGE_DESCRIPTION
 
     async function fetchRestaurants() {
       const { data } = await supabase
         .from("listings")
         .select("name, slug, image, image2, google_rating, price, region, description, cat_label, recomendacion_resumen, recomendado_bullets")
-        .eq("cat_label", "Restaurantes")
-        .order("google_rating", { ascending: false }).limit(10);
+        .eq("cuisine", "Mexicana")
+        .order("google_rating", { ascending: false }).limit(10
 
       if (data) {
-        const mexican = data.filter((r: any) =>
-          (r.name || "").toLowerCase().includes("mexic") ||
-          (r.description || "").toLowerCase().includes("mexic") ||
-          (r.description || "").toLowerCase().includes("taco") ||
-          (r.description || "").toLowerCase().includes("mexicana")
-        );
-        setRestaurants(mexican.length > 0 ? mexican : data.slice(0, 8));
+        // All results are already Mexican
+          
+          
+          
+          
+        
+        setRestaurants(mexican.length > 0 ? mexican : data.slice(0, 8)
       }
-      setLoading(false);
+      setLoading(false
     }
-    fetchRestaurants();
-  }, []);
+    fetchRestaurants(
+  }, []
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -235,5 +235,5 @@ export default function RestaurantesMexicanosGuide() {
 
       <Footer />
     </>
-  );
+  
 }
