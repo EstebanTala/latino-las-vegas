@@ -9,35 +9,6 @@ import { supabase } from "@/integrations/supabase/client";
 const PAGE_TITLE = "Los Mejores Restaurantes Mexicanos en Las Vegas (2026) \u2014 Latino LV";
 const PAGE_DESCRIPTION = "Gu\u00eda con los mejores restaurantes mexicanos en Las Vegas. Tacos, birria, mariscos y m\u00e1s. Rese\u00f1as de la comunidad, precios y consejos.";
 
-const faqItems = [
-  {
-    question: "\u00bfCu\u00e1l es el mejor restaurante mexicano en Las Vegas?",
-    answer: "Depende de lo que busques. Para tacos aut\u00e9nticos estilo Tijuana, Tacos El Gordo es la opci\u00f3n m\u00e1s popular. Para una experiencia de lujo, Casa Playa en el Wynn es dif\u00edcil de superar.",
-  },
-  {
-    question: "\u00bfD\u00f3nde puedo encontrar tacos baratos en Las Vegas?",
-    answer: "Tacos El Gordo en el Strip ofrece tacos aut\u00e9nticos a buen precio y est\u00e1 abierto hasta las 3am. Casa El Desayuno tiene opciones de desayuno mexicano muy accesibles.",
-  },
-  {
-    question: "\u00bfCu\u00e1l es el mejor restaurante mexicano cerca del Strip?",
-    answer: "Tacos El Gordo est\u00e1 directamente en el Strip. El Dorado Cantina est\u00e1 a pasos del Strip con estacionamiento gratis. Casa Playa est\u00e1 dentro del Wynn.",
-  },
-  {
-    question: "\u00bfHay opciones de comida mexicana de lujo en Las Vegas?",
-    answer: "S\u00ed. Casa Playa en el Wynn ofrece cocina costera mexicana de alta calidad. Il Toro E La Capra en Downtown fusiona sabores mexicanos con t\u00e9cnicas italianas.",
-  },
-];
-
-const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqItems.map((faq) => ({
-    "@type": "Question",
-    name: faq.question,
-    acceptedAnswer: { "@type": "Answer", text: faq.answer },
-  })),
-};
-
 export default function RestaurantesMexicanosGuide() {
   const [restaurants, setRestaurants] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -84,7 +55,6 @@ export default function RestaurantesMexicanosGuide() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <Navbar />
 
       {/* Hero */}
@@ -173,25 +143,6 @@ export default function RestaurantesMexicanosGuide() {
               ))}
             </div>
           )}
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-16 bg-dark-2 border-t border-white/5">
-        <div className="container max-w-[700px]">
-          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5 text-center">Preguntas frecuentes</div>
-          <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] text-dark-text text-center mb-10">COMIDA MEXICANA EN LAS VEGAS</h2>
-          <div className="space-y-4">
-            {faqItems.map((faq, i) => (
-              <details key={i} className="group bg-[rgba(255,255,255,0.03)] rounded-lg border border-white/5 overflow-hidden">
-                <summary className="flex items-center justify-between p-5 cursor-pointer text-[15px] font-bold text-dark-text hover:text-red transition-colors list-none [&::-webkit-details-marker]:hidden">
-                  <span className="pr-4">{faq.question}</span>
-                  <span className="text-red text-[20px] shrink-0 group-open:rotate-45 transition-transform">+</span>
-                </summary>
-                <div className="px-5 pb-5 text-[14px] text-dark-text-2 leading-relaxed">{faq.answer}</div>
-              </details>
-            ))}
-          </div>
         </div>
       </section>
 
