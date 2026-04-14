@@ -41,7 +41,7 @@ export default function RestaurantesMexicanosGuide() {
     description: PAGE_DESCRIPTION,
     author: { "@type": "Organization", name: "Latino Las Vegas" },
     publisher: { "@type": "Organization", name: "Latino Las Vegas", url: "https://latinolasvegas.com" },
-    url: "https://latinolasvegas.com/guia/restaurantes-mexicanos-las-vegas",
+    url: "https://latinolasvegas.com/guia/explorar?cat=restaurantes-mexicanos-las-vegas",
     mainEntity: {
       "@type": "ItemList",
       itemListElement: restaurants.map((r, i) => ({
@@ -64,7 +64,7 @@ export default function RestaurantesMexicanosGuide() {
           <div className="flex items-center justify-center gap-2 mb-6">
             <Link href="/" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Inicio</Link>
             <span className="text-dark-text-muted text-[12px]">{"\u203A"}</span>
-            <Link href="/restaurantes" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Restaurantes</Link>
+            <Link href="/explorar?cat=restaurantes" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Restaurantes</Link>
             <span className="text-dark-text-muted text-[12px]">{"\u203A"}</span>
             <span className="text-[12px] text-dark-text-muted">Mexicanos</span>
           </div>
@@ -76,7 +76,7 @@ export default function RestaurantesMexicanosGuide() {
             {"Los mejores restaurantes mexicanos en Las Vegas \u2014 desde taquer\u00edas callejeras hasta alta cocina. Rese\u00f1as honestas de un local que realmente come aqu\u00ed."}
           </p>
           <div className="flex justify-center">
-            <Link href="/categoria/restaurantes" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all">
+            <Link href="/categoria/explorar?cat=restaurantes" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all">
               {"Explorar restaurantes mexicanos \u2192"}
             </Link>
           </div>
