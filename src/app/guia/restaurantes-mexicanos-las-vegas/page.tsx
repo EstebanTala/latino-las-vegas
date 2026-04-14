@@ -75,11 +75,6 @@ export default function RestaurantesMexicanosGuide() {
           <p className="text-[19px] text-dark-text-2 max-w-[640px] mx-auto mb-9 leading-relaxed">
             {"Los mejores restaurantes mexicanos en Las Vegas \u2014 desde taquer\u00edas callejeras hasta alta cocina. Rese\u00f1as honestas de un local que realmente come aqu\u00ed."}
           </p>
-          <div className="flex justify-center">
-            <Link href="/categoria/explorar?cat=restaurantes" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all">
-              {"Explorar restaurantes mexicanos \u2192"}
-            </Link>
-          </div>
         </div>
       </div>
 
