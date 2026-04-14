@@ -1,50 +1,65 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { supabase } from "@/integrations/supabase/client";
 
-const PAGE_TITLE = "Los Mejores Restaurantes Mexicanos en Las Vegas (2026) \u2014 Latino LV";
-const PAGE_DESCRIPTION = "Gu\u00eda con los mejores restaurantes mexicanos en Las Vegas. Tacos, birria, mariscos y m\u00e1s. Rese\u00f1as de la comunidad, precios y consejos.";
+export const metadata: Metadata = {
+  title: "Los Mejores Restaurantes Mexicanos en Las Vegas (2026) \u2014 Latino LV",
+  description: "Gu\u00eda con los mejores restaurantes mexicanos en Las Vegas. Tacos, birria, mariscos y m\u00e1s. Rese\u00f1as de la comunidad, precios y consejos.",
+  openGraph: {
+    title: "Los Mejores Restaurantes Mexicanos en Las Vegas (2026)",
+    description: "Gu\u00eda con los mejores restaurantes mexicanos en Las Vegas. Tacos, birria, mariscos y m\u00e1s.",
+    url: "https://latinolasvegas.com/guia/restaurantes-mexicanos-las-vegas",
+    siteName: "Latino Las Vegas",
+    locale: "es_MX",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Los Mejores Restaurantes Mexicanos en Las Vegas (2026)",
+    description: "Gu\u00eda con los mejores restaurantes mexicanos en Las Vegas.",
+  },
+  alternates: {
+    canonical: "https://latinolasvegas.com/guia/restaurantes-mexicanos-las-vegas",
+  },
+};
 
-export default function RestaurantesMexicanosGuide() {
-  const [restaurants, setRestaurants] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+export const revalidate = 3600; // Revalidate every hour
 
-  useEffect(() => {
-    document.title = PAGE_TITLE;
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) meta.setAttribute("content", PAGE_DESCRIPTION);
+async function getRestaurants() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) return [];
 
-    async function fetchRestaurants() {
-      const { data } = await supabase
-        .from("listings")
-        .select("name, slug, image, image2, google_rating, price, region, description, cuisine, recomendacion_resumen, recomendado_bullets")
-        .contains("cuisine", ["Mexicana"])
-        .order("google_rating", { ascending: false }).order("google_user_ratings_total", { ascending: false })
-        .limit(10);
-
-      if (data) {
-        setRestaurants(data);
-      }
-      setLoading(false);
+  const res = await fetch(
+    `${url}/rest/v1/listings?cuisine=cs.{Mexicana}&order=google_rating.desc.nullslast&limit=10&select=name,slug,image,image2,google_rating,price,region,description,cuisine,recomendacion_resumen,recomendado_bullets`,
+    {
+      headers: {
+        apikey: key,
+        Authorization: `Bearer ${key}`,
+      },
+      next: { revalidate: 3600 },
     }
-    fetchRestaurants();
-  }, []);
+  );
+
+  if (!res.ok) return [];
+  return res.json();
+}
+
+export default async function RestaurantesMexicanosGuide() {
+  const restaurants = await getRestaurants();
 
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: PAGE_TITLE,
-    description: PAGE_DESCRIPTION,
+    headline: "Los Mejores Restaurantes Mexicanos en Las Vegas (2026)",
+    description: "Gu\u00eda con los mejores restaurantes mexicanos en Las Vegas.",
     author: { "@type": "Organization", name: "Latino Las Vegas" },
     publisher: { "@type": "Organization", name: "Latino Las Vegas", url: "https://latinolasvegas.com" },
-    url: "https://latinolasvegas.com/guia/explorar?cat=restaurantes-mexicanos-las-vegas",
+    url: "https://latinolasvegas.com/guia/restaurantes-mexicanos-las-vegas",
     mainEntity: {
       "@type": "ItemList",
-      itemListElement: restaurants.map((r, i) => ({
+      itemListElement: restaurants.map((r: any, i: number) => ({
         "@type": "ListItem",
         position: i + 1,
         item: { "@type": "Restaurant", name: r.name, priceRange: r.price },
@@ -64,7 +79,7 @@ export default function RestaurantesMexicanosGuide() {
           <div className="flex items-center justify-center gap-2 mb-6">
             <Link href="/" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Inicio</Link>
             <span className="text-dark-text-muted text-[12px]">{"\u203A"}</span>
-            <Link href="/explorar?cat=restaurantes" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Restaurantes</Link>
+            <Link href="/restaurantes" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Restaurantes</Link>
             <span className="text-dark-text-muted text-[12px]">{"\u203A"}</span>
             <span className="text-[12px] text-dark-text-muted">Mexicanos</span>
           </div>
@@ -83,20 +98,18 @@ export default function RestaurantesMexicanosGuide() {
         <div className="container max-w-[800px]">
           <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">{"Las Vegas es una de las ciudades con m\u00e1s opciones de comida mexicana fuera de M\u00e9xico. Desde taquer\u00edas abiertas hasta las 3am hasta restaurantes de alta cocina en el Strip \u2014 hay opciones para todos los gustos y presupuestos."}</p>
           <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">{"Esta gu\u00eda re\u00fane los restaurantes mexicanos m\u00e1s populares y mejor calificados de Las Vegas. Investigamos rese\u00f1as, hablamos con la comunidad, y seleccionamos los que consistentemente reciben las mejores recomendaciones."}</p>
-          <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">{"Si ya visitaste alguno de estos lugares, d\u00e9janos saber tu experiencia \u2014 esta gu\u00eda crece con la comunidad."}</p>
+          <p className="text-[17px] text-muted-foreground leading-relaxed">{"Si ya visitaste alguno de estos lugares, d\u00e9janos saber tu experiencia \u2014 esta gu\u00eda crece con la comunidad."}</p>
         </div>
       </section>
 
       {/* Restaurant List */}
       <section className="pb-20 bg-background">
         <div className="container max-w-[900px]">
-          {loading ? (
-            <div className="text-center py-20 text-muted-foreground">Cargando restaurantes...</div>
-          ) : restaurants.length === 0 ? (
+          {restaurants.length === 0 ? (
             <div className="text-center py-20 text-muted-foreground">No se encontraron restaurantes mexicanos.</div>
           ) : (
             <div className="space-y-10">
-              {restaurants.map((r, i) => (
+              {restaurants.map((r: any, i: number) => (
                 <article key={r.slug} className="border border-border rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all">
                   {(r.image || r.image2) && (
                     <div className="flex gap-0 overflow-hidden">
@@ -120,9 +133,9 @@ export default function RestaurantesMexicanosGuide() {
                       </h2>
                       <div className="flex items-center gap-1.5 text-[14px]">
                         {r.google_rating && <span className="font-bold text-gold">{`\u2605 ${r.google_rating}`}</span>}
-                        {r.google_rating && <span className="text-muted-foreground">·</span>}
+                        {r.google_rating && <span className="text-muted-foreground">{"\u00b7"}</span>}
                         {r.price && <span className="text-muted-foreground">{r.price}</span>}
-                        {r.region && <span className="text-muted-foreground">{`· ${r.region}`}</span>}
+                        {r.region && <span className="text-muted-foreground">{`\u00b7 ${r.region}`}</span>}
                       </div>
                     </div>
                     <p className="text-[15px] text-foreground/80 leading-relaxed mb-5">{r.description}</p>
@@ -139,7 +152,7 @@ export default function RestaurantesMexicanosGuide() {
           )}
           <div className="flex justify-center mt-12">
             <Link href="/explorar?cat=restaurantes" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all">
-              Ver todos los restaurantes →
+              {"Ver todos los restaurantes \u2192"}
             </Link>
           </div>
         </div>
