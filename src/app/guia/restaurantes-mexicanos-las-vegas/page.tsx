@@ -143,6 +143,11 @@ export default function RestaurantesMexicanosGuide() {
               ))}
             </div>
           )}
+          <div className="flex justify-center mt-12">
+            <Link href="/explorar?cat=restaurantes" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all">
+              Ver todos los restaurantes →
+            </Link>
+          </div>
         </div>
       </section>
 
