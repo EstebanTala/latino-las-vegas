@@ -51,7 +51,7 @@ export default function RestaurantesMexicanosGuide() {
       const { data } = await supabase
         .from("listings")
         .select("name, slug, image, image2, stars, price, region, description, cat_label, recomendacion_resumen, recomendado_bullets")
-        .eq("cat_label", "Restaurante")
+        .eq("cat_label", "Restaurantes")
         .order("stars", { ascending: false });
 
       if (data) {
