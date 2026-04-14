@@ -367,15 +367,6 @@ export default function RestaurantesMexicanosGuide() {
                       </p>
                     </div>
 
-                    {/* Link to listing */}
-                    <div className="mt-4 pt-4 border-t border-border">
-                      <Link
-                        href={`/lugar/${r.slug}`}
-                        className="text-[13px] font-bold tracking-[1px] uppercase text-red/80 hover:text-red transition-colors"
-                      >
-                        Ver en directorio →
-                      </Link>
-                    </div>
                   </div>
                 </article>
               );
