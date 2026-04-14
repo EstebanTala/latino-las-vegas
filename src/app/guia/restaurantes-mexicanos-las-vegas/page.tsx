@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { createClient } from "@/integrations/supabase/client";
 
 export const metadata: Metadata = {
   title: "Los Mejores Restaurantes Mexicanos en Las Vegas (2026) — Latino LV",
@@ -197,24 +196,10 @@ const articleJsonLd = {
   },
 };
 
-async function getRestaurantImages() {
-  const supabase = createClient();
-  const slugs = restaurants.map((r) => r.slug);
-  const { data } = await supabase
-    .from("listings")
-    .select("slug, image, image2")
-    .in("slug", slugs);
-  const imageMap: Record<string, { image?: string; image2?: string }> = {};
-  if (data) {
-    data.forEach((row: { slug: string; image?: string; image2?: string }) => {
-      imageMap[row.slug] = { image: row.image ?? undefined, image2: row.image2 ?? undefined };
-    });
-  }
-  return imageMap;
-}
 
-export default async function RestaurantesMexicanosGuide() {
-  const images = await getRestaurantImages();
+
+export default function RestaurantesMexicanosGuide() {
+  const images: Record<string, { image?: string; image2?: string }> = {};
 
   return (
     <>
