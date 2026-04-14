@@ -156,9 +156,9 @@ export default function RestaurantesMexicanosGuide() {
                       </h2>
                       <div className="flex items-center gap-1.5 text-[14px]">
                         {r.google_rating && <span className="font-bold text-gold">{`\u2605 ${r.google_rating}`}</span>}
-                        {r.google_rating && <span className="text-muted-foreground">\u00b7</span>}
+                        {r.google_rating && <span className="text-muted-foreground">·</span>}
                         {r.price && <span className="text-muted-foreground">{r.price}</span>}
-                        {r.region && <span className="text-muted-foreground">{`\u00b7 ${r.region}`}</span>}
+                        {r.region && <span className="text-muted-foreground">{`· ${r.region}`}</span>}
                       </div>
                     </div>
                     <p className="text-[15px] text-foreground/80 leading-relaxed mb-5">{r.description}</p>
