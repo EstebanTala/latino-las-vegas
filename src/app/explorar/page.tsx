@@ -53,7 +53,7 @@ const catPlaceholders: Record<string, string> = {
 };
 
 function ExplorePageInner() {
-  const [searchParams] = useSearchParams();
+  const searchParams = useSearchParams();
   const initialCat = searchParams.get("cat") || "hoteles";
   const initialQ = searchParams.get("q") || "";
   const initialCocinaSlug = searchParams.get("cocina") || "";
