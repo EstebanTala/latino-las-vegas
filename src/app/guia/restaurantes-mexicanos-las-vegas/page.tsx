@@ -166,19 +166,6 @@ export default function RestaurantesMexicanosGuide() {
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="py-16 bg-dark-2 text-center">
-        <div className="container max-w-[600px]">
-          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">{"Explora m\u00e1s"}</div>
-          <h2 className="font-display text-[48px] tracking-[2px] text-dark-text mb-4">{"\u00bfBuscas M\u00e1s Opciones?"}</h2>
-          <p className="text-dark-text-2 leading-relaxed mb-8">{"Nuestro directorio tiene restaurantes de todo tipo en Las Vegas \u2014 desde comida peruana y colombiana hasta los mejores buffets."}</p>
-          <div className="flex gap-3 justify-center flex-wrap">
-            <Link href="/explorar?cat=restaurantes" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all">{"Ver todos los restaurantes \u2192"}</Link>
-            <Link href="/hoteles" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm border border-[rgba(255,255,255,0.15)] text-dark-text-2 hover:text-dark-text hover:border-[rgba(255,255,255,0.3)] transition-all">Hoteles en Las Vegas</Link>
-          </div>
-        </div>
-      </section>
-
       <Footer />
     </>
   );
