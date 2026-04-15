@@ -32,7 +32,7 @@ async function getShows() {
   if (!url || !key) return [];
 
   const res = await fetch(
-    `${url}/rest/v1/listings?cat_label=eq.Shows %26 Eventos&order=google_rating.desc.nullslast&limit=15&select=name,slug,image,image2,google_rating,price_from,region,description,show_experience_type,recomendacion_resumen,recomendado_bullets`,
+    `${url}/rest/v1/listings?cat_label=eq.Shows %26 Eventos&order=google_rating.desc.nullslast,google_user_ratings_total.desc.nullslast&limit=15&select=name,slug,image,image2,google_rating,price_from,region,description,show_experience_type,recomendacion_resumen,recomendado_bullets`,
     {
       headers: {
         apikey: key,
