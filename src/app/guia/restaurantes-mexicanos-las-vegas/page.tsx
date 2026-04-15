@@ -79,7 +79,7 @@ export default async function RestaurantesMexicanosGuide() {
           <div className="flex items-center justify-center gap-2 mb-6">
             <Link href="/" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Inicio</Link>
             <span className="text-dark-text-muted text-[12px]">{"\u203A"}</span>
-            <Link href="/restaurantes" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Restaurantes</Link>
+            <Link href="/explorar?cat=restaurantes" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Restaurantes</Link>
             <span className="text-dark-text-muted text-[12px]">{"\u203A"}</span>
             <span className="text-[12px] text-dark-text-muted">Mexicanos</span>
           </div>

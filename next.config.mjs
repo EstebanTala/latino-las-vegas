@@ -17,6 +17,11 @@ const nextConfig = {
         destination: '/guia/mejores-shows-las-vegas',
         permanent: true,
       },
+      {
+        source: '/restaurantes',
+        destination: '/explorar?cat=restaurantes',
+        permanent: true,
+      },
     ];
   },
 };
