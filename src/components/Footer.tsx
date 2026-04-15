@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="bg-dark border-t border-[hsl(var(--dark-border))] pt-14 pb-7">
       <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-14 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-14 mb-12">
           <div>
             <Link href="/" className="font-display text-2xl tracking-[2px] flex items-center gap-2.5 text-dark-text">
               <div className="w-9 h-9 bg-red rounded-lg flex items-center justify-center text-[15px] text-primary-foreground font-display tracking-[1px] shadow-[0_0_20px_hsl(var(--glow-red))]">LLV</div>
@@ -19,6 +19,14 @@ export default function Footer() {
               <li><Link href="/explorar?cat=restaurantes" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Restaurantes</Link></li>
               <li><Link href="/explorar?cat=shows" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Shows & Eventos</Link></li>
               <li><Link href="/explorar?cat=nocturna" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Vida Nocturna</Link></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-condensed text-xs font-bold tracking-[2.5px] uppercase text-dark-text-muted mb-4">Guías</h4>
+            <ul className="space-y-3">
+              <li><Link href="/guia/restaurantes-mexicanos-las-vegas" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Restaurantes Mexicanos</Link></li>
+              <li><Link href="/guia/mejores-shows-las-vegas" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Mejores Shows</Link></li>
+              <li><Link href="/guia/vida-nocturna-latina-las-vegas" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Vida Nocturna Latina</Link></li>
             </ul>
           </div>
           <div>
