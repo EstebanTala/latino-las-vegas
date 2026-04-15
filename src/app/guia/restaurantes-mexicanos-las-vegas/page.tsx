@@ -150,9 +150,13 @@ export default async function RestaurantesMexicanosGuide() {
               ))}
             </div>
           )}
-          <div className="flex justify-center mt-12">
-            <Link href="/explorar?cat=restaurantes" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all">
-              {"Ver todos los restaurantes \u2192"}
+          {/* Directory CTA */}
+          <div className="mt-16 rounded-xl bg-[rgba(5,5,5,0.95)] border border-white/[0.08] p-10 text-center">
+            <p className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-3">Directorio completo</p>
+            <h3 className="font-display text-[clamp(22px,4vw,32px)] tracking-[2px] text-white mb-3">{"\u00bfBUSCAS M\u00c1S OPCIONES?"}</h3>
+            <p className="text-[14px] text-[rgba(255,255,255,0.55)] max-w-[500px] mx-auto mb-6 leading-relaxed">{"Explora todos los restaurantes en nuestro directorio \u2014 con filtros por ubicaci\u00f3n, precio y tipo de cocina."}</p>
+            <Link href="/explorar?cat=restaurantes" className="inline-block font-condensed text-[15px] font-bold tracking-[1px] uppercase px-8 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all">
+              {"Explorar todos los restaurantes \u2192"}
             </Link>
           </div>
         </div>
