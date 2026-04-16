@@ -74,7 +74,7 @@ export default async function MejoresShowsGuide() {
 
       {/* Hero */}
       <div className="pt-[140px] pb-20 text-center relative overflow-hidden bg-[linear-gradient(180deg,hsl(var(--dark))_0%,hsl(var(--dark-2))_100%)]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_80%,rgba(232,39,42,0.12)_0%,transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_80%,rgba(251,146,60,0.12)_0%,transparent_60%)]" />
         <div className="container relative">
           <div className="flex items-center justify-center gap-2 mb-6">
             <Link href="/" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Inicio</Link>

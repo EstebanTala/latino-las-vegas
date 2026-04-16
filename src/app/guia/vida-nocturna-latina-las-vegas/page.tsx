@@ -194,13 +194,13 @@ export default async function VidaNocturnaLatinaGuide() {
         <div className="container relative">
           <div className="flex items-center justify-center gap-2 mb-6">
             <Link href="/" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Inicio</Link>
-            <span className="text-dark-text-muted text-[12px]">&gt;</span>
+            <span className="text-dark-text-muted text-[12px]">{"\u203A"}</span>
             <Link href="/explorar?cat=nocturna" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Vida Nocturna</Link>
-            <span className="text-dark-text-muted text-[12px]">&gt;</span>
-            <span className="text-[12px] text-[#C084FC]">Latina</span>
+            <span className="text-dark-text-muted text-[12px]">{"\u203A"}</span>
+            <span className="text-[12px] text-dark-text-muted">Latina</span>
           </div>
           <div className="text-[11px] font-bold tracking-[3px] uppercase text-[#C084FC] mb-2.5">
-            {"Gu\u00eda nocturna \u00b7 2026"}
+            {"Gu\u00eda local"}
           </div>
           <h1 className="font-display text-[clamp(48px,8vw,96px)] tracking-[4px] leading-[0.9] mb-5 text-dark-text">
             VIDA NOCTURNA<br /><span className="text-[#C084FC]">LATINA</span>
