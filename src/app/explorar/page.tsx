@@ -14,7 +14,7 @@ import React from "react";
 
 const catHeroContent: Record<string, { title: React.ReactNode; subtitle: string }> = {
   hoteles: {
-    title: <>HOTELES EN <span className="text-red">LAS VEGAS</span></>,
+    title: <>HOTELES Y CASINOS EN <span className="text-red">LAS VEGAS</span></>,
     subtitle: "Descubre los mejores hoteles y casinos de Las Vegas, desde resorts icónicos en el Strip hasta opciones locales en toda la ciudad.",
   },
   restaurantes: {
