@@ -209,12 +209,7 @@ export default async function VidaNocturnaLatinaGuide() {
             Clubs, discotecas y noches latinas en Las Vegas — reggaeton, salsa,
             banda y m&aacute;s. D&oacute;nde ir, qu&eacute; esperar, y cu&aacute;nto vas a gastar.
           </p>
-          <Link
-            href="#clubs-latinos"
-            className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-[#C084FC] text-white shadow-[0_2px_8px_rgba(192,132,252,0.3)] hover:brightness-110 hover:-translate-y-px transition-all"
-          >
-            {"Ver clubs latinos \u2192"}
-          </Link>
+
         </div>
       </div>
 
