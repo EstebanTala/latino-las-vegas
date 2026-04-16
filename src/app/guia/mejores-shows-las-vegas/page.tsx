@@ -83,9 +83,9 @@ export default async function MejoresShowsGuide() {
             <span className="text-dark-text-muted text-[12px]">{"\u203A"}</span>
             <span className="text-[12px] text-dark-text-muted">{"Qu\u00e9 Ver"}</span>
           </div>
-          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">{"Gu\u00eda local"}</div>
+          <div className="text-[11px] font-bold tracking-[3px] uppercase text-[#FB923C] mb-2.5">{"Gu\u00eda local"}</div>
           <h1 className="font-display text-[clamp(48px,8vw,96px)] tracking-[4px] leading-[0.9] mb-5 text-dark-text">
-            {"QU\u00c9 VER EN"}<br /><span className="text-red">LAS VEGAS</span>
+            {"QU\u00c9 VER EN"}<br /><span className="text-[#FB923C]">LAS VEGAS</span>
           </h1>
           <p className="text-[19px] text-dark-text-2 max-w-[640px] mx-auto mb-9 leading-relaxed">
             {"Los mejores shows y espect\u00e1culos en Las Vegas \u2014 desde Cirque du Soleil hasta conciertos y experiencias \u00fanicas."}
@@ -127,13 +127,13 @@ export default async function MejoresShowsGuide() {
                   )}
                   <div className="p-6 md:p-8">
                     <div className="mb-4">
-                      <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-1 block">#{i + 1}</span>
+                      <span className="text-[11px] font-bold tracking-[2px] uppercase text-[#FB923C] mb-1 block">#{i + 1}</span>
                       <h2 className="font-condensed text-[28px] font-bold leading-tight mb-2">
-                        <Link href={`/lugar/${s.slug}`} className="hover:text-red transition-colors">{s.name}</Link>
+                        <Link href={`/lugar/${s.slug}`} className="hover:text-[#FB923C] transition-colors">{s.name}</Link>
                       </h2>
                       <div className="flex items-center gap-1.5 text-[14px] flex-wrap">
                         {s.show_experience_type && Array.isArray(s.show_experience_type) && s.show_experience_type.length > 0 && (
-                          <span className="text-[11px] font-bold tracking-[1.5px] uppercase bg-red/10 text-red px-2 py-0.5 rounded-sm mr-1">{s.show_experience_type.join(", ")}</span>
+                          <span className="text-[11px] font-bold tracking-[1.5px] uppercase bg-[#FB923C]/10 text-[#FB923C] px-2 py-0.5 rounded-sm mr-1">{s.show_experience_type.join(", ")}</span>
                         )}
                         {s.google_rating && <span className="font-bold text-gold">{`\u2605 ${s.google_rating}`}</span>}
                         {s.google_rating && s.price_from && <span className="text-muted-foreground">{"\u00b7"}</span>}
@@ -144,7 +144,7 @@ export default async function MejoresShowsGuide() {
                     <p className="text-[15px] text-foreground/80 leading-relaxed mb-5">{s.description}</p>
                     {(s.recomendacion_resumen || s.recomendado_bullets) && (
                       <div className="bg-cream-2 rounded-lg p-4 border border-border">
-                        <div className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-1">Lo que dice la comunidad</div>
+                        <div className="text-[11px] font-bold tracking-[2px] uppercase text-[#FB923C] mb-1">Lo que dice la comunidad</div>
                         <p className="text-[14px] text-muted-foreground leading-relaxed">{s.recomendacion_resumen || s.recomendado_bullets}</p>
                       </div>
                     )}
@@ -155,10 +155,10 @@ export default async function MejoresShowsGuide() {
           )}
           {/* Directory CTA */}
           <div className="mt-16 rounded-xl bg-[rgba(5,5,5,0.95)] border border-white/[0.08] p-10 text-center">
-            <p className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-3">Directorio completo</p>
+            <p className="text-[11px] font-bold tracking-[3px] uppercase text-[#FB923C] mb-3">Directorio completo</p>
             <h3 className="font-display text-[clamp(22px,4vw,32px)] tracking-[2px] text-white mb-3">{"\u00bfQUIERES VER M\u00c1S SHOWS?"}</h3>
             <p className="text-[14px] text-[rgba(255,255,255,0.55)] max-w-[500px] mx-auto mb-6 leading-relaxed">{"Explora todos los shows y eventos en nuestro directorio \u2014 con fechas, precios y rese\u00f1as de la comunidad."}</p>
-            <Link href="/explorar?cat=shows" className="inline-block font-condensed text-[15px] font-bold tracking-[1px] uppercase px-8 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all">
+            <Link href="/explorar?cat=shows" className="inline-block font-condensed text-[15px] font-bold tracking-[1px] uppercase px-8 py-3.5 rounded-sm bg-[#FB923C] text-white shadow-[0_2px_8px_rgba(251,146,60,0.3)] hover:brightness-110 hover:-translate-y-px transition-all">
               {"Explorar todos los shows \u2192"}
             </Link>
           </div>
