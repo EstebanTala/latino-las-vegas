@@ -145,7 +145,7 @@ function ExplorePageInner() {
   const handleSearchChange = useCallback((value: string) => {
     setSearch(value);
     if (!value.trim() || activeCat !== "restaurantes") return;
-    const tokens = value.toLowerCase().split(/\s+/).filter(t => !STOPWORDS.has(t));
+    const tokens = value.toLowerCase().split(/\s+/).filter(t => !STOPWORDS.has(t) && t.length >= 3);
     for (const cuisine of taxonomyCuisines) {
       const cName = cuisine.name.toLowerCase();
       if (tokens.some(t => cName.includes(t) || t.includes(cName))) {
