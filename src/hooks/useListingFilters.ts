@@ -41,7 +41,7 @@ export function useListingFilters(listings: Listing[], activeCat: string = "") {
     // Tier score: paid listings first
     const tierScore = (l: Listing) => (l.isSponsored ? 2 : l.isFeatured ? 1 : 0);
 
-    const pm: Record<string, number> = { "$": 1, "$$": 2, "$$$": 3, "$$$$": 4 };
+    const pm: Record<string, number> = { "Gratis": 0, "gratis": 0, "$": 1, "$$": 2, "$$$": 3, "$$$$": 4 };
     if (filters.sort === "name") {
       r.sort((a, b) => tierScore(b) - tierScore(a) || a.name.localeCompare(b.name));
     } else if (filters.sort === "stars") {
@@ -53,9 +53,9 @@ export function useListingFilters(listings: Listing[], activeCat: string = "") {
         return (b.googleUserRatingsTotal ?? 0) - (a.googleUserRatingsTotal ?? 0);
       });
     } else if (filters.sort === "price-low") {
-      r.sort((a, b) => tierScore(b) - tierScore(a) || pm[a.price] - pm[b.price]);
+      r.sort((a, b) => tierScore(b) - tierScore(a) || (pm[a.price] ?? 0) - (pm[b.price] ?? 0));
     } else if (filters.sort === "price-high") {
-      r.sort((a, b) => tierScore(b) - tierScore(a) || pm[b.price] - pm[a.price]);
+      r.sort((a, b) => tierScore(b) - tierScore(a) || (pm[b.price] ?? 0) - (pm[a.price] ?? 0));
     }
 
     return r;
