@@ -216,26 +216,9 @@ export default async function VidaNocturnaLatinaGuide() {
       {/* Intro */}
       <section className="py-16 bg-background">
         <div className="container max-w-[800px]">
-          <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">
-            La vida nocturna latina en Las Vegas ha explotado en los &uacute;ltimos
-            a&ntilde;os. Ya no tienes que conformarte con un club del Strip donde
-            ponen reggaeton una canci&oacute;n de cada diez. Ahora hay clubs dedicados
-            100% a la m&uacute;sica latina, con DJs que saben la diferencia entre
-            perreo y dembow, y donde pedir en espa&ntilde;ol es lo normal.
-          </p>
-          <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">
-            Esta gu&iacute;a cubre los mejores spots latinos de la ciudad — desde
-            clubs de salsa elegantes hasta antros de reggaeton que no paran
-            hasta las 4am. Tambi&eacute;n incluimos las noches latinas especiales en
-            los mega-clubs del Strip, porque cuando Hakkasan o Omnia hacen una
-            noche latina, la producci&oacute;n es de otro mundo.
-          </p>
-          <p className="text-[17px] text-muted-foreground leading-relaxed">
-            <strong>Consejo general:</strong> Los clubs latinos en Vegas est&aacute;n
-            fuera del Strip — eso significa precios m&aacute;s accesibles, menos
-            turistas, y un ambiente m&aacute;s aut&eacute;ntico. Uber o Lyft es la mejor
-            forma de llegar.
-          </p>
+          <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">Las Vegas tiene una escena nocturna latina que no para de crecer. Desde clubs dedicados 100% a la música latina hasta noches especiales de reggaeton en los mega-clubs del Strip — hay opciones para todos los gustos y presupuestos.</p>
+          <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">Esta guía reúne los clubs y spots nocturnos más populares y mejor calificados por la comunidad. Investigamos reseñas, hablamos con la gente, y seleccionamos los que consistentemente ofrecen la mejor experiencia.</p>
+          <p className="text-[17px] text-muted-foreground leading-relaxed">Si ya saliste a alguno de estos lugares, déjanos saber tu experiencia — esta guía crece con la comunidad.</p>
         </div>
       </section>
 
