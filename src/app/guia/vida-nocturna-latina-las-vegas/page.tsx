@@ -1,19 +1,79 @@
-"use client";
+import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { useEffect } from "react";
 
-const clubs = [
+export const metadata: Metadata = {
+  title: "Vida Nocturna Latina en Las Vegas (2026) \u2014 Clubs, Discotecas y M\u00e1s | Latino LV",
+  description:
+    "Gu\u00eda completa de la vida nocturna latina en Las Vegas. Clubs de salsa, reggaeton, bachata y m\u00e1s. D\u00f3nde ir, qu\u00e9 esperar y cu\u00e1nto vas a gastar.",
+  openGraph: {
+    title: "Vida Nocturna Latina en Las Vegas (2026)",
+    description:
+      "Clubs, discotecas y noches latinas en Las Vegas \u2014 reggaeton, salsa, banda y m\u00e1s.",
+    url: "https://latinolasvegas.com/guia/vida-nocturna-latina-las-vegas",
+    siteName: "Latino Las Vegas",
+    locale: "es_MX",
+    type: "article",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Vida Nocturna Latina en Las Vegas (2026)",
+    description:
+      "Clubs, discotecas y noches latinas en Las Vegas \u2014 reggaeton, salsa, banda y m\u00e1s.",
+  },
+  alternates: {
+    canonical: "https://latinolasvegas.com/guia/vida-nocturna-latina-las-vegas",
+  },
+};
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+const SUPABASE_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
+
+type VenueDB = {
+  name: string;
+  slug: string;
+  image?: string;
+  google_rating?: number | null;
+  google_user_ratings_total?: number | null;
+  region?: string;
+  price?: string;
+  description?: string;
+  recomendacion_resumen?: string;
+  recomendado_bullets?: string;
+};
+
+async function fetchNightlifeVenues(): Promise<VenueDB[]> {
+  if (!SUPABASE_URL || !SUPABASE_KEY) return [];
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/listings?select=name,slug,image,google_rating,google_user_ratings_total,region,price,description,recomendacion_resumen,recomendado_bullets&cat_label=eq.Vida%20Nocturna&order=google_user_ratings_total.desc.nullslast`,
+      {
+        headers: {
+          apikey: SUPABASE_KEY,
+          Authorization: `Bearer ${SUPABASE_KEY}`,
+        },
+        next: { revalidate: 3600 },
+      }
+    );
+    if (!res.ok) return [];
+    return (await res.json()) as VenueDB[];
+  } catch {
+    return [];
+  }
+}
+
+/* ── Hardcoded Latin clubs (not in Supabase yet) ── */
+const latinClubs = [
   {
     name: "La Jolla Nightclub",
     zona: "Near The Strip (Flamingo Rd)",
     precio: "Cover $10-20",
     musica: "Salsa, Merengue, Cumbia, Reggaeton, Latin EDM",
-    mejorNoche: "Sábados (Famous Latin Saturday)",
+    mejorNoche: "S\u00e1bados (Famous Latin Saturday)",
     descripcion:
-      "La Jolla es probablemente el club latino más popular de Las Vegas. Está a 5 minutos del Strip pero con precios que no te van a destrozar la cartera. Los DJs rotan entre salsa, merengue, cumbia, reggaeton y hasta rock en español. Tiene bar completo, hookah, y botanas. El ambiente es 100% latino — escuchas español por todos lados y la pista siempre está llena.",
-    tip: "Los jueves (Fuego Thursday) son la mejor noche para ir si quieres menos gente y mejores precios en bebidas. Los sábados son más llenos pero la energía es increíble.",
+      "La Jolla es probablemente el club latino m\u00e1s popular de Las Vegas. Est\u00e1 a 5 minutos del Strip pero con precios que no te van a destrozar la cartera. Los DJs rotan entre salsa, merengue, cumbia, reggaeton y hasta rock en espa\u00f1ol. Tiene bar completo, hookah, y botanas. El ambiente es 100% latino \u2014 escuchas espa\u00f1ol por todos lados y la pista siempre est\u00e1 llena.",
+    tip: "Los jueves (Fuego Thursday) son la mejor noche para ir si quieres menos gente y mejores precios en bebidas. Los s\u00e1bados son m\u00e1s llenos pero la energ\u00eda es incre\u00edble.",
     dressCode: "Casual elegante. No tenis, no shorts.",
   },
   {
@@ -21,65 +81,51 @@ const clubs = [
     zona: "Near The Strip (Decatur Blvd)",
     precio: "Cover $10-15",
     musica: "Reggaeton, Latin Pop, Bachata, Cumbia",
-    mejorNoche: "Viernes y sábados",
+    mejorNoche: "Viernes y s\u00e1bados",
     descripcion:
-      "Mango Tango es más moderno y lujoso que la mayoría de clubs latinos en Vegas. Tiene mesas VIP con servicio de botella, cocina abierta toda la noche, y un sistema de sonido de primer nivel. Los servidores son atentos y el ambiente es para gente que quiere salir bien vestida y pasarla bien sin el caos de un club del Strip. A pocas cuadras del Strip pero con precios mucho más razonables.",
-    tip: "Reserva mesa si van en grupo — el servicio de botella es sorprendentemente accesible comparado con los clubs del Strip. Dress to impress aquí.",
+      "Mango Tango es m\u00e1s moderno y lujoso que la mayor\u00eda de clubs latinos en Vegas. Tiene mesas VIP con servicio de botella, cocina abierta toda la noche, y un sistema de sonido de primer nivel. Los servidores son atentos y el ambiente es para gente que quiere salir bien vestida y pasarla bien sin el caos de un club del Strip.",
+    tip: "Reserva mesa si van en grupo \u2014 el servicio de botella es sorprendentemente accesible comparado con los clubs del Strip. Dress to impress aqu\u00ed.",
     dressCode: "Elegante. Camisa con botones recomendada para hombres.",
   },
   {
     name: "La Hacienda Nightclub",
     zona: "North Las Vegas (Daley St)",
     precio: "Cover $5-15",
-    musica: "Banda, Regional Mexicano, Norteño, Cumbia",
-    mejorNoche: "Sábados",
+    musica: "Banda, Regional Mexicano, Norte\u00f1o, Cumbia",
+    mejorNoche: "S\u00e1bados",
     descripcion:
-      "Si lo tuyo es la música regional mexicana — banda, norteño, sierreño — La Hacienda es tu lugar. Está en North Las Vegas, lejos del Strip, y eso es parte del encanto: es un club para la comunidad local, no para turistas. Los DJs saben exactamente qué poner y cuándo. Hay noches temáticas diferentes cada día de la semana. Es el club donde los locales van a bailar de verdad.",
-    tip: "Los domingos tienen eventos especiales con bandas en vivo. Es más lejos del Strip pero vale el viaje si te gusta la regional mexicana.",
+      "Si lo tuyo es la m\u00fasica regional mexicana \u2014 banda, norte\u00f1o, sierre\u00f1o \u2014 La Hacienda es tu lugar. Est\u00e1 en North Las Vegas, lejos del Strip, y eso es parte del encanto: es un club para la comunidad local, no para turistas. Los DJs saben exactamente qu\u00e9 poner y cu\u00e1ndo.",
+    tip: "Los domingos tienen eventos especiales con bandas en vivo. Es m\u00e1s lejos del Strip pero vale el viaje si te gusta la regional mexicana.",
     dressCode: "Casual. Botas y sombrero bienvenidos.",
-  },
-  {
-    name: "Las Toxicas Gentlemen's Club",
-    zona: "Near The Strip (Western Ave)",
-    precio: "Cover varies",
-    musica: "Reggaeton, Perreo, Latin Trap, Corridos Tumbados",
-    mejorNoche: "Viernes y sábados",
-    descripcion:
-      "Un concepto diferente: un gentlemen's club completamente enfocado en la cultura latina. La música no es decoración aquí — es el corazón del lugar. Reggaeton, perreo, corridos tumbados. Las performers entienden los ritmos y la cultura. Es el spot que estaba reclamando la comunidad: entretenimiento para adultos pero con la vibra latina que los clubs americanos nunca han logrado capturar.",
-    tip: "A minutos del norte del Strip. El ambiente es completamente diferente a cualquier otro gentlemen's club en Vegas.",
-    dressCode: "Casual.",
   },
   {
     name: "Noches latinas en clubs del Strip",
     zona: "The Strip (varios venues)",
     precio: "Cover $30-75+",
-    musica: "Varía por evento",
+    musica: "Var\u00eda por evento",
     mejorNoche: "Depende del evento",
     descripcion:
-      "Varios clubs en el Strip organizan noches latinas especiales — Hakkasan, Omnia, XS, y otros rotan eventos con DJs latinos y artistas de reggaeton. Estos son eventos especiales, no noches fijas, así que hay que estar pendiente de las redes sociales para enterarte. La producción es de primer nivel (es el Strip, después de todo) pero los precios también lo son. Cover puede superar los $50 y las bebidas arrancan en $18+.",
-    tip: "Sigue a @HakkasanLV, @OmniaLV y @XSlasvegas en Instagram para enterarte de las noches latinas. Compra boletos por adelantado — en puerta siempre es más caro. Las guest lists a veces dan entrada gratis antes de cierta hora.",
-    dressCode: "Elegante. Código de vestimenta estricto — no tenis, no jeans rotos.",
+      "Varios clubs en el Strip organizan noches latinas especiales \u2014 Hakkasan, Omnia, XS, y otros rotan eventos con DJs latinos y artistas de reggaeton. Estos son eventos especiales, no noches fijas. La producci\u00f3n es de primer nivel pero los precios tambi\u00e9n lo son. Cover puede superar los $50 y las bebidas arrancan en $18+.",
+    tip: "Sigue a @HakkasanLV, @OmniaLV y @XSlasvegas en Instagram para enterarte de las noches latinas. Compra boletos por adelantado \u2014 en puerta siempre es m\u00e1s caro.",
+    dressCode: "Elegante. C\u00f3digo de vestimenta estricto.",
   },
 ];
 
-export default function VidaNocturnaLatinaGuide() {
-  useEffect(() => {
-    document.title =
-      "Clubs y Discotecas Latinas en Las Vegas — Guía 2026 | Latino Las Vegas";
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta)
-      meta.setAttribute(
-        "content",
-        "Guía completa de la vida nocturna latina en Las Vegas. Clubs, discotecas, noches de salsa, reggaeton y más — con recomendaciones de un local."
-      );
-  }, []);
+function stars(rating: number | null | undefined) {
+  if (!rating) return null;
+  const full = Math.floor(rating);
+  return "\u2605".repeat(full) + (rating % 1 >= 0.5 ? "\u00bd" : "");
+}
+
+export default async function VidaNocturnaLatinaGuide() {
+  const venues = await fetchNightlifeVenues();
 
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: "Clubs y Discotecas Latinas en Las Vegas — Guía 2026",
+    headline: "Vida Nocturna Latina en Las Vegas \u2014 Gu\u00eda 2026",
     description:
-      "Guía de la vida nocturna latina en Las Vegas. Los mejores clubs, discotecas y noches latinas con música en español.",
+      "Gu\u00eda de la vida nocturna latina en Las Vegas. Los mejores clubs, discotecas y noches latinas con m\u00fasica en espa\u00f1ol.",
     author: { "@type": "Organization", name: "Latino Las Vegas" },
     publisher: {
       "@type": "Organization",
@@ -87,8 +133,47 @@ export default function VidaNocturnaLatinaGuide() {
       url: "https://latinolasvegas.com",
     },
     datePublished: "2026-04-14",
-    dateModified: "2026-04-14",
+    dateModified: new Date().toISOString().split("T")[0],
     url: "https://latinolasvegas.com/guia/vida-nocturna-latina-las-vegas",
+  };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "\u00bfCu\u00e1les son los mejores clubs latinos en Las Vegas?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Los clubs latinos m\u00e1s populares en Las Vegas incluyen La Jolla Nightclub (salsa, merengue, reggaeton), Mango Tango (reggaeton, bachata) y La Hacienda (banda, regional mexicano). Tambi\u00e9n hay noches latinas en clubs del Strip como Hakkasan y XS.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "\u00bfCu\u00e1nto cuesta salir de noche en Las Vegas?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Los clubs latinos fuera del Strip cobran cover de $5-20. Los clubs del Strip pueden cobrar $30-75+. Bebidas en clubs latinos cuestan $8-15, mientras que en el Strip arrancan en $18+.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "\u00bfHay clubs con m\u00fasica reggaeton en Las Vegas?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "S\u00ed. La Jolla, Mango Tango y varios clubs del Strip tienen noches de reggaeton. Los clubs latinos lo ponen toda la noche, mientras que en el Strip son eventos especiales.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "\u00bfCu\u00e1l es el dress code en los clubs latinos de Las Vegas?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "La mayor\u00eda de clubs latinos piden casual elegante: nada de tenis, shorts o camisetas sin mangas para hombres. Los clubs del Strip son m\u00e1s estrictos. En La Hacienda, el dress code es m\u00e1s relajado.",
+        },
+      },
+    ],
   };
 
   return (
@@ -96,6 +181,10 @@ export default function VidaNocturnaLatinaGuide() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <Navbar />
 
@@ -105,21 +194,27 @@ export default function VidaNocturnaLatinaGuide() {
         <div className="container relative">
           <div className="flex items-center justify-center gap-2 mb-6">
             <Link href="/" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Inicio</Link>
-            <span className="text-dark-text-muted text-[12px]">›</span>
+            <span className="text-dark-text-muted text-[12px]">&gt;</span>
             <Link href="/explorar?cat=nocturna" className="text-[12px] text-dark-text-muted hover:text-dark-text transition-colors">Vida Nocturna</Link>
-            <span className="text-dark-text-muted text-[12px]">›</span>
+            <span className="text-dark-text-muted text-[12px]">&gt;</span>
             <span className="text-[12px] text-[#C084FC]">Latina</span>
           </div>
           <div className="text-[11px] font-bold tracking-[3px] uppercase text-[#C084FC] mb-2.5">
-            Guía nocturna · 2026
+            {"Gu\u00eda nocturna \u00b7 2026"}
           </div>
           <h1 className="font-display text-[clamp(48px,8vw,96px)] tracking-[4px] leading-[0.9] mb-5 text-dark-text">
             VIDA NOCTURNA<br /><span className="text-[#C084FC]">LATINA</span>
           </h1>
           <p className="text-[19px] text-dark-text-2 max-w-[640px] mx-auto mb-9 leading-relaxed">
             Clubs, discotecas y noches latinas en Las Vegas — reggaeton, salsa,
-            banda y más. Dónde ir, qué esperar, y cuánto vas a gastar.
+            banda y m&aacute;s. D&oacute;nde ir, qu&eacute; esperar, y cu&aacute;nto vas a gastar.
           </p>
+          <Link
+            href="#clubs-latinos"
+            className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-[#C084FC] text-white shadow-[0_2px_8px_rgba(192,132,252,0.3)] hover:brightness-110 hover:-translate-y-px transition-all"
+          >
+            {"Ver clubs latinos \u2192"}
+          </Link>
         </div>
       </div>
 
@@ -127,73 +222,56 @@ export default function VidaNocturnaLatinaGuide() {
       <section className="py-16 bg-background">
         <div className="container max-w-[800px]">
           <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">
-            La vida nocturna latina en Las Vegas ha explotado en los últimos
-            años. Ya no tienes que conformarte con un club del Strip donde
-            ponen reggaeton una canción de cada diez. Ahora hay clubs dedicados
-            100% a la música latina, con DJs que saben la diferencia entre
-            perreo y dembow, y donde pedir en español es lo normal.
+            La vida nocturna latina en Las Vegas ha explotado en los &uacute;ltimos
+            a&ntilde;os. Ya no tienes que conformarte con un club del Strip donde
+            ponen reggaeton una canci&oacute;n de cada diez. Ahora hay clubs dedicados
+            100% a la m&uacute;sica latina, con DJs que saben la diferencia entre
+            perreo y dembow, y donde pedir en espa&ntilde;ol es lo normal.
           </p>
           <p className="text-[17px] text-muted-foreground leading-relaxed mb-6">
-            Esta guía cubre los mejores spots latinos de la ciudad — desde
+            Esta gu&iacute;a cubre los mejores spots latinos de la ciudad — desde
             clubs de salsa elegantes hasta antros de reggaeton que no paran
-            hasta las 4am. También incluimos las noches latinas especiales en
+            hasta las 4am. Tambi&eacute;n incluimos las noches latinas especiales en
             los mega-clubs del Strip, porque cuando Hakkasan o Omnia hacen una
-            noche latina, la producción es de otro mundo.
+            noche latina, la producci&oacute;n es de otro mundo.
           </p>
           <p className="text-[17px] text-muted-foreground leading-relaxed">
-            <strong>Consejo general:</strong> Los clubs latinos en Vegas están
-            fuera del Strip — eso significa precios más accesibles, menos
-            turistas, y un ambiente más auténtico. Uber o Lyft es la mejor
+            <strong>Consejo general:</strong> Los clubs latinos en Vegas est&aacute;n
+            fuera del Strip — eso significa precios m&aacute;s accesibles, menos
+            turistas, y un ambiente m&aacute;s aut&eacute;ntico. Uber o Lyft es la mejor
             forma de llegar.
           </p>
         </div>
       </section>
 
-      {/* Club List */}
-      <section className="pb-20 bg-background">
+      {/* Latin Clubs */}
+      <section id="clubs-latinos" className="py-16 bg-cream-2">
         <div className="container max-w-[900px]">
-          <div className="space-y-10">
-            {clubs.map((c, i) => (
-              <article
-                key={i}
-                className="border border-border rounded-xl overflow-hidden shadow-card hover:shadow-card-hover transition-all"
-              >
+          <div className="text-[11px] font-bold tracking-[3px] uppercase text-[#C084FC] mb-2.5">Clubs 100% latinos</div>
+          <h2 className="font-display text-[clamp(28px,5vw,48px)] tracking-[2px] mb-10">
+            {"D\u00d3NDE BAILAR M\u00daSICA LATINA"}
+          </h2>
+          <div className="space-y-6">
+            {latinClubs.map((club, i) => (
+              <article key={club.name} className="bg-background border border-border rounded-xl overflow-hidden shadow-card">
                 <div className="p-6 md:p-8">
-                  <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+                  <div className="flex items-start justify-between gap-4 mb-3">
                     <div>
-                      <div className="flex items-center gap-2 mb-1 flex-wrap">
-                        <span className="text-[10px] font-bold tracking-[1.5px] uppercase bg-[rgba(192,132,252,0.1)] text-[#C084FC] border border-[rgba(192,132,252,0.25)] rounded-full px-2.5 py-0.5">
-                          {c.mejorNoche}
-                        </span>
-                        <span className="text-[10px] font-bold tracking-[1.5px] uppercase bg-[rgba(255,255,255,0.05)] text-muted-foreground border border-border rounded-full px-2.5 py-0.5">
-                          {c.precio}
-                        </span>
-                      </div>
-                      <h2 className="font-condensed text-[28px] font-bold leading-tight">
-                        {c.name}
-                      </h2>
+                      <span className="text-[#C084FC] font-bold text-[13px]">#{i + 1}</span>
+                      <h3 className="font-condensed text-[clamp(20px,4vw,28px)] font-bold leading-tight">{club.name}</h3>
                     </div>
-                    <div className="text-right text-[13px] text-muted-foreground">
-                      <div>{c.zona}</div>
-                      <div className="text-[11px] mt-1">{c.dressCode}</div>
-                    </div>
+                    <span className="text-[13px] text-muted-foreground whitespace-nowrap">{club.precio}</span>
                   </div>
-
-                  <div className="text-[12px] font-bold tracking-[1.5px] uppercase text-muted-foreground mb-3">
-                    {c.musica}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <span className="text-[12px] bg-[rgba(192,132,252,0.1)] border border-[rgba(192,132,252,0.25)] text-[#C084FC] px-2.5 py-1 rounded-full">{club.zona}</span>
+                    <span className="text-[12px] bg-[rgba(192,132,252,0.1)] border border-[rgba(192,132,252,0.25)] text-[#C084FC] px-2.5 py-1 rounded-full">{"Mejor noche: " + club.mejorNoche}</span>
                   </div>
-
-                  <p className="text-[15px] text-foreground/80 leading-relaxed mb-5">
-                    {c.descripcion}
-                  </p>
-
-                  <div className="bg-cream-2 rounded-lg p-4 border border-border">
-                    <div className="text-[11px] font-bold tracking-[2px] uppercase text-[#C084FC] mb-1">
-                      Consejo local
-                    </div>
-                    <p className="text-[14px] text-muted-foreground leading-relaxed">
-                      {c.tip}
-                    </p>
+                  <p className="text-[14px] text-muted-foreground leading-relaxed mb-4">{club.descripcion}</p>
+                  <div className="text-[13px] text-muted-foreground mb-2"><strong>{"M\u00fasica:"}</strong> {club.musica}</div>
+                  <div className="text-[13px] text-muted-foreground mb-4"><strong>Dress code:</strong> {club.dressCode}</div>
+                  <div className="bg-[rgba(192,132,252,0.06)] border border-[rgba(192,132,252,0.15)] rounded-lg p-4">
+                    <div className="text-[11px] font-bold tracking-[2px] uppercase text-[#C084FC] mb-1">{"Lo que dice la comunidad"}</div>
+                    <p className="text-[14px] text-muted-foreground leading-relaxed">{club.tip}</p>
                   </div>
                 </div>
               </article>
@@ -201,6 +279,62 @@ export default function VidaNocturnaLatinaGuide() {
           </div>
         </div>
       </section>
+
+      {/* Supabase venues */}
+      {venues.length > 0 && (
+        <section className="py-16 bg-background">
+          <div className="container max-w-[900px]">
+            <div className="text-[11px] font-bold tracking-[3px] uppercase text-[#C084FC] mb-2.5">{"M\u00e1s vida nocturna"}</div>
+            <h2 className="font-display text-[clamp(28px,5vw,48px)] tracking-[2px] mb-4">
+              {"BARES Y LOUNGES EN LAS VEGAS"}
+            </h2>
+            <p className="text-[17px] text-muted-foreground leading-relaxed mb-10">
+              {"Adem\u00e1s de los clubs latinos, Las Vegas tiene una escena incre\u00edble de bares, lounges y spots nocturnos. Estos son los mejor calificados por la comunidad."}
+            </p>
+            <div className="space-y-4">
+              {venues.map((v, i) => (
+                <article key={v.slug} className="bg-cream-2 border border-border rounded-xl overflow-hidden shadow-card hover:shadow-lg transition-shadow">
+                  <div className="flex flex-col sm:flex-row">
+                    {v.image && (
+                      <div className="sm:w-[200px] sm:min-h-[160px] relative shrink-0">
+                        <img src={v.image} alt={v.name} className="w-full h-full object-cover sm:absolute sm:inset-0" loading="lazy" />
+                      </div>
+                    )}
+                    <div className="p-5 flex-1">
+                      <div className="flex items-start justify-between gap-3 mb-2">
+                        <Link href={`/lugar/${v.slug}`} className="hover:text-[#C084FC] transition-colors">
+                          <span className="text-[#C084FC] font-bold text-[12px] mr-1.5">#{i + 1}</span>
+                          <span className="font-condensed text-[20px] font-bold leading-tight">{v.name}</span>
+                        </Link>
+                        {v.price && <span className="text-[13px] text-muted-foreground whitespace-nowrap">{v.price}</span>}
+                      </div>
+                      <div className="flex items-center gap-3 text-[13px] text-muted-foreground mb-3">
+                        {v.google_rating && (
+                          <span>
+                            <span className="text-yellow-500">{stars(v.google_rating)}</span>{" "}
+                            {v.google_rating}
+                            {v.google_user_ratings_total ? ` (${v.google_user_ratings_total.toLocaleString()})` : ""}
+                          </span>
+                        )}
+                        {v.region && <span>{"\u00b7 " + v.region}</span>}
+                      </div>
+                      {v.description && (
+                        <p className="text-[14px] text-muted-foreground leading-relaxed line-clamp-2">{v.description}</p>
+                      )}
+                      {(v.recomendacion_resumen || v.recomendado_bullets) && (
+                        <div className="mt-3 bg-[rgba(192,132,252,0.06)] border border-[rgba(192,132,252,0.15)] rounded-lg p-3">
+                          <div className="text-[11px] font-bold tracking-[2px] uppercase text-[#C084FC] mb-1">{"Lo que dice la comunidad"}</div>
+                          <p className="text-[14px] text-muted-foreground leading-relaxed">{v.recomendacion_resumen || v.recomendado_bullets}</p>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Safety tips */}
       <section className="py-16 bg-cream-2">
@@ -213,56 +347,78 @@ export default function VidaNocturnaLatinaGuide() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
-              { titulo: "Transporte", texto: "Siempre usa Uber/Lyft. Nunca manejes después de beber. Los clubs latinos están fuera del Strip así que no puedes caminar." },
-              { titulo: "Efectivo", texto: "Lleva efectivo — algunos clubs cobran cover solo en cash. ATMs dentro de clubs cobran fees de $5-10." },
-              { titulo: "Dress code", texto: "Cada club tiene su código. En general: nada de tenis, shorts, o camisetas sin mangas para hombres. Mejor ir un poco más arreglado." },
-              { titulo: "Reservaciones", texto: "Para servicio de botella o mesas VIP, reserva por Instagram DM o teléfono. Casi todos los clubs latinos responden rápido por IG." },
+              { titulo: "Transporte", texto: "Siempre usa Uber/Lyft. Nunca manejes despu\u00e9s de beber. Los clubs latinos est\u00e1n fuera del Strip as\u00ed que no puedes caminar." },
+              { titulo: "Efectivo", texto: "Lleva efectivo \u2014 algunos clubs cobran cover solo en cash. ATMs dentro de clubs cobran fees de $5-10." },
+              { titulo: "Dress code", texto: "Cada club tiene su c\u00f3digo. En general: nada de tenis, shorts, o camisetas sin mangas para hombres. Mejor ir un poco m\u00e1s arreglado." },
+              { titulo: "Reservaciones", texto: "Para servicio de botella o mesas VIP, reserva por Instagram DM o tel\u00e9fono. Casi todos los clubs latinos responden r\u00e1pido por IG." },
             ].map((t) => (
-              <div
-                key={t.titulo}
-                className="bg-background border border-border rounded-lg p-5"
-              >
-                <div className="font-condensed text-[16px] font-bold mb-1">
-                  {t.titulo}
-                </div>
-                <p className="text-[13px] text-muted-foreground leading-relaxed">
-                  {t.texto}
-                </p>
+              <div key={t.titulo} className="bg-background border border-border rounded-lg p-5">
+                <div className="font-condensed text-[16px] font-bold mb-1">{t.titulo}</div>
+                <p className="text-[13px] text-muted-foreground leading-relaxed">{t.texto}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 bg-dark-2 text-center">
-        <div className="container max-w-[600px]">
-          <div className="text-[11px] font-bold tracking-[3px] uppercase text-[#C084FC] mb-2.5">
-            Sigue explorando
+      {/* FAQ */}
+      <section className="py-16 bg-background">
+        <div className="container max-w-[800px]">
+          <div className="text-[11px] font-bold tracking-[3px] uppercase text-[#C084FC] mb-2.5">Preguntas frecuentes</div>
+          <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] mb-8">SOBRE LA VIDA NOCTURNA LATINA</h2>
+          <div className="space-y-3">
+            {(faqJsonLd.mainEntity as any[]).map((faq: any, i: number) => (
+              <details key={i} className="group bg-cream-2 border border-border rounded-lg">
+                <summary className="cursor-pointer px-5 py-4 text-[15px] font-medium list-none flex items-center justify-between gap-4">
+                  {faq.name}
+                  <span className="text-muted-foreground text-[18px] group-open:rotate-45 transition-transform">+</span>
+                </summary>
+                <div className="px-5 pb-4 text-[14px] text-muted-foreground leading-relaxed">{faq.acceptedAnswer.text}</div>
+              </details>
+            ))}
           </div>
-          <h2 className="font-display text-[48px] tracking-[2px] text-dark-text mb-4">
-            Más Para Descubrir
-          </h2>
-          <p className="text-dark-text-2 leading-relaxed mb-8">
-            La noche es solo el comienzo. Explora restaurantes, shows y
-            atracciones para completar tu experiencia en Las Vegas.
-          </p>
-          <div className="flex gap-3 justify-center flex-wrap">
-            <Link
-              href="/explorar?cat=nocturna"
-              className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all"
-            >
-              Ver toda la vida nocturna →
-            </Link>
-            <Link
-              href="/guia/restaurantes-mexicanos-las-vegas"
-              className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm border border-[rgba(255,255,255,0.15)] text-dark-text-2 hover:text-dark-text hover:border-[rgba(255,255,255,0.3)] transition-all"
-            >
-              Restaurantes mexicanos →
+        </div>
+      </section>
+
+      {/* Directory CTA */}
+      <section className="py-16 bg-cream-2">
+        <div className="container max-w-[900px]">
+          <div className="rounded-xl bg-[rgba(5,5,5,0.95)] border border-white/[0.08] p-10 text-center">
+            <p className="text-[11px] font-bold tracking-[3px] uppercase text-[#C084FC] mb-3">Directorio completo</p>
+            <h3 className="font-display text-[clamp(22px,4vw,32px)] tracking-[2px] text-white mb-3">{"\\u00bfQUIERES EXPLORAR M\\u00c1S?"}</h3>
+            <p className="text-[14px] text-[rgba(255,255,255,0.55)] max-w-[500px] mx-auto mb-6 leading-relaxed">
+              {"Descubre todos los bares, lounges y clubs en nuestro directorio \\u2014 con filtros, rese\\u00f1as y recomendaciones de la comunidad."}
+            </p>
+            <Link href="/explorar?cat=nocturna" className="inline-block font-condensed text-[15px] font-bold tracking-[1px] uppercase px-8 py-3.5 rounded-sm bg-[#C084FC] text-white shadow-[0_2px_8px_rgba(192,132,252,0.3)] hover:brightness-110 hover:-translate-y-px transition-all">
+              {"Explorar vida nocturna \\u2192"}
             </Link>
           </div>
         </div>
       </section>
+
+      {/* Related Guides */}
+      <section className="py-16 bg-background border-t border-border">
+        <div className="container max-w-[900px]">
+          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5 text-center">{"Gu\u00edas relacionadas"}</div>
+          <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] text-center mb-10">{"EXPLORA M\u00c1S DE LAS VEGAS"}</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            <Link href="/guia/restaurantes-mexicanos-las-vegas" className="group block rounded-xl border border-border p-6 hover:border-red/30 hover:shadow-card transition-all">
+              <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-2 block">{"Gu\u00eda"}</span>
+              <span className="font-condensed text-[22px] font-bold group-hover:text-red transition-colors block mb-2">Restaurantes Mexicanos</span>
+              <span className="text-[13px] text-muted-foreground">{"Los mejores tacos, birria, mariscos y m\u00e1s \u2014 recomendados por la comunidad."}</span>
+            </Link>
+            <Link href="/guia/mejores-shows-las-vegas" className="group block rounded-xl border border-border p-6 hover:border-red/30 hover:shadow-card transition-all">
+              <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-2 block">{"Gu\u00eda"}</span>
+              <span className="font-condensed text-[22px] font-bold group-hover:text-red transition-colors block mb-2">Mejores Shows</span>
+              <span className="text-[13px] text-muted-foreground">{"Los mejores espect\u00e1culos y shows que puedes disfrutar en Las Vegas."}</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <p className="text-center text-[12px] text-muted-foreground py-4">
+        {"\u00daltima actualizaci\u00f3n: abril 2026"}
+      </p>
 
       <Footer />
     </>
