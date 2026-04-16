@@ -275,61 +275,7 @@ export default async function VidaNocturnaLatinaGuide() {
         </div>
       </section>
 
-      {/* Supabase venues */}
-      {venues.length > 0 && (
-        <section className="py-16 bg-background">
-          <div className="container max-w-[900px]">
-            <div className="text-[11px] font-bold tracking-[3px] uppercase text-[#C084FC] mb-2.5">{"M\u00e1s vida nocturna"}</div>
-            <h2 className="font-display text-[clamp(28px,5vw,48px)] tracking-[2px] mb-4">
-              {"BARES Y LOUNGES EN LAS VEGAS"}
-            </h2>
-            <p className="text-[17px] text-muted-foreground leading-relaxed mb-10">
-              {"Adem\u00e1s de los clubs latinos, Las Vegas tiene una escena incre\u00edble de bares, lounges y spots nocturnos. Estos son los mejor calificados por la comunidad."}
-            </p>
-            <div className="space-y-4">
-              {venues.map((v, i) => (
-                <article key={v.slug} className="bg-cream-2 border border-border rounded-xl overflow-hidden shadow-card hover:shadow-lg transition-shadow">
-                  <div className="flex flex-col sm:flex-row">
-                    {v.image && (
-                      <div className="sm:w-[200px] sm:min-h-[160px] relative shrink-0">
-                        <img src={v.image} alt={v.name} className="w-full h-full object-cover sm:absolute sm:inset-0" loading="lazy" />
-                      </div>
-                    )}
-                    <div className="p-5 flex-1">
-                      <div className="flex items-start justify-between gap-3 mb-2">
-                        <Link href={`/lugar/${v.slug}`} className="hover:text-[#C084FC] transition-colors">
-                          <span className="text-[#C084FC] font-bold text-[12px] mr-1.5">#{i + 1}</span>
-                          <span className="font-condensed text-[20px] font-bold leading-tight">{v.name}</span>
-                        </Link>
-                        {v.price && <span className="text-[13px] text-muted-foreground whitespace-nowrap">{v.price}</span>}
-                      </div>
-                      <div className="flex items-center gap-3 text-[13px] text-muted-foreground mb-3">
-                        {v.google_rating && (
-                          <span>
-                            <span className="text-yellow-500">{stars(v.google_rating)}</span>{" "}
-                            {v.google_rating}
-                            {v.google_user_ratings_total ? ` (${v.google_user_ratings_total.toLocaleString()})` : ""}
-                          </span>
-                        )}
-                        {v.region && <span>{"\u00b7 " + v.region}</span>}
-                      </div>
-                      {v.description && (
-                        <p className="text-[14px] text-muted-foreground leading-relaxed line-clamp-2">{v.description}</p>
-                      )}
-                      {(v.recomendacion_resumen || v.recomendado_bullets) && (
-                        <div className="mt-3 bg-[rgba(192,132,252,0.06)] border border-[rgba(192,132,252,0.15)] rounded-lg p-3">
-                          <div className="text-[11px] font-bold tracking-[2px] uppercase text-[#C084FC] mb-1">{"Lo que dice la comunidad"}</div>
-                          <p className="text-[14px] text-muted-foreground leading-relaxed">{v.recomendacion_resumen || v.recomendado_bullets}</p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
+
 
       {/* Safety tips */}
       <section className="py-16 bg-cream-2">
