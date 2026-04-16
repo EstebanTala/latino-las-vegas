@@ -352,7 +352,7 @@ function ExplorePageInner() {
                   <button
                     key={tab.key}
                     data-active={activeCat === tab.key}
-                    onClick={() => setActiveCat(tab.key)}
+                    onClick={() => { setActiveCat(tab.key); window.history.replaceState(null, '', `/explorar?cat=${tab.key}`); }}
                     className={`relative px-3 py-2.5 text-[13px] tracking-[0.5px] border-b-[3px] border-transparent transition-colors whitespace-nowrap font-body shrink-0 ${
                       activeCat === tab.key
                         ? "font-bold text-red bg-red/[0.06]"
@@ -414,7 +414,7 @@ function ExplorePageInner() {
                     <button
                       key={tab.key}
                       data-active={activeCat === tab.key}
-                      onClick={() => setActiveCat(tab.key)}
+                      onClick={() => { setActiveCat(tab.key); window.history.replaceState(null, '', `/explorar?cat=${tab.key}`); }}
                       className={`relative px-5 py-3.5 text-[13px] tracking-[0.5px] border-b-[3px] border-transparent transition-colors whitespace-nowrap font-body shrink-0 ${
                         activeCat === tab.key
                           ? "font-bold text-red bg-red/[0.06]"
