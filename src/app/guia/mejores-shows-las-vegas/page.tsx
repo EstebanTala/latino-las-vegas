@@ -153,6 +153,9 @@ export default async function MejoresShowsGuide() {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="py-16 bg-background">
         <div className="container max-w-[800px]">
@@ -212,8 +215,6 @@ export default async function MejoresShowsGuide() {
               {"Explorar todos los shows \u2192"}
             </Link>
           </div>
-        </div>
-      </section>
         </div>
       </section>
 

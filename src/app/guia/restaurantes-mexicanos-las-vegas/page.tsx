@@ -150,6 +150,9 @@ export default async function RestaurantesMexicanosGuide() {
               ))}
             </div>
           )}
+        </div>
+      </section>
+
       {/* FAQ */}
       <section className="py-16 bg-background">
         <div className="container max-w-[800px]">
@@ -209,8 +212,6 @@ export default async function RestaurantesMexicanosGuide() {
               {"Explorar todos los restaurantes \u2192"}
             </Link>
           </div>
-        </div>
-      </section>
         </div>
       </section>
 
