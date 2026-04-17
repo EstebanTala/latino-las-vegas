@@ -35,7 +35,7 @@ export default function Footer() {
               <li><Link href="/nosotros" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Nosotros</Link></li>
               <li><Link href="/nosotros#contacto" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Contacto</Link></li>
               <li><Link href="/anunciate" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Anúnciate</Link></li>
-              <li><Link href="/agregar-negocio" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Agregar Negocio</Link></li>
+              <li><Link href="/anunciate" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Agregar Negocio</Link></li>
             </ul>
           </div>
           <div>

@@ -11,7 +11,7 @@ export default function Navbar() {
       </Link>
 
       <div className="hidden md:flex items-center">
-        <Link href="/agregar-negocio" className="font-condensed text-xs font-bold tracking-[1px] uppercase px-4 py-1.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.25)] hover:bg-red-light hover:-translate-y-px transition-all">
+        <Link href="/anunciate" className="font-condensed text-xs font-bold tracking-[1px] uppercase px-4 py-1.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.25)] hover:bg-red-light hover:-translate-y-px transition-all">
           Agrega Tu Negocio
         </Link>
       </div>
