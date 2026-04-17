@@ -184,7 +184,7 @@ export default async function MejoresShowsGuide() {
       </section>
 
 
-      {{/* Related Guides */}}
+      {/* Related Guides */}
       <section className="py-10 bg-background border-t border-border">
         <div className="container max-w-[900px]">
           <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5 text-center">{"Gu\u00edas relacionadas"}</div>
