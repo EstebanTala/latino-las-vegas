@@ -220,14 +220,14 @@ export default function AboutPage() {
       {/* FAQ */}
       <section className="py-20 bg-background">
         <div className="container">
-          <SectionHeader eyebrow="Preguntas frecuentes" title="FAQ" />
+          <SectionHeader eyebrow="Preguntas frecuentes" title="Preguntas Sobre Latino LV" />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
               { q: "¿Cómo agrego mi negocio a la guía?", a: "Usa el formulario de contacto y cuéntanos sobre tu lugar." },
               { q: "¿La guía es gratuita?", a: "Sí, completamente gratuita para usuarios." },
-              { q: "¿Con qué frecuencia actualizan la info?", a: "Revisamos cada lugar al menos una vez al mes." },
+              { q: "¿Con qué frecuencia actualizan la info?", a: "Actualizamos la guía semanalmente con nuevos lugares y mejoras." },
               { q: "¿Solo incluyen lugares en el Strip?", a: "No. Cubrimos toda el área de Las Vegas." },
-              { q: "¿Puedo dejar reseñas?", a: "¡Sí! Crea una cuenta gratuita." },
+              { q: "¿Puedo dejar reseñas?", a: "Próximamente. Estamos trabajando en un sistema de reseñas de la comunidad." },
               { q: "¿Aceptan publicidad patrocinada?", a: "Ofrecemos listados destacados, siempre claramente marcados." },
             ].map(f => (
               <div key={f.q} className="bg-card border border-border rounded-lg p-6 shadow-card hover:border-red/20 hover:shadow-card-hover transition-all">
