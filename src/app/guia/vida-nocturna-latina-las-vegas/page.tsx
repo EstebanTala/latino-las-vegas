@@ -274,23 +274,6 @@ export default async function VidaNocturnaLatinaGuide() {
           </div>
         </div>
       </section>
-
-      {/* Directory CTA */}
-      <section className="py-16 bg-cream-2">
-        <div className="container max-w-[900px]">
-          <div className="rounded-xl bg-[rgba(5,5,5,0.95)] border border-white/[0.08] p-10 text-center">
-            <p className="text-[11px] font-bold tracking-[3px] uppercase text-[#C084FC] mb-3">Directorio completo</p>
-            <h3 className="font-display text-[clamp(22px,4vw,32px)] tracking-[2px] text-white mb-3">¿QUIERES EXPLORAR MÁS?</h3>
-            <p className="text-[14px] text-[rgba(255,255,255,0.55)] max-w-[500px] mx-auto mb-6 leading-relaxed">
-              Descubre todos los bares, lounges y clubs en nuestro directorio — con filtros, reseñas y recomendaciones de la comunidad.
-            </p>
-            <Link href="/explorar?cat=nocturna" className="inline-block font-condensed text-[15px] font-bold tracking-[1px] uppercase px-8 py-3.5 rounded-sm bg-[#C084FC] text-white shadow-[0_2px_8px_rgba(192,132,252,0.3)] hover:brightness-110 hover:-translate-y-px transition-all">
-              Explorar vida nocturna →
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* Related Guides */}
       <section className="py-16 bg-background border-t border-border">
         <div className="container max-w-[900px]">
@@ -306,6 +289,24 @@ export default async function VidaNocturnaLatinaGuide() {
               <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-2 block">{"Gu\u00eda"}</span>
               <span className="font-condensed text-[22px] font-bold group-hover:text-red transition-colors block mb-2">Mejores Shows</span>
               <span className="text-[13px] text-muted-foreground">{"Los mejores espect\u00e1culos y shows que puedes disfrutar en Las Vegas."}</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      
+
+      {/* Directory CTA */}
+      <section className="py-16 bg-cream-2">
+        <div className="container max-w-[900px]">
+          <div className="rounded-xl bg-[rgba(5,5,5,0.95)] border border-white/[0.08] p-10 text-center">
+            <p className="text-[11px] font-bold tracking-[3px] uppercase text-[#C084FC] mb-3">Directorio completo</p>
+            <h3 className="font-display text-[clamp(22px,4vw,32px)] tracking-[2px] text-white mb-3">¿QUIERES EXPLORAR MÁS?</h3>
+            <p className="text-[14px] text-[rgba(255,255,255,0.55)] max-w-[500px] mx-auto mb-6 leading-relaxed">
+              Descubre todos los bares, lounges y clubs en nuestro directorio — con filtros, reseñas y recomendaciones de la comunidad.
+            </p>
+            <Link href="/explorar?cat=nocturna" className="inline-block font-condensed text-[15px] font-bold tracking-[1px] uppercase px-8 py-3.5 rounded-sm bg-[#C084FC] text-white shadow-[0_2px_8px_rgba(192,132,252,0.3)] hover:brightness-110 hover:-translate-y-px transition-all">
+              Explorar vida nocturna →
             </Link>
           </div>
         </div>
