@@ -52,7 +52,7 @@ export default function AboutPage() {
               <div className="font-display text-[60px] tracking-[2px] leading-[0.95] mb-5">Por La Comunidad,<br/>Para La Comunidad</div>
               <p className="text-foreground/80 text-base leading-[1.8] mb-5">Latino Las Vegas nació de una necesidad real: los visitantes y residentes latinos en Las Vegas merecen una guía completa, confiable y en su idioma.</p>
               <p className="text-foreground/80 text-base leading-[1.8] mb-5">Somos más que un directorio. Somos un puente entre la comunidad latina y las mejores experiencias que esta ciudad icónica tiene para ofrecer.</p>
-              <Link href="/explorar" className="inline-flex font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-gold text-foreground shadow-[0_2px_8px_hsl(var(--gold)/0.3)] hover:bg-gold-light hover:-translate-y-px transition-all mt-2">Explorar la guía →</Link>
+              <Link href="/explorar" className="inline-flex font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-gold text-white shadow-[0_2px_8px_hsl(var(--gold)/0.3)] hover:bg-gold-light hover:-translate-y-px transition-all mt-2">Explorar la guía →</Link>
             </div>
             <div className="grid grid-cols-2 gap-3.5">
               {[
