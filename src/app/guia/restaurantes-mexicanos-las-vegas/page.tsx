@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -115,12 +116,12 @@ export default async function RestaurantesMexicanosGuide() {
                     <div className="flex gap-0 overflow-hidden">
                       {r.image && (
                         <div className={`relative ${r.image2 ? "w-1/2" : "w-full"} h-[220px] md:h-[260px]`}>
-                          <img src={r.image} alt={`${r.name} \u2014 restaurante mexicano en Las Vegas`} className="w-full h-full object-cover" loading={i < 3 ? "eager" : "lazy"} />
+                          <Image fill src={r.image} alt={`${r.name} \u2014 restaurante mexicano en Las Vegas`} className="w-full h-full object-cover" />
                         </div>
                       )}
                       {r.image2 && (
                         <div className={`relative ${r.image ? "w-1/2" : "w-full"} h-[220px] md:h-[260px]`}>
-                          <img src={r.image2} alt={`${r.name} \u2014 comida y ambiente`} className="w-full h-full object-cover" loading="lazy" />
+                          <Image fill src={r.image2} alt={`${r.name} \u2014 comida y ambiente`} className="w-full h-full object-cover" />
                         </div>
                       )}
                     </div>

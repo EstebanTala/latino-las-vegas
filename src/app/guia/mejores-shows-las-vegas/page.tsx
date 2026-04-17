@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -115,12 +116,12 @@ export default async function MejoresShowsGuide() {
                     <div className="flex gap-0 overflow-hidden">
                       {s.image && (
                         <div className={`relative ${s.image2 ? "w-1/2" : "w-full"} h-[220px] md:h-[260px]`}>
-                          <img src={s.image} alt={`${s.name} \u2014 show en Las Vegas`} className="w-full h-full object-cover" loading={i < 3 ? "eager" : "lazy"} />
+                          <Image fill src={s.image} alt={`${s.name} \u2014 show en Las Vegas`} className="w-full h-full object-cover" />
                         </div>
                       )}
                       {s.image2 && (
                         <div className={`relative ${s.image ? "w-1/2" : "w-full"} h-[220px] md:h-[260px]`}>
-                          <img src={s.image2} alt={`${s.name} \u2014 espect\u00e1culo`} className="w-full h-full object-cover" loading="lazy" />
+                          <Image fill src={s.image2} alt={`${s.name} \u2014 espect\u00e1culo`} className="w-full h-full object-cover" />
                         </div>
                       )}
                     </div>
