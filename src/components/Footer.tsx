@@ -10,7 +10,7 @@ export default function Footer() {
               <div className="w-9 h-9 bg-red rounded-lg flex items-center justify-center text-[15px] text-primary-foreground font-display tracking-[1px] shadow-[0_0_20px_hsl(var(--glow-red))]">LLV</div>
               Latino<span className="text-red">LV</span>
             </Link>
-            <p className="text-sm text-dark-text-muted leading-[1.75] max-w-[280px] mt-4">Tu guía en español para descubrir lo mejor de Las Vegas — hoteles, restaurantes, shows y vida nocturna.</p>
+            <p className="text-sm text-dark-text-muted leading-[1.75] max-w-[280px] mt-4">Todo lo que necesitas saber sobre Las Vegas — en español, sin filtros.</p>
           </div>
           <div>
             <h4 className="font-condensed text-xs font-bold tracking-[2.5px] uppercase text-dark-text-muted mb-4">Explorar</h4>
