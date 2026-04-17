@@ -33,9 +33,6 @@ export default function Footer() {
             <h4 className="font-condensed text-xs font-bold tracking-[2.5px] uppercase text-dark-text-muted mb-4">Sitio</h4>
             <ul className="space-y-3">
               <li><Link href="/nosotros" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Nosotros</Link></li>
-              <li><Link href="/nosotros#contacto" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Contacto</Link></li>
-              <li><Link href="/anunciate" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Anúnciate</Link></li>
-              <li><Link href="/anunciate" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Agregar Negocio</Link></li>
             </ul>
           </div>
           <div>
