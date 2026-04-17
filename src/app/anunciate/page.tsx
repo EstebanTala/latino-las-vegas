@@ -113,7 +113,7 @@ export default function AnunciatePage() {
             <div className="inline-block bg-card border border-border rounded-xl px-8 py-5 text-center shadow-card">
               <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-1">Próximamente</div>
               <div className="font-condensed text-[18px] font-bold mb-1">Listados Destacados</div>
-              <div className="text-[13px] text-muted-foreground">Mayor visibilidad, posición prioritaria y más fotos. En desarrollo.</div>
+              <div className="text-[13px] text-muted-foreground">Mayor visibilidad, posición prioritaria y mayor alcance. En desarrollo.</div>
             </div>
           </div>
         </div>
