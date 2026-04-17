@@ -163,7 +163,7 @@ export default function AboutPage() {
                 {[
                   { icon: "✉️", label: "Email", value: "hola@latinolasvegas.com" },
                   { icon: "📍", label: "Ubicación", value: "Las Vegas, Nevada" },
-                  { icon: "⏰", label: "Respuesta", value: "Menos de 24 horas" },
+                  { icon: "💬", label: "Respuesta", value: "Menos de 24 horas" },
                 ].map(c => (
                   <div key={c.label} className="flex items-start gap-4 p-4 bg-[rgba(255,255,255,0.06)] border border-[hsl(var(--dark-border))] rounded-sm hover:border-[hsl(var(--dark-border-2))] transition-colors">
                     <span className="text-[22px] shrink-0">{c.icon}</span>
