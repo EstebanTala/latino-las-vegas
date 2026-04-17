@@ -77,9 +77,9 @@ export default function AboutPage() {
       <div className="py-20 bg-cream-2 border-y border-border">
         <div className="container">
           <SectionHeader eyebrow="La historia detrás del proyecto" title="¿Por Qué Nació Latino LV?" />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
             <div className="bg-card border border-border rounded-lg p-10 shadow-card">
-              <div className="text-6xl mb-6">🎰</div>
+              <div className="text-6xl mb-6">🗺️</div>
               <p className="text-foreground/80 text-base leading-[1.9] mb-5">
                 Latino Las Vegas nació porque no existía una guía confiable, en español, que ayudara a la comunidad latina a navegar todo lo que esta ciudad ofrece.
               </p>
@@ -92,7 +92,7 @@ export default function AboutPage() {
             </div>
             <div className="grid grid-cols-1 gap-4">
               {[
-                { icon: "🎯", title: "Un solo objetivo", text: "Ser la guía #1 en español de Las Vegas — sin atajos, sin contenido genérico." },
+                { icon: "🎯", title: "Un solo objetivo", text: "Convertirnos en la guía en español de referencia para la comunidad latina en Las Vegas." },
                 { icon: "🔨", title: "Proyecto independiente", text: "Sin inversores ni corporaciones. Hecho por y para la comunidad latina." },
                 { icon: "📈", title: "En constante crecimiento", text: "Nuevos lugares, reseñas actualizadas y funciones añadidas cada semana." },
               ].map(item => (
