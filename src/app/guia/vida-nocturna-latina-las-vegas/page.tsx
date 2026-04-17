@@ -312,10 +312,6 @@ export default async function VidaNocturnaLatinaGuide() {
         </div>
       </section>
 
-      <p className="text-center text-[12px] text-muted-foreground py-4">
-        {"\u00daltima actualizaci\u00f3n: abril 2026"}
-      </p>
-
       <Footer />
     </>
   );
