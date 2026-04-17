@@ -27,7 +27,7 @@ export default function AnunciatePage() {
         nombre: nombreRef.current?.value,
         email: emailRef.current?.value,
         asunto: `Nuevo negocio: ${negocioRef.current?.value} (${categoriaRef.current?.value})`,
-        mensaje: `Tel\u00e9fono: ${telefonoRef.current?.value}\n\n${mensajeRef.current?.value}`,
+        mensaje: `Teléfono: ${telefonoRef.current?.value}\n\n${mensajeRef.current?.value}`,
       }),
     });
     setLoading(false);
@@ -48,7 +48,7 @@ export default function AnunciatePage() {
             LLEGA A LA<br /><span className="text-red">COMUNIDAD LATINA</span>
           </h1>
           <p className="text-[18px] text-dark-text-2 max-w-[560px] mx-auto leading-relaxed">
-            {`Latino Las Vegas es la gu\u00eda en espa\u00f1ol para visitantes y residentes latinos en Las Vegas. Agrega tu negocio gratis.`}
+            {`Latino Las Vegas es la guía en español para visitantes y residentes latinos en Las Vegas. Agrega tu negocio gratis.`}
           </p>
         </div>
       </div>
@@ -56,24 +56,24 @@ export default function AnunciatePage() {
       {/* Why list */}
       <section className="py-16 bg-background border-b border-border">
         <div className="container max-w-[900px]">
-          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5 text-center">Por qu\u00e9 estar aqu\u00ed</div>
+          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5 text-center">Por qué estar aquí</div>
           <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] text-center mb-10">TU NEGOCIO, SU IDIOMA</h2>
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                icon: "\ud83c\udfaf",
-                title: "Audiencia espec\u00edfica",
+                icon: "🎯",
+                title: "Audiencia específica",
                 text: "Conectamos directamente con visitantes y residentes latinos que buscan negocios como el tuyo.",
               },
               {
-                icon: "\ud83d\udde3\ufe0f",
-                title: "En espa\u00f1ol",
-                text: "Toda nuestra gu\u00eda est\u00e1 en espa\u00f1ol. Tu negocio llega a quien realmente lo necesita.",
+                icon: "🗣️",
+                title: "En español",
+                text: "Toda nuestra guía está en español. Tu negocio llega a quien realmente lo necesita.",
               },
               {
-                icon: "\ud83d\udccd",
+                icon: "📍",
                 title: "100% local",
-                text: "No somos una plataforma nacional. Somos una gu\u00eda hecha espec\u00edficamente para Las Vegas.",
+                text: "No somos una plataforma nacional. Somos una guía hecha específicamente para Las Vegas.",
               },
             ].map((item) => (
               <div key={item.title} className="bg-card border border-border rounded-xl p-7 shadow-card hover:border-red/25 hover:-translate-y-[3px] hover:shadow-card-hover transition-all">
@@ -91,27 +91,27 @@ export default function AnunciatePage() {
         <div className="container max-w-[900px]">
           <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5 text-center">Listado gratuito</div>
           <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] text-center mb-3">\u00bfQU\u00c9 INCLUYE?</h2>
-          <p className="text-center text-muted-foreground text-[15px] mb-10">Tu listado b\u00e1sico es completamente gratis, siempre.</p>
+          <p className="text-center text-muted-foreground text-[15px] mb-10">Tu listado básico es completamente gratis, siempre.</p>
           <div className="grid md:grid-cols-2 gap-4 max-w-[700px] mx-auto">
             {[
-              "Nombre, categor\u00eda y descripci\u00f3n",
-              "Direcci\u00f3n, tel\u00e9fono y horarios",
+              "Nombre, categoría y descripción",
+              "Dirección, teléfono y horarios",
               "Hasta 2 fotos del negocio",
               "Link a Google Maps",
-              "Aparece en b\u00fasquedas y filtros",
+              "Aparece en búsquedas y filtros",
               "Link a tu sitio web o redes sociales",
             ].map((item) => (
               <div key={item} className="flex items-center gap-3 bg-background border border-border rounded-lg px-5 py-4">
-                <span className="text-red font-bold text-[18px]">\u2713</span>
+                <span className="text-red font-bold text-[18px]">✓</span>
                 <span className="text-[15px] text-foreground/80">{item}</span>
               </div>
             ))}
           </div>
           <div className="mt-8 text-center">
             <div className="inline-block bg-card border border-border rounded-xl px-8 py-5 text-center shadow-card">
-              <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-1">Pr\u00f3ximamente</div>
+              <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-1">Próximamente</div>
               <div className="font-condensed text-[18px] font-bold mb-1">Listados Destacados</div>
-              <div className="text-[13px] text-muted-foreground">Mayor visibilidad, posici\u00f3n prioritaria y m\u00e1s fotos. En desarrollo.</div>
+              <div className="text-[13px] text-muted-foreground">Mayor visibilidad, posición prioritaria y más fotos. En desarrollo.</div>
             </div>
           </div>
         </div>
@@ -126,7 +126,7 @@ export default function AnunciatePage() {
 
           {sent ? (
             <div className="text-center p-10 bg-green-500/10 border border-green-500/20 rounded-xl">
-              <div className="text-4xl mb-4">\u2705</div>
+              <div className="text-4xl mb-4">✅</div>
               <div className="font-condensed text-[24px] font-bold mb-2">{"u00a1Recibido!"}</div>
               <div className="text-muted-foreground text-[15px]">{"Te contactaremos en menos de 48 horas para agregar tu negocio al directorio."}</div>
             </div>
@@ -143,9 +143,9 @@ export default function AnunciatePage() {
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-bold tracking-[1.5px] uppercase text-muted-foreground mb-2">Categor\u00eda</label>
+                <label className="block text-xs font-bold tracking-[1.5px] uppercase text-muted-foreground mb-2">Categoría</label>
                 <select ref={categoriaRef} required className="w-full bg-background border border-border rounded-sm px-4 py-3 text-[15px] outline-none focus:border-red/45 transition-all cursor-pointer">
-                  <option value="">Selecciona una categor\u00eda...</option>
+                  <option value="">Selecciona una categoría...</option>
                   <option>Restaurante</option>
                   <option>Bar / Nightclub</option>
                   <option>Hotel / Casino</option>
@@ -162,23 +162,23 @@ export default function AnunciatePage() {
                   <input ref={emailRef} type="email" required placeholder="tu@email.com" className="w-full bg-background border border-border rounded-sm px-4 py-3 text-[15px] outline-none focus:border-red/45 focus:shadow-[0_0_0_3px_rgba(196,34,41,0.1)] transition-all placeholder:text-muted-foreground/50" />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold tracking-[1.5px] uppercase text-muted-foreground mb-2">Tel\u00e9fono (opcional)</label>
+                  <label className="block text-xs font-bold tracking-[1.5px] uppercase text-muted-foreground mb-2">Teléfono (opcional)</label>
                   <input ref={telefonoRef} type="tel" placeholder="(702) 000-0000" className="w-full bg-background border border-border rounded-sm px-4 py-3 text-[15px] outline-none focus:border-red/45 focus:shadow-[0_0_0_3px_rgba(196,34,41,0.1)] transition-all placeholder:text-muted-foreground/50" />
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-bold tracking-[1.5px] uppercase text-muted-foreground mb-2">Algo m\u00e1s que debamos saber (opcional)</label>
-                <textarea ref={mensajeRef} placeholder="Direcci\u00f3n, horarios, sitio web, redes sociales..." className="w-full bg-background border border-border rounded-sm px-4 py-3 text-[15px] outline-none min-h-[100px] resize-y leading-relaxed focus:border-red/45 focus:shadow-[0_0_0_3px_rgba(196,34,41,0.1)] transition-all placeholder:text-muted-foreground/50" />
+                <label className="block text-xs font-bold tracking-[1.5px] uppercase text-muted-foreground mb-2">Algo más que debamos saber (opcional)</label>
+                <textarea ref={mensajeRef} placeholder="Dirección, horarios, sitio web, redes sociales..." className="w-full bg-background border border-border rounded-sm px-4 py-3 text-[15px] outline-none min-h-[100px] resize-y leading-relaxed focus:border-red/45 focus:shadow-[0_0_0_3px_rgba(196,34,41,0.1)] transition-all placeholder:text-muted-foreground/50" />
               </div>
               <button type="submit" disabled={loading} className="w-full py-4 bg-red text-primary-foreground border-none rounded-sm font-condensed text-[16px] font-bold tracking-[1.5px] uppercase cursor-pointer hover:bg-red-light transition-all shadow-[0_2px_8px_hsl(var(--red)/0.35)] disabled:opacity-60">
-                {loading ? "Enviando..." : "Agregar mi negocio \u2192"}
+                {loading ? "Enviando..." : "Agregar mi negocio →"}
               </button>
               {error && (
                 <div className="text-center p-4 bg-red/10 border border-red/20 rounded-sm text-red text-[14px] font-semibold">
-                  {"\u274c Hubo un error. Int\u00e9ntalo de nuevo o escr\u00edbenos a hola@latinolasvegas.com"}
+                  {"❌ Hubo un error. Inténtalo de nuevo o escríbenos a hola@latinolasvegas.com"}
                 </div>
               )}
-              <p className="text-center text-[12px] text-muted-foreground">{"Sin costo \u00b7 Sin contratos \u00b7 Respondemos en menos de 48 horas"}</p>
+              <p className="text-center text-[12px] text-muted-foreground">{"Sin costo · Sin contratos · Respondemos en menos de 48 horas"}</p>
             </form>
           )}
         </div>
