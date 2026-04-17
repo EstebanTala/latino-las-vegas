@@ -182,7 +182,7 @@ export default async function RestaurantesMexicanosGuide() {
 
 
       {/* Related Guides */}
-      <section className="py-16 bg-cream-2 border-t border-border">
+      <section className="py-10 bg-background border-t border-border">
         <div className="container max-w-[900px]">
           <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5 text-center">{"Gu\u00edas relacionadas"}</div>
           <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] text-center mb-10">{"EXPLORA M\u00c1S DE LAS VEGAS"}</h2>
