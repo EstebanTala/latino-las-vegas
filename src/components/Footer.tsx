@@ -19,6 +19,7 @@ export default function Footer() {
               <li><Link href="/explorar?cat=restaurantes" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Restaurantes</Link></li>
               <li><Link href="/explorar?cat=shows" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Shows & Eventos</Link></li>
               <li><Link href="/explorar?cat=nocturna" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Vida Nocturna</Link></li>
+              <li><Link href="/explorar?cat=atracciones" className="text-sm font-normal text-dark-text-muted/70 hover:text-dark-text transition-colors">Atracciones</Link></li>
             </ul>
           </div>
           <div>
