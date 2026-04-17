@@ -78,8 +78,7 @@ export default function AboutPage() {
         <div className="container">
           <SectionHeader eyebrow="La historia detrás del proyecto" title="¿Por Qué Nació Latino LV?" />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-            <div className="bg-card border border-border rounded-lg p-10 shadow-card">
-              <div className="text-6xl mb-6">🗺️</div>
+            <div className="bg-card border border-border rounded-lg p-10 shadow-card h-full flex flex-col justify-center">
               <p className="text-foreground/80 text-base leading-[1.9] mb-5">
                 Latino Las Vegas nació porque no existía una guía confiable, en español, que ayudara a la comunidad latina a navegar todo lo que esta ciudad ofrece.
               </p>
@@ -90,7 +89,7 @@ export default function AboutPage() {
                 Este proyecto es un esfuerzo independiente, construido con dedicación para resolver esa necesidad real. Lo construimos para la comunidad latina — con honestidad, sin contenido genérico.
               </p>
             </div>
-            <div className="grid grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 gap-4 h-full">
               {[
                 { icon: "🎯", title: "Un solo objetivo", text: "Convertirnos en la guía en español de referencia para la comunidad latina en Las Vegas." },
                 { icon: "🔨", title: "Proyecto independiente", text: "Sin inversores ni corporaciones. Hecho por y para la comunidad latina." },
