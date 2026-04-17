@@ -118,11 +118,11 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
               { icon: "🤝", title: "Comunidad Primero", text: "Todo lo que hacemos está pensado para servir a la comunidad latina de Las Vegas." },
-              { icon: "✅", title: "Contenido Verificado", text: "Información verificada y actualizada con fuentes confiables y revisiones periódicas." },
+              { icon: "🔍", title: "Contenido Verificado", text: "Investigamos cada lugar con reseñas reales de la comunidad — sin contenido inventado ni pagado." },
               { icon: "🗣️", title: "Siempre en Español", text: "El español es nuestra lengua de trabajo. Todo escrito por hablantes nativos." },
               { icon: "🔍", title: "Transparencia Total", text: "Nunca aceptamos pagos por reseñas positivas." },
               { icon: "🌎", title: "Diversidad Latina", text: "Mexicanos, cubanos, colombianos, venezolanos y más." },
-              { icon: "💡", title: "Innovación Constante", text: "Mejoramos la guía cada semana con nuevos lugares y funciones." },
+              { icon: "💬", title: "Voz de la Comunidad", text: "Creado para que latinos ayuden a latinos — tus recomendaciones hacen la guía mejor." },
             ].map(v => (
               <div key={v.title} className="bg-card border border-border rounded-lg p-8 shadow-card hover:border-red/25 hover:shadow-card-hover hover:-translate-y-0.5 transition-all">
                 <div className="text-4xl mb-4">{v.icon}</div>
