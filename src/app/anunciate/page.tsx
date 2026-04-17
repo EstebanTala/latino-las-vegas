@@ -127,7 +127,7 @@ export default function AnunciatePage() {
           {sent ? (
             <div className="text-center p-10 bg-green-500/10 border border-green-500/20 rounded-xl">
               <div className="text-4xl mb-4">\u2705</div>
-              <div className="font-condensed text-[24px] font-bold mb-2">{\u00a1Recibido!}</div>
+              <div className="font-condensed text-[24px] font-bold mb-2">{"u00a1Recibido!"}</div>
               <div className="text-muted-foreground text-[15px]">{"Te contactaremos en menos de 48 horas para agregar tu negocio al directorio."}</div>
             </div>
           ) : (
