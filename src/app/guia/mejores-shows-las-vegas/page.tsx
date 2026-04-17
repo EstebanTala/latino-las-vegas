@@ -63,7 +63,7 @@ export default async function MejoresShowsGuide() {
       itemListElement: shows.map((s: any, i: number) => ({
         "@type": "ListItem",
         position: i + 1,
-        item: { "@type": "Event", name: s.name },
+        item: { "@type": "Thing", name: s.name },
       })),
     },
   };
