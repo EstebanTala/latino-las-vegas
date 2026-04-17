@@ -35,10 +35,10 @@ export default function AboutPage() {
         <div className="container relative">
           <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">Conoce la comunidad</div>
           <h1 className="font-display text-[96px] tracking-[4px] leading-[0.9] mb-5 text-dark-text">SOMOS<br/><span className="text-red">LATINOS LV</span></h1>
-          <p className="text-[19px] text-dark-text-2 max-w-[600px] mx-auto mb-9 leading-relaxed">La primera guía en español dedicada a conectar a la comunidad latina con lo mejor que Las Vegas tiene para ofrecer.</p>
+          <p className="text-[19px] text-dark-text-2 max-w-[600px] mx-auto mb-9 leading-relaxed">La guía en español más completa para conectar a la comunidad latina con lo mejor que Las Vegas tiene para ofrecer.</p>
           <div className="flex gap-3 justify-center">
-            <a href="#contacto" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all">Contáctanos</a>
-            <Link href="/explorar" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm border border-border-2 text-muted-foreground hover:text-foreground hover:border-foreground/20 transition-all">Explorar guía →</Link>
+            <a href="#contacto" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm border border-white/20 text-dark-text hover:border-white/40 hover:-translate-y-px transition-all">Contáctanos</a>
+            <Link href="/explorar" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all">Explorar guía →</Link>
           </div>
         </div>
       </div>
