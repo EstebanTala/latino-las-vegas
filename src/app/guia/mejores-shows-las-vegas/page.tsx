@@ -153,6 +153,31 @@ export default async function MejoresShowsGuide() {
               ))}
             </div>
           )}
+      {/* FAQ */}
+      <section className="py-16 bg-cream-2">
+        <div className="container max-w-[800px]">
+          <div className="text-[11px] font-bold tracking-[3px] uppercase text-[#FB923C] mb-2.5">Preguntas frecuentes</div>
+          <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] mb-8">SOBRE SHOWS EN LAS VEGAS</h2>
+          <div className="space-y-3">
+            <details className="group bg-background border border-border rounded-lg">
+              <summary className="cursor-pointer px-5 py-4 text-[15px] font-medium list-none flex items-center justify-between gap-4">{"¿Cuáles son los mejores shows en Las Vegas?"}<span className="text-muted-foreground text-[18px] group-open:rotate-45 transition-transform">+</span></summary>
+              <div className="px-5 pb-4 text-[14px] text-muted-foreground leading-relaxed">Los shows mejor calificados incluyen espectáculos de Cirque du Soleil como "O" y Mystere, shows de comedia, conciertos de artistas en residencia, y experiencias inmersivas como Meow Wolf. La mejor opción depende de tus gustos y presupuesto.</div>
+            </details>
+            <details className="group bg-background border border-border rounded-lg">
+              <summary className="cursor-pointer px-5 py-4 text-[15px] font-medium list-none flex items-center justify-between gap-4">{"¿Cuánto cuestan los shows en Las Vegas?"}<span className="text-muted-foreground text-[18px] group-open:rotate-45 transition-transform">+</span></summary>
+              <div className="px-5 pb-4 text-[14px] text-muted-foreground leading-relaxed">Los precios varían desde $30-50 para shows más pequeños hasta $150-300+ para Cirque du Soleil y conciertos de artistas grandes. Comprar boletos por adelantado suele ser más barato que en taquilla.</div>
+            </details>
+            <details className="group bg-background border border-border rounded-lg">
+              <summary className="cursor-pointer px-5 py-4 text-[15px] font-medium list-none flex items-center justify-between gap-4">{"¿Hay shows en español en Las Vegas?"}<span className="text-muted-foreground text-[18px] group-open:rotate-45 transition-transform">+</span></summary>
+              <div className="px-5 pb-4 text-[14px] text-muted-foreground leading-relaxed">La mayoría de los shows son en inglés, pero muchos espectáculos visuales como Cirque du Soleil no requieren idioma. También hay conciertos de artistas latinos y eventos especiales en español durante todo el año.</div>
+            </details>
+            <details className="group bg-background border border-border rounded-lg">
+              <summary className="cursor-pointer px-5 py-4 text-[15px] font-medium list-none flex items-center justify-between gap-4">{"¿Dónde comprar boletos para shows en Las Vegas?"}<span className="text-muted-foreground text-[18px] group-open:rotate-45 transition-transform">+</span></summary>
+              <div className="px-5 pb-4 text-[14px] text-muted-foreground leading-relaxed">Puedes comprar boletos en los sitios oficiales de cada show, en plataformas como Ticketmaster, o en taquillas de descuento en el Strip. Para los mejores precios, compra con anticipación o busca ofertas de último momento en apps como TodayTix.</div>
+            </details>
+          </div>
+        </div>
+      </section>
           {/* Directory CTA */}
           <div className="mt-16 rounded-xl bg-[rgba(5,5,5,0.95)] border border-white/[0.08] p-10 text-center">
             <p className="text-[11px] font-bold tracking-[3px] uppercase text-[#FB923C] mb-3">Directorio completo</p>

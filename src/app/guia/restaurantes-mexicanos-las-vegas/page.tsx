@@ -150,6 +150,31 @@ export default async function RestaurantesMexicanosGuide() {
               ))}
             </div>
           )}
+      {/* FAQ */}
+      <section className="py-16 bg-cream-2">
+        <div className="container max-w-[800px]">
+          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">Preguntas frecuentes</div>
+          <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] mb-8">SOBRE COMIDA MEXICANA EN LAS VEGAS</h2>
+          <div className="space-y-3">
+            <details className="group bg-background border border-border rounded-lg">
+              <summary className="cursor-pointer px-5 py-4 text-[15px] font-medium list-none flex items-center justify-between gap-4">{"¿Cuáles son los mejores restaurantes mexicanos en Las Vegas?"}<span className="text-muted-foreground text-[18px] group-open:rotate-45 transition-transform">+</span></summary>
+              <div className="px-5 pb-4 text-[14px] text-muted-foreground leading-relaxed">Los restaurantes mexicanos mejor calificados en Las Vegas incluyen Rosa Mexicano en el Strip, Tacos El Gordo con varias ubicaciones, y varios spots locales en West Las Vegas y East Las Vegas que sirven comida auténtica a precios accesibles.</div>
+            </details>
+            <details className="group bg-background border border-border rounded-lg">
+              <summary className="cursor-pointer px-5 py-4 text-[15px] font-medium list-none flex items-center justify-between gap-4">{"¿Dónde encontrar tacos auténticos en Las Vegas?"}<span className="text-muted-foreground text-[18px] group-open:rotate-45 transition-transform">+</span></summary>
+              <div className="px-5 pb-4 text-[14px] text-muted-foreground leading-relaxed">Las mejores taquerías están fuera del Strip, especialmente en West Las Vegas y North Las Vegas. Busca lugares donde los locales comen — si el menú está en español y hay familias comiendo, es buena señal.</div>
+            </details>
+            <details className="group bg-background border border-border rounded-lg">
+              <summary className="cursor-pointer px-5 py-4 text-[15px] font-medium list-none flex items-center justify-between gap-4">{"¿Cuánto cuesta comer en un restaurante mexicano en Las Vegas?"}<span className="text-muted-foreground text-[18px] group-open:rotate-45 transition-transform">+</span></summary>
+              <div className="px-5 pb-4 text-[14px] text-muted-foreground leading-relaxed">Los precios varían mucho. Taquerías callejeras y spots locales cuestan $8-15 por persona. Restaurantes mexicanos en el Strip o de alta cocina pueden costar $30-60+ por persona.</div>
+            </details>
+            <details className="group bg-background border border-border rounded-lg">
+              <summary className="cursor-pointer px-5 py-4 text-[15px] font-medium list-none flex items-center justify-between gap-4">{"¿Hay restaurantes mexicanos abiertos las 24 horas en Las Vegas?"}<span className="text-muted-foreground text-[18px] group-open:rotate-45 transition-transform">+</span></summary>
+              <div className="px-5 pb-4 text-[14px] text-muted-foreground leading-relaxed">Sí, varios restaurantes y taquerías en Las Vegas están abiertos hasta muy tarde o las 24 horas, especialmente cerca del Strip y en zonas como East Las Vegas.</div>
+            </details>
+          </div>
+        </div>
+      </section>
           {/* Directory CTA */}
           <div className="mt-16 rounded-xl bg-[rgba(5,5,5,0.95)] border border-white/[0.08] p-10 text-center">
             <p className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-3">Directorio completo</p>

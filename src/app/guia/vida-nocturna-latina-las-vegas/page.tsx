@@ -256,31 +256,6 @@ export default async function VidaNocturnaLatinaGuide() {
 
 
 
-      {/* Safety tips */}
-      <section className="py-16 bg-cream-2">
-        <div className="container max-w-[800px]">
-          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">
-            Antes de salir
-          </div>
-          <h2 className="font-display text-[48px] tracking-[2px] mb-6">
-            Tips Para La Noche
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {[
-              { titulo: "Transporte", texto: "Siempre usa Uber/Lyft. Nunca manejes despu\u00e9s de beber. Los clubs latinos est\u00e1n fuera del Strip as\u00ed que no puedes caminar." },
-              { titulo: "Efectivo", texto: "Lleva efectivo \u2014 algunos clubs cobran cover solo en cash. ATMs dentro de clubs cobran fees de $5-10." },
-              { titulo: "Dress code", texto: "Cada club tiene su c\u00f3digo. En general: nada de tenis, shorts, o camisetas sin mangas para hombres. Mejor ir un poco m\u00e1s arreglado." },
-              { titulo: "Reservaciones", texto: "Para servicio de botella o mesas VIP, reserva por Instagram DM o tel\u00e9fono. Casi todos los clubs latinos responden r\u00e1pido por IG." },
-            ].map((t) => (
-              <div key={t.titulo} className="bg-background border border-border rounded-lg p-5">
-                <div className="font-condensed text-[16px] font-bold mb-1">{t.titulo}</div>
-                <p className="text-[13px] text-muted-foreground leading-relaxed">{t.texto}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* FAQ */}
       <section className="py-16 bg-background">
         <div className="container max-w-[800px]">
