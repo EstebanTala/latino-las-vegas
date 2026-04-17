@@ -90,7 +90,7 @@ export default function AnunciatePage() {
       <section className="py-16 bg-cream-2 border-b border-border">
         <div className="container max-w-[900px]">
           <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5 text-center">Listado gratuito</div>
-          <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] text-center mb-3">\u00bfQU\u00c9 INCLUYE?</h2>
+          <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] text-center mb-3">¿QUÉ INCLUYE?</h2>
           <p className="text-center text-muted-foreground text-[15px] mb-10">Tu listado básico es completamente gratis, siempre.</p>
           <div className="grid md:grid-cols-2 gap-4 max-w-[700px] mx-auto">
             {[
