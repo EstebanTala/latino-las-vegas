@@ -102,6 +102,7 @@ export default function AnunciatePage() {
               "Página propia en el directorio",
               "Reseñas de la comunidad (próximamente)",
               "Visible para visitantes latinos de Las Vegas",
+              "Link a tu sitio web o redes sociales",
             ].map((item) => (
               <div key={item} className="flex items-center gap-3 bg-background border border-border rounded-lg px-5 py-4">
                 <span className="text-red font-bold text-[18px]">✓</span>
