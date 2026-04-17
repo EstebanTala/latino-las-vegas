@@ -62,6 +62,9 @@ function ExplorePageInner() {
   const initialResort = searchParams.get("resort") || "";
   const initialTipoSlug = searchParams.get("tipo") || "";
   const [activeCat, setActiveCat] = useState(initialCat);
+  useEffect(() => {
+    setActiveCat(searchParams.get("cat") || "hoteles");
+  }, [searchParams]);
   const { data: allListings = [] } = useListings();
   const { data: taxonomyCuisines = [] } = useCuisines();
   const { data: taxonomyZones = [] } = useZones();
