@@ -75,7 +75,7 @@ export default function AboutPage() {
                 Desde encontrar un restaurante con auténtica comida mexicana hasta saber qué shows tienen opciones en español — toda esa información estaba dispersa o simplemente no existía.
               </p>
               <p className="text-foreground/80 text-base leading-[1.9]">
-                Este proyecto es un esfuerzo independiente, construido con dedicación para resolver esa necesidad real. Cada lugar listado ha sido verificado personalmente.
+                Este proyecto es un esfuerzo independiente, construido con dedicación para resolver esa necesidad real. Lo construimos para la comunidad latina — con honestidad, sin contenido genérico.
               </p>
             </div>
             <div className="grid grid-cols-1 gap-4">

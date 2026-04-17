@@ -178,7 +178,7 @@ export default function AdminPage() {
     setBulkPending(true);
     try {
       const ids = Array.from(visibleSelected);
-      const { error } = await (supabase.from("listings") as any).update(updates).in("id", ids);
+      const { error } = await supabase.from("listings").update(updates as any).in("id", ids);
       if (error) throw error;
       await queryClient.invalidateQueries({ queryKey: ["listings"] });
       toast.success(`${ids.length} listing${ids.length === 1 ? "" : "s"} updated`);
