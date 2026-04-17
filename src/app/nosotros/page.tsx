@@ -57,9 +57,9 @@ export default function AboutPage() {
             <div className="grid grid-cols-2 gap-3.5">
               {[
                 { icon: "📍", num: listingCount ? `${listingCount}+` : "83+", label: "Lugares" },
-                { icon: "🗺️", num: "LV", label: "Las Vegas" },
+                { icon: "📖", num: "3", label: "Guías publicadas" },
                 { icon: "🇲🇽", num: "100%", label: "En español" },
-                { icon: "🔄", num: "Semanal", label: "Actualización" },
+                { icon: "🔄", num: "↑", label: "Actualización semanal" },
               ].map(c => (
                 <div key={c.label} className="bg-card border border-border rounded-lg p-7 text-center shadow-card hover:border-red/25 hover:-translate-y-[3px] hover:shadow-card-hover transition-all">
                   <div className="text-4xl mb-3">{c.icon}</div>
