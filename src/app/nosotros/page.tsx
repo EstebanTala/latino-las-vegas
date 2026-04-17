@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,6 +7,18 @@ import SectionHeader from "@/components/SectionHeader";
 
 export default function AboutPage() {
   const [formSent, setFormSent] = useState(false);
+  const [listingCount, setListingCount] = useState<number | null>(null);
+  useEffect(() => {
+    fetch("https://sxwmeoujphvnnxggiqzp.supabase.co/rest/v1/listings?select=id", {
+      headers: {
+        apikey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "",
+        Prefer: "count=exact",
+      },
+    }).then(res => {
+      const range = res.headers.get("content-range");
+      if (range) setListingCount(parseInt(range.split("/")[1]));
+    });
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,10 +56,10 @@ export default function AboutPage() {
             </div>
             <div className="grid grid-cols-2 gap-3.5">
               {[
-                { icon: "📍", num: "50+", label: "Lugares" },
-                { icon: "⭐", num: "4.8", label: "Calificación" },
+                { icon: "📍", num: listingCount ? `${listingCount}+` : "83+", label: "Lugares" },
+                { icon: "🗺️", num: "LV", label: "Las Vegas" },
                 { icon: "🇲🇽", num: "100%", label: "En español" },
-                { icon: "👥", num: "5k+", label: "Usuarios" },
+                { icon: "🔄", num: "Semanal", label: "Actualización" },
               ].map(c => (
                 <div key={c.label} className="bg-card border border-border rounded-lg p-7 text-center shadow-card hover:border-red/25 hover:-translate-y-[3px] hover:shadow-card-hover transition-all">
                   <div className="text-4xl mb-3">{c.icon}</div>
