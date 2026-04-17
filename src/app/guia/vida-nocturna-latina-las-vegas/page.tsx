@@ -275,10 +275,10 @@ export default async function VidaNocturnaLatinaGuide() {
         </div>
       </section>
       {/* Related Guides */}
-      <section className="py-16 bg-background border-t border-border">
+      <section className="py-10 bg-background border-t border-border">
         <div className="container max-w-[900px]">
           <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5 text-center">{"Gu\u00edas relacionadas"}</div>
-          <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] text-center mb-10">{"EXPLORA M\u00c1S DE LAS VEGAS"}</h2>
+          <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] text-center mb-6">{"EXPLORA M\u00c1S DE LAS VEGAS"}</h2>
           <div className="grid md:grid-cols-2 gap-4">
             <Link href="/guia/restaurantes-mexicanos-las-vegas" className="group block rounded-xl border border-border p-6 hover:border-red/30 hover:shadow-card transition-all">
               <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-2 block">{"Gu\u00eda"}</span>
@@ -297,7 +297,7 @@ export default async function VidaNocturnaLatinaGuide() {
       
 
       {/* Directory CTA */}
-      <section className="py-16 bg-cream-2">
+      <section className="py-10 bg-cream-2">
         <div className="container max-w-[900px]">
           <div className="rounded-xl bg-[rgba(5,5,5,0.95)] border border-white/[0.08] p-10 text-center">
             <p className="text-[11px] font-bold tracking-[3px] uppercase text-[#C084FC] mb-3">Directorio completo</p>
