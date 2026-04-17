@@ -1,124 +1,188 @@
 "use client";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-export default function AdsPage() {
+export default function AnunciatePage() {
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const nombreRef = useRef<HTMLInputElement>(null);
+  const negocioRef = useRef<HTMLInputElement>(null);
+  const categoriaRef = useRef<HTMLSelectElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const telefonoRef = useRef<HTMLInputElement>(null);
+  const mensajeRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(false);
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        nombre: nombreRef.current?.value,
+        email: emailRef.current?.value,
+        asunto: `Nuevo negocio: ${negocioRef.current?.value} (${categoriaRef.current?.value})`,
+        mensaje: `Tel\u00e9fono: ${telefonoRef.current?.value}\n\n${mensajeRef.current?.value}`,
+      }),
+    });
+    setLoading(false);
+    if (res.ok) setSent(true);
+    else setError(true);
+  };
+
   return (
     <>
       <Navbar />
 
       {/* Hero */}
-      <div className="pt-[100px] pb-[60px] text-center relative overflow-hidden bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(232,39,42,0.1)_0%,transparent_70%)]">
-        <div className="container">
-          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">Para negocios</div>
-          <h1 className="font-display text-[clamp(52px,8vw,96px)] tracking-[3px] leading-[0.9] mb-4">
-            LLEGA A LA<br/><span className="text-red">COMUNIDAD LATINA</span>
+      <div className="pt-[140px] pb-20 text-center relative overflow-hidden bg-[linear-gradient(180deg,hsl(var(--dark))_0%,hsl(var(--dark-2))_100%)]">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_80%,rgba(232,39,42,0.12)_0%,transparent_60%)]" />
+        <div className="container relative max-w-[700px]">
+          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-4">Para negocios</div>
+          <h1 className="font-display text-[clamp(42px,7vw,80px)] tracking-[3px] leading-[0.95] mb-5 text-dark-text">
+            LLEGA A LA<br /><span className="text-red">COMUNIDAD LATINA</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-[540px] mx-auto mb-10 leading-relaxed">Latino Las Vegas es la guía de referencia en español para visitantes y residentes latinos en Las Vegas.</p>
+          <p className="text-[18px] text-dark-text-2 max-w-[560px] mx-auto leading-relaxed">
+            {`Latino Las Vegas es la gu\u00eda en espa\u00f1ol para visitantes y residentes latinos en Las Vegas. Agrega tu negocio gratis.`}
+          </p>
+        </div>
+      </div>
 
-          <div className="flex gap-0 justify-center mb-14 border border-border rounded-xl overflow-hidden max-w-[600px] mx-auto bg-card">
+      {/* Why list */}
+      <section className="py-16 bg-background border-b border-border">
+        <div className="container max-w-[900px]">
+          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5 text-center">Por qu\u00e9 estar aqu\u00ed</div>
+          <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] text-center mb-10">TU NEGOCIO, SU IDIOMA</h2>
+          <div className="grid md:grid-cols-3 gap-6">
             {[
-              { num: "50+", label: "Lugares listados" },
-              { num: "100%", label: "En español" },
-              { num: "LV", label: "Mercado local" },
-            ].map((s, i) => (
-              <div key={s.label} className={`flex-1 py-7 px-5 text-center ${i < 2 ? 'border-r border-border' : ''}`}>
-                <div className="font-display text-[42px] text-red tracking-[1px] leading-none">{s.num}</div>
-                <div className="text-xs text-muted-foreground uppercase tracking-[1.5px] mt-1">{s.label}</div>
+              {
+                icon: "\ud83c\udfaf",
+                title: "Audiencia espec\u00edfica",
+                text: "Conectamos directamente con visitantes y residentes latinos que buscan negocios como el tuyo.",
+              },
+              {
+                icon: "\ud83d\udde3\ufe0f",
+                title: "En espa\u00f1ol",
+                text: "Toda nuestra gu\u00eda est\u00e1 en espa\u00f1ol. Tu negocio llega a quien realmente lo necesita.",
+              },
+              {
+                icon: "\ud83d\udccd",
+                title: "100% local",
+                text: "No somos una plataforma nacional. Somos una gu\u00eda hecha espec\u00edficamente para Las Vegas.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="bg-card border border-border rounded-xl p-7 shadow-card hover:border-red/25 hover:-translate-y-[3px] hover:shadow-card-hover transition-all">
+                <div className="text-4xl mb-4">{item.icon}</div>
+                <div className="font-condensed text-[20px] font-bold mb-2">{item.title}</div>
+                <div className="text-[14px] text-muted-foreground leading-relaxed">{item.text}</div>
               </div>
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Plans */}
-      <div className="container">
-        <div className="text-center mb-4">
-          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">Opciones de visibilidad</div>
-          <div className="font-display text-[52px] tracking-[2px] leading-[0.95]">Elige Tu Plan</div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-14">
-          {[
-            {
-              icon: "📋", name: "Listado Básico", price: "Gratis", period: "/siempre", featured: false,
-              desc: "Aparece en nuestro directorio con información esencial.",
-              features: ["Nombre y categoría", "Dirección y teléfono", "Horarios de apertura", "Descripción básica", "Hasta 2 imágenes", "Link a Google Maps", "Aparece en resultados de búsqueda"],
-              btnLabel: "Solicitar listado", btnStyle: "secondary" as const,
-            },
-            {
-              icon: "⭐", name: "Listado Destacado", price: "$79", period: "/mes", featured: true, badge: "Más Popular",
-              desc: "Destaca sobre la competencia con posición prioritaria y galería completa.",
-              features: ["Todo lo del plan básico", "Badge 'Destacado' visible", "Posición prioritaria en categoría", "Galería de hasta 6 fotos", "Links a redes sociales", "Descripción extendida", "Sección Happy Hour"],
-              btnLabel: "Empezar ahora", btnStyle: "primary" as const,
-            },
-            {
-              icon: "🏆", name: "Seleccionado", price: "$199", period: "/mes", featured: false,
-              desc: "Máxima visibilidad. Tu negocio en la página de inicio y primero en búsquedas.",
-              features: ["Todo lo del plan destacado", "Aparición en página de inicio", "Primera posición en categorías", "Primera posición en búsquedas", "Etiqueta 'Seleccionado' elegante", "Diseño de tarjeta elevado", "Reporte mensual de rendimiento", "Soporte prioritario"],
-              btnLabel: "Contactar", btnStyle: "secondary" as const,
-            },
-          ].map(plan => (
-            <div key={plan.name} className={`relative bg-card border rounded-xl p-9 transition-all hover:border-red/40 hover:-translate-y-[3px] ${plan.featured ? 'border-red bg-[linear-gradient(135deg,rgba(232,39,42,0.06)_0%,hsl(var(--card))_100%)]' : 'border-border'}`}>
-              {plan.badge && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-red text-primary-foreground text-[11px] font-bold tracking-[1.5px] uppercase px-3.5 py-1 rounded-full whitespace-nowrap">{plan.badge}</div>
-              )}
-              <div className="text-[32px] mb-4">{plan.icon}</div>
-              <div className="font-condensed text-[22px] font-bold tracking-[0.5px] mb-1.5">{plan.name}</div>
-              <div className="font-display text-5xl text-red leading-none mb-1">{plan.price}<span className="text-lg text-muted-foreground font-body font-normal">{plan.period}</span></div>
-              <div className="text-[13px] text-muted-foreground mb-6 leading-relaxed">{plan.desc}</div>
-              <ul className="space-y-0 mb-7">
-                {plan.features.map(f => (
-                  <li key={f} className="text-[13px] text-muted-foreground py-[7px] border-b border-border last:border-b-0 flex items-center gap-2">
-                    <span className="text-red font-bold">✓</span> {f}
-                  </li>
-                ))}
-              </ul>
-              <Link
-                href="/nosotros#contacto"
-                className={`block w-full text-center font-condensed text-sm font-bold tracking-[1px] uppercase px-5 py-3 rounded-sm transition-all ${
-                  plan.btnStyle === 'primary'
-                    ? 'bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light'
-                    : 'bg-card text-foreground border border-border-2 shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:border-foreground/20'
-                }`}
-              >
-                {plan.btnLabel}
-              </Link>
-            </div>
-          ))}
-        </div>
-
-        {/* Why */}
-        <div className="text-center mt-14 mb-4">
-          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">Por qué elegirnos</div>
-          <div className="font-display text-[52px] tracking-[2px] leading-[0.95]">Tu Negocio, Su Idioma</div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-10">
-          {[
-            { icon: "🎯", title: "Audiencia Específica", text: "Llegamos directamente a visitantes y residentes latinos." },
-            { icon: "✅", title: "Contenido Verificado", text: "Todos los listados son revisados por nuestro equipo." },
-            { icon: "📈", title: "Sin Contratos Largos", text: "Paga mes a mes, cancela cuando quieras." },
-          ].map(w => (
-            <div key={w.title} className="bg-card border border-border rounded-lg p-7 text-center">
-              <div className="text-[28px] mb-3">{w.icon}</div>
-              <div className="font-condensed text-lg font-bold mb-2">{w.title}</div>
-              <div className="text-[13px] text-muted-foreground leading-relaxed">{w.text}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* CTA */}
-        <div className="bg-card border border-border rounded-xl p-12 text-center my-10">
-          <h3 className="font-display text-[42px] tracking-[2px] mb-3">¿LISTO PARA EMPEZAR?</h3>
-          <p className="text-muted-foreground text-[15px] mb-7 max-w-[440px] mx-auto">Escríbenos y te tenemos en el directorio en menos de 48 horas.</p>
-          <div className="flex gap-3 justify-center flex-wrap">
-            <a href="mailto:hola@latinolasvegas.com" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light transition-all">✉️ Escribir ahora</a>
-            <Link href="/nosotros#contacto" className="font-condensed text-[15px] font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-card text-foreground border border-border-2 shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:border-foreground/20 transition-all">Ver contacto</Link>
+      {/* What you get */}
+      <section className="py-16 bg-cream-2 border-b border-border">
+        <div className="container max-w-[900px]">
+          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5 text-center">Listado gratuito</div>
+          <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] text-center mb-3">\u00bfQU\u00c9 INCLUYE?</h2>
+          <p className="text-center text-muted-foreground text-[15px] mb-10">Tu listado b\u00e1sico es completamente gratis, siempre.</p>
+          <div className="grid md:grid-cols-2 gap-4 max-w-[700px] mx-auto">
+            {[
+              "Nombre, categor\u00eda y descripci\u00f3n",
+              "Direcci\u00f3n, tel\u00e9fono y horarios",
+              "Hasta 2 fotos del negocio",
+              "Link a Google Maps",
+              "Aparece en b\u00fasquedas y filtros",
+              "Link a tu sitio web o redes sociales",
+            ].map((item) => (
+              <div key={item} className="flex items-center gap-3 bg-background border border-border rounded-lg px-5 py-4">
+                <span className="text-red font-bold text-[18px]">\u2713</span>
+                <span className="text-[15px] text-foreground/80">{item}</span>
+              </div>
+            ))}
           </div>
-          <p className="text-xs text-muted-foreground mt-5">Respondemos en menos de 24 horas · Lunes a Viernes</p>
+          <div className="mt-8 text-center">
+            <div className="inline-block bg-card border border-border rounded-xl px-8 py-5 text-center shadow-card">
+              <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-1">Pr\u00f3ximamente</div>
+              <div className="font-condensed text-[18px] font-bold mb-1">Listados Destacados</div>
+              <div className="text-[13px] text-muted-foreground">Mayor visibilidad, posici\u00f3n prioritaria y m\u00e1s fotos. En desarrollo.</div>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* Form */}
+      <section className="py-16 bg-background">
+        <div className="container max-w-[700px]">
+          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5 text-center">Empieza hoy</div>
+          <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] text-center mb-3">AGREGA TU NEGOCIO</h2>
+          <p className="text-center text-muted-foreground text-[15px] mb-10">{"Te tenemos en el directorio en menos de 48 horas. Sin costo, sin contratos."}</p>
+
+          {sent ? (
+            <div className="text-center p-10 bg-green-500/10 border border-green-500/20 rounded-xl">
+              <div className="text-4xl mb-4">\u2705</div>
+              <div className="font-condensed text-[24px] font-bold mb-2">{\u00a1Recibido!}</div>
+              <div className="text-muted-foreground text-[15px]">{"Te contactaremos en menos de 48 horas para agregar tu negocio al directorio."}</div>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="bg-card border border-border rounded-xl p-8 shadow-card space-y-5">
+              <div className="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label className="block text-xs font-bold tracking-[1.5px] uppercase text-muted-foreground mb-2">Tu nombre</label>
+                  <input ref={nombreRef} type="text" required placeholder="Tu nombre completo" className="w-full bg-background border border-border rounded-sm px-4 py-3 text-[15px] outline-none focus:border-red/45 focus:shadow-[0_0_0_3px_rgba(196,34,41,0.1)] transition-all placeholder:text-muted-foreground/50" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold tracking-[1.5px] uppercase text-muted-foreground mb-2">Nombre del negocio</label>
+                  <input ref={negocioRef} type="text" required placeholder="Nombre de tu negocio" className="w-full bg-background border border-border rounded-sm px-4 py-3 text-[15px] outline-none focus:border-red/45 focus:shadow-[0_0_0_3px_rgba(196,34,41,0.1)] transition-all placeholder:text-muted-foreground/50" />
+                </div>
+              </div>
+              <div>
+                <label className="block text-xs font-bold tracking-[1.5px] uppercase text-muted-foreground mb-2">Categor\u00eda</label>
+                <select ref={categoriaRef} required className="w-full bg-background border border-border rounded-sm px-4 py-3 text-[15px] outline-none focus:border-red/45 transition-all cursor-pointer">
+                  <option value="">Selecciona una categor\u00eda...</option>
+                  <option>Restaurante</option>
+                  <option>Bar / Nightclub</option>
+                  <option>Hotel / Casino</option>
+                  <option>Show / Entretenimiento</option>
+                  <option>Servicios profesionales</option>
+                  <option>Tienda / Retail</option>
+                  <option>Belleza / Spa</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+              <div className="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label className="block text-xs font-bold tracking-[1.5px] uppercase text-muted-foreground mb-2">Email</label>
+                  <input ref={emailRef} type="email" required placeholder="tu@email.com" className="w-full bg-background border border-border rounded-sm px-4 py-3 text-[15px] outline-none focus:border-red/45 focus:shadow-[0_0_0_3px_rgba(196,34,41,0.1)] transition-all placeholder:text-muted-foreground/50" />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold tracking-[1.5px] uppercase text-muted-foreground mb-2">Tel\u00e9fono (opcional)</label>
+                  <input ref={telefonoRef} type="tel" placeholder="(702) 000-0000" className="w-full bg-background border border-border rounded-sm px-4 py-3 text-[15px] outline-none focus:border-red/45 focus:shadow-[0_0_0_3px_rgba(196,34,41,0.1)] transition-all placeholder:text-muted-foreground/50" />
+                </div>
+              </div>
+              <div>
+                <label className="block text-xs font-bold tracking-[1.5px] uppercase text-muted-foreground mb-2">Algo m\u00e1s que debamos saber (opcional)</label>
+                <textarea ref={mensajeRef} placeholder="Direcci\u00f3n, horarios, sitio web, redes sociales..." className="w-full bg-background border border-border rounded-sm px-4 py-3 text-[15px] outline-none min-h-[100px] resize-y leading-relaxed focus:border-red/45 focus:shadow-[0_0_0_3px_rgba(196,34,41,0.1)] transition-all placeholder:text-muted-foreground/50" />
+              </div>
+              <button type="submit" disabled={loading} className="w-full py-4 bg-red text-primary-foreground border-none rounded-sm font-condensed text-[16px] font-bold tracking-[1.5px] uppercase cursor-pointer hover:bg-red-light transition-all shadow-[0_2px_8px_hsl(var(--red)/0.35)] disabled:opacity-60">
+                {loading ? "Enviando..." : "Agregar mi negocio \u2192"}
+              </button>
+              {error && (
+                <div className="text-center p-4 bg-red/10 border border-red/20 rounded-sm text-red text-[14px] font-semibold">
+                  {"\u274c Hubo un error. Int\u00e9ntalo de nuevo o escr\u00edbenos a hola@latinolasvegas.com"}
+                </div>
+              )}
+              <p className="text-center text-[12px] text-muted-foreground">{"Sin costo \u00b7 Sin contratos \u00b7 Respondemos en menos de 48 horas"}</p>
+            </form>
+          )}
+        </div>
+      </section>
 
       <Footer />
     </>
