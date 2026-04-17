@@ -211,6 +211,11 @@ export default function AboutPage() {
                     ✅ ¡Mensaje enviado! Te responderemos en menos de 24 horas.
                   </div>
                 )}
+                {formError && (
+                  <div className="text-center p-5 bg-red/10 border border-red/20 rounded-sm mt-3 text-red font-semibold">
+                    ❌ Hubo un error al enviar. Intenta de nuevo o escríbenos a hola@latinolasvegas.com
+                  </div>
+                )}
               </form>
             </div>
           </div>
