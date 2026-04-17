@@ -91,7 +91,7 @@ export default function AboutPage() {
             </div>
             <div className="grid grid-cols-1 gap-4 h-full">
               {[
-                { icon: "🎯", title: "Un solo objetivo", text: "Convertirnos en la guía en español de referencia para la comunidad latina en Las Vegas." },
+                { icon: "🎯", title: "Un solo objetivo", text: "La guía en español de referencia para la comunidad latina en Las Vegas." },
                 { icon: "🔨", title: "Proyecto independiente", text: "Sin inversores ni corporaciones. Hecho por y para la comunidad latina." },
                 { icon: "📈", title: "En constante crecimiento", text: "Nuevos lugares, reseñas actualizadas y funciones añadidas cada semana." },
               ].map(item => (
