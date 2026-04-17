@@ -301,7 +301,7 @@ export default async function VidaNocturnaLatinaGuide() {
         <div className="container max-w-[900px]">
           <div className="rounded-xl bg-[rgba(5,5,5,0.95)] border border-white/[0.08] p-10 text-center">
             <p className="text-[11px] font-bold tracking-[3px] uppercase text-[#C084FC] mb-3">Directorio completo</p>
-            <h3 className="font-display text-[clamp(22px,4vw,32px)] tracking-[2px] text-white mb-3">¿QUIERES EXPLORAR MÁS?</h3>
+            <h3 className="font-display text-[clamp(22px,4vw,32px)] tracking-[2px] text-white mb-3">¿LISTO PARA LA NOCHE?</h3>
             <p className="text-[14px] text-[rgba(255,255,255,0.55)] max-w-[500px] mx-auto mb-6 leading-relaxed">
               Descubre todos los bares, lounges y clubs en nuestro directorio — con filtros, reseñas y recomendaciones de la comunidad.
             </p>
