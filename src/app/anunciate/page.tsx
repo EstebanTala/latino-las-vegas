@@ -169,8 +169,8 @@ export default function AnunciatePage() {
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-bold tracking-[1.5px] uppercase text-muted-foreground mb-2">Algo más que debamos saber (opcional)</label>
-                <textarea ref={mensajeRef} placeholder="Dirección, horarios, sitio web, redes sociales..." className="w-full bg-background border border-border rounded-sm px-4 py-3 text-[15px] outline-none min-h-[100px] resize-y leading-relaxed focus:border-red/45 focus:shadow-[0_0_0_3px_rgba(196,34,41,0.1)] transition-all placeholder:text-muted-foreground/50" />
+                <label className="block text-xs font-bold tracking-[1.5px] uppercase text-muted-foreground mb-2">Dirección y horarios (opcional)</label>
+                <textarea ref={mensajeRef} placeholder="Dirección del negocio, horarios de apertura..." className="w-full bg-background border border-border rounded-sm px-4 py-3 text-[15px] outline-none min-h-[100px] resize-y leading-relaxed focus:border-red/45 focus:shadow-[0_0_0_3px_rgba(196,34,41,0.1)] transition-all placeholder:text-muted-foreground/50" />
               </div>
               <button type="submit" disabled={loading} className="w-full py-4 bg-red text-primary-foreground border-none rounded-sm font-condensed text-[16px] font-bold tracking-[1.5px] uppercase cursor-pointer hover:bg-red-light transition-all shadow-[0_2px_8px_hsl(var(--red)/0.35)] disabled:opacity-60">
                 {loading ? "Enviando..." : "Agregar mi negocio →"}
