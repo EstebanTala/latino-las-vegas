@@ -162,7 +162,7 @@ export default async function RestaurantesMexicanosGuide() {
           <div className="space-y-3">
             <details className="group bg-cream-2 border border-border rounded-lg">
               <summary className="cursor-pointer px-5 py-4 text-[15px] font-medium list-none flex items-center justify-between gap-4">{"¿Cuáles son los mejores restaurantes mexicanos en Las Vegas?"}<span className="text-muted-foreground text-[18px] group-open:rotate-45 transition-transform">+</span></summary>
-              <div className="px-5 pb-4 text-[14px] text-muted-foreground leading-relaxed">Los restaurantes mexicanos mejor calificados en Las Vegas incluyen Rosa Mexicano en el Strip, Tacos El Gordo con varias ubicaciones, y varios spots locales en West Las Vegas y East Las Vegas que sirven comida auténtica a precios accesibles.</div>
+              <div className="px-5 pb-4 text-[14px] text-muted-foreground leading-relaxed">Los restaurantes mexicanos mejor calificados en Las Vegas están repartidos por toda la ciudad — desde taquerías locales en West Las Vegas y East Las Vegas hasta opciones en el Strip. Consulta nuestra lista arriba para ver los mejor recomendados por la comunidad.</div>
             </details>
             <details className="group bg-cream-2 border border-border rounded-lg">
               <summary className="cursor-pointer px-5 py-4 text-[15px] font-medium list-none flex items-center justify-between gap-4">{"¿Dónde encontrar tacos auténticos en Las Vegas?"}<span className="text-muted-foreground text-[18px] group-open:rotate-45 transition-transform">+</span></summary>
