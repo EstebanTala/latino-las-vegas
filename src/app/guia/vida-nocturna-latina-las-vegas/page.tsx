@@ -223,13 +223,9 @@ export default async function VidaNocturnaLatinaGuide() {
       </section>
 
       {/* Latin Clubs */}
-      <section id="clubs-latinos" className="py-16 bg-cream-2">
+      <section className="pb-20 bg-background">
         <div className="container max-w-[900px]">
-          <div className="text-[11px] font-bold tracking-[3px] uppercase text-[#C084FC] mb-2.5">Clubs 100% latinos</div>
-          <h2 className="font-display text-[clamp(28px,5vw,48px)] tracking-[2px] mb-10">
-            {"D\u00d3NDE BAILAR M\u00daSICA LATINA"}
-          </h2>
-          <div className="space-y-6">
+          <div className="space-y-10">
             {latinClubs.map((club, i) => (
               <article key={club.name} className="bg-background border border-border rounded-xl overflow-hidden shadow-card">
                 <div className="p-6 md:p-8">
