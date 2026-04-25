@@ -21,11 +21,13 @@ export function useListingFilters(listings: Listing[], activeCat: string = "") {
     let r = [...listings];
 
     if (search) {
-      const q = search.toLowerCase();
+      const q = search.toLowerCase().trim();
+      // Word-boundary match: "rio" matches "Rio Hotel" but not "Marriott"
+      const wordBoundary = new RegExp(`\\b${q.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&")}`, "i");
       r = r.filter(l =>
-        l.name.toLowerCase().includes(q) ||
-        l.desc.toLowerCase().includes(q) ||
-        l.catLabel.toLowerCase().includes(q)
+        wordBoundary.test(l.name) ||
+        wordBoundary.test(l.desc) ||
+        wordBoundary.test(l.catLabel)
       );
     }
 
