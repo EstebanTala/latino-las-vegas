@@ -77,7 +77,7 @@ export default function GuiasIndex() {
       <Navbar />
 
       {/* Hero */}
-      <div className="pt-[140px] pb-20 text-center relative overflow-hidden bg-[linear-gradient(180deg,hsl(var(--dark))_0%,hsl(var(--dark-2))_100%)]">
+      <div className="pt-[140px] pb-12 text-center relative overflow-hidden bg-[linear-gradient(180deg,hsl(var(--dark))_0%,hsl(var(--dark-2))_100%)]">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_80%,hsl(var(--red)/0.12)_0%,transparent_60%)]" />
         <div className="container relative">
           <div className="flex items-center justify-center gap-2 mb-6">
@@ -121,12 +121,10 @@ export default function GuiasIndex() {
                 <h2 className="font-condensed text-[24px] font-bold leading-tight group-hover:text-red transition-colors mb-3">
                   {g.title}
                 </h2>
-                <p className="text-[14px] text-muted-foreground leading-relaxed mb-5">
+                <p className="text-[14px] text-muted-foreground leading-relaxed mb-0">
                   {g.desc}
                 </p>
-                <span className="text-[12px] font-bold tracking-[1.5px] uppercase text-red">
-                  Leer guía →
-                </span>
+               
               </Link>
             ))}
           </div>
