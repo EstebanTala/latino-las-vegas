@@ -336,9 +336,7 @@ function ExplorePageInner() {
               placeholder={catPlaceholders[activeCat] || catPlaceholders[""]}
               className="flex-1 bg-transparent border-none outline-none px-5 py-3.5 text-dark-text font-body text-[15px] placeholder:text-dark-text-muted"
             />
-            <button className="bg-red border-none px-6 py-3.5 text-primary-foreground font-condensed text-sm font-bold tracking-[1px] uppercase cursor-pointer hover:bg-red-light transition-colors">
-              Buscar
-            </button>
+
           </div>
         </div>
       </div>
