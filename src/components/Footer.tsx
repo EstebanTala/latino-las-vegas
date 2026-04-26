@@ -57,7 +57,7 @@ export default function Footer() {
         </div>
 
         <div className="pt-6 border-t border-[hsl(var(--dark-border))] flex justify-between items-center text-[13px] text-dark-text-muted">
-          <span>© 2025 Latino Las Vegas · Guía en español de Las Vegas</span>
+          <span>© 2026 Latino Las Vegas · Guía en español de Las Vegas</span>
           <div className="flex gap-2.5">
             {['📘', '📸', '🎵', '▶️'].map((icon, i) => (
               <div key={i} className="w-[34px] h-[34px] rounded-lg bg-[rgba(255,255,255,0.05)] border border-[hsl(var(--dark-border))] flex items-center justify-center text-[15px] hover:bg-[rgba(255,255,255,0.1)] transition-all cursor-pointer">
