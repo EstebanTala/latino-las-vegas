@@ -187,10 +187,10 @@ export default async function RestaurantesMexicanosGuide() {
           <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5 text-center">{"Gu\u00edas relacionadas"}</div>
           <h2 className="font-display text-[clamp(28px,5vw,42px)] tracking-[2px] text-center mb-10">{"EXPLORA M\u00c1S DE LAS VEGAS"}</h2>
           <div className="grid md:grid-cols-2 gap-4">
-            <Link href="/guia/shows-en-espanol-las-vegas" className="group block rounded-xl border border-border bg-card shadow-card p-6 hover:border-red/30 hover:shadow-card-hover transition-all">
+            <Link href="/guia/mejores-shows-las-vegas" className="group block rounded-xl border border-border bg-card shadow-card p-6 hover:border-red/30 hover:shadow-card-hover transition-all">
               <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-2 block">{"Gu\u00eda"}</span>
-              <span className="font-condensed text-[22px] font-bold group-hover:text-red transition-colors block mb-2">{"Shows en Espa\u00f1ol"}</span>
-              <span className="text-[13px] text-muted-foreground">{"Los mejores espect\u00e1culos y shows que puedes disfrutar en espa\u00f1ol en Las Vegas."}</span>
+              <span className="font-condensed text-[22px] font-bold group-hover:text-red transition-colors block mb-2">{"Mejores Shows de Las Vegas"}</span>
+              <span className="text-[13px] text-muted-foreground">{"Conciertos, Cirque du Soleil y los mejores espect\u00e1culos en el Strip \u2014 con consejos para hispanohablantes."}</span>
             </Link>
             <Link href="/guia/vida-nocturna-latina-las-vegas" className="group block rounded-xl border border-border bg-card shadow-card p-6 hover:border-red/30 hover:shadow-card-hover transition-all">
               <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-2 block">{"Gu\u00eda"}</span>
