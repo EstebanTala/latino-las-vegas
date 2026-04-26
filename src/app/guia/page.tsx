@@ -91,14 +91,14 @@ export default function GuiasIndex() {
             <span className="text-[12px] text-red">Guías</span>
           </div>
           <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">
-            Gu�de Las Vegas
+            Guías de Las Vegas
           </div>
           <h1 className="font-display text-[clamp(48px,8vw,96px)] tracking-[4px] leading-[0.9] mb-5 text-dark-text">
             GUÍAS<br />
             <span className="text-red">EN ESPAÑOL</span>
           </h1>
           <p className="text-[19px] text-dark-text-2 max-w-[640px] mx-auto leading-relaxed">
-            Todo lo que necesitas saber sobre Las Vegas — sin filtros, escrito
+            Todo lo que necesitas saber sobre Las Vegas: sin filtros, escrito
             para la comunidad latina. Restaurantes, shows y vida nocturna,
             curados por nosotros.
           </p>
