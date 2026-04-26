@@ -19,7 +19,7 @@ export default function Navbar() {
           <div className="w-7 h-7 bg-red rounded-md flex items-center justify-center text-[11px] text-primary-foreground font-display tracking-[1px] shadow-[0_0_14px_hsl(var(--glow-red))] shrink-0">
             LLV
           </div>
-          <span className="text-primary-foreground">Laino<span className="text-red">LV</span></span>
+          <span className="text-primary-foreground">Latino<span className="text-red">LV</span></span>
         </Link>
 
         {/* Desktop nav */}
