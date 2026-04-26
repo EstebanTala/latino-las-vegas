@@ -473,20 +473,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Newsletter */}
-      <section className="py-14 text-center relative overflow-hidden bg-cream-2">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_70%_at_50%_50%,rgba(196,34,41,0.05)_0%,transparent_70%)]" />
-        <div className="relative max-w-[540px] mx-auto px-6">
-          <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">Newsletter</div>
-          <div className="font-display text-[56px] tracking-[2px] mb-3">Mantente Al Día</div>
-          <p className="text-muted-foreground mb-8 leading-relaxed">Los mejores eventos, lugares y planes en Las Vegas — directo a tu correo.</p>
-          <div className="flex rounded-sm overflow-hidden border border-border bg-card shadow-[0_2px_12px_rgba(0,0,0,0.06)] focus-within:border-red/35 focus-within:shadow-[0_4px_20px_rgba(196,34,41,0.08)] transition-all">
-            <input type="email" placeholder="tucorreo@email.com" className="flex-1 bg-transparent border-none outline-none px-5 py-3.5 font-body text-[15px] placeholder:text-muted-foreground" />
-            <button className="bg-red border-none px-6 py-3.5 text-primary-foreground font-condensed text-sm font-bold tracking-[1px] uppercase cursor-pointer hover:bg-red-light transition-colors">Suscribirse</button>
-          </div>
-          <p className="mt-3 text-xs text-muted-foreground">Sin spam. Solo recomendaciones útiles.</p>
-        </div>
-      </section>
 
       <Footer />
     </>
