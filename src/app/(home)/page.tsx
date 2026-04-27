@@ -237,11 +237,6 @@ export default function HomePage() {
             <HeroSearch allListings={allListings} />
           </div>
 
-          <div className="mt-8 flex items-center justify-center">
-            <p className="text-xs tracking-widest uppercase text-gold-dark/60 font-medium drop-shadow-[0_1px_4px_rgba(0,0,0,0.3)]">
-              Hecho para la comunidad latina en Las Vegas
-            </p>
-          </div>
 
         </div>
       </section>
