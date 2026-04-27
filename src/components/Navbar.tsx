@@ -13,7 +13,7 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-[200] bg-[rgba(5,5,5,0.5)] backdrop-blur-lg border-b border-white/[0.08] transition-all">
-      <div className="grid grid-cols-[auto_1fr_auto] md:grid-cols-3 items-center px-6 md:px-12 h-[68px] gap-4">
+      <div className="grid grid-cols-[auto_1fr_auto] md:grid-cols-3 items-center px-6 md:px-12 h-[64px] gap-4">
         {/* Logo (left) */}
         <Link href="/" className="font-display text-xl tracking-[2px] flex items-center gap-2 justify-self-start">
           <div className="w-7 h-7 bg-red rounded-md flex items-center justify-center text-[11px] text-primary-foreground font-display tracking-[1px] shadow-[0_0_14px_hsl(var(--glow-red))] shrink-0">

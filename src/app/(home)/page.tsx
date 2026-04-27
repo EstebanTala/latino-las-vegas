@@ -202,7 +202,7 @@ export default function HomePage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative min-h-[60vh] flex flex-col items-center justify-center text-center px-6 md:px-12 pt-[136px] pb-[80px] overflow-visible z-20">
+      <section className="relative min-h-[60vh] flex flex-col items-center justify-center text-center px-6 md:px-12 pt-[132px] pb-[80px] overflow-visible z-20">
         {/* Background wrapper — overflow-hidden so image+overlays never exceed section bounds */}
         <div className="absolute inset-0 overflow-hidden">
           <img
