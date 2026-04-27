@@ -10,7 +10,7 @@ const CATEGORIES = [
   { key: "restaurantes", path: "/restaurantes", label: "Restaurantes" },
   { key: "shows", path: "/explorar?cat=shows", label: "Shows & Eventos" },
   { key: "nocturna", path: "/explorar?cat=nocturna", label: "Vida Nocturna" },
-  { key: "atracciones", path: "/atracciones", label: "Atracciones" },
+  { key: "atracciones", path: "/explorar?cat=atracciones", label: "Atracciones" },
 ];
 
 const POPULAR_SEARCHES = [
@@ -18,7 +18,7 @@ const POPULAR_SEARCHES = [
   { label: "Restaurantes mexicanos", path: "/explorar?cat=restaurantes&cocina=mexicana" },
   { label: "Shows de magia", path: "/explorar?cat=shows&q=magia" },
   { label: "Bares con vista", path: "/explorar?cat=nocturna&tipo=rooftop-bar" },
-  { label: "Atracciones en Las Vegas", path: "/atracciones" },
+  { label: "Atracciones en Las Vegas", path: "/explorar?cat=atracciones" },
 ];
 
 // Contextual suggestions keyed by detected intent
@@ -51,7 +51,7 @@ const CONTEXTUAL_SUGGESTIONS: Record<string, { label: string; path: string }[]> 
   ],
   atracciones: [
     { label: "Atracciones en el Strip", path: "/explorar?cat=atracciones&zona=the-strip" },
-    { label: "Atracciones en Las Vegas", path: "/atracciones" },
+    { label: "Atracciones en Las Vegas", path: "/explorar?cat=atracciones" },
     { label: "Tours en Las Vegas", path: "/explorar?cat=atracciones&q=tour" },
     { label: "Atracciones familiares", path: "/explorar?q=atracciones+familiares" },
   ],
