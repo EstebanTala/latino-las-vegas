@@ -230,7 +230,7 @@ export default function HomePage() {
           </h1>
 
           <p className="animate-fade-up-2 text-lg text-dark-text-2 mb-[40px] font-normal leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.4)]">
-            Restaurantes, bares, shows y experiencias — todo en un solo lugar
+            Hoteles, restaurantes, shows y experiencias — todo en un solo lugar
           </p>
 
           <div className="[&>div]:shadow-[0_12px_48px_rgba(0,0,0,0.45)]">
