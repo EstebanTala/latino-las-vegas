@@ -492,7 +492,7 @@ export default function HeroSearch({ allListings, onOpenChange }: HeroSearchProp
 
       {/* Popular searches (empty input) */}
       {showPopular && (
-         <div className="absolute left-0 right-0 top-[calc(100%+6px)] bg-[#F7F5F1] border border-[rgba(180,165,140,0.1)] rounded-xl shadow-[0_16px_40px_rgba(0,0,0,0.18)] z-[80] max-h-[280px] overflow-y-auto search-dropdown-scroll" ref={listRef}>
+         <div className="absolute left-0 right-0 top-[calc(100%+6px)] bg-[#F7F5F1] border border-[rgba(0,0,0,0.08)] rounded-xl shadow-[0_24px_60px_rgba(0,0,0,0.35),0_8px_20px_rgba(0,0,0,0.18)] z-[80] max-h-[280px] overflow-y-auto search-dropdown-scroll" ref={listRef}>
           <div className="px-4 pt-3 pb-1 text-[9px] font-semibold tracking-[2.5px] uppercase text-[#B0A89E]">Búsquedas populares</div>
           {POPULAR_SEARCHES.map((s, i) => (
             <button
@@ -510,7 +510,7 @@ export default function HeroSearch({ allListings, onOpenChange }: HeroSearchProp
 
       {/* Results dropdown */}
       {showResults && (
-        <div className="absolute left-0 right-0 top-[calc(100%+6px)] bg-[#F7F5F1] border border-[rgba(180,165,140,0.1)] rounded-xl shadow-[0_16px_40px_rgba(0,0,0,0.18)] z-[80] max-h-[280px] overflow-y-auto search-dropdown-scroll" ref={listRef}>
+        <div className="absolute left-0 right-0 top-[calc(100%+6px)] bg-[#F7F5F1] border border-[rgba(0,0,0,0.08)] rounded-xl shadow-[0_24px_60px_rgba(0,0,0,0.35),0_8px_20px_rgba(0,0,0,0.18)] z-[80] max-h-[280px] overflow-y-auto search-dropdown-scroll" ref={listRef}>
           {hasResults ? (
             <>
               {groupedSuggestions.map((group) => (
