@@ -255,44 +255,6 @@ export default function HomePage() {
         </section>
       )}
 
-      {/* Categories */}
-      <section className="py-14 bg-background">
-        <div className="container">
-          <SectionHeader eyebrow="Explora por categoría" title="Encuentra Tu Experiencia" />
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-11">
-            {categories.map((c) => (
-              <Link
-                key={c.key}
-                href={c.path}
-                className="group relative rounded-xl overflow-hidden aspect-[3/4] cursor-pointer flex flex-col transition-all duration-300 hover:-translate-y-[5px] hover:shadow-[0_8px_30px_rgba(0,0,0,0.3)]"
-              >
-                <div className={`absolute inset-0 ${c.bg} transition-all duration-500 group-hover:scale-110 group-hover:brightness-[1.15]`} />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="relative z-10 flex-1" />
-                {(() => {
-                  const count = allListings.filter(l => l.cat === c.key).length;
-                  const colors = categoryColors[c.key];
-                  if (count === 0) return null;
-                  const hasCustomText = colors?.badge?.includes("text-");
-                  return (
-                    <div className={`absolute top-3 left-3 ${colors?.badge ?? "bg-[rgba(255,255,255,0.10)] border-[rgba(255,255,255,0.18)]"} border rounded-full px-3 py-1 text-[10px] font-bold tracking-[1.5px] uppercase ${hasCustomText ? "" : "text-[rgba(255,255,255,0.75)]"}`}>
-                      {count} {categoryUnits[c.key]}
-                    </div>
-                  );
-                })()}
-                <div className="relative z-10 p-4 pb-6">
-                  <c.icon size={22} strokeWidth={1.5} className={`mb-3 ${categoryColors[c.key]?.icon ?? "text-white/75"}`} />
-                  <span className="font-condensed text-lg font-bold text-primary-foreground block mb-1">{c.label}</span>
-                  <span className="text-[11px] text-[rgba(255,255,255,0.6)] block mb-3 leading-[1.4]">{c.desc}</span>
-                  <span className={`inline-flex items-center gap-1 text-[11px] font-bold tracking-[1.5px] uppercase transition-all duration-300 group-hover:tracking-[2px] ${categoryColors[c.key]?.cta ?? "text-[rgba(255,255,255,0.8)] group-hover:text-white"}`}>
-                    Explorar <span className="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
-                  </span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Tendencias */}
       {trendingWithBadges.length > 0 && (() => {
