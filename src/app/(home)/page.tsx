@@ -341,10 +341,71 @@ export default function HomePage() {
           </section>
         );
       })()}
+      {/* Guias */}
+      <section className="bg-dark-2 border-y border-border/[0.05] py-16">
+        <div className="container">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+            <div>
+              <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">Editorial</div>
+              <div className="font-display text-[42px] md:text-[48px] tracking-[2px] leading-[0.95] text-dark-text mb-3">Guías Para Tu Visita</div>
+              <p className="text-dark-text-2 leading-relaxed max-w-[560px]">Recomendaciones curadas en español sobre Las Vegas.</p>
+            </div>
+            <Link
+              href="/guia"
+              className="font-condensed text-[13px] font-bold tracking-[1.5px] uppercase text-dark-text-2 hover:text-dark-text transition-colors whitespace-nowrap"
+            >
+              Ver todas las guías →
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <Link
+              href="/guia/restaurantes-mexicanos-las-vegas"
+              className="group block rounded-xl bg-dark-3 border border-[hsl(var(--dark-border))] p-7 hover:border-red/30 hover:-translate-y-px transition-all"
+            >
+              <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-3 block">
+                Comida
+              </span>
+              <h3 className="font-condensed text-[22px] font-bold leading-tight text-dark-text group-hover:text-red transition-colors mb-3">
+                Restaurantes Mexicanos en Las Vegas
+              </h3>
+              <p className="text-[14px] text-dark-text-2 leading-relaxed">
+                Los mejores tacos, mariscos y cocina mexicana auténtica — del Strip a los barrios locales.
+              </p>
+            </Link>
+            <Link
+              href="/guia/mejores-shows-las-vegas"
+              className="group block rounded-xl bg-dark-3 border border-[hsl(var(--dark-border))] p-7 hover:border-red/30 hover:-translate-y-px transition-all"
+            >
+              <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-3 block">
+                Entretenimiento
+              </span>
+              <h3 className="font-condensed text-[22px] font-bold leading-tight text-dark-text group-hover:text-red transition-colors mb-3">
+                Los Mejores Shows de Las Vegas
+              </h3>
+              <p className="text-[14px] text-dark-text-2 leading-relaxed">
+                Cirque du Soleil, conciertos en The Sphere y los espectáculos imperdibles del Strip en 2026.
+              </p>
+            </Link>
+            <Link
+              href="/guia/vida-nocturna-latina-las-vegas"
+              className="group block rounded-xl bg-dark-3 border border-[hsl(var(--dark-border))] p-7 hover:border-red/30 hover:-translate-y-px transition-all"
+            >
+              <span className="text-[11px] font-bold tracking-[2px] uppercase text-red mb-3 block">
+                Vida Nocturna
+              </span>
+              <h3 className="font-condensed text-[22px] font-bold leading-tight text-dark-text group-hover:text-red transition-colors mb-3">
+                Vida Nocturna Latina en Las Vegas
+              </h3>
+              <p className="text-[14px] text-dark-text-2 leading-relaxed">
+                Clubs, bares y noches latinas — reggaetón, salsa, bachata y todo lo que mueve el Strip de noche.
+              </p>
+            </Link>
+          </div>
+        </div>
+      </section>
+      {/* Hotels */}
+      <section className="py-14 bg-background">
 
-      {/* Hotels */}
-      {/* Hotels */}
-       <section className="py-14 bg-background">
         <div className="container">
           <SectionHeader
             eyebrow="Alojamiento destacado"
