@@ -341,6 +341,35 @@ export default function HomePage() {
           </section>
         );
       })()}
+      {/* Hotels */}
+      <section className="py-14 bg-background">
+
+        <div className="container">
+          <SectionHeader
+            eyebrow="Alojamiento destacado"
+            title="Hoteles & Casinos"
+            subtitle="Descubre hoteles y casinos icónicos de Las Vegas, desde el Strip hasta los resorts locales."
+            viewAllLink="/explorar?cat=hoteles"
+            viewAllLabel="Ver todos los hoteles →"
+          />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {hotels.map((l) => <ListingCard key={l.id} listing={l} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* Restaurants */}
+      {/* Restaurants */}
+      <section className="py-14 bg-background">
+        <div className="container">
+          <SectionHeader eyebrow="Sabores imperdibles" title="Restaurantes" subtitle="Explora los sabores más destacados de Las Vegas, desde restaurantes icónicos hasta joyas locales." viewAllLink="/explorar?cat=restaurantes" viewAllLabel="Ver todos los restaurantes →" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-8">
+            {restaurants.map((l) => <ListingCard key={l.id} listing={l} />)}
+          </div>
+        </div>
+      </section>
+
+
       {/* Guias */}
       <section className="bg-dark-2 border-y border-border/[0.05] py-16">
         <div className="container">
@@ -403,64 +432,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* Hotels */}
-      <section className="py-14 bg-background">
-
-        <div className="container">
-          <SectionHeader
-            eyebrow="Alojamiento destacado"
-            title="Hoteles & Casinos"
-            subtitle="Descubre hoteles y casinos icónicos de Las Vegas, desde el Strip hasta los resorts locales."
-            viewAllLink="/explorar?cat=hoteles"
-            viewAllLabel="Ver todos los hoteles →"
-          />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {hotels.map((l) => <ListingCard key={l.id} listing={l} />)}
-          </div>
-        </div>
-      </section>
-
-      {/* Restaurants */}
-      {/* Restaurants */}
-      <section className="py-14 bg-background">
-        <div className="container">
-          <SectionHeader eyebrow="Sabores imperdibles" title="Restaurantes" subtitle="Explora los sabores más destacados de Las Vegas, desde restaurantes icónicos hasta joyas locales." viewAllLink="/explorar?cat=restaurantes" viewAllLabel="Ver todos los restaurantes →" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-8">
-            {restaurants.map((l) => <ListingCard key={l.id} listing={l} />)}
-          </div>
-        </div>
-      </section>
-
-      {/* Why us belt */}
-      <div className="bg-dark-2 border-y border-border/[0.05] py-14">
-        <div className="container">
-          <div className="flex flex-col lg:flex-row gap-16 items-center">
-            <div className="flex-1">
-              <div className="text-[11px] font-bold tracking-[3px] uppercase text-red mb-2.5">¿Por qué Latino Las Vegas?</div>
-              <div className="font-display text-[52px] tracking-[2px] leading-[0.95] text-dark-text mb-4">Hecho Para La Comunidad</div>
-              <p className="text-dark-text-2 leading-relaxed mb-6">Todo el contenido está curado en español, pensado para visitantes y residentes latinos que quieren vivir Las Vegas al máximo — sin barreras.</p>
-              <Link href="/explorar" className="inline-flex items-center gap-1.5 font-condensed text-sm font-bold tracking-[1px] uppercase px-7 py-3.5 rounded-sm bg-red text-primary-foreground shadow-[0_2px_8px_hsl(var(--red)/0.3)] hover:bg-red-light hover:-translate-y-px transition-all">
-                Explorar ahora →
-              </Link>
-            </div>
-            <div className="grid grid-cols-2 gap-3">
-              {[
-                { icon: "🇲🇽", name: "100% en Español", sub: "Toda la guía en tu idioma" },
-                { icon: "⭐", name: "Reseñas Reales", sub: "Opiniones de la comunidad" },
-                { icon: "📍", name: "Mapa Interactivo", sub: "Encuentra lugares cercanos" },
-                { icon: "🔔", name: "Alertas de Eventos", sub: "No te pierdas nada" },
-              ].map((f) => (
-                <div key={f.name} className="bg-dark-3 border border-[hsl(var(--dark-border))] rounded-lg p-5 text-center">
-                  <div className="text-2xl mb-2">{f.icon}</div>
-                  <div className="font-condensed text-[15px] font-bold text-dark-text mb-1">{f.name}</div>
-                  <div className="text-[11px] text-dark-text-muted italic">{f.sub}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Shows */}
       <section className="py-14 bg-background">
         <div className="container">
