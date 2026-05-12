@@ -43,7 +43,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body>
+      <body className="overflow-x-hidden">
         <Providers>{children}</Providers>
       </body>
     </html>
