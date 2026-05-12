@@ -202,7 +202,7 @@ export default function HomePage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="relative min-h-[70vh] flex flex-col items-center justify-center text-center px-6 md:px-12 pt-[132px] pb-[80px] overflow-visible z-20">
+      <section className="relative min-h-[70vh] flex flex-col items-center justify-center text-center px-6 md:px-12 pt-[132px] pb-[80px] overflow-x-hidden overflow-y-visible z-20">
         {/* Background wrapper — overflow-hidden so image+overlays never exceed section bounds */}
         <div className="absolute inset-0 overflow-hidden">
           <img
@@ -224,7 +224,7 @@ export default function HomePage() {
             Tu guía en español · Las Vegas, NV
           </div>
 
-          <h1 className="animate-fade-up-1 font-display text-[clamp(72px,12vw,140px)] leading-[0.88] tracking-[4px] mb-3 text-dark-text drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+          <h1 className="animate-fade-up-1 font-display text-[clamp(56px,12vw,140px)] leading-[0.88] tracking-[2px] md:tracking-[4px] mb-3 text-dark-text drop-shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
             EXPLORA<br />
             <span className="text-transparent [-webkit-text-stroke:2.5px_hsl(0,72%,42%)] [text-shadow:0_0_40px_rgba(180,30,30,0.4),0_0_80px_rgba(180,30,30,0.18)]">LAS VEGAS</span>
           </h1>
