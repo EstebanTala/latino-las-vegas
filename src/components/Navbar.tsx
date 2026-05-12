@@ -45,10 +45,10 @@ export default function Navbar() {
 
         {/* Mobile hamburger button */}
         <button
-          aria-label={open ? "Cerrar menú" : "Arir menú"}
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
           onClick={() => setOpen(!open)}
-          className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-[5px]"
+          className="md:hidden flex flex-col justify-center items-center w-8 h-8 gap-[5px] justify-self-end col-start-3"
         >
           <span
             className={`block h-[2px] w-5 bg-dark-text transition-all duration-200 ${
